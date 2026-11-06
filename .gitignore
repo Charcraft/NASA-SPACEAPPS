@@ -1,0 +1,44 @@
+# Dependencias
+node_modules/
+.pnpm-store/
+
+# Build
+.next/
+out/
+dist/
+build/
+
+# Entorno
+.env
+.env.local
+.env.*.local
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Caché
+.cache/
+.turbo/
+*.tsbuildinfo
+
+# Datos temporales del hackathon
+temp/
+tmp/
+
+# Bitácoras personales de IA (no forman parte del entregable público)
+Uso de IA-Personal/
+
+# Pruebas locales de cada integrante (ver docs/03-plan/01-plan-7-dias.md)
+practicas-locales/

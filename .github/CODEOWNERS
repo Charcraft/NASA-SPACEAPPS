@@ -1,0 +1,42 @@
+# CODEOWNERS
+#
+# Revisión automática por área. GitHub pide review a estas personas al abrir un PR.
+#
+# ⚠️ PENDIENTE (Eduardo, antes del 12 de noviembre):
+#    Reemplazar los marcadores <github-user> por los usuarios reales de GitHub
+#    de cada integrante. Los de Space Apps no siempre coinciden.
+#
+#    Mientras estén los marcadores, las líneas comentadas no hacen nada.
+#    Solo la regla "*" está activa y usa @Charcraft como respaldo.
+#
+# Formato:  <patrón>  <usuario(s)>
+# Más info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Respaldo: si nadie más aplica, revisa el owner del equipo.
+*                                   @Charcraft
+
+# --- Documentación científica (nadie la cambia sin revisión) ---
+/docs/02-investigacion/             @Charcraft
+/docs/05-ia/                        @Charcraft
+
+# --- Plan y alcance ---
+/docs/03-plan/                      @Charcraft
+
+# --- Reglas de trabajo ---
+/AGENTS.md                          @Charcraft
+/TECH-STACK.md                      @Charcraft
+/MEMORY.md                          @Charcraft
+
+# --- Cuando exista código (descomentar y asignar) ---
+# /src/lib/rules/                   @<github-user-de-carlos-de-jesus>
+# /src/data/                        @<github-user-de-carlos-de-jesus>
+# /src/components/                  @<github-user-de-angel-marco>
+# /src/lib/db/                      @<github-user-de-carlos-alberto>
+# /scripts/                         @<github-user-de-carlos-alberto>
+
+# --- Carpetas personales: cada quien revisa la suya ---
+/team/danny1510/                    @Charcraft
+# /team/angel_marco/                @<github-user>
+# /team/cxrlosmp/                   @<github-user>
+# /team/giganroker/                 @<github-user>
+# /team/ernesto-montes/             @<github-user>

@@ -1,0 +1,45 @@
+---
+description: Reglas del proyecto NASA Space Apps 2026 — Equipo ROCKET
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Proyecto: NASA Space Apps 2026 — Health Monitoring Software
+
+## Reglas que siempre aplican
+
+1. **Lee `AGENTS.md`** antes de proponer cambios. Es el contrato del proyecto.
+2. **No se escribe código de producto antes del 14 de noviembre de 2026.** Es una regla oficial del evento.
+3. **Idioma de la documentación: español.** Términos oficiales en inglés cuando corresponda.
+4. **No inventes datos.** Umbrales clínicos, cifras, APIs y citas se verifican o se marcan `[POR VALIDAR]`.
+5. Toda cifra de salud necesita fuente en `docs/02-investigacion/04-bibliografia.md`.
+6. **El stack está congelado** en `TECH-STACK.md`. No lo cambies sin un PR aprobado.
+7. Cada uso relevante de IA se registra en `docs/05-ia/03-registro-uso-ia.md`.
+
+## Contexto del proyecto
+
+- Reto: *Create Health Monitoring Software for Astronauts on Space Missions* (autor: Agencia Espacial Brasileña).
+- Equipo: ROCKET, 5 integrantes.
+- Evento: 14–15 de noviembre de 2026, EcoCity Hotel, Tuxtla Gutiérrez.
+- **Entrega local: domingo 15 de noviembre a las 17:00** (no a medianoche).
+- El producto: herramienta de salud para astronautas, offline-first, con modo rutina y modo emergencia.
+
+## Dónde está cada cosa
+
+| Necesito… | Está en… |
+|---|---|
+| Reglas de trabajo | `AGENTS.md` |
+| Estado y decisiones | `MEMORY.md` |
+| Stack y arquitectura | `TECH-STACK.md` |
+| Ciencia y fuentes | `docs/02-investigacion/` |
+| Planes y alcance | `docs/03-plan/` |
+| Cómo trabajamos en equipo | `docs/07-trabajo-colaborativo/` |
+| Política de IA | `docs/05-ia/` |
+
+## Prohibido
+
+- Presentar el producto como dispositivo médico.
+- Emitir diagnósticos en los textos de la interfaz.
+- Recomendar fármacos o dosis.
+- Mezclar datos reales de OSDR con datos ficticios sin etiquetarlos.
+- Inventar URLs de datasets.

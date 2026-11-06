@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Reglas de trabajo del proyecto
+    url: https://github.com/Charcraft/NASA-SPACEAPPS/blob/main/AGENTS.md
+    about: Antes de abrir un issue, revisa cómo trabajamos y qué se puede y no se puede hacer.
+  - name: Flujo de git y pull requests
+    url: https://github.com/Charcraft/NASA-SPACEAPPS/blob/main/docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md
+    about: Ramas, commits, revisión y resolución de conflictos.
