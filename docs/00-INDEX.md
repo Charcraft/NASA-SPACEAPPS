@@ -13,6 +13,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`AGENTS.md`](../AGENTS.md) | Reglas de trabajo y veracidad | Todos |
 | [`MEMORY.md`](../MEMORY.md) | Estado vivo, decisiones, pendientes | Todos |
 | [`TECH-STACK.md`](../TECH-STACK.md) | Stack técnico congelado y arquitectura | Devs |
+| [`charla-presencial.md`](../charla-presencial.md) | Notas de trabajo para el pitch presencial (no es documento final) | Quien presenta |
 
 ---
 
@@ -51,6 +52,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/08-preguntas-jurado.md`](03-plan/08-preguntas-jurado.md) | **Documento de estudio: 40+ preguntas del jurado con respuestas y preguntas trampa** |
 | [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
 | [`03-plan/10-reparto-backend.md`](03-plan/10-reparto-backend.md) | **Reparto Back 1 / Back 2**: dueño por archivo, contratos de dependencia y acuerdos previos |
+| [`03-plan/11-arquitectura-backend.md`](03-plan/11-arquitectura-backend.md) | **Arquitectura de backend**: roles, flujo de datos, contratos congelados, puertas y plan paralelo |
 
 ---
 

@@ -69,6 +69,10 @@
 | D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
 | D24 | Reparto Backend: **Back 1** = motor realtime, registry, bridge 3D, `types` y scaffold; **Back 2 (Angel)** = OSDR client, Dexie/repositorios, reglas/triage, APIs `osdr` y `ai-context`, tests | 2026-11-14 | El brief asumía archivos ya creados que no existen; se reparte por dominio para evitar conflictos |
 | D25 | Corregir el brief: **17 indicadores OSDR**, no 19; `meshNodeId` nullable para parámetros ambientales | 2026-11-14 | Verificado contra `src/data/seed/osdr-inspiration4-cmp.json` |
+| D26 | **Vitest como `devDependency`**, excepción registrada al congelamiento del stack | 2026-11-14 | Sin runner de TS no hay pruebas de `rules/`; no entra al bundle de producción. Ver `TECH-STACK.md` §9 |
+| D27 | **`repositories.ts` es el único punto de escritura en Dexie**; Back 1 solo emite por `TelemetrySink` | 2026-11-14 | Evita doble escritura y filas duplicadas en la demo |
+| D28 | Contratos compartidos (`types/index.ts`) **congelados a H2**; cambios solo por PR | 2026-11-14 | Un contrato que cambia en vivo rompe el build y la demo |
+| D29 | **Roles backend cerrados:** Ernesto = Back 1, Angel = Back 2 | 2026-11-14 | Elimina la ambigüedad que dejó el brief y evita dos planes para el mismo frente |
 
 ---
 
@@ -86,9 +90,13 @@
 - [ ] Validar umbrales clínicos con fuente primaria (`[POR VALIDAR]` en `docs/02-investigacion/02-indicadores-fisiologicos.md`).
 - [ ] Explorar OSDR y documentar 3 datasets concretos utilizables.
 - [ ] Revisar recursos oficiales el 13 de noviembre y ajustar el plan de datos.
-- [x] Confirmar **Back 1**: Ernesto (`@ernesto-montes`); falta su aceptación del reparto.
+- [x] Confirmar **Back 1**: Ernesto (`@ernesto-montes`).
+- [x] Confirmar **Back 2**: Angel Marco (`@angel_marco`).
 - [ ] Integrar `BRIEF-BACKEND-AGENTES.md` al repo (hoy está en `~/Downloads`).
-- [ ] Crear los issues de Backend 1 y Backend 2 y el scaffold (`package.json`, `tsconfig`, `next.config`).
+- [ ] Crear el issue del reparto y los dos issues de trabajo.
+- [ ] Scaffold de Next 15 (Back 1) — deadline H0:45.
+- [ ] Congelar `types/index.ts` (Back 1 + Back 2) — deadline H2.
+- [ ] Revisión de Pineda sobre `rules/` antes de mergear.
 
 ---
 
@@ -101,6 +109,15 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Revisión y corrección del plan de Back 2
+
+- Se revisó `docs/angel_marco/plan-backend` contra `main` y contra la rama `feat/back2-persistencia-triage`.
+- **Corregidos 4 defectos de contrato:** `baseline` nullable, `Evaluacion` con `valor`/`desviacion`/`degradado`, `guardarFrame` devuelve `ResultadoPersistencia`, y `evaluar` acepta `calidad`.
+- **Higiene:** eliminado `docs/03-plan/~$pitch-aegis.pptx` (archivo temporal de PowerPoint), añadido `~$*` a `.gitignore`, y `CHARLAPRESENCIAL.md` → `charla-presencial.md` con H1 y registro en el índice.
+- **Stack:** Vitest registrado como excepción explícita en `TECH-STACK.md` §9.
+- **Nuevo:** `docs/03-plan/11-arquitectura-backend.md` con roles, flujo de datos, puertas y plan paralelo.
+- **Roles cerrados:** Back 1 = Ernesto, Back 2 = Angel.
 
 ### 2026-11-14 — Pitch presencial
 - La charla del Local Event fijó: **7 diapositivas máximo, en inglés**, con la estructura problema/usuario → solución → datos → demostración → evidencia y limitaciones → cierre.

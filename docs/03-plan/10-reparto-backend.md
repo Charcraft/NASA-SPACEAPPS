@@ -78,6 +78,7 @@ Además, el seed tiene **17 indicadores**, no 19 como dice el brief; sí coincid
 
 ```ts
 export type Nivel = 'NOMINAL' | 'ATENCION' | 'CRITICO';
+export type TipoDesviacion = 'z-score' | 'delta-absoluto';
 
 export interface Evaluacion {
   nivel: Nivel;
@@ -85,20 +86,44 @@ export interface Evaluacion {
   accion: string;
   fuente: string;
   reglaDisparada: string;
+  // --- añadido 2026-11-14: lo exige RealtimeTelemetryFrame del brief ---
+  valor: number;
+  baseline: number | null;
+  desviacion: { tipo: TipoDesviacion; valor: number };
+  degradado: boolean;
 }
 
 export function evaluar(
   paramId: string,
   valor: number,
-  baseline: number,
+  baseline: number | null,      // antes era `number`: rompía con baselinePreVuelo()
   entorno?: EntornoCabina,
+  calidad?: number,             // 0..1; si falta, se asume 1
 ): Evaluacion;
 
 export function baselinePreVuelo(crewId: CrewId, paramId: string): number | null;
 
-export async function guardarFrame(frame: RealtimeTelemetryFrame): Promise<void>;
-// Nunca lanza y nunca bloquea el loop de 1 Hz.
+export interface ResultadoPersistencia {
+  ok: boolean;
+  guardadas: number;
+  codigo?: string;              // E-DB-001, E-DB-002, E-SYN-001…
+  motivo?: string;
+}
+
+export async function guardarFrame(frame: RealtimeTelemetryFrame): Promise<ResultadoPersistencia>;
+// Contrato: no lanza y no bloquea el loop de 1 Hz.
+// Pero TAMPOCO descarta en silencio: devuelve `codigo` y deja rastro en `bitacora`.
 ```
+
+**Correcciones aplicadas el 2026-11-14** (`[VERIFICADO]`):
+
+| Error encontrado | Por qué rompía | Corrección |
+|---|---|---|
+| `baseline: number` vs `baselinePreVuelo(): number \| null` | Primer tripulante sin baseline → `NaN` o `!` forzado | `baseline: number \| null` + `degradado` |
+| `Evaluacion` sin `valor`/`baseline`/`desviacion` | Back 1 debía recalcular `desviacionPct` por su cuenta → dos fórmulas | Campos añadidos al contrato |
+| `guardarFrame` devolvía `void` | Fallo de IndexedDB invisible; datos perdidos sin rastro | `ResultadoPersistencia` con código |
+| `evaluar` sin `calidad` | Un artefacto de sensor podía disparar `CRITICO` en el video | Parámetro opcional `calidad` |
+
 
 ### Back 1 entrega a Back 2
 
@@ -117,8 +142,11 @@ export function injectAnomaly(paramId: string, valor: number): void;
 1. IDs canónicos acordados (OSDR tal cual; simulados en `snake_case`).
 2. Corregir **19 → 17** indicadores en el brief.
 3. `meshNodeId: ... | null` para parámetros `ambiental-cabina`.
-4. Back 1 crea el scaffold; Back 2 agrega `vitest.config.ts`.
-5. Back 1 confirmado: **Ernesto** (`@ernesto-montes`); falta su aceptación explícita.
+4. Back 1 crea el scaffold; Back 2 agrega la configuración de tests.
+5. **Roles confirmados (2026-11-14):** Back 1 = **Ernesto** (`@ernesto-montes`), Back 2 = **Angel Marco** (`@angel_marco`).
+6. **Contratos congelados a H2.** Cambios posteriores solo por PR y con aviso al otro dueño.
+7. **`repositories.ts` es el único punto de escritura en Dexie.** Back 1 nunca importa `dexie`.
+8. **Runner de tests:** Vitest como `devDependency`, registrado como excepción al congelamiento del stack (`TECH-STACK.md` §Excepciones). No entra al bundle de producción.
 
 ---
 
@@ -126,5 +154,7 @@ export function injectAnomaly(paramId: string, valor: number): void;
 
 - [ ] Integrar `BRIEF-BACKEND-AGENTES.md` al repo (hoy vive en `~/Downloads`).
 - [x] Confirmar Back 1: **Ernesto** (`@ernesto-montes`).
-- [ ] Aceptación explícita del reparto por Back 1 y Pineda.
+- [x] Confirmar Back 2: **Angel Marco** (`@angel_marco`).
+- [ ] Aceptación explícita del reparto por ambos y por Pineda (revisión de `rules/`).
 - [ ] Crear el issue del reparto y los dos issues de trabajo.
+- [ ] Scaffold de Next 15: primer commit de Back 1.

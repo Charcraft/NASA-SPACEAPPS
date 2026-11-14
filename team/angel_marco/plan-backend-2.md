@@ -94,6 +94,7 @@
 ```ts
 // src/lib/rules/triage.ts
 export type Nivel = 'NOMINAL' | 'ATENCION' | 'CRITICO';
+export type TipoDesviacion = 'z-score' | 'delta-absoluto';
 
 export interface Evaluacion {
   nivel: Nivel;
@@ -101,13 +102,18 @@ export interface Evaluacion {
   accion: string;
   fuente: string;
   reglaDisparada: string;
+  valor: number;
+  baseline: number | null;
+  desviacion: { tipo: TipoDesviacion; valor: number };
+  degradado: boolean;
 }
 
 export function evaluar(
   paramId: string,
   valor: number,
-  baseline: number,
+  baseline: number | null,
   entorno?: EntornoCabina,
+  calidad?: number,
 ): Evaluacion;
 ```
 
@@ -118,9 +124,17 @@ export function baselinePreVuelo(crewId: CrewId, paramId: string): number | null
 
 ```ts
 // src/lib/db/repositories.ts
-export async function guardarFrame(frame: RealtimeTelemetryFrame): Promise<void>;
-// Contrato: nunca lanza y nunca bloquea el loop de 1 Hz.
+export interface ResultadoPersistencia {
+  ok: boolean;
+  guardadas: number;
+  codigo?: string;
+  motivo?: string;
+}
+
+export async function guardarFrame(frame: RealtimeTelemetryFrame): Promise<ResultadoPersistencia>;
+// No lanza y no bloquea el loop de 1 Hz. Devuelve código si falla; no descarta en silencio.
 ```
+
 
 ### Lo que yo necesito de Back 1
 
@@ -148,9 +162,66 @@ Además: `types/index.ts` final, IDs definitivos y fixtures de anomalía para mi
 2. **Corregir el brief:** 19 → **17** indicadores.
 3. **`meshNodeId` nullable** para `ambiental-cabina` (CO₂ no tiene malla corporal). Si no, `ParameterDefinition` no compila.
 4. **Scaffold:** lo crea Back 1; yo solo agrego `vitest.config.ts` y tests.
-5. **Back 1 confirmado:** Ernesto (`@ernesto-montes`); falta su aceptación explícita de este reparto.
+5. **Roles confirmados (2026-11-14):** Back 1 = Ernesto (`@ernesto-montes`), Back 2 = Angel Marco (`@angel_marco`). El reparto queda aceptado.
+6. **Runner:** Vitest como `devDependency`, registrado como excepción al congelamiento del stack. No entra al bundle de producción.
+7. **Contratos congelados a H2.** Cualquier cambio posterior va por PR y se avisa al otro dueño.
 
 ---
+
+## 5.1 · Catálogo de errores (mensajes exactos)
+
+Toda falla del backend lanza `Back2Error` con código, y la UI muestra el mensaje ya redactado.
+
+| Código | Cuándo | Mensaje |
+|---|---|---|
+| `E-DB-001` | Cuota de IndexedDB llena | `No se pudo guardar: cuota de IndexedDB llena ({usadoMb} MB). Ejecuta purgarVentana() y reintenta.` |
+| `E-DB-002` | Otra pestaña bloquea la base | `Base de datos bloqueada por otra pestaña. Cierra las demás pestañas de AEGIS y reintenta.` |
+| `E-DB-003` | Versión de esquema incompatible | `Esquema incompatible (v{actual} vs v{esperada}). Borra los datos locales desde Ajustes.` |
+| `E-VAL-001` | Valor fuera de rango fisiológico | `Medición rechazada para «{paramId}»: valor {valor} fuera de [{min}, {max}]. Revisa el sensor o corrige la entrada.` |
+| `E-VAL-002` | Parámetro no registrado | `Parámetro «{paramId}» no existe en el catálogo. Añádelo en registry.ts antes de registrar.` |
+| `E-VAL-003` | Unidad no canónica | `Unidad «{unidad}» no es la canónica de «{paramId}» (esperada: {unidadCanonica}). Convierte antes de guardar.` |
+| `E-TRI-001` | Umbral sin fuente | `Umbral de «{paramId}» sin fuente trazable. Añade fuenteTrazable o marca [SUPUESTO].` |
+| `E-TRI-002` | Sin baseline en la época | `Sin baseline de «{paramId}» en época «{epoca}». Se evaluó con referencia poblacional (degradado).` |
+| `E-SYN-001` | Hash no coincide | `Lote {id} rechazado: hash esperado {esperado}, recibido {recibido}. No se reintenta automáticamente.` |
+| `E-SYN-002` | Cola corrupta | `Cola de sincronización corrupta en el ítem {id}. Exporta la cola y reinicia el estado a 'pendiente'.` |
+| `E-API-001` | Respuesta fuera de contrato | `Respuesta inválida en {ruta}: {detalle}. Se sirvió el fallback local.` |
+| `E-API-002` | Timeout de llamada externa | `Tiempo de espera agotado en {ruta} ({ms} ms). Se sirvió el fallback determinista.` |
+
+```ts
+export class Back2Error extends Error {
+  constructor(
+    public readonly codigo: CodigoError,
+    public readonly detalle: Record<string, string | number>,
+    public readonly causa?: unknown,
+  ) {
+    super(mensajeDe(codigo, detalle));
+    this.name = 'Back2Error';
+  }
+}
+```
+
+## 5.2 · Esquema Dexie v1
+
+```ts
+this.version(1).stores({
+  parametros: 'id, categoria, meshNodeId, tipoDato',
+  mediciones: '++id, [crewId+parametroId+timestamp], timestamp, nivel',
+  series:     '[crewId+parametroId+resolucion+inicio], parametroId',
+  episodios:  '++id, [crewId+parametroId+inicio], abierto',
+  baselines:  '[crewId+parametroId+epoca]',
+  eventos:    '++id, crewId, timestamp, severidad, sincronizadoTierra',
+  colaSync:   '++id, prioridad, creadoEn, estado',
+  bitacora:   '++id, timestamp, actor',
+});
+```
+
+| Tabla | Retención |
+|---|---|
+| `mediciones` | 15 min en memoria + 30 días en disco |
+| `series` | 1 año (agregados 1 min / 1 h) |
+| `baselines`, `episodios`, `bitacora` | Permanente |
+
+**Regla:** `mediciones` es append-only. Corregir = fila nueva con `amendsId`; nunca `delete` sobre histórico.
 
 ## 6 · Riesgos
 
