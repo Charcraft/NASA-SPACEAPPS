@@ -97,6 +97,15 @@
 - Se añadió `LICENSE` MIT con aviso de no afiliación a NASA.
 - Se corrigió un error propio de codificación que corrompió `02-plan-30h-hackathon.md` (reparado y verificado).
 
+### 2026-11-13 — Integración de la investigación del equipo
+- El equipo aportó en `context.md` una investigación sobre la arquitectura real de monitorización de NASA
+  (Bio-Monitor, AstroSkin, actígrafos, HDTP, capas de telemetría, HUD).
+- Se sintetizó en `docs/02-investigacion/05-arquitectura-actual-nasa.md` con 12 fuentes nuevas marcadas `[POR VERIFICAR]`.
+- Hallazgo clave para el pitch: **NASA documenta que sus displays son demasiado densos y poco intuitivos**.
+  Eso convierte nuestra propuesta en respuesta a una necesidad reconocida, no en una idea suelta.
+- También valida el **local-first**: NASA almacena y analiza datos esenciales a bordo antes de transmitir.
+- Se retiró un PNG del repositorio (`cur.png` se queda en disco, fuera de git).
+
 ### 2026-11-06 — Sesión de arranque- Investigación del reto, HRP, 5 hazards, reglas del evento, premios y datasets disponibles.
 - Se identificó el Local Event, el equipo, el límite de 5 y **el horario real de entrega (17:00)**.
 - Se creó el navegador aislado `nasa-spaceapps-2026` con el perfil `charcraftycarlos@gmail.com`.

@@ -71,6 +71,34 @@
 
 ---
 
+## Fuentes aportadas por el equipo — pendientes de verificación
+
+> Aportadas en `context.md` el **2026-11-13**. Sostienen `05-arquitectura-actual-nasa.md`.
+> **Ninguna se ha abierto para verificar su contenido.** Se marcan como `[POR VERIFICAR]` hasta que alguien las revise.
+
+| # | Fuente | Enlace | Consultado |
+|---|---|---|---|
+| B40 | NASA — Biomedical Flight Controllers | https://www.nasa.gov/directorates/esdmd/hhp/biomedical-flight-controllers/ | ⬜ 2026-11-13 |
+| B41 | NASA — OCHMO-TB-044 Medical Operations | https://www.nasa.gov/wp-content/uploads/2025/08/ochmo-tb-044-medical-operations.pdf | ⬜ |
+| B42 | NASA — Spacesuits Vol. 2 (11.0) | https://www.nasa.gov/reference/11-0-spacesuits-vol-2/ | ⬜ |
+| B43 | NASA — OCHMO-TB-050 Spacesuits | https://www.nasa.gov/wp-content/uploads/2025/09/ochmo-tb-050-spacesuits.pdf | ⬜ |
+| B44 | NASA — Artemis II crew to advance human spaceflight research | https://www.nasa.gov/humans-in-space/artemis-ii-crew-to-advance-human-spaceflight-research/ | ⬜ |
+| B45 | NASA — Expedition 74: advancing space health and AI research | https://www.nasa.gov/blogs/spacestation/2025/12/18/expedition-74-advancing-space-health-and-ai-research-on-station/ | ⬜ |
+| B46 | NASA — Crew works health, spacesuits and cargo (2026-05-05) | https://www.nasa.gov/blogs/spacestation/2026/05/05/crew-works-health-spacesuits-and-cargo-mission-preps-on-tuesday/ | ⬜ |
+| B47 | NASA TechPort — Human Digital Twin Platform (154412) | https://techport.nasa.gov/projects/154412 | ⬜ |
+| B48 | NTRS — Human-Centered Design of Next-Gen Telemetry Displays | https://ntrs.nasa.gov/api/citations/20250011659 | ⬜ |
+| B49 | NTRS — fisiología en vuelo (20190000238) | https://ntrs.nasa.gov/api/citations/20190000238 | ⬜ |
+| B50 | SpaceOps 2025 — paper de operaciones (id 0092) | https://publications.spaceops.org/2025/download_by_id.php?id=0092 | ⬜ |
+| B51 | NASA — AHR 2025 (Annual Health Report) | https://www.nasa.gov/wp-content/uploads/2026/05/ahr-2025-20260518.pdf | ⬜ |
+
+### Antes de citarlas en material público
+
+- [ ] Abrir cada URL y confirmar que existe y dice lo que creemos.
+- [ ] Marcar la fecha real de consulta.
+- [ ] Cambiar `[POR VERIFICAR]` por `[VERIFICADO]` en `05-arquitectura-actual-nasa.md`.
+
+---
+
 ## Cómo se cita dentro del código
 
 Cada indicador en la app incluye un campo `fuente`. Reglas:
