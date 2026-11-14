@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="412" height="917" viewBox="0 0 412 917" fill="none">
+  <defs>
+    <linearGradient id="bgGrad02" x1="206" y1="0" x2="206" y2="917" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090C14"/>
+      <stop offset="100%" stop-color="#0B0F17"/>
+    </linearGradient>
+    <radialGradient id="bodyGlow" cx="50%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#090C14" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="412" height="917" rx="28" fill="url(#bgGrad02)"/>
+  <circle cx="206" cy="390" r="185" fill="url(#bodyGlow)"/>
+
+  <!-- Barra de estado -->
+  <text x="24" y="26" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="12" font-weight="600">14:23 UTC</text>
+  <text x="259" y="26" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="500">SEÑAL  •••  100%</text>
+
+  <!-- Cabecera -->
+  <rect x="24" y="44" width="96" height="36" rx="12" fill="#131A27"/>
+  <text x="38" y="66" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="13" font-weight="600">←  Volver</text>
+  <text x="136" y="60" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="16" font-weight="700">MAPA CORPORAL</text>
+  <text x="136" y="76" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500">TRIPULANTE C003 · TRAJE A-01</text>
+
+  <!-- Filtros de sistema -->
+  <rect x="24" y="92" width="114" height="28" rx="14" fill="#D9FB76"/>
+  <text x="40" y="110" fill="#11180A" font-family="Inter, sans-serif" font-size="10" font-weight="700">6 Sistemas</text>
+  <rect x="146" y="92" width="118" height="28" rx="14" fill="#131A27" stroke="#F59E0B" stroke-width="1"/>
+  <text x="160" y="110" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="600">● 2 en Atención</text>
+  <rect x="272" y="92" width="116" height="28" rx="14" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+  <text x="288" y="110" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="500">Microgravedad</text>
+
+  <!-- Escena central del cuerpo humano anatómico vectorial + Nodos -->
+  <g id="BodyMapScene">
+    <!-- Retícula espacial de telemetría -->
+    <circle cx="206" cy="360" r="145" stroke="#1E293B" stroke-width="1" stroke-dasharray="4 6"/>
+    <circle cx="206" cy="360" r="105" stroke="#1E293B" stroke-width="1"/>
+    <line x1="206" y1="180" x2="206" y2="545" stroke="#1E293B" stroke-width="1"/>
+    <line x1="60" y1="360" x2="352" y2="360" stroke="#1E293B" stroke-width="1"/>
+
+    <!-- Silueta anatómica del astronauta (SVG puro editable en Figma) -->
+    <!-- Cabeza y casco -->
+    <circle cx="206" cy="212" r="24" fill="#131A27" stroke="#38BDF8" stroke-width="2"/>
+    <!-- Torso -->
+    <path d="M174 244 C174 238 238 238 238 244 L246 356 C246 364 166 364 166 356 Z" fill="#131A27" stroke="#38BDF8" stroke-width="2"/>
+    <!-- Brazo Izquierdo -->
+    <path d="M172 248 L142 338 L156 344 L178 274" fill="#131A27" stroke="#38BDF8" stroke-width="1.8"/>
+    <!-- Brazo Derecho -->
+    <path d="M240 248 L270 338 L256 344 L234 274" fill="#131A27" stroke="#38BDF8" stroke-width="1.8"/>
+    <!-- Pierna Izquierda -->
+    <path d="M174 360 L166 492 L188 492 L198 360" fill="#131A27" stroke="#38BDF8" stroke-width="1.8"/>
+    <!-- Pierna Derecha -->
+    <path d="M214 360 L224 492 L246 492 L238 360" fill="#131A27" stroke="#38BDF8" stroke-width="1.8"/>
+
+    <!-- Nodos fisiológicos sobre el cuerpo -->
+    <!-- 1. Neuro-ocular / SANS (Cabeza) -->
+    <circle cx="206" cy="206" r="10" fill="#F59E0B" fill-opacity="0.25"/>
+    <circle cx="206" cy="206" r="5" fill="#F59E0B"/>
+    <line x1="214" y1="206" x2="262" y2="176" stroke="#F59E0B" stroke-width="1.5"/>
+
+    <!-- 2. Cardiovascular (Corazón) -->
+    <circle cx="214" cy="282" r="11" fill="#10B981" fill-opacity="0.25"/>
+    <circle cx="214" cy="282" r="5" fill="#10B981"/>
+    <line x1="222" y1="282" x2="262" y2="272" stroke="#10B981" stroke-width="1.5"/>
+
+    <!-- 3. Respiratorio (Pulmones) -->
+    <circle cx="192" cy="274" r="9" fill="#10B981" fill-opacity="0.25"/>
+    <circle cx="192" cy="274" r="4.5" fill="#10B981"/>
+    <line x1="184" y1="274" x2="144" y2="250" stroke="#10B981" stroke-width="1.5"/>
+
+    <!-- 4. Metabólico / Hepático (Abdomen - OSD-575) -->
+    <circle cx="196" cy="326" r="12" fill="#F59E0B" fill-opacity="0.3"/>
+    <circle cx="196" cy="326" r="6" fill="#F59E0B"/>
+    <line x1="188" y1="326" x2="144" y2="346" stroke="#F59E0B" stroke-width="1.5"/>
+
+    <!-- 5. Musculoesquelético (Fémur / Columna) -->
+    <circle cx="230" cy="418" r="10" fill="#10B981" fill-opacity="0.25"/>
+    <circle cx="230" cy="418" r="5" fill="#10B981"/>
+    <line x1="238" y1="418" x2="262" y2="418" stroke="#10B981" stroke-width="1.5"/>
+
+    <!-- Callout Cards flotantes alrededor del astronauta -->
+    <!-- Callout Neuro-Ocular (SANS) -->
+    <rect x="262" y="152" width="126" height="52" rx="12" fill="#131A27" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="274" y="170" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="700">NEURO · SANS</text>
+    <text x="274" y="185" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Fluido cefálico ↑</text>
+    <text x="274" y="197" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="8.5">Test Amsler sugerido</text>
+
+    <!-- Callout Respiratorio -->
+    <rect x="24" y="226" width="120" height="50" rx="12" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="36" y="244" fill="#D9FB76" font-family="Inter, sans-serif" font-size="10" font-weight="700">RESPIRATORIO</text>
+    <text x="36" y="260" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">SpO₂ 98% · 14 rpm</text>
+    <text x="36" y="271" fill="#10B981" font-family="Inter, sans-serif" font-size="8.5">Nominal en cabina</text>
+
+    <!-- Callout Cardiovascular -->
+    <rect x="262" y="248" width="126" height="50" rx="12" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="274" y="266" fill="#10B981" font-family="Inter, sans-serif" font-size="10" font-weight="700">CARDIOVASCULAR</text>
+    <text x="274" y="282" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">72 lpm · 118/76</text>
+    <text x="274" y="293" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="8.5">Ritmo sinusal normal</text>
+
+    <!-- Callout Metabólico (Seleccionado) -->
+    <rect x="24" y="320" width="124" height="60" rx="12" fill="#231B12" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="36" y="338" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="700">● METABÓLICO</text>
+    <text x="36" y="354" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">Glucosa 103 mg/dL</text>
+    <text x="36" y="368" fill="#F59E0B" font-family="Inter, sans-serif" font-size="9" font-weight="600">AST 18 U/L · ALT 19 U/L</text>
+
+    <!-- Callout Musculoesquelético -->
+    <rect x="262" y="394" width="126" height="50" rx="12" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="274" y="412" fill="#10B981" font-family="Inter, sans-serif" font-size="10" font-weight="700">ÓSEO / MUSCULAR</text>
+    <text x="274" y="428" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">Ca²⁺ 9.4 mg/dL</text>
+    <text x="274" y="439" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="8.5">ARED: 120 min compl.</text>
+
+    <!-- Callout Radiación / Inmune -->
+    <rect x="24" y="458" width="124" height="50" rx="12" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="36" y="476" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10" font-weight="700">INMUNE / RAD</text>
+    <text x="36" y="492" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">PCR 0.8 mg/L</text>
+    <text x="36" y="503" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="8.5">Dosis acum: 12.4 mSv</text>
+  </g>
+
+  <!-- Panel Inferior: Detalle del Sistema Seleccionado (Metabólico OSD-575) -->
+  <g id="SystemDetailSheet">
+    <rect x="24" y="560" width="364" height="268" rx="22" fill="#131A27" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="176" y="570" width="60" height="4" rx="2" fill="#334155"/>
+
+    <text x="44" y="598" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="700" letter-spacing="0.8">SISTEMA SELECCIONADO · PANEL BIOQUÍMICO OSD-575</text>
+    <text x="44" y="622" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="20" font-weight="700">Metabólico y Hepático</text>
+    <text x="44" y="642" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11">La microgravedad eleva glucosa y transaminasas.</text>
+
+    <!-- 3 Mini métricas del sistema -->
+    <rect x="44" y="658" width="102" height="84" rx="14" fill="#090C14" stroke="#F59E0B" stroke-width="1.2"/>
+    <text x="56" y="678" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600">GLUCOSA</text>
+    <text x="56" y="708" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">103</text>
+    <text x="56" y="728" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">mg/dL (↑ 44%)</text>
+
+    <rect x="155" y="658" width="102" height="84" rx="14" fill="#090C14" stroke="#1E293B" stroke-width="1"/>
+    <text x="167" y="678" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600">ALBÚMINA</text>
+    <text x="167" y="708" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">4.2</text>
+    <text x="167" y="728" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">g/dL (Nominal)</text>
+
+    <rect x="266" y="658" width="102" height="84" rx="14" fill="#090C14" stroke="#1E293B" stroke-width="1"/>
+    <text x="278" y="678" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600">CREATININA</text>
+    <text x="278" y="708" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">0.89</text>
+    <text x="278" y="728" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">mg/dL (Nominal)</text>
+
+    <!-- Botón de acción -->
+    <rect x="44" y="758" width="324" height="52" rx="26" fill="#D9FB76"/>
+    <text x="68" y="789" fill="#11180A" font-family="Inter, sans-serif" font-size="14" font-weight="700">Medir indicador de este sistema</text>
+    <text x="332" y="789" fill="#11180A" font-family="Inter, sans-serif" font-size="18" font-weight="700">↗</text>
+  </g>
+
+  <!-- Barra de Navegación Inferior -->
+  <g id="BottomNav02">
+    <rect x="24" y="840" width="364" height="44" rx="22" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="47" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Dashboard</text>
+    <rect x="128" y="845" width="90" height="34" rx="17" fill="#1E293B"/>
+    <text x="145" y="866" fill="#D9FB76" font-family="Inter, sans-serif" font-size="11" font-weight="700">Cuerpo 3D</text>
+    <text x="232" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Medición</text>
+    <text x="312" y="866" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="600">Protocolos</text>
+  </g>
+
+  <text x="58" y="898" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="500">Prototipo educativo NASA Space Apps 2026 · No es un dispositivo médico.</text>
+  <rect x="142" y="906" width="128" height="4" rx="2" fill="#F6F7FB" fill-opacity="0.4"/>
+</svg>

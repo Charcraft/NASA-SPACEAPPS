@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="412" height="917" viewBox="0 0 412 917" fill="none">
+  <defs>
+    <linearGradient id="bgGrad01" x1="206" y1="0" x2="206" y2="917" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090C14"/>
+      <stop offset="100%" stop-color="#0B0F17"/>
+    </linearGradient>
+    <linearGradient id="amberCardGrad" x1="0" y1="0" x2="364" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#231B12"/>
+      <stop offset="100%" stop-color="#131A27"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo principal -->
+  <rect width="412" height="917" rx="28" fill="url(#bgGrad01)"/>
+
+  <!-- Barra de estado superior -->
+  <g id="StatusBar">
+    <text x="24" y="26" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="12" font-weight="600">14:22 UTC</text>
+    <rect x="132" y="13" width="112" height="18" rx="9" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="144" cy="22" r="3.5" fill="#D9FB76"/>
+    <text x="153" y="25" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">OFFLINE · LOCAL</text>
+    <text x="272" y="26" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500">DELAY +14m 20s</text>
+  </g>
+
+  <!-- Cabecera AEGIS + Selector Modo -->
+  <g id="Header">
+    <text x="24" y="64" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="22" font-weight="700" letter-spacing="0.5">AEGIS · ÓRBITA</text>
+    <text x="24" y="81" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Autonomía de Salud · NASA OSDR OSD-575</text>
+
+    <!-- Botón SOS / Emergencia -->
+    <rect x="282" y="46" width="106" height="36" rx="18" fill="#2A1215" stroke="#EF4444" stroke-width="1.5"/>
+    <circle cx="298" cy="64" r="4" fill="#EF4444"/>
+    <text x="308" y="68" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="700">EMERGENCIA</text>
+  </g>
+
+  <!-- Selector de Tripulante (C001 - C004 de OSD-575) -->
+  <g id="CrewSelector">
+    <!-- C001 -->
+    <rect x="24" y="98" width="85" height="54" rx="14" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="36" y="118" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">C001</text>
+    <circle cx="95" cy="114" r="4" fill="#10B981"/>
+    <text x="36" y="134" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="500">CMO · R+1</text>
+    <text x="36" y="146" fill="#10B981" font-family="Inter, sans-serif" font-size="8" font-weight="600">Nominal</text>
+
+    <!-- C002 -->
+    <rect x="117" y="98" width="85" height="54" rx="14" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="129" y="118" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">C002</text>
+    <circle cx="188" cy="114" r="4" fill="#10B981"/>
+    <text x="129" y="134" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="500">Piloto · R+1</text>
+    <text x="129" y="146" fill="#10B981" font-family="Inter, sans-serif" font-size="8" font-weight="600">Nominal</text>
+
+    <!-- C003 · activo -->
+    <rect x="210" y="98" width="85" height="54" rx="14" fill="#131A27" stroke="#D9FB76" stroke-width="1.5"/>
+    <text x="222" y="118" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">C003</text>
+    <circle cx="281" cy="114" r="4" fill="#F59E0B"/>
+    <text x="222" y="134" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="10" font-weight="600">Espec. · R+1</text>
+    <text x="222" y="146" fill="#F59E0B" font-family="Inter, sans-serif" font-size="8" font-weight="700">Glucosa ↑</text>
+
+    <!-- C004 -->
+    <rect x="303" y="98" width="85" height="54" rx="14" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="315" y="118" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">C004</text>
+    <circle cx="374" cy="114" r="4" fill="#10B981"/>
+    <text x="315" y="134" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="500">Cmdte · R+1</text>
+    <text x="315" y="146" fill="#10B981" font-family="Inter, sans-serif" font-size="8" font-weight="600">Nominal</text>
+  </g>
+
+  <!-- Barra de los 5 Peligros NASA HRP -->
+  <g id="HrpHazardsBar">
+    <rect x="24" y="164" width="364" height="52" rx="14" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="36" y="180" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600" letter-spacing="0.8">5 PELIGROS NASA HRP · CONTEXTO AMBIENTAL</text>
+
+    <!-- Pills de los 5 riesgos -->
+    <rect x="36" y="188" width="62" height="20" rx="6" fill="#1E293B"/>
+    <text x="43" y="201" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">RAD 0.4mSv</text>
+
+    <rect x="104" y="188" width="66" height="20" rx="6" fill="#2A2012" stroke="#F59E0B" stroke-width="0.8"/>
+    <text x="111" y="201" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">μG · SANS</text>
+
+    <rect x="176" y="188" width="66" height="20" rx="6" fill="#1E293B"/>
+    <text x="183" y="201" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">CO₂ 2.8mmHg</text>
+
+    <rect x="248" y="188" width="62" height="20" rx="6" fill="#1E293B"/>
+    <text x="255" y="201" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">SUEÑO 6.8h</text>
+
+    <rect x="316" y="188" width="60" height="20" rx="6" fill="#1E293B"/>
+    <text x="323" y="201" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">AUTÓNOMO</text>
+  </g>
+
+  <!-- Banner de Estado General / Triage -->
+  <g id="StatusSummaryCard">
+    <rect x="24" y="228" width="364" height="106" rx="18" fill="url(#amberCardGrad)" stroke="#F59E0B" stroke-width="1.5"/>
+    <rect x="40" y="244" width="110" height="22" rx="11" fill="#F59E0B"/>
+    <text x="52" y="258" fill="#11180A" font-family="Inter, sans-serif" font-size="10" font-weight="700">● ATENCIÓN · R+1</text>
+    <text x="276" y="258" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500">BASE PERSONAL: L-44</text>
+
+    <text x="40" y="286" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="17" font-weight="700">1 indicador fuera de tu línea base</text>
+    <text x="40" y="305" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="400">Glucosa 103 mg/dL · +44.4 % vs tu media pre-vuelo</text>
+    <text x="40" y="322" fill="#D9FB76" font-family="Inter, sans-serif" font-size="11" font-weight="600">Acción: Repetir medición en 2 h tras hidratación →</text>
+  </g>
+
+  <!-- Título de sección Signos Vitales y Panel Metabólico -->
+  <text x="24" y="358" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="600" letter-spacing="0.8">SIGNOS VITALES Y PANEL METABÓLICO (OSD-575)</text>
+  <text x="312" y="358" fill="#D9FB76" font-family="Inter, sans-serif" font-size="10" font-weight="600">Ver serie L→R ↗</text>
+
+  <!-- Grid 2x2 de Tarjetas de Signos Vitales -->
+  <!-- Card 1: Frecuencia Cardíaca -->
+  <g id="CardHR">
+    <rect x="24" y="370" width="176" height="118" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="38" y="392" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="600">PULSO CARDÍACO</text>
+    <circle cx="182" cy="388" r="4.5" fill="#10B981"/>
+    <text x="38" y="430" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700">72</text>
+    <text x="84" y="430" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="12" font-weight="500">lpm</text>
+    <!-- Mini sparkline -->
+    <path d="M38 452 L62 449 L86 451 L110 446 L134 448 L158 442 L182 444" stroke="#10B981" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="38" y="474" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">Base L-44: 68 lpm (+5.8%)</text>
+  </g>
+
+  <!-- Card 2: SpO2 -->
+  <g id="CardSpO2">
+    <rect x="212" y="370" width="176" height="118" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="226" y="392" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="600">OXÍGENO (SpO₂)</text>
+    <circle cx="370" cy="388" r="4.5" fill="#10B981"/>
+    <text x="226" y="430" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700">98</text>
+    <text x="272" y="430" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600">%</text>
+    <!-- Mini sparkline -->
+    <path d="M226 446 L250 446 L274 448 L298 446 L322 445 L346 447 L370 446" stroke="#D9FB76" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="226" y="474" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">Base L-44: 99% (Nominal)</text>
+  </g>
+
+  <!-- Card 3: Glucosa (OSD-575 real alert) -->
+  <g id="CardGlucose">
+    <rect x="24" y="500" width="176" height="118" rx="16" fill="#131A27" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="38" y="522" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="700">GLUCOSA (OSD-575)</text>
+    <circle cx="182" cy="518" r="4.5" fill="#F59E0B"/>
+    <text x="38" y="560" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700">103</text>
+    <text x="102" y="560" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600">mg/dL</text>
+    <!-- Mini sparkline showing spike at R+1 -->
+    <path d="M38 584 L62 582 L86 583 L110 568 L134 579 L158 581 L182 580" stroke="#F59E0B" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="110" cy="568" r="3" fill="#F59E0B"/>
+    <text x="38" y="604" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">Rango: 65–99 · Base: 71</text>
+  </g>
+
+  <!-- Card 4: Presión Arterial + Proteína C Reactiva -->
+  <g id="CardBP">
+    <rect x="212" y="500" width="176" height="118" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="226" y="522" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10" font-weight="600">PRESIÓN ARTERIAL</text>
+    <circle cx="370" cy="518" r="4.5" fill="#10B981"/>
+    <text x="226" y="560" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">118/76</text>
+    <text x="322" y="560" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500">mmHg</text>
+    <path d="M226 582 L250 580 L274 581 L298 577 L322 579 L346 578 L370 578" stroke="#10B981" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="226" y="604" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">Base L-44: 115/74 mmHg</text>
+  </g>
+
+  <!-- Serie Longitudinal OSD-575 (L-92 a R+194) -->
+  <g id="TimelineCard">
+    <rect x="24" y="632" width="364" height="132" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="40" y="654" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="12" font-weight="600">Línea base personal · C003</text>
+    <text x="372" y="654" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" text-anchor="end">4 PUNTOS · OSD-575</text>
+
+    <!-- Banda de referencia 65-99 mg/dL -->
+    <rect x="40" y="684" width="332" height="32" rx="4" fill="#10B981" fill-opacity="0.1"/>
+    <line x1="40" y1="684" x2="372" y2="684" stroke="#F59E0B" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="248" y="680" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="8">UMBRAL 99</text>
+
+    <!-- Serie real de C003: 77 · 62 · 75 · 103 mg/dL (OSD-575) -->
+    <path d="M52 705 L152 719 L252 707 L352 680" stroke="#D9FB76" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="52" cy="705" r="3.5" fill="#10B981"/>
+    <circle cx="152" cy="719" r="3.5" fill="#F59E0B"/>
+    <circle cx="252" cy="707" r="3.5" fill="#10B981"/>
+    <circle cx="352" cy="680" r="5" fill="#F59E0B" stroke="#090C14" stroke-width="1.5"/>
+
+    <!-- Etiquetas eje X -->
+    <text x="42" y="746" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9">L-92</text>
+    <text x="142" y="746" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9">L-44</text>
+    <text x="242" y="746" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9">L-3</text>
+    <text x="332" y="746" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">R+1</text>
+  </g>
+
+  <!-- CTA Principal: Nueva Medición Guiada -->
+  <g id="PrimaryCTA">
+    <rect x="24" y="778" width="364" height="50" rx="25" fill="#D9FB76"/>
+    <text x="52" y="808" fill="#11180A" font-family="Inter, sans-serif" font-size="15" font-weight="700">+  Iniciar medición guiada paso a paso</text>
+    <text x="350" y="808" fill="#11180A" font-family="Inter, sans-serif" font-size="18" font-weight="700">↗</text>
+  </g>
+
+  <!-- Barra de Navegación Inferior + Disclaimer -->
+  <g id="BottomNav">
+    <rect x="24" y="840" width="364" height="44" rx="22" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <rect x="30" y="845" width="90" height="34" rx="17" fill="#1E293B"/>
+    <text x="47" y="866" fill="#D9FB76" font-family="Inter, sans-serif" font-size="11" font-weight="700">Dashboard</text>
+    <text x="142" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Cuerpo 3D</text>
+    <text x="232" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Medición</text>
+    <text x="312" y="866" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="600">Protocolos</text>
+  </g>
+
+  <text x="58" y="898" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="500">Prototipo educativo NASA Space Apps 2026 · No es un dispositivo médico.</text>
+  <rect x="142" y="906" width="128" height="4" rx="2" fill="#F6F7FB" fill-opacity="0.4"/>
+</svg>

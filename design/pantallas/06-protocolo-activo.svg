@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="412" height="917" viewBox="0 0 412 917" fill="none">
+  <defs>
+    <linearGradient id="bgGrad06" x1="206" y1="0" x2="206" y2="917" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0C0A10"/>
+      <stop offset="100%" stop-color="#0B0F17"/>
+    </linearGradient>
+    <linearGradient id="timerGrad06" x1="24" y1="96" x2="388" y2="184" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2A1215"/>
+      <stop offset="100%" stop-color="#131A27"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo principal (modo foco: sin barra de navegación) -->
+  <rect width="412" height="917" rx="28" fill="url(#bgGrad06)"/>
+
+  <!-- Barra de estado -->
+  <g id="StatusBar06">
+    <text x="24" y="26" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="12" font-weight="600">14:34 UTC</text>
+    <circle cx="250" cy="22" r="3.5" fill="#EF4444"/>
+    <text x="259" y="26" fill="#FCA5A5" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">PROTOCOLO ACTIVO · LOCAL</text>
+  </g>
+
+  <!-- Cabecera -->
+  <text x="24" y="52" fill="#FCA5A5" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" letter-spacing="0.8">EMERGENCIA · C003 · ESPECIALISTA</text>
+  <text x="24" y="78" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="22" font-weight="800" letter-spacing="0.3">DOLOR TORÁCICO</text>
+
+  <!-- Cronómetro -->
+  <g id="TimerCard">
+    <rect x="24" y="96" width="364" height="88" rx="18" fill="url(#timerGrad06)" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="42" y="120" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600" letter-spacing="0.6">TIEMPO EN PROTOCOLO</text>
+    <text x="42" y="158" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="34" font-weight="700">03:42</text>
+    <rect x="300" y="130" width="72" height="24" rx="12" fill="#1E293B"/>
+    <text x="336" y="146" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" text-anchor="middle">PASO 2/6</text>
+    <text x="42" y="172" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="9" font-weight="500">Sigue aunque te sientas mejor · no se puede deshacer</text>
+  </g>
+
+  <!-- Progreso de pasos -->
+  <g id="StepDots">
+    <circle cx="30" cy="204" r="5" fill="#10B981"/>
+    <circle cx="56" cy="204" r="6" fill="#EF4444"/>
+    <circle cx="82" cy="204" r="5" fill="#334155"/>
+    <circle cx="108" cy="204" r="5" fill="#334155"/>
+    <circle cx="134" cy="204" r="5" fill="#334155"/>
+    <circle cx="160" cy="204" r="5" fill="#334155"/>
+    <text x="388" y="208" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" text-anchor="end">1 hecho · 1 en curso</text>
+  </g>
+
+  <!-- Instrucción del paso actual -->
+  <g id="StepCard">
+    <rect x="24" y="222" width="364" height="262" rx="22" fill="#131A27" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="46" y="252" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" letter-spacing="0.6">PASO 2 · AHORA</text>
+
+    <text x="46" y="292" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.3">Afloja el traje</text>
+    <text x="46" y="324" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.3">y avisa a Tierra.</text>
+
+    <text x="46" y="356" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11.5" font-weight="400">Libera el cuello y el pecho del traje para respirar</text>
+    <text x="46" y="373" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11.5" font-weight="400">sin esfuerzo. Después envía el aviso de emergencia.</text>
+
+    <line x1="46" y1="394" x2="366" y2="394" stroke="#334155" stroke-width="1"/>
+
+    <text x="46" y="416" fill="#EF4444" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.5">NO HAGAS ESTO</text>
+    <text x="46" y="434" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="10.5" font-weight="500">✕ No te acuestes boca abajo</text>
+    <text x="222" y="434" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="10.5" font-weight="500">✕ No comas ni bebas</text>
+    <text x="46" y="456" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9.5" font-weight="400">El traje abierto no se presuriza: hazlo en 30 segundos.</text>
+  </g>
+
+  <!-- Reevaluación -->
+  <g id="ReevalCard">
+    <rect x="24" y="496" width="364" height="94" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="42" y="520" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600" letter-spacing="0.6">SIGUIENTE REEVALUACIÓN</text>
+    <text x="42" y="548" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">01:18</text>
+    <text x="366" y="548" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" text-anchor="end">a los 5 min</text>
+    <rect x="42" y="562" width="324" height="8" rx="4" fill="#1E293B"/>
+    <rect x="42" y="562" width="252" height="8" rx="4" fill="#F59E0B"/>
+    <text x="42" y="582" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="8.5" font-weight="400">Pulso, SpO₂ y dolor (0–10). El cronómetro es visible a propósito.</text>
+  </g>
+
+  <!-- Registro automático -->
+  <g id="EventLog">
+    <rect x="24" y="602" width="364" height="86" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="42" cy="624" r="3.5" fill="#D9FB76"/>
+    <text x="54" y="628" fill="#D9FB76" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" letter-spacing="0.5">REGISTRO AUTOMÁTICO · 3 EVENTOS</text>
+    <text x="42" y="648" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">14:31:08  Paso 1 «Detente y siéntate»</text>
+    <text x="42" y="662" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500">14:33:12  Paso 2 iniciado</text>
+    <text x="42" y="676" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">14:34:02  Aviso empaquetado para enlace</text>
+  </g>
+
+  <!-- Acción principal -->
+  <rect x="24" y="702" width="364" height="58" rx="29" fill="#D9FB76"/>
+  <text x="50" y="737" fill="#11180A" font-family="Inter, sans-serif" font-size="15" font-weight="800">Siguiente: medir signos</text>
+  <text x="364" y="738" fill="#11180A" font-family="Inter, sans-serif" font-size="18" font-weight="700" text-anchor="end">→</text>
+
+  <!-- Acciones secundarias -->
+  <g id="SecondaryActions">
+    <rect x="24" y="770" width="176" height="46" rx="23" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="112" y="798" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">← Volver un paso</text>
+    <rect x="212" y="770" width="176" height="46" rx="23" fill="#131A27" stroke="#EF4444" stroke-width="1"/>
+    <text x="300" y="798" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Avisar a Tierra</text>
+  </g>
+
+  <!-- Aviso de cumplimiento -->
+  <text x="24" y="846" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="500">Protocolo de apoyo. No sustituye al Crew Medical Officer ni a un</text>
+  <text x="24" y="858" fill="#64748B" font-family="Inter, sans-serif" font-size="8.5" font-weight="500">dispositivo médico. Cada paso queda registrado con su hora.</text>
+  <rect x="142" y="906" width="128" height="4" rx="2" fill="#F6F7FB" fill-opacity="0.4"/>
+</svg>

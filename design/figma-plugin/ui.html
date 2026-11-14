@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<style>
+  :root {
+    --bg: #0b0f17;
+    --surface: #131a27;
+    --line: #1e293b;
+    --text: #f6f7fb;
+    --muted: #9ba4b8;
+    --accent: #d9fb76;
+    --ink: #11180a;
+    --ok: #10b981;
+    --bad: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 18px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px;
+  }
+  h1 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    letter-spacing: 0.2px;
+  }
+  .sub {
+    color: var(--muted);
+    font-size: 10.5px;
+    line-height: 1.45;
+    margin: 0 0 14px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    color: var(--text);
+    font-size: 11.5px;
+    cursor: pointer;
+  }
+  input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 14px;
+    height: 14px;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 22px;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+  #log {
+    margin-top: 10px;
+    height: 120px;
+    overflow-y: auto;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 9.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  #log .ok { color: var(--ok); }
+  #log .bad { color: var(--bad); }
+  .hint {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.4;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+  <h1>AEGIS · Maquetado</h1>
+  <p class="sub">Crea las 6 pantallas del alcance y la página de sistema de diseño en este archivo.</p>
+
+  <div class="card">
+    <label><input type="checkbox" id="screens" checked /> 6 pantallas (412 × 917)</label>
+    <label><input type="checkbox" id="system" checked /> Página de sistema (color, tipo, reglas)</label>
+  </div>
+
+  <button id="go">Generar maquetado</button>
+  <div class="hint">Se crean en páginas nuevas. No borra nada de lo que ya tengas.</div>
+
+  <div id="log"></div>
+
+  <script>
+    const go = document.getElementById("go");
+    const log = document.getElementById("log");
+    const screens = document.getElementById("screens");
+    const system = document.getElementById("system");
+
+    function write(text, cls) {
+      const line = document.createElement("div");
+      if (cls) line.className = cls;
+      line.textContent = text;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    go.addEventListener("click", () => {
+      log.innerHTML = "";
+      go.disabled = true;
+      write("Generando…");
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "build",
+            screens: screens.checked,
+            system: system.checked
+          }
+        },
+        "*"
+      );
+    });
+
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+      if (msg.type === "log") write(msg.text);
+      if (msg.type === "progress") write("· " + msg.done + "/" + msg.total + "  " + msg.label);
+      if (msg.type === "done") { write("Listo.", "ok"); go.disabled = false; }
+      if (msg.type === "error") { write("Error: " + msg.text, "bad"); go.disabled = false; }
+      if (msg.type === "busy") go.disabled = msg.value;
+    };
+  </script>
+</body>
+</html>

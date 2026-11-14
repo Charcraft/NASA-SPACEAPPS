@@ -1,7 +1,7 @@
 # MEMORY.md — Memoria operativa del proyecto
 
 > Registro vivo del estado del proyecto. Se actualiza al final de cada sesión de trabajo.
-> **Última actualización:** 2026-11-13
+> **Última actualización:** 2026-11-14
 
 ---
 
@@ -9,8 +9,8 @@
 
 | Campo | Valor |
 |---|---|
-| Fecha | **Viernes 13 de noviembre de 2026** |
-| Días para el hackathon | **1** (evento: 2026-11-14, 09:00) |
+| Fecha | **Sábado 14 de noviembre de 2026** |
+| Días para el hackathon | **0** (evento en curso) |
 | Fase | Recursos oficiales recibidos · adaptación final |
 | Proyecto enviado | No (0 de 1) |
 | Repositorio público | ✅ https://github.com/Charcraft/NASA-SPACEAPPS |
@@ -67,6 +67,8 @@
 | D21 | **Un navegador BrowserAct por persona**, nunca compartido | 2026-11-13 | Sesiones de Google y GitHub son privadas; compartir uno rompe trazabilidad y desconecta sesiones |
 | D22 | **Protocolo documental obligatorio** + verificación automática de documentos huérfanos | 2026-11-13 | Que ningún agente cierre una tarea sin registrar decisiones, fuentes, IA y archivos |
 | D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
+| D24 | El maquetado se entrega como **plugin de Figma** en `design/`, no como SVG suelto | 2026-11-14 | El MCP de Figma es de solo lectura y la API REST no crea nodos; el plugin deja capas nativas y funciona en cualquier archivo |
+| D25 | La escena de demo es **C003 en R+1, glucosa 103 mg/dL** | 2026-11-14 | Es el único valor de glucosa realmente fuera de rango en R+1; los 102/89 anteriores no existen en OSD-575 |
 
 ---
 
@@ -155,3 +157,12 @@
 - Se crearon 3 scripts: `setup-integrante.ps1`, `nuevo-worktree.ps1`, `verificar-docs.ps1`.
 - Se inicializó el repositorio git local en `main` y `.gitignore` (excluye `Uso de IA-Personal/`).
 - Se definió el plan adaptativo F0–F4 hasta el 13 de noviembre.
+
+### 2026-11-14 — Maquetado en Figma como plugin nativo
+- El MCP de Figma configurado (`figma-developer-mcp`) es **de solo lectura** y la API REST de Figma **no permite crear frames ni texto**. Se verificó el token contra `api.figma.com/v1/me` (200 OK, cuenta de Carlos Pineda) y se confirmó que no hay herramienta de escritura.
+- Se creó `design/` como carpeta aislada: las 6 pantallas congeladas en `design/pantallas/` y un **plugin de Figma** en `design/figma-plugin/` que las construye con capas nativas, más una página de sistema con 12 estilos de color y 7 de texto.
+- **Hallazgo grave de veracidad:** el maquetado previo mostraba glucosa **102 mg/dL, base 89, +14.6 % para C001**. En OSD-575, C001 tiene 90 mg/dL y base 77.3; esos valores no existen. Se reescribió la escena con **C003 = 103 mg/dL, base 71.3, +44.4 %**, que sí sostienen el caso.
+- Se corrigieron también AST/ALT (18/19 en vez de 29/31), albúmina (4.2) y creatinina (0.89) del mapa corporal.
+- Se añadieron dos herramientas: `design/tools/verificar-pantallas.py` (falla si un número no está en el dataset) y `design/tools/smoke-test.mjs` (ejecuta el plugin contra un doble de la API y genera `design/out/preview.html`).
+- **Inconsistencia abierta:** el semáforo de glucemia del catálogo (verde 70–140) contradice la referencia de ayuno que cita (70–99). La pantalla 04 lo dice explícitamente; falta decidir la regla oficial.
+- No se tocó `assets/figma-vistas/`: otra línea de trabajo estaba escribiendo ahí y llegó a sobrescribir un archivo durante la sesión.

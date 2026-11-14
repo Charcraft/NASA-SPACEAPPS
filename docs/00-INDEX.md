@@ -50,6 +50,8 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/pitch-aegis.pptx`](03-plan/pitch-aegis.pptx) | **Presentación lista para proyectar** (generada con `scripts/generar-pitch.py`) |
 | [`03-plan/08-preguntas-jurado.md`](03-plan/08-preguntas-jurado.md) | **Documento de estudio: 40+ preguntas del jurado con respuestas y preguntas trampa** |
 | [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
+| [`03-plan/10-sistema-diseno.md`](03-plan/10-sistema-diseno.md) | **Sistema de diseño, tokens, trazabilidad de cada número y supuestos de interfaz** |
+| [`design/README.md`](../design/README.md) | **Maquetado y plugin de Figma**: cómo se construye, se prueba y se importa |
 
 ---
 
@@ -148,6 +150,21 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | Documento | Contenido |
 |---|---|
 | [`12-briefing-equipo.md`](12-briefing-equipo.md) | **Todo el proyecto en un documento**, para presentarlo al equipo en 40 minutos |
+
+---
+
+## 13 · Maquetado UI/UX y Vistas Figma (`assets/figma-vistas/`)
+
+| Artefacto | Contenido |
+|---|---|
+| [`../assets/figma-vistas/00-sistema-completo-aegis.svg`](../assets/figma-vistas/00-sistema-completo-aegis.svg) | Lienzo maestro con las 6 vistas unificadas listas para pegar en Figma (`Ctrl+V`) |
+| [`../assets/figma-vistas/01-dashboard-rutina.svg`](../assets/figma-vistas/01-dashboard-rutina.svg) | Vista 01 · Dashboard de Rutina (OSD-575, C001–C004, 5 peligros NASA HRP) |
+| [`../assets/figma-vistas/02-mapa-corporal.svg`](../assets/figma-vistas/02-mapa-corporal.svg) | Vista 02 · Mapa Corporal 0G por sistema fisiológico |
+| [`../assets/figma-vistas/03-asistente-medicion.svg`](../assets/figma-vistas/03-asistente-medicion.svg) | Vista 03 · Asistente de medición guiado paso a paso con modos de fallo en 0G |
+| [`../assets/figma-vistas/04-tarjeta-triage.svg`](../assets/figma-vistas/04-tarjeta-triage.svg) | Vista 04 · Tarjeta de resultado / Triage determinista + cola diferida |
+| [`../assets/figma-vistas/05-selector-emergencia.svg`](../assets/figma-vistas/05-selector-emergencia.svg) | Vista 05 · Selector rápido de protocolos de emergencia (escenario AEB) |
+| [`../assets/figma-vistas/06-protocolo-activo.svg`](../assets/figma-vistas/06-protocolo-activo.svg) | Vista 06 · Protocolo activo paso a paso + metrónomo RCP 110 LPM |
+| [`../assets/figma-vistas/preview-interactivo.html`](../assets/figma-vistas/preview-interactivo.html) | Simulador interactivo con datos reales OSD-575 y copiado en 1 clic a Figma |
 
 ---
 

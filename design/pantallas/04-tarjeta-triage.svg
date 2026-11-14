@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="412" height="917" viewBox="0 0 412 917" fill="none">
+  <defs>
+    <linearGradient id="bgGrad04" x1="206" y1="0" x2="206" y2="917" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#090C14"/>
+      <stop offset="100%" stop-color="#0B0F17"/>
+    </linearGradient>
+    <linearGradient id="triageAmber" x1="24" y1="108" x2="388" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#291E10"/>
+      <stop offset="100%" stop-color="#131A27"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="412" height="917" rx="28" fill="url(#bgGrad04)"/>
+
+  <!-- Barra de estado -->
+  <text x="24" y="26" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="12" font-weight="600">14:26 UTC</text>
+  <text x="246" y="26" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">MOTOR DETERMINISTA LOCAL</text>
+
+  <!-- Cabecera -->
+  <rect x="24" y="44" width="96" height="36" rx="12" fill="#131A27"/>
+  <text x="38" y="66" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="13" font-weight="600">←  Volver</text>
+  <text x="136" y="60" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="15" font-weight="700">RESULTADO DE TRIAGE</text>
+  <text x="136" y="76" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500">C003 · GLUCOSA · R+1</text>
+
+  <!-- Tarjeta Principal Semáforo Determinista -->
+  <g id="TriageHeroCard">
+    <rect x="24" y="96" width="364" height="236" rx="22" fill="url(#triageAmber)" stroke="#F59E0B" stroke-width="2"/>
+
+    <!-- Badge Semáforo AMARILLO -->
+    <rect x="42" y="116" width="164" height="28" rx="14" fill="#F59E0B"/>
+    <text x="54" y="134" fill="#11180A" font-family="Inter, sans-serif" font-size="10" font-weight="800">▲ ATENCIÓN · DESVIACIÓN</text>
+    <text x="282" y="134" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="10">ID #TRG-0575</text>
+
+    <!-- Lectura y Delta -->
+    <text x="42" y="186" fill="#F6F7FB" font-family="JetBrains Mono, monospace" font-size="44" font-weight="700">103</text>
+    <text x="136" y="186" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="16" font-weight="600">mg/dL</text>
+
+    <rect x="220" y="156" width="150" height="42" rx="10" fill="#090C14" stroke="#F59E0B" stroke-width="1"/>
+    <text x="232" y="173" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9" font-weight="600">DESVIACIÓN PERSONAL</text>
+    <text x="232" y="190" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">+44.4% (+32 mg/dL)</text>
+
+    <!-- Razón explícita de la regla determinista -->
+    <line x1="42" y1="214" x2="370" y2="214" stroke="#334155" stroke-width="1"/>
+    <text x="42" y="236" fill="#F59E0B" font-family="Inter, sans-serif" font-size="10" font-weight="700">¿POR QUÉ TE PIDE ATENCIÓN?</text>
+    <text x="42" y="256" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11.5" font-weight="500">Semáforo clínico verde (70–140): no es urgencia. Pero 103 está</text>
+    <text x="42" y="274" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11.5" font-weight="500">44.4 % sobre tu media pre-vuelo (71.3) y fuera del ayuno (65–99).</text>
+    <text x="42" y="298" fill="#9BA4B8" font-family="JetBrains Mono, monospace" font-size="9">Regla: fuera de 65–99 Y ≥ 30 % sobre la línea base personal</text>
+    <text x="42" y="316" fill="#38BDF8" font-family="Inter, sans-serif" font-size="9.5" font-weight="600">Fuente: NASA OSDR OSD-575 (Inspiration4 CMP) · NASA-STD-3001</text>
+  </g>
+
+  <!-- Plan de Acción Autónoma (Pasos concretos para el astronauta) -->
+  <g id="NextStepsCard">
+    <rect x="24" y="346" width="364" height="222" rx="18" fill="#131A27" stroke="#1E293B" stroke-width="1.5"/>
+    <text x="42" y="372" fill="#D9FB76" font-family="Inter, sans-serif" font-size="11" font-weight="700" letter-spacing="0.6">QUÉ HACER AHORA (PROTOCOLO DE AUTONOMÍA)</text>
+
+    <!-- Paso 1 -->
+    <rect x="42" y="386" width="328" height="48" rx="12" fill="#090C14" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="64" cy="410" r="11" fill="#D9FB76"/>
+    <text x="60" y="414" fill="#11180A" font-family="Inter, sans-serif" font-size="11" font-weight="700">1</text>
+    <text x="84" y="406" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Hidratación oral (250 mL de agua)</text>
+    <text x="84" y="422" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10">Descarta hemoconcentración por desplazamiento de fluidos.</text>
+
+    <!-- Paso 2 -->
+    <rect x="42" y="442" width="328" height="48" rx="12" fill="#090C14" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="64" cy="466" r="11" fill="#1E293B"/>
+    <text x="60" y="470" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11" font-weight="700">2</text>
+    <text x="84" y="462" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Repetir medición capilar en 120 minutos</text>
+    <text x="84" y="478" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10">Temporizador programable en reloj de misión.</text>
+
+    <!-- Paso 3 -->
+    <rect x="42" y="498" width="328" height="54" rx="12" fill="#2A1215" stroke="#EF4444" stroke-width="1"/>
+    <circle cx="64" cy="525" r="11" fill="#EF4444"/>
+    <text x="60" y="529" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11" font-weight="700">!</text>
+    <text x="84" y="518" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="700">Criterio de escalado a ROJO (Emergencia):</text>
+    <text x="84" y="534" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="10">Si hay mareo, visión borrosa, dolor torácico o &gt;180.</text>
+  </g>
+
+  <!-- Paquete de Telemetría Asincrónica para el Flight Surgeon -->
+  <g id="TelemetryQueueCard">
+    <rect x="24" y="582" width="364" height="92" rx="16" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="42" y="606" fill="#38BDF8" font-family="Inter, sans-serif" font-size="10" font-weight="700">📦 COLA DE TELEMETRÍA DIFERIDA (DELAY +14m 20s)</text>
+    <text x="42" y="626" fill="#F6F7FB" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Registro guardado en IndexedDB local y empaquetado</text>
+    <text x="42" y="644" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="10">Se enviará al Flight Surgeon en Tierra en la próxima ventana de enlace.</text>
+    <text x="42" y="662" fill="#D9FB76" font-family="JetBrains Mono, monospace" font-size="9.5">HASH: OSD575-C003-GLU-103-20261114T1426Z</text>
+  </g>
+
+  <!-- Botones de Acción -->
+  <rect x="24" y="688" width="176" height="48" rx="24" fill="#D9FB76"/>
+  <text x="44" y="717" fill="#11180A" font-family="Inter, sans-serif" font-size="12.5" font-weight="700">✓ Agendar re-toma 2h</text>
+
+  <rect x="212" y="688" width="176" height="48" rx="24" fill="#2A1215" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="232" y="717" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="12.5" font-weight="700">⚡ Tengo síntomas</text>
+
+  <!-- Disclaimer Médico Legal Visible (Regla §2.6 AGENTS.md) -->
+  <rect x="24" y="750" width="364" height="76" rx="14" fill="#090C14" stroke="#334155" stroke-width="1"/>
+  <text x="40" y="770" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="9.5" font-weight="700">AVISO DE CUMPLIMIENTO · NO ES UN DISPOSITIVO MÉDICO</text>
+  <text x="40" y="788" fill="#64748B" font-family="Inter, sans-serif" font-size="9.5">Esta herramienta es un prototipo informativo de apoyo a la autonomía</text>
+  <text x="40" y="802" fill="#64748B" font-family="Inter, sans-serif" font-size="9.5">de la tripulación basado en rangos públicos de NASA OSDR (OSD-575).</text>
+  <text x="40" y="816" fill="#64748B" font-family="Inter, sans-serif" font-size="9.5">No diagnostica, trata ni prescribe. Use el protocolo del CMO a bordo.</text>
+
+  <!-- Barra de Navegación Inferior -->
+  <g id="BottomNav04">
+    <rect x="24" y="840" width="364" height="44" rx="22" fill="#131A27" stroke="#1E293B" stroke-width="1"/>
+    <text x="47" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Dashboard</text>
+    <text x="142" y="866" fill="#9BA4B8" font-family="Inter, sans-serif" font-size="11" font-weight="500">Cuerpo 3D</text>
+    <rect x="216" y="845" width="86" height="34" rx="17" fill="#1E293B"/>
+    <text x="234" y="866" fill="#D9FB76" font-family="Inter, sans-serif" font-size="11" font-weight="700">Medición</text>
+    <text x="312" y="866" fill="#FCA5A5" font-family="Inter, sans-serif" font-size="11" font-weight="600">Protocolos</text>
+  </g>
+
+  <rect x="142" y="906" width="128" height="4" rx="2" fill="#F6F7FB" fill-opacity="0.4"/>
+</svg>

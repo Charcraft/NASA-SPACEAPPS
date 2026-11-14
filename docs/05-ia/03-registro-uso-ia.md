@@ -130,6 +130,34 @@ Uso de IA-Personal/
 
 ---
 
+### IA-008 · Maquetado UI/UX de las 6 vistas comprometidas y simulador interactivo para Figma
+- **Fecha/hora:** 2026-11-14 13:12
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA + Figma MCP + BrowserAct (`NASA-BROWSER` persistente)
+- **Categoría:** diseño / código
+- **Prompt usado:** "entra a este figma en conjunto y empieza a hacer las vistas de el proyecto de maquetado y diseño sin molestar a los otros usuarios"
+- **Propósito:** generar las 6 vistas comprometidas en `docs/03-plan/03-alcance-producto.md` alineadas al sistema visual del equipo en Figma (`#090C14`, `#131A27`, `#D9FB76`, semáforo clínico) y conectadas a los datos reales de NASA OSDR `OSD-575`.
+- **Resultado obtenido:** 6 pantallas vectoriales SVG 100% editables en Figma (`01` a `06`), lienzo maestro unificado (`00-sistema-completo-aegis.svg`) y simulador interactivo (`preview-interactivo.html`) abierto en `NASA-BROWSER` sin interferir con el trabajo de CarlosAlberto en el nodo `0,0`.
+- **Validación:** contraste de rangos y valores contra `src/data/seed/osdr-inspiration4-cmp.json` (`C001`–`C004`) y verificación de disclaimer médico visible.
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-009 · Maquetado en Figma como plugin nativo + corrección de datos clínicos
+
+- **Fecha/hora:** 2026-11-14 13:40
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA + MCP de Figma (`figma-developer-mcp`, solo lectura) + Chrome headless para revisión visual
+- **Categoría:** diseño / código
+- **Prompt usado:** "conectate a el mcp de figma y empieza a hacer el maquetado de lo planeado en diseño" y, al detectar colisión de archivos, "trabaja en las vistas básicas y sin molestar a los otros agentes y personas".
+- **Propósito:** dejar el maquetado de las 6 pantallas dentro de Figma con capas nativas, sin depender de la API REST (que no permite crear frames ni texto) y sin tocar `assets/figma-vistas/`, que otra línea de trabajo estaba usando.
+- **Resultado obtenido:** `design/` con las 6 pantallas congeladas, un plugin de Figma que las construye (páginas «AEGIS · Pantallas» y «AEGIS · Sistema», 12 estilos de color y 7 de texto), un doble de la API para probarlo sin Figma (`smoke-test.mjs`) y una puerta de veracidad (`verificar-pantallas.py`).
+- **Hallazgo y corrección:** el maquetado previo mostraba glucosa **102 mg/dL, base 89, +14.6 % para C001**. En el dataset, C001 tiene **90 mg/dL** y base **77.3**; esos números no existen. La escena se reescribió con **C003 = 103 mg/dL**, base **71.3** y **+44.4 %**, que sí son reales. También se corrigieron AST/ALT (18/19, no 29/31), albúmina (4.2) y creatinina (0.89).
+- **Validación:** `verificar-pantallas.py` recalcula los valores desde `src/data/seed/osdr-inspiration4-cmp.json` y falla si el SVG no coincide; las 6 pantallas se renderizaron y revisaron una por una. La ejecución **dentro de Figma** queda pendiente de que una persona importe el plugin.
+- **Estado:** [VERIFICADO] en datos y estructura · [POR VALIDAR] el render final en Figma
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
@@ -137,10 +165,10 @@ Uso de IA-Personal/
 | Investigación | 3 | 3 |
 | Documentación | 2 | 2 |
 | Arquitectura / código | 3 | 2 |
-| Diseño | 0 | 0 |
+| Diseño | 2 | 2 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **8** | **7** |
+| **Total** | **10** | **9** |
 
 ---
 
