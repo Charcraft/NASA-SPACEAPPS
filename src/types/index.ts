@@ -199,3 +199,18 @@ export interface AIProvider {
     signal: AbortSignal,
   ): Promise<{ ok: boolean; texto?: string; usaFallback: boolean }>;
 }
+
+// ---------------------------------------------------------------------------
+// Entorno de cabina (añadido 2026-11-14 · Back 2)
+// ---------------------------------------------------------------------------
+
+/**
+ * Ambiente de la cabina que `evaluar` recibe como contexto para parámetros
+ * ambientales (CO₂, radiación) o que dependen del entorno de vuelo.
+ * Los valores ausentes van en `null`, nunca en `0`.
+ */
+export interface EntornoCabina {
+  co2MmHg: number | null;
+  radiacionMsv: number | null;
+  retardoTierraSegundos: number;
+}
