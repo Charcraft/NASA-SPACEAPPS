@@ -74,8 +74,10 @@
 | D28 | Contratos compartidos (`types/index.ts`) **congelados a H2**; cambios solo por PR | 2026-11-14 | Un contrato que cambia en vivo rompe el build y la demo |
 | D29 | **Roles backend cerrados:** Ernesto = Back 1, Angel = Back 2 | 2026-11-14 | Elimina la ambigüedad que dejó el brief y evita dos planes para el mismo frente |
 | D30 | **TypeScript fijado en 6.x y `next.config.mjs`** en lugar de `next.config.ts` | 2026-11-14 | Next 15 falla con el compilador nativo de TS 7 (`fileExists` undefined) y rechaza el build: "TypeScript 7.0.2 is not supported". TS 6 es la versión que Next recomienda |
-| D31 | **Local-first con sincronización diferida a Tierra; sin réplica en tiempo real entre astronautas** | 2026-11-14 | El enlace en vuelo es intermitente y no hay backend remoto en 30 h. `colaSync` deja el transporte listo. Ver `docs/03-plan/11-arquitectura-backend.md` §8 |
+| D31 | **Local-first + sala compartida en vivo (SSE) + sincronización diferida a Tierra.** Sustituye el "sin réplica entre astronautas" del 2026-11-14 | 2026-11-14 | El hub en memoria permite ver la alerta de otro tripulante en < 2 s sin exigir una base central durable. Ver §8 de `11-arquitectura-backend.md` |
 | D32 | **Alcance físico únicamente:** 26 parámetros físicos/bioquímicos. Sueño, ánimo y carga cognitiva quedan para fase posterior | 2026-11-14 | Evita inventar escalas clínicas y mantiene la demo enfocada |
+| D33 | **El hub de sala no persiste:** estado en memoria del proceso. Lo durable vive en Dexie y `colaSync` | 2026-11-14 | Un backend durable en 30 h no es viable; el hub demuestra el contrato y se reinicia sin pérdida clínica |
+| D34 | **Proveedores `[DEMO]` inyectables** (`demo/baseline.ts`, `demo/evaluador.ts`, `demo/sensor-source.ts`) hasta que Back 2 entregue `osdr/` y `rules/` | 2026-11-14 | Permite una demo funcional hoy sin duplicar archivos de Back 2; el reemplazo es una línea en `sala-control.tsx` |
 
 ---
 
@@ -112,6 +114,18 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Sala de tripulación y motor de tiempo real
+
+- `stream-engine.ts`: 1 Hz, anomalías forzadas, estado de nodos 3D y suscriptores tolerantes a fallos.
+- `crew-hub.ts`: último frame por tripulante, deduplicación por parámetro, `snapshot`, `alerta`, `resuelta` y `latido` cada 5 s.
+- `api/telemetry`: POST valida con Zod y publica; GET abre SSE con `retry: 3000`.
+- `api/parameters`: catálogo completo (26) con validación al arranque.
+- `model3d-bridge/contracts.ts`: etiquetas, colores, animación y resumen accesible.
+- Shell `sala-control.tsx`: una pestaña = una estación (`?crew=C002`), alerta compartida y simulador.
+- **Prueba end-to-end** (`scripts/probar-sala.ps1`): catálogo, alerta visible por SSE, alerta resuelta, 400 con detalle. Todo en verde.
+- **Errores corregidos:** `forced anomaly` no aplicaba a parámetros sin umbral (ahora lanza mensaje específico); el script de issues creaba la etiqueta `prio:crítica` con mojibake por UTF-8 en PowerShell 5.1 (ahora usa archivos de cuerpo y etiqueta sin acentos en el código).
+- Issues abiertos: [#2 Back 1](https://github.com/Charcraft/NASA-SPACEAPPS/issues/2) y [#3 Back 2](https://github.com/Charcraft/NASA-SPACEAPPS/issues/3).
 
 ### 2026-11-14 — Scaffold de Back 1
 

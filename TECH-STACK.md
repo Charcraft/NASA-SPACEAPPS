@@ -38,6 +38,12 @@
 | PWA | **next-pwa** o manifest + service worker manual | Instalable, funciona sin red. |
 | Semilla de datos | **JSON estático** en `src/data/seed/` | Datos reales de OSDR exportados antes del evento. |
 
+### Tiempo real
+| Pieza | Elección | Motivo |
+|---|---|---|
+| Sala de tripulación | **SSE nativo** (`EventSource`) + hub en memoria | Sin dependencias nuevas; reconexión automática y suficiente para alertas unidireccionales. |
+| Validación de frames | **Zod** en el route handler | Un frame mal formado no contamina la sala. |
+
 ### IA
 | Pieza | Elección | Motivo |
 |---|---|---|

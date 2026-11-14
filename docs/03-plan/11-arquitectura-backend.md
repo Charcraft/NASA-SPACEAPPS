@@ -26,7 +26,12 @@ src/
 ├── lib/
 │   ├── realtime/
 │   │   ├── registry.ts          # Back 1 · catálogo ParameterDefinition
-│   │   └── stream-engine.ts     # Back 1 · emite frames a 1 Hz
+│   │   ├── stream-engine.ts     # Back 1 · emite frames a 1 Hz
+│   │   ├── crew-hub.ts          # Back 1 · sala: frames + alertas + SSE
+│   │   └── demo/                # Back 1 · [DEMO] sustituible por Back 2
+│   │       ├── baseline.ts      #   media pre-vuelo del seed
+│   │       ├── evaluador.ts     #   triage provisional
+│   │       └── sensor-source.ts #   simulador determinista
 │   ├── model3d-bridge/
 │   │   └── contracts.ts         # Back 1 · meshNodeId → animación
 │   ├── osdr/
@@ -47,8 +52,13 @@ src/
 └── app/api/
     ├── osdr/route.ts            # Back 2
     ├── ai-context/route.ts      # Back 2
-    ├── telemetry/route.ts       # Back 1 (SSE)
+    ├── telemetry/route.ts       # Back 1 (SSE + publish)
     └── parameters/route.ts      # Back 1
+```
+
+```text
+src/components/
+└── sala-control.tsx             # Back 1 · shell de demo (la UI final es de Frontend)
 ```
 
 ---
@@ -57,19 +67,21 @@ src/
 
 ```text
 [seed OSDR] ──► osdr/client ──► baselinePreVuelo()
-                                      │
+                                     │
 [sensor / mock] ──► stream-engine ──► frame(1 Hz)
-                                      │
-                                      ├──► evaluar(frame) ──► Evaluacion[]
-                                      │                         │
-                                      │                         ├──► UI semáforo
-                                      │                         └──► model3d-bridge
-                                      │
-                                      └──► guardarFrame() ──► Dexie
-                                                                  │
-                                                          queue.ts ──► sync diferida
-                                                                  │
-                                                          ai-context (snapshot)
+                                     │
+                                     ├──► evaluar(frame) ──► Evaluacion[]
+                                     │                         │
+                                     │                         ├──► UI semáforo
+                                     │                         └──► model3d-bridge
+                                     │
+                                     ├──► POST crew-hub ──► SSE ──► las 4 estaciones
+                                     │
+                                     └──► guardarFrame() ──► Dexie
+                                                               │
+                                                       queue.ts ──► sync diferida
+                                                               │
+                                                       ai-context (snapshot)
 ```
 
 **Invariantes:**
@@ -77,6 +89,7 @@ src/
 2. `rules/` no importa `db/`, `realtime/` ni `ai/`.
 3. `realtime/` no importa `dexie`.
 4. La IA es opcional: con `AI_ENABLED=false` todo funciona.
+5. La sala (`crew-hub`) no persiste: si cae, el dato local sigue intacto.
 
 ---
 
@@ -180,31 +193,57 @@ export interface ResultadoPersistencia {
 
 ## 8. Sincronización, persistencia y hardware
 
-### 8.1 · Modelo de datos: local primero, Tierra después
+### 8.1 · Modelo de capas: local, sala y Tierra
 
 | Capa | Dónde vive | Qué guarda | Estado en el MVP |
 |---|---|---|---|
-| **Local** | IndexedDB del dispositivo (Dexie) | Verdad operativa en vuelo: mediciones, episodios, alertas, bitácora | **Sí** |
-| **Nave** | Nodo compartido de la tripulación | Consolidado de los 4 tripulantes | **No** (fuera del MVP) |
+| **Local** | IndexedDB (Dexie), Back 2 | Verdad operativa: mediciones, episodios, bitácora | **Sí** |
+| **Sala** | Hub en memoria del servidor, Back 1 | Último frame y alertas activas de los 4 tripulantes | **Sí** |
 | **Tierra** | Servidor de misión | Archivo histórico y análisis clínico | **No** (contrato y cola sí) |
 
-**Decisión:** no hay sincronización en tiempo real entre astronautas. Cada estación
-trabaja contra su IndexedDB y la sincronización es **diferida hacia Tierra**.
+**Decisión (sustituye a D31):** hay dos canales con propósitos distintos.
 
-Por qué:
+1. **Sala en vivo (SSE):** que cualquier tripulante vea la alerta de otro en
+   menos de 2 s. No es durable: si el servidor reinicia, la sala se vacía.
+2. **Cola durable (Back 2):** que nada se pierda y que el histórico llegue a
+   Tierra cuando haya enlace.
 
-1. En vuelo real el enlace es intermitente y con retardo; el dato no puede depender de la red.
-2. Sin backend remoto no hay forma honesta de simular un nodo de nave en 30 h.
-3. El modelo real de NASA es telemetría hacia el *Mission Control Center*, no
-   réplica entre tripulantes.
+No hay réplica de bases de datos entre astronautas ni base central durable en
+30 h. El hub es deliberadamente simple: estado en memoria + reintento del cliente.
 
-Lo que **sí** queda preparado: `colaSync` en Dexie con prioridad, hash e idempotencia.
-Cuando exista el nodo central, solo se implementa el transporte; el contrato ya está.
+### 8.2 · Cómo funciona la sala compartida
 
-### 8.2 · Pérdida de conexión
+```text
+Estación C001 ─┐
+Estación C002 ─┤  POST /api/telemetry   (frame evaluado)
+Estación C003 ─┼──────────────► crew-hub (memoria)
+Estación C004 ─┘                     │
+                                     ├─ snapshot al conectar
+                                     ├─ alerta (nueva o sube de nivel)
+                                     ├─ resuelta (vuelve a NOMINAL)
+                                     └─ latido cada 5 s
+                                     │
+                     GET /api/telemetry (SSE) ──► las 4 estaciones
+```
+
+- Cada estación emite su frame local y lo publica cada 2 s.
+- El hub deduplica por `crewId + parametroId`: una alerta activa no se repite
+  cada segundo, solo cuando aparece o cambia de nivel.
+- Al abrir una pestaña, el `snapshot` trae el estado actual; no hace falta
+  esperar al siguiente latido.
+- Si el hub no responde, la estación **sigue funcionando** con sus datos locales
+  y `EventSource` reintenta solo (3 s).
+- El hub marca `degradado` a los 5 s sin frame y `sin-enlace` a los 15 s.
+
+**Límite honesto:** el hub no es una base de datos. Reiniciar el servidor borra
+la sala; lo que debe sobrevivir vive en Dexie y en `colaSync`.
+
+### 8.3 · Pérdida de conexión
 
 ```text
 sensor ──► frame ──► evaluar ──► guardarFrame (Dexie)  ← siempre funciona
+                                        │
+                                        ├──► sala (SSE, best-effort)
                                         │
                                         └──► colaSync: A (crítico) > B (alerta)
                                                        > C (medición) > D (bitácora)
@@ -215,13 +254,14 @@ sensor ──► frame ──► evaluar ──► guardarFrame (Dexie)  ← sie
 ```
 
 - **Nada se descarta por falta de red.** La escritura local es la operación crítica.
+- La sala es *best-effort*: su caída no bloquea la medición ni la persistencia.
 - Cada lote lleva hash del anterior: si no coincide, no se reintenta en automático
   (`E-SYN-001`) para no corromper el histórico.
 - **Conflicto:** las mediciones son *append-only*. Una corrección es una fila nueva
   con `amendsId`; nunca se sobrescribe un valor clínico.
 - **Reconexión:** se envía primero lo crítico, luego el resto; el ACK libera la cola.
 
-### 8.3 · De dónde salen los datos (hardware)
+### 8.4 · De dónde salen los datos (hardware)
 
 | Fuente | Interfaz | Uso en el MVP |
 |---|---|---|
@@ -239,7 +279,7 @@ público. Cualquier cifra clínica sin fuente va marcada `[SUPUESTO]`.
 (Back 1) que hoy implementa el simulador. Un adaptador BLE o serie se añade sin
 tocar `stream-engine` ni los contratos.
 
-### 8.4 · Alcance actual: solo físico
+### 8.5 · Alcance actual: solo físico
 
 En el MVP entran únicamente parámetros **físicos y bioquímicos** (los 26 del
 `registry.ts`: 17 OSDR + 9 simulados). Quedan fuera, para una fase posterior:

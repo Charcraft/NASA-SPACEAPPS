@@ -34,6 +34,8 @@ Además, el seed tiene **17 indicadores**, no 19 como dice el brief; sí coincid
 | `src/types/index.ts` | Back 1 |
 | `src/lib/realtime/registry.ts` | Back 1 |
 | `src/lib/realtime/stream-engine.ts` | Back 1 |
+| `src/lib/realtime/crew-hub.ts` | Back 1 |
+| `src/lib/realtime/demo/*` | Back 1 (temporal, se sustituye por Back 2) |
 | `src/lib/model3d-bridge/contracts.ts` | Back 1 |
 | `src/app/api/telemetry/route.ts` | Back 1 |
 | `src/app/api/parameters/route.ts` | Back 1 |
