@@ -141,6 +141,17 @@ Uso de IA-Personal/
 - **Validación:** contraste con `git ls-tree`, `git status` y el JSON del seed; pendiente de revisión de Back 1 y Pineda.
 - **Estado:** [POR VALIDAR]
 
+### IA-009 · Implementación del backend Back 2 (cliente OSDR, reglas, persistencia, sync y APIs)
+- **Fecha/hora:** 2026-11-14 17:56
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — implementar las tareas de Back 2 según `team/angel_marco/plan-backend-2.md`.
+- **Propósito:** construir la capa de datos y reglas deterministas de AEGIS (Back 2) sin red, sin DB remota y sin IA crítica.
+- **Resultado obtenido:** `osdr/client.ts` (baseline pre-vuelo + fuera de rango), `rules/thresholds.ts`, `rules/triage.ts` (`evaluar`), `db/{errors,types,dexie,repositories}.ts`, `sync/{hash,queue,aggregate}.ts`, `ai/snapshot.ts`, `api/osdr` y `api/ai-context`. 17 commits, 61 tests.
+- **Validación:** `pnpm test` (61/61) y `pnpm typecheck` (0 errores). Umbrales OSDR contrastados 1:1 contra `src/data/seed/osdr-inspiration4-cmp.json`; las 24 lecturas fuera de rango verificadas con script. Pendiente revisión de Pineda (regla `rules/`) y merge.
+- **Estado:** [POR VALIDAR]
+
 ---
 
 ## Resumen por categoría
@@ -149,11 +160,11 @@ Uso de IA-Personal/
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 3 | 2 |
+| Arquitectura / código | 4 | 2 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **9** | **7** |
+| **Total** | **10** | **7** |
 
 ---
 
