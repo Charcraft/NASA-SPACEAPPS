@@ -103,7 +103,12 @@ export function evaluar(
   calidad?: number,             // 0..1; si falta, se asume 1
 ): Evaluacion;
 
-export function baselinePreVuelo(crewId: CrewId, paramId: string): number | null;
+export function baselinePreVuelo(
+  crewId: CrewId,
+  paramId: string,
+): EstadisticaBaselinePersonal | null;
+// Devuelve el objeto completo (media, desviacionEstandar, min, max, n), no solo la media:
+// `triage` necesita la desviación estándar para el cálculo z-score.
 
 export interface ResultadoPersistencia {
   ok: boolean;
