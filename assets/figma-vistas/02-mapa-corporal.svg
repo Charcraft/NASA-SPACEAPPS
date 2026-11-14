@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <defs>
+    <radialGradient id="monoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ECEFF4" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0A0B0E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Vista general</text>
+    <text x="656" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="500">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  
+  <!-- Escenario Central 3D (Malla Monocromática Limpia) -->
+  <g id="Viewport3D">
+    <!-- Halo sutil monocromático -->
+    <circle cx="720" cy="450" r="250" fill="url(#monoGlow)"/>
+    <circle cx="720" cy="450" r="220" stroke="#161920" stroke-width="1"/>
+    <circle cx="720" cy="450" r="150" stroke="#14171E" stroke-width="1" stroke-dasharray="2 6"/>
+
+    <!-- Eje vertical de referencia arquitectónica -->
+    <line x1="720" y1="140" x2="720" y2="760" stroke="#14171E" stroke-width="1"/>
+    <line x1="560" y1="660" x2="880" y2="660" stroke="#1C2029" stroke-width="1"/>
+    <ellipse cx="720" cy="660" rx="110" ry="22" stroke="#1C2029" stroke-width="1" fill="none"/>
+
+    <!-- Modelo 3D del Astronauta (Silueta volumétrica limpia por contornos) -->
+    <!-- Casco / Cabeza -->
+    <circle cx="720" cy="246" r="34" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <ellipse cx="720" cy="246" rx="24" ry="18" fill="#141820" stroke="#484F5C" stroke-width="1"/>
+    <!-- Cuello y Hombros -->
+    <path d="M702 280 L738 280 L778 308 L662 308 Z" fill="#0E1015" stroke="#484F5C" stroke-width="1.2"/>
+    <!-- Torso Volumétrico -->
+    <path d="M662 308 L778 308 L764 468 L676 468 Z" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <!-- Líneas de topología 3D discretas en el torso -->
+    <path d="M670 355 Q720 368 770 355" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <path d="M674 410 Q720 422 766 410" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <line x1="720" y1="280" x2="720" y2="468" stroke="#1E232D" stroke-width="1"/>
+
+    <!-- Brazos -->
+    <path d="M662 308 L628 446 L652 452 L674 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M778 308 L812 446 L788 452 L766 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Piernas -->
+    <path d="M678 468 L668 648 L702 648 L712 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M728 468 L738 648 L772 648 L762 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Nodos anatómicos minimalistas -->
+    <!-- Neuro / Ocular -->
+    <circle cx="720" cy="242" r="4" fill="#ECEFF4"/>
+    <!-- Cardiorrespiratorio -->
+    <circle cx="734" cy="352" r="4" fill="#64748B"/>
+    <!-- Metabólico (Único punto con atención suave) -->
+    <circle cx="708" cy="418" r="10" fill="#ECEFF4" fill-opacity="0.12"/>
+    <circle cx="708" cy="418" r="4.5" fill="#ECEFF4"/>
+
+    <!-- Controles de cámara 3D discretos al pie del modelo -->
+    <rect x="610" y="704" width="220" height="32" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="634" y="724" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">Frontal</text>
+    <text x="704" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Lateral</text>
+    <text x="772" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Capas</text>
+  </g>
+
+
+  <!-- Línea conectora sutil del nodo craneal a la ficha derecha -->
+  <line x1="724" y1="242" x2="1020" y2="242" stroke="#484F5C" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Izquierda: Índice limpio de los 5 sistemas (sin cajas saturadas) -->
+  <g id="SystemsList">
+    <text x="56" y="136" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Sistemas corporales</text>
+
+    <text x="56" y="192" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="18" font-weight="500">Neuro-ocular (SANS)</text>
+    <text x="56" y="214" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Adaptación a microgravedad</text>
+    <line x1="56" y1="238" x2="340" y2="238" stroke="#ECEFF4" stroke-width="1"/>
+
+    <text x="56" y="286" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Cardiovascular</text>
+    <text x="280" y="286" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="312" x2="340" y2="312" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="360" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Respiratorio</text>
+    <text x="280" y="360" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="386" x2="340" y2="386" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="434" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="16">Metabólico y hepático</text>
+    <text x="272" y="434" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12">1 aviso</text>
+    <line x1="56" y1="460" x2="340" y2="460" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="508" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Musculoesquelético</text>
+    <text x="280" y="508" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="534" x2="340" y2="534" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  <!-- Derecha: Detalle limpio del nodo seleccionado en el Modelo 3D -->
+  <g id="NodeDetail">
+    <rect x="1020" y="160" width="364" height="390" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="1052" y="204" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Región seleccionada</text>
+    <text x="1052" y="236" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="22" font-weight="500">Sistema Neuro-ocular</text>
+    <text x="1052" y="266" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">El desplazamiento cefálico de fluidos en 0G incrementa</text>
+    <text x="1052" y="286" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">la presión intracraneal y aplana el globo ocular.</text>
+
+    <line x1="1052" y1="316" x2="1352" y2="316" stroke="#1C2029" stroke-width="1"/>
+
+    <text x="1052" y="352" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Agudeza visual cercana</text>
+    <text x="1296" y="352" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">20/20</text>
+
+    <text x="1052" y="392" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Rejilla de Amsler</text>
+    <text x="1248" y="392" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Sin distorsión</text>
+
+    <text x="1052" y="432" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Calidad de sueño</text>
+    <text x="1304" y="432" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">6.8 h</text>
+
+    <rect x="1052" y="476" width="300" height="44" rx="10" fill="#161922" stroke="#262B36" stroke-width="1"/>
+    <text x="1126" y="503" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Evaluar este sistema</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico.</text>
+</svg>

@@ -48,6 +48,35 @@
 
 ---
 
+## Acceso al repositorio
+
+Invitaciones enviadas el **2026-11-14** con permiso **write** (pueden crear ramas, hacer push y abrir PRs).
+
+| Persona | GitHub | Invitación | Estado |
+|---|---|---|---|
+| Pineda | `@Charcraft` | — | ✅ Owner del repo |
+| Angel Marco | `@angelcobos380-art` | Enviada | ⏳ Pendiente de aceptar |
+| Carlos Alberto | `@carlosaalbertolazaro` | Enviada | ⏳ Pendiente de aceptar |
+| Ernesto | `@ErnestoMG01` | Enviada | ⏳ Pendiente de aceptar |
+| **Eduardo** | `@eduardovd2007` | ❌ **No enviada** | El usuario no existe en GitHub (404) |
+
+### Qué tiene que hacer cada quien
+
+1. Revisar el correo de GitHub (o entrar a `github.com/Charcraft/NASA-SPACEAPPS/invitations`).
+2. Aceptar la invitación.
+3. Verificar: `gh repo view Charcraft/NASA-SPACEAPPS`.
+
+### Pendiente de Eduardo
+
+El usuario `eduardovd2007` que puso en el formulario **no existe en GitHub**. Tiene que:
+
+1. Confirmar cuál es su usuario real, o crear una cuenta si no tiene.
+2. Pasarlo para enviar la invitación.
+
+> Hasta que acepten, no pueden hacer push. Conviene confirmarlo **antes** del sábado a las 11:15.
+
+---
+
 ## Contacto y escalamiento
 
 | Rol | Persona | Contacto |

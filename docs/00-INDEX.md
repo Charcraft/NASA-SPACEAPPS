@@ -13,6 +13,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`AGENTS.md`](../AGENTS.md) | Reglas de trabajo y veracidad | Todos |
 | [`MEMORY.md`](../MEMORY.md) | Estado vivo, decisiones, pendientes | Todos |
 | [`TECH-STACK.md`](../TECH-STACK.md) | Stack técnico congelado y arquitectura | Devs |
+| [`BRIEF-BACKEND-AGENTES.md`](../BRIEF-BACKEND-AGENTES.md) | **Contrato técnico de Backend, BD, Tiempo Real, Modelo 3D e IA opcional** | Los 2 devs de Back y sus agentes |
 
 ---
 
@@ -33,6 +34,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`02-investigacion/03-fuentes-datos.md`](02-investigacion/03-fuentes-datos.md) | OSDR, LSDA, LSAH, data.nasa.gov: qué hay realmente y cómo acceder |
 | [`02-investigacion/04-bibliografia.md`](02-investigacion/04-bibliografia.md) | Todas las fuentes citadas, con fecha de consulta |
 | [`02-investigacion/05-arquitectura-actual-nasa.md`](02-investigacion/05-arquitectura-actual-nasa.md) | Cómo monitoriza NASA la salud hoy, y qué hueco llenamos |
+| [`02-investigacion/06-modelos-3d-anatomia.md`](02-investigacion/06-modelos-3d-anatomia.md) | **Modelos 3D del cuerpo humano: 7 fuentes libres comparadas, licencias, y mapeo a los 6 `meshNodeId`** |
 
 ---
 
@@ -103,6 +105,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`../team/`](../team/README.md) | Una carpeta por integrante: perfil y bitácora |
 | [`../.github/`](../.github/CODEOWNERS) | Plantillas de issue y PR, CODEOWNERS |
 | [`../scripts/`](../scripts/setup-integrante.ps1) | Setup por integrante, worktrees y verificación de docs |
+| [`../public/models/README.md`](../public/models/README.md) | **Modelo 3D del cuerpo humano**: inventario, nodos, licencia y mapeo a los 6 `meshNodeId` |
 
 ---
 

@@ -1,0 +1,566 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3240" height="3220" viewBox="0 0 3240 3220" fill="none">
+  <rect width="3240" height="3220" fill="#050608"/>
+  <text x="120" y="84" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="500">AEGIS · Sistema de Diseño Minimalista Monocromático (Desktop 1440×900)</text>
+  <g id="Desktop_01" transform="translate(120, 160)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Dashboard principal + Modelo 3D</text>
+
+  <defs>
+    <radialGradient id="monoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ECEFF4" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0A0B0E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  
+  <!-- Escenario Central 3D (Malla Monocromática Limpia) -->
+  <g id="Viewport3D">
+    <!-- Halo sutil monocromático -->
+    <circle cx="720" cy="450" r="250" fill="url(#monoGlow)"/>
+    <circle cx="720" cy="450" r="220" stroke="#161920" stroke-width="1"/>
+    <circle cx="720" cy="450" r="150" stroke="#14171E" stroke-width="1" stroke-dasharray="2 6"/>
+
+    <!-- Eje vertical de referencia arquitectónica -->
+    <line x1="720" y1="140" x2="720" y2="760" stroke="#14171E" stroke-width="1"/>
+    <line x1="560" y1="660" x2="880" y2="660" stroke="#1C2029" stroke-width="1"/>
+    <ellipse cx="720" cy="660" rx="110" ry="22" stroke="#1C2029" stroke-width="1" fill="none"/>
+
+    <!-- Modelo 3D del Astronauta (Silueta volumétrica limpia por contornos) -->
+    <!-- Casco / Cabeza -->
+    <circle cx="720" cy="246" r="34" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <ellipse cx="720" cy="246" rx="24" ry="18" fill="#141820" stroke="#484F5C" stroke-width="1"/>
+    <!-- Cuello y Hombros -->
+    <path d="M702 280 L738 280 L778 308 L662 308 Z" fill="#0E1015" stroke="#484F5C" stroke-width="1.2"/>
+    <!-- Torso Volumétrico -->
+    <path d="M662 308 L778 308 L764 468 L676 468 Z" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <!-- Líneas de topología 3D discretas en el torso -->
+    <path d="M670 355 Q720 368 770 355" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <path d="M674 410 Q720 422 766 410" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <line x1="720" y1="280" x2="720" y2="468" stroke="#1E232D" stroke-width="1"/>
+
+    <!-- Brazos -->
+    <path d="M662 308 L628 446 L652 452 L674 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M778 308 L812 446 L788 452 L766 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Piernas -->
+    <path d="M678 468 L668 648 L702 648 L712 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M728 468 L738 648 L772 648 L762 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Nodos anatómicos minimalistas -->
+    <!-- Neuro / Ocular -->
+    <circle cx="720" cy="242" r="4" fill="#64748B"/>
+    <!-- Cardiorrespiratorio -->
+    <circle cx="734" cy="352" r="4" fill="#64748B"/>
+    <!-- Metabólico (Único punto con atención suave) -->
+    <circle cx="708" cy="418" r="10" fill="#ECEFF4" fill-opacity="0.12"/>
+    <circle cx="708" cy="418" r="4.5" fill="#ECEFF4"/>
+
+    <!-- Controles de cámara 3D discretos al pie del modelo -->
+    <rect x="610" y="704" width="220" height="32" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="634" y="724" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">Frontal</text>
+    <text x="704" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Lateral</text>
+    <text x="772" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Capas</text>
+  </g>
+
+
+  <!-- Columna Izquierda: Estado General y 3 Signos Vitales Primarios (Sin saturación) -->
+  <g id="LeftColumn">
+    <text x="56" y="136" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Estado fisiológico</text>
+    <text x="56" y="172" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.5">Estable, 1 variación leve</text>
+    <text x="56" y="198" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Comparado contra tu línea base pre-vuelo (L-44)</text>
+
+    <line x1="56" y1="232" x2="380" y2="232" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 1: Pulso -->
+    <text x="56" y="272" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Frecuencia cardíaca</text>
+    <text x="56" y="316" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">72</text>
+    <text x="110" y="316" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">lpm</text>
+    <text x="290" y="312" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Base 68</text>
+
+    <line x1="56" y1="352" x2="380" y2="352" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 2: Saturación -->
+    <text x="56" y="392" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Saturación de oxígeno</text>
+    <text x="56" y="436" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">98</text>
+    <text x="110" y="436" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">%</text>
+    <text x="290" y="432" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Base 99%</text>
+
+    <line x1="56" y1="472" x2="380" y2="472" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 3: Presión arterial -->
+    <text x="56" y="512" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Presión arterial</text>
+    <text x="56" y="556" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">118/76</text>
+    <text x="196" y="556" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">mmHg</text>
+    <text x="290" y="552" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+
+    <line x1="56" y1="592" x2="380" y2="592" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Selector minimalista de tripulación -->
+    <text x="56" y="640" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Tripulación (OSD-575)</text>
+    <rect x="56" y="658" width="68" height="36" rx="8" fill="#161922" stroke="#ECEFF4" stroke-width="1"/>
+    <text x="75" y="681" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">C001</text>
+
+    <rect x="134" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="153" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C002</text>
+
+    <rect x="212" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="231" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C003</text>
+
+    <rect x="290" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="309" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C004</text>
+  </g>
+
+  <!-- Columna Derecha: Foco Único en la Variación Detectada + Tendencia Limpia -->
+  <g id="RightColumn">
+    <rect x="1020" y="128" width="364" height="320" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <circle cx="1050" cy="162" r="4" fill="#ECEFF4"/>
+    <text x="1064" y="166" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">Observación activa · Metabólico</text>
+
+    <text x="1048" y="218" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="44" font-weight="300" letter-spacing="-1">102</text>
+    <text x="1132" y="218" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">mg/dL</text>
+    <text x="1048" y="244" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Glucosa en ayunas (+14% sobre tu base de 89 mg/dL)</text>
+
+    <!-- Curva longitudinal minimalista (L-92 a R+194) -->
+    <line x1="1048" y1="296" x2="1352" y2="296" stroke="#1C2029" stroke-width="1" stroke-dasharray="3 3"/>
+    <path d="M1048 320 L1098 318 L1148 316 L1198 282 L1248 314 L1298 317 L1352 318" stroke="#ECEFF4" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle cx="1198" cy="282" r="4" fill="#ECEFF4"/>
+    <text x="1048" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">L-92</text>
+    <text x="1186" y="348" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">R+1</text>
+    <text x="1320" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">R+194</text>
+
+    <rect x="1048" y="376" width="308" height="44" rx="10" fill="#ECEFF4"/>
+    <text x="1126" y="403" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="13" font-weight="600">Iniciar medición guiada</text>
+
+    <!-- Contexto ambiental discreto -->
+    <text x="1020" y="504" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Ambiente de cabina</text>
+    <line x1="1020" y1="520" x2="1384" y2="520" stroke="#181B22" stroke-width="1"/>
+    <text x="1020" y="552" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Radiación acumulada</text>
+    <text x="1312" y="552" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">0.4 mSv</text>
+    <text x="1020" y="588" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Presión parcial CO₂</text>
+    <text x="1302" y="588" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">2.8 mmHg</text>
+    <text x="1020" y="624" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Retardo con Tierra</text>
+    <text x="1312" y="624" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">14m 20s</text>
+  </g>
+
+  <!-- Pie de página silencioso -->
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico.</text>
+
+  </g>
+  <g id="Desktop_02" transform="translate(1680, 160)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Exploración del Modelo 3D</text>
+
+  <defs>
+    <radialGradient id="monoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ECEFF4" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0A0B0E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Vista general</text>
+    <text x="656" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="500">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  
+  <!-- Escenario Central 3D (Malla Monocromática Limpia) -->
+  <g id="Viewport3D">
+    <!-- Halo sutil monocromático -->
+    <circle cx="720" cy="450" r="250" fill="url(#monoGlow)"/>
+    <circle cx="720" cy="450" r="220" stroke="#161920" stroke-width="1"/>
+    <circle cx="720" cy="450" r="150" stroke="#14171E" stroke-width="1" stroke-dasharray="2 6"/>
+
+    <!-- Eje vertical de referencia arquitectónica -->
+    <line x1="720" y1="140" x2="720" y2="760" stroke="#14171E" stroke-width="1"/>
+    <line x1="560" y1="660" x2="880" y2="660" stroke="#1C2029" stroke-width="1"/>
+    <ellipse cx="720" cy="660" rx="110" ry="22" stroke="#1C2029" stroke-width="1" fill="none"/>
+
+    <!-- Modelo 3D del Astronauta (Silueta volumétrica limpia por contornos) -->
+    <!-- Casco / Cabeza -->
+    <circle cx="720" cy="246" r="34" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <ellipse cx="720" cy="246" rx="24" ry="18" fill="#141820" stroke="#484F5C" stroke-width="1"/>
+    <!-- Cuello y Hombros -->
+    <path d="M702 280 L738 280 L778 308 L662 308 Z" fill="#0E1015" stroke="#484F5C" stroke-width="1.2"/>
+    <!-- Torso Volumétrico -->
+    <path d="M662 308 L778 308 L764 468 L676 468 Z" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <!-- Líneas de topología 3D discretas en el torso -->
+    <path d="M670 355 Q720 368 770 355" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <path d="M674 410 Q720 422 766 410" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <line x1="720" y1="280" x2="720" y2="468" stroke="#1E232D" stroke-width="1"/>
+
+    <!-- Brazos -->
+    <path d="M662 308 L628 446 L652 452 L674 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M778 308 L812 446 L788 452 L766 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Piernas -->
+    <path d="M678 468 L668 648 L702 648 L712 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M728 468 L738 648 L772 648 L762 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Nodos anatómicos minimalistas -->
+    <!-- Neuro / Ocular -->
+    <circle cx="720" cy="242" r="4" fill="#ECEFF4"/>
+    <!-- Cardiorrespiratorio -->
+    <circle cx="734" cy="352" r="4" fill="#64748B"/>
+    <!-- Metabólico (Único punto con atención suave) -->
+    <circle cx="708" cy="418" r="10" fill="#ECEFF4" fill-opacity="0.12"/>
+    <circle cx="708" cy="418" r="4.5" fill="#ECEFF4"/>
+
+    <!-- Controles de cámara 3D discretos al pie del modelo -->
+    <rect x="610" y="704" width="220" height="32" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="634" y="724" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">Frontal</text>
+    <text x="704" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Lateral</text>
+    <text x="772" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Capas</text>
+  </g>
+
+
+  <!-- Línea conectora sutil del nodo craneal a la ficha derecha -->
+  <line x1="724" y1="242" x2="1020" y2="242" stroke="#484F5C" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Izquierda: Índice limpio de los 5 sistemas (sin cajas saturadas) -->
+  <g id="SystemsList">
+    <text x="56" y="136" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Sistemas corporales</text>
+
+    <text x="56" y="192" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="18" font-weight="500">Neuro-ocular (SANS)</text>
+    <text x="56" y="214" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Adaptación a microgravedad</text>
+    <line x1="56" y1="238" x2="340" y2="238" stroke="#ECEFF4" stroke-width="1"/>
+
+    <text x="56" y="286" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Cardiovascular</text>
+    <text x="280" y="286" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="312" x2="340" y2="312" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="360" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Respiratorio</text>
+    <text x="280" y="360" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="386" x2="340" y2="386" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="434" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="16">Metabólico y hepático</text>
+    <text x="272" y="434" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12">1 aviso</text>
+    <line x1="56" y1="460" x2="340" y2="460" stroke="#181B22" stroke-width="1"/>
+
+    <text x="56" y="508" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Musculoesquelético</text>
+    <text x="280" y="508" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+    <line x1="56" y1="534" x2="340" y2="534" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  <!-- Derecha: Detalle limpio del nodo seleccionado en el Modelo 3D -->
+  <g id="NodeDetail">
+    <rect x="1020" y="160" width="364" height="390" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="1052" y="204" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Región seleccionada</text>
+    <text x="1052" y="236" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="22" font-weight="500">Sistema Neuro-ocular</text>
+    <text x="1052" y="266" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">El desplazamiento cefálico de fluidos en 0G incrementa</text>
+    <text x="1052" y="286" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">la presión intracraneal y aplana el globo ocular.</text>
+
+    <line x1="1052" y1="316" x2="1352" y2="316" stroke="#1C2029" stroke-width="1"/>
+
+    <text x="1052" y="352" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Agudeza visual cercana</text>
+    <text x="1296" y="352" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">20/20</text>
+
+    <text x="1052" y="392" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Rejilla de Amsler</text>
+    <text x="1248" y="392" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Sin distorsión</text>
+
+    <text x="1052" y="432" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Calidad de sueño</text>
+    <text x="1304" y="432" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">6.8 h</text>
+
+    <rect x="1052" y="476" width="300" height="44" rx="10" fill="#161922" stroke="#262B36" stroke-width="1"/>
+    <text x="1126" y="503" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Evaluar este sistema</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico.</text>
+
+  </g>
+  <g id="Desktop_03" transform="translate(120, 1180)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Medición guiada en 0G</text>
+
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <!-- Diseño editorial de 2 columnas con amplio espacio en blanco -->
+  <g id="GuidedStepLeft">
+    <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Paso 2 de 3 · Toma capilar en microgravedad</text>
+    <text x="140" y="218" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="34" font-weight="400" letter-spacing="-0.6">Acerca el cartucho a 90°</text>
+    <text x="140" y="260" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="34" font-weight="400" letter-spacing="-0.6">de la esfera de sangre</text>
+
+    <text x="140" y="320" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">En microgravedad la gota no cae: permanece adherida al dedo</text>
+    <text x="140" y="344" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">por tensión superficial. No sacudas la mano.</text>
+
+    <!-- Nota de modo de fallo sobria y limpia -->
+    <rect x="140" y="396" width="460" height="96" rx="12" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="168" y="430" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Evita burbujas en el canal capilar</text>
+    <text x="168" y="456" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">La entrada de aire produce lecturas falsamente bajas (&lt;60 mg/dL).</text>
+  </g>
+
+  <!-- Derecha: Ingreso limpio del valor -->
+  <g id="GuidedInputRight">
+    <rect x="760" y="168" width="520" height="480" rx="20" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="816" y="226" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Lectura del analizador portátil (Glucosa)</text>
+
+    <text x="816" y="330" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="76" font-weight="300" letter-spacing="-2">102</text>
+    <text x="970" y="330" fill="#484F5C" font-family="Inter, sans-serif" font-size="22">mg/dL</text>
+
+    <line x1="816" y1="368" x2="1224" y2="368" stroke="#1C2029" stroke-width="1"/>
+
+    <text x="816" y="412" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Tu media pre-vuelo (C001)</text>
+    <text x="1140" y="412" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">89 mg/dL</text>
+
+    <text x="816" y="452" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Rango de referencia (OSD-575)</text>
+    <text x="1120" y="452" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">65 – 99 mg/dL</text>
+
+    <rect x="816" y="536" width="408" height="52" rx="12" fill="#ECEFF4"/>
+    <text x="938" y="567" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="14" font-weight="600">Evaluar lectura</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico.</text>
+
+  </g>
+  <g id="Desktop_04" transform="translate(1680, 1180)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Evaluación contra línea base</text>
+
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <!-- Resultado centrado, sereno y directo -->
+  <g id="EvaluationClean">
+    <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Resultado de evaluación · C001</text>
+    <text x="140" y="220" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="36" font-weight="400" letter-spacing="-0.6">Atención moderada</text>
+    <text x="140" y="264" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">102 mg/dL supera el límite superior de referencia (99 mg/dL)</text>
+    <text x="140" y="290" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">y se desvía +14.6% respecto a tu línea base personal.</text>
+
+    <line x1="140" y1="340" x2="640" y2="340" stroke="#181B22" stroke-width="1"/>
+
+    <text x="140" y="388" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="15" font-weight="500">Pasos recomendados</text>
+    <text x="140" y="430" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">1. Hidratación oral con 250 mL de agua para descartar hemoconcentración.</text>
+    <text x="140" y="468" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">2. Repetir la medición capilar en 120 minutos.</text>
+    <text x="140" y="506" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">3. Si aparece dolor torácico, mareo o visión borrosa, cambiar a protocolo agudo.</text>
+
+    <rect x="140" y="568" width="240" height="48" rx="10" fill="#ECEFF4"/>
+    <text x="188" y="597" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="13" font-weight="600">Programar recordatorio</text>
+
+    <rect x="396" y="568" width="220" height="48" rx="10" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="446" y="597" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Reportar síntomas</text>
+  </g>
+
+  <!-- Derecha: Registro diferido para Tierra -->
+  <g id="DeferredSyncCard">
+    <rect x="820" y="168" width="460" height="280" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="216" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="15" font-weight="500">Sincronización diferida con Tierra</text>
+    <text x="860" y="250" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">La lectura quedó almacenada localmente y se enviará</text>
+    <text x="860" y="272" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">al Flight Surgeon en la próxima ventana disponible.</text>
+
+    <line x1="860" y1="312" x2="1240" y2="312" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Fuente de referencia</text>
+    <text x="860" y="372" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">NASA OSDR OSD-575 · Inspiration4 CMP</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico. No diagnostica ni prescribe.</text>
+
+  </g>
+  <g id="Desktop_05" transform="translate(120, 2200)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Selector de emergencia</text>
+
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#E5484D"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Emergencia</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Respuesta autónoma sin enlace a Tierra</text>
+  <text x="140" y="216" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="34" font-weight="400" letter-spacing="-0.6">Selecciona el evento clínico</text>
+
+  <!-- Grid minimalista 2x2 de protocolos -->
+  <g id="EmergencyGrid">
+    <!-- Card 1: Cardiovascular (Escenario AEB) -->
+    <rect x="140" y="272" width="556" height="210" rx="16" fill="#101217" stroke="#ECEFF4" stroke-width="1.2"/>
+    <text x="180" y="320" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">Prioridad inmediata</text>
+    <text x="180" y="362" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="500">Dolor torácico o colapso</text>
+    <text x="180" y="394" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Opresión aguda, síncope, arritmia o paro cardiorrespiratorio.</text>
+    <text x="180" y="444" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Abrir protocolo cardiovascular</text>
+
+    <!-- Card 2: Hipoxia / CO2 -->
+    <rect x="724" y="272" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="764" y="320" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Ambiental y respiratorio</text>
+    <text x="764" y="362" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Hipoxia o exceso de CO₂</text>
+    <text x="764" y="394" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Disnea aguda, SpO₂ menor a 90% o cefalea por hipercapnia.</text>
+    <text x="764" y="444" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo respiratorio</text>
+
+    <!-- Card 3: Neuro-ocular agudo -->
+    <rect x="140" y="510" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="180" y="558" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Neurológico</text>
+    <text x="180" y="600" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Alteración visual o vértigo</text>
+    <text x="180" y="632" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Pérdida visual súbita, presión intracraneal o desorientación.</text>
+    <text x="180" y="682" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo neurológico</text>
+
+    <!-- Card 4: Trauma / EVA -->
+    <rect x="724" y="510" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="764" y="558" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Trauma y actividad extravehicular</text>
+    <text x="764" y="600" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Hemorragia o lesión en EVA</text>
+    <text x="764" y="632" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Fijación en camilla CMRS, control de sangrado y descontaminación.</text>
+    <text x="764" y="682" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo de trauma</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Basado en ISS Medical Checklist (JSC-48522). No es un dispositivo médico.</text>
+
+  </g>
+  <g id="Desktop_06" transform="translate(1680, 2200)">
+    <text x="0" y="-20" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Protocolo activo y RCP 0G</text>
+
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#E5484D"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Emergencia</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <!-- Izquierda: Una sola instrucción clara y grande -->
+  <g id="ActiveProtocolFocus">
+    <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Protocolo cardiovascular · Paso 2 de 5 · Tiempo activo 02:18</text>
+    <text x="140" y="226" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="400" letter-spacing="-0.8">Fija al paciente antes de</text>
+    <text x="140" y="276" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="400" letter-spacing="-0.8">iniciar las compresiones</text>
+
+    <text x="140" y="344" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Sin sujeción a la camilla CMRS o apoyo de pies en la pared opuesta</text>
+    <text x="140" y="370" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">(postura Handstand), la fuerza de compresión desplaza al rescatista.</text>
+
+    <!-- Metrónomo limpio -->
+    <rect x="140" y="424" width="520" height="104" rx="14" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <circle cx="184" cy="476" r="8" fill="#ECEFF4"/>
+    <text x="212" y="468" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="22" font-weight="400">110 compresiones / min</text>
+    <text x="212" y="496" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Profundidad de 5 a 6 cm · Relación 30:2 · DEA en Rack B2</text>
+
+    <!-- Botones de avance -->
+    <rect x="140" y="568" width="250" height="52" rx="12" fill="#ECEFF4"/>
+    <text x="196" y="599" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="14" font-weight="600">Siguiente paso</text>
+
+    <rect x="410" y="568" width="250" height="52" rx="12" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="466" y="599" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14">Registrar descarga DEA</text>
+  </g>
+
+  <!-- Derecha: Bitácora silenciosa para el Flight Surgeon -->
+  <g id="QuietLog">
+    <rect x="820" y="168" width="460" height="452" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="218" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="500">Registro automático para Flight Surgeon</text>
+    <line x1="860" y1="242" x2="1240" y2="242" stroke="#1C2029" stroke-width="1"/>
+
+    <text x="860" y="284" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">14:24:02   Inicio de protocolo cardiovascular (C001)</text>
+    <text x="860" y="324" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">14:24:45   Vía aérea verificada y suministro O₂</text>
+    <text x="860" y="364" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">14:25:12   Fijación CMRS y metrónomo 110 lpm activo</text>
+
+    <rect x="860" y="536" width="380" height="44" rx="10" fill="#161922" stroke="#262B36" stroke-width="1"/>
+    <text x="954" y="563" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Exportar paquete de telemetría</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en Hinkelbein et al. (RCP 0G) e ISS Medical Checklist. No es un dispositivo médico.</text>
+
+  </g>
+</svg>

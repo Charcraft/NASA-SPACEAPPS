@@ -48,6 +48,32 @@
 
 ---
 
+## Fuentes primarias — modelos 3D y anatomía abierta
+
+> Sostienen [`06-modelos-3d-anatomia.md`](06-modelos-3d-anatomia.md). Los enlaces marcados ✅ se probaron con una petición HTTP real el 2026-11-14.
+
+| # | Fuente | Tipo | Consultado |
+|---|---|---|---|
+| B60 | open-anatomy-3d — repositorio y README — https://github.com/MervinR07/open-anatomy-3d | Modelo 3D · CC BY 4.0 / MIT | ✅ 2026-11-14 |
+| B61 | open-anatomy-3d — registro npm (v0.1.0, licencia, 15.8 MB) — https://registry.npmjs.org/open-anatomy-3d | Paquete | ✅ 2026-11-14 |
+| B62 | anatomy-male.glb (7,614,076 bytes) y anatomy-female.glb (8,134,732 bytes) — https://cdn.jsdelivr.net/npm/open-anatomy-3d@0.1.0/models/anatomy-male.glb | Binario | ✅ 2026-11-14 |
+| B63 | Human Atlas — https://github.com/ashemag/human-atlas | Modelo 3D · CC BY 4.0 / MIT | ✅ 2026-11-14 |
+| B64 | BodyParts3D — descarga oficial (OBJ, 62 y 136 MB) — https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html | Dataset | ✅ 2026-11-14 |
+| B65 | BodyParts3D — licencia CC BY 4.0, actualizada 2025-02-27 — https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html | Licencia | ✅ 2026-11-14 |
+| B66 | BodyParts3D — README del dataset — https://dbarchive.biosciencedbc.jp/data/bodyparts3d/LATEST/README_e.html | Documentación | ✅ 2026-11-14 |
+| B67 | Z-Anatomy — repositorio del modelo — https://github.com/Z-Anatomy/Models-of-human-anatomy | Modelo 3D · CC BY-SA 4.0 | ✅ 2026-11-14 |
+| B68 | Z-Anatomy — License.txt y atribuciones obligatorias — https://github.com/Z-Anatomy/Models-of-human-anatomy/blob/master/License.txt | Licencia | ✅ 2026-11-14 |
+| B69 | Z-Anatomy — issue #6: interpretación del licenciante sobre share-alike — https://github.com/Z-Anatomy/Models-of-human-anatomy/issues/6 | Discusión · **crítica** | ✅ 2026-11-14 |
+| B70 | Z-Anatomy — TA2.csv con columna Español — https://raw.githubusercontent.com/Z-Anatomy/Models-of-human-anatomy/master/TA2.csv | Terminología | ✅ 2026-11-14 |
+| B71 | HRA 3D Reference Object Library — https://humanatlas.io/3d-reference-library | Modelo 3D · CC BY 4.0 | ✅ 2026-11-14 |
+| B72 | HRA — colección NIH 3D — https://3d.nih.gov/collections/hra | Repositorio | ✅ 2026-11-14 |
+| B73 | Écorché — https://github.com/Charleeh/ecorche | Modelo 3D · CC BY-SA 4.0 | ✅ 2026-11-14 |
+| B74 | Innerscene 3D Parts Library (CC0) — https://www.innerscene.com/tools/library/3d-parts/lymphatic-system-figure-f810172c | Modelo 3D · CC0 | ✅ 2026-11-14 |
+| B75 | nqwrc/3d-anatomy — advertencia de piezas NC en Z-Anatomy — https://github.com/nqwrc/3d-anatomy | Auditoría de licencia | ✅ 2026-11-14 |
+| B76 | PERMISSIVE_ANATOMY.md — auditoría de licencias de anatomía abierta — https://github.com/Opening-Science/open-twin-xr/blob/main/docs/PERMISSIVE_ANATOMY.md | Auditoría de terceros | ✅ 2026-11-14 |
+
+---
+
 ## Fuentes secundarias (contexto, no autoridad)
 
 | # | Fuente | Nota |

@@ -28,6 +28,10 @@
 | R13 | El equipo no se pone de acuerdo en el alcance | 2 | 2 | 4 | G1 a las 12:00 del sábado: decide el owner, no el consenso |
 | R14 | La librería de gráficas falla con datos vacíos | 2 | 1 | 2 | Componente con estado vacío desde el inicio |
 | R15 | Nadie del equipo sabe medicina y se nota | 2 | 2 | 4 | Lenguaje de "criterio para revisión", nunca diagnóstico |
+| R16 | **Se publica un modelo 3D con licencia NC o share-alike** y contamina el repo abierto | 2 | 3 | 6 | Solo `open-anatomy-3d` (CC BY 4.0) entra a `public/models/`. Z-Anatomy queda como atlas de consulta. Ver `02-investigacion/06-modelos-3d-anatomia.md` §6 |
+| R17 | El GLB usa `EXT_meshopt_compression` y el visor lo carga sin el decoder → cuerpo invisible en la demo | 2 | 3 | 6 | Importar `MeshoptDecoder` siempre y probar con el WiFi apagado antes del domingo 12:00 |
+| R18 | El componente React del modelo exige React 18/R3F 8 y el stack es React 19 | 2 | 2 | 4 | Usar Three.js plano sobre el `.glb`, no el wrapper `open-anatomy-3d-react` |
+| R19 | Se olvida la atribución anatómica obligatoria (BodyParts3D, HuBMAP, MakeHuman) | 2 | 2 | 4 | Línea de crédito copiada en README, pantalla "Acerca de" y créditos del video |
 
 ---
 

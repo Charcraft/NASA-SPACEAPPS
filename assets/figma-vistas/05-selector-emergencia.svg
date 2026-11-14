@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#E5484D"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Emergencia</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Respuesta autónoma sin enlace a Tierra</text>
+  <text x="140" y="216" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="34" font-weight="400" letter-spacing="-0.6">Selecciona el evento clínico</text>
+
+  <!-- Grid minimalista 2x2 de protocolos -->
+  <g id="EmergencyGrid">
+    <!-- Card 1: Cardiovascular (Escenario AEB) -->
+    <rect x="140" y="272" width="556" height="210" rx="16" fill="#101217" stroke="#ECEFF4" stroke-width="1.2"/>
+    <text x="180" y="320" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">Prioridad inmediata</text>
+    <text x="180" y="362" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="500">Dolor torácico o colapso</text>
+    <text x="180" y="394" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Opresión aguda, síncope, arritmia o paro cardiorrespiratorio.</text>
+    <text x="180" y="444" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Abrir protocolo cardiovascular</text>
+
+    <!-- Card 2: Hipoxia / CO2 -->
+    <rect x="724" y="272" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="764" y="320" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Ambiental y respiratorio</text>
+    <text x="764" y="362" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Hipoxia o exceso de CO₂</text>
+    <text x="764" y="394" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Disnea aguda, SpO₂ menor a 90% o cefalea por hipercapnia.</text>
+    <text x="764" y="444" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo respiratorio</text>
+
+    <!-- Card 3: Neuro-ocular agudo -->
+    <rect x="140" y="510" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="180" y="558" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Neurológico</text>
+    <text x="180" y="600" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Alteración visual o vértigo</text>
+    <text x="180" y="632" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Pérdida visual súbita, presión intracraneal o desorientación.</text>
+    <text x="180" y="682" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo neurológico</text>
+
+    <!-- Card 4: Trauma / EVA -->
+    <rect x="724" y="510" width="556" height="210" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="764" y="558" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Trauma y actividad extravehicular</text>
+    <text x="764" y="600" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="24" font-weight="400">Hemorragia o lesión en EVA</text>
+    <text x="764" y="632" fill="#7D8594" font-family="Inter, sans-serif" font-size="14">Fijación en camilla CMRS, control de sangrado y descontaminación.</text>
+    <text x="764" y="682" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Abrir protocolo de trauma</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Basado en ISS Medical Checklist (JSC-48522). No es un dispositivo médico.</text>
+</svg>

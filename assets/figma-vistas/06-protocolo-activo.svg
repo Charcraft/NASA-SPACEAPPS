@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#E5484D"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Emergencia</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <!-- Izquierda: Una sola instrucción clara y grande -->
+  <g id="ActiveProtocolFocus">
+    <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Protocolo cardiovascular · Paso 2 de 5 · Tiempo activo 02:18</text>
+    <text x="140" y="226" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="400" letter-spacing="-0.8">Fija al paciente antes de</text>
+    <text x="140" y="276" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="400" letter-spacing="-0.8">iniciar las compresiones</text>
+
+    <text x="140" y="344" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">Sin sujeción a la camilla CMRS o apoyo de pies en la pared opuesta</text>
+    <text x="140" y="370" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">(postura Handstand), la fuerza de compresión desplaza al rescatista.</text>
+
+    <!-- Metrónomo limpio -->
+    <rect x="140" y="424" width="520" height="104" rx="14" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <circle cx="184" cy="476" r="8" fill="#ECEFF4"/>
+    <text x="212" y="468" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="22" font-weight="400">110 compresiones / min</text>
+    <text x="212" y="496" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Profundidad de 5 a 6 cm · Relación 30:2 · DEA en Rack B2</text>
+
+    <!-- Botones de avance -->
+    <rect x="140" y="568" width="250" height="52" rx="12" fill="#ECEFF4"/>
+    <text x="196" y="599" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="14" font-weight="600">Siguiente paso</text>
+
+    <rect x="410" y="568" width="250" height="52" rx="12" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="466" y="599" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14">Registrar descarga DEA</text>
+  </g>
+
+  <!-- Derecha: Bitácora silenciosa para el Flight Surgeon -->
+  <g id="QuietLog">
+    <rect x="820" y="168" width="460" height="452" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="218" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="500">Registro automático para Flight Surgeon</text>
+    <line x1="860" y1="242" x2="1240" y2="242" stroke="#1C2029" stroke-width="1"/>
+
+    <text x="860" y="284" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">14:24:02   Inicio de protocolo cardiovascular (C001)</text>
+    <text x="860" y="324" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">14:24:45   Vía aérea verificada y suministro O₂</text>
+    <text x="860" y="364" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">14:25:12   Fijación CMRS y metrónomo 110 lpm activo</text>
+
+    <rect x="860" y="536" width="380" height="44" rx="10" fill="#161922" stroke="#262B36" stroke-width="1"/>
+    <text x="954" y="563" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Exportar paquete de telemetría</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en Hinkelbein et al. (RCP 0G) e ISS Medical Checklist. No es un dispositivo médico.</text>
+</svg>

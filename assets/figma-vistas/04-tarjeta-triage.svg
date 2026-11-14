@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+
+  <!-- Resultado centrado, sereno y directo -->
+  <g id="EvaluationClean">
+    <text x="140" y="168" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Resultado de evaluación · C001</text>
+    <text x="140" y="220" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="36" font-weight="400" letter-spacing="-0.6">Atención moderada</text>
+    <text x="140" y="264" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">102 mg/dL supera el límite superior de referencia (99 mg/dL)</text>
+    <text x="140" y="290" fill="#7D8594" font-family="Inter, sans-serif" font-size="16">y se desvía +14.6% respecto a tu línea base personal.</text>
+
+    <line x1="140" y1="340" x2="640" y2="340" stroke="#181B22" stroke-width="1"/>
+
+    <text x="140" y="388" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="15" font-weight="500">Pasos recomendados</text>
+    <text x="140" y="430" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">1. Hidratación oral con 250 mL de agua para descartar hemoconcentración.</text>
+    <text x="140" y="468" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">2. Repetir la medición capilar en 120 minutos.</text>
+    <text x="140" y="506" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">3. Si aparece dolor torácico, mareo o visión borrosa, cambiar a protocolo agudo.</text>
+
+    <rect x="140" y="568" width="240" height="48" rx="10" fill="#ECEFF4"/>
+    <text x="188" y="597" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="13" font-weight="600">Programar recordatorio</text>
+
+    <rect x="396" y="568" width="220" height="48" rx="10" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="446" y="597" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">Reportar síntomas</text>
+  </g>
+
+  <!-- Derecha: Registro diferido para Tierra -->
+  <g id="DeferredSyncCard">
+    <rect x="820" y="168" width="460" height="280" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="216" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="15" font-weight="500">Sincronización diferida con Tierra</text>
+    <text x="860" y="250" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">La lectura quedó almacenada localmente y se enviará</text>
+    <text x="860" y="272" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">al Flight Surgeon en la próxima ventana disponible.</text>
+
+    <line x1="860" y1="312" x2="1240" y2="312" stroke="#1C2029" stroke-width="1"/>
+    <text x="860" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Fuente de referencia</text>
+    <text x="860" y="372" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">NASA OSDR OSD-575 · Inspiration4 CMP</text>
+  </g>
+
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico. No diagnostica ni prescribe.</text>
+</svg>

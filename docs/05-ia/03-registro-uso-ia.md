@@ -158,17 +158,58 @@ Uso de IA-Personal/
 
 ---
 
+### IA-010 · Implementación del software Next.js 15 e indexador O(1) para NASA OSDR OSD-575
+- **Fecha/hora:** 2026-11-14 14:13
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA
+- **Categoría:** código / arquitectura
+- **Prompt usado:** "hermano necesito que empieces a trabajar en el software, apegado al diseño que creaste necesito que investigues como utilizar la base de datos de la nasa, revisa la forma optima sin hacerlo tardar, empieza a crearlo y hazlo de manera estructurada en el proyecto crea la carpeta correctamante"
+- **Propósito:** estructurar e implementar la aplicación web completa en `src/` conforme a `TECH-STACK.md` y al diseño minimalista monocromático con modelo 3D central, calculando cada métrica y línea base directamente desde `src/data/seed/osdr-inspiration4-cmp.json` en `<1 ms` sin latencia de red.
+- **Resultado obtenido:** estructura completa en `src/app/`, `src/components/`, `src/lib/osdr/client.ts` (indexador en memoria + cálculo exacto de línea base pre-vuelo L-92, L-44, L-3), `src/lib/rules/triage.ts` (motor determinista puro), `src/lib/db/dexie.ts` (persistencia local IndexedDB) y endpoint híbrido `/api/osdr`.
+- **Validación:** `pnpm exec tsc --noEmit` con 0 errores y servidor activo en `http://localhost:3000` abierto en `NASA-BROWSER`.
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-011 · Redacción del contrato técnico de Backend y Base de Datos para agentes (`BRIEF-BACKEND-AGENTES.md`)
+- **Fecha/hora:** 2026-11-14 14:52
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA
+- **Categoría:** arquitectura / documentación
+- **Prompt usado:** "necesito que generes en un solo md para darles el contexto de todo el stack tecnologico para la creacion del software para mi equipo, dos seran el back... el md es para el agente... tiene que mostrar un modelo 3D del cuerpo Humano... animaciones de cada herramienta util... IA no es indispensable y es añadido, preocupate en que sea adaptable y escalable por los parametros poco a poco"
+- **Propósito:** alinear a los 2 integrantes de Backend/BD y a sus agentes de IA con contratos tipados para monitoreo biológico/físico en tiempo real, enlace con nodos del Modelo 3D (`meshNodeId`), disparadores de animaciones de herramientas (`toolAnimationId`), registro escalable de parámetros (*Plug & Play*) y capa de IA desacoplada/opcional.
+- **Resultado obtenido:** [`BRIEF-BACKEND-AGENTES.md`](../../BRIEF-BACKEND-AGENTES.md) en la raíz del proyecto, enlazado desde `docs/00-INDEX.md`.
+- **Validación:** revisión de consistencia contra `TECH-STACK.md`, `AGENTS.md` y la estructura real en `src/`.
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-012 — Investigación de modelos 3D del cuerpo humano, licencias y mapeo a `meshNodeId`
+- **Fecha/hora:** 2026-11-14
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA con búsqueda web + verificación HTTP directa (descarga real de cada binario)
+- **Categoría:** investigación
+- **Prompt usado:** ad hoc — *"Necesito que investigues en internet o en github modelos del cuerpo humano en 3D gratuitos y que se puedan usar y descargar, necesito que venga cada sistema del cuerpo humano… nos servirá para que el astronauta interactúe visualmente con la parte del cuerpo humano"*
+- **Propósito:** elegir el modelo 3D que el astronauta va a tocar, con licencia compatible con el repo público, sin share-alike ni cláusula NC, y que exponga mallas nombradas compatibles con los 6 `meshNodeId` del contrato del backend.
+- **Resultado obtenido:** [`docs/02-investigacion/06-modelos-3d-anatomia.md`](../02-investigacion/06-modelos-3d-anatomia.md) — 7 fuentes comparadas, tabla de cobertura de los 11 sistemas, mapeo a los 6 nodos del contrato, 5 trampas de licencia y plan B. Fuentes B60–B76 en la bibliografía.
+- **Validación:** **no se aceptó ninguna cifra de un README.** Se comprobaron por descarga real e inspección de cabecera GLB: `anatomy-male.glb` = 7,614,076 B (134 nodos) y `anatomy-female.glb` = 8,134,732 B (139 nodos); `partof_BP3D_4.0_obj_99.zip` = 64,888,505 B; `3d-vh-m-united.glb` = 241,633,636 B; licencia de BodyParts3D releída en la página oficial (CC BY 4.0 desde 2025-02-27). Las raíces de sistemas se leyeron de `TA2.csv`.
+- **Corrección posterior:** la primera medición del GLB (5,991,963 B) era el tamaño del flujo **comprimido** devuelto por el CDN a una petición `Range`, no del archivo. Detectado al descargar y comparar con la longitud declarada dentro del propio GLB. Queda registrado porque el error era fácil de repetir.
+- **Limitación declarada:** la afirmación de que los `.obj` de BodyParts3D llevan cabecera antigua CC BY-SA 2.1 proviene de una auditoría de terceros, no de descarga propia → queda como `[POR VALIDAR]` en el documento.
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
-| Investigación | 3 | 3 |
-| Documentación | 2 | 2 |
-| Arquitectura / código | 3 | 2 |
+| Investigación | 4 | 4 |
+| Documentación | 3 | 3 |
+| Arquitectura / código | 4 | 3 |
 | Diseño | 2 | 2 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **10** | **9** |
+| **Total** | **13** | **12** |
 
 ---
 

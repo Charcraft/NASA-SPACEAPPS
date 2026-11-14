@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none">
+  <defs>
+    <radialGradient id="monoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ECEFF4" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0A0B0E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="900" fill="#0A0B0E"/>
+  
+  <!-- Barra superior minimalista -->
+  <g id="TopNav">
+    <text x="56" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="0.4">AEGIS</text>
+    <text x="112" y="46" fill="#484F5C" font-family="Inter, sans-serif" font-size="13" font-weight="400">Tripulante C001</text>
+
+    <!-- Navegación limpia sin cajas pesadas -->
+    <text x="540" y="46" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13" font-weight="500">Vista general</text>
+    <text x="656" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Modelo 3D</text>
+    <text x="756" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Medición</text>
+    <text x="846" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="13" font-weight="400">Evaluación</text>
+
+    <!-- Estado offline discreto -->
+    <circle cx="1216" cy="41" r="3" fill="#ECEFF4"/>
+    <text x="1228" y="46" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Autónomo</text>
+
+    <rect x="1304" y="28" width="80" height="28" rx="14" fill="#ECEFF4"/>
+    <text x="1322" y="46" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="11" font-weight="600">Rutina</text>
+
+    <line x1="56" y1="72" x2="1384" y2="72" stroke="#181B22" stroke-width="1"/>
+  </g>
+
+  
+  <!-- Escenario Central 3D (Malla Monocromática Limpia) -->
+  <g id="Viewport3D">
+    <!-- Halo sutil monocromático -->
+    <circle cx="720" cy="450" r="250" fill="url(#monoGlow)"/>
+    <circle cx="720" cy="450" r="220" stroke="#161920" stroke-width="1"/>
+    <circle cx="720" cy="450" r="150" stroke="#14171E" stroke-width="1" stroke-dasharray="2 6"/>
+
+    <!-- Eje vertical de referencia arquitectónica -->
+    <line x1="720" y1="140" x2="720" y2="760" stroke="#14171E" stroke-width="1"/>
+    <line x1="560" y1="660" x2="880" y2="660" stroke="#1C2029" stroke-width="1"/>
+    <ellipse cx="720" cy="660" rx="110" ry="22" stroke="#1C2029" stroke-width="1" fill="none"/>
+
+    <!-- Modelo 3D del Astronauta (Silueta volumétrica limpia por contornos) -->
+    <!-- Casco / Cabeza -->
+    <circle cx="720" cy="246" r="34" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <ellipse cx="720" cy="246" rx="24" ry="18" fill="#141820" stroke="#484F5C" stroke-width="1"/>
+    <!-- Cuello y Hombros -->
+    <path d="M702 280 L738 280 L778 308 L662 308 Z" fill="#0E1015" stroke="#484F5C" stroke-width="1.2"/>
+    <!-- Torso Volumétrico -->
+    <path d="M662 308 L778 308 L764 468 L676 468 Z" fill="#0E1015" stroke="#94A3B8" stroke-width="1.5"/>
+    <!-- Líneas de topología 3D discretas en el torso -->
+    <path d="M670 355 Q720 368 770 355" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <path d="M674 410 Q720 422 766 410" stroke="#1E232D" stroke-width="1" fill="none"/>
+    <line x1="720" y1="280" x2="720" y2="468" stroke="#1E232D" stroke-width="1"/>
+
+    <!-- Brazos -->
+    <path d="M662 308 L628 446 L652 452 L674 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M778 308 L812 446 L788 452 L766 348" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Piernas -->
+    <path d="M678 468 L668 648 L702 648 L712 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+    <path d="M728 468 L738 648 L772 648 L762 468" fill="#0E1015" stroke="#64748B" stroke-width="1.2"/>
+
+    <!-- Nodos anatómicos minimalistas -->
+    <!-- Neuro / Ocular -->
+    <circle cx="720" cy="242" r="4" fill="#64748B"/>
+    <!-- Cardiorrespiratorio -->
+    <circle cx="734" cy="352" r="4" fill="#64748B"/>
+    <!-- Metabólico (Único punto con atención suave) -->
+    <circle cx="708" cy="418" r="10" fill="#ECEFF4" fill-opacity="0.12"/>
+    <circle cx="708" cy="418" r="4.5" fill="#ECEFF4"/>
+
+    <!-- Controles de cámara 3D discretos al pie del modelo -->
+    <rect x="610" y="704" width="220" height="32" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="634" y="724" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">Frontal</text>
+    <text x="704" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Lateral</text>
+    <text x="772" y="724" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Capas</text>
+  </g>
+
+
+  <!-- Columna Izquierda: Estado General y 3 Signos Vitales Primarios (Sin saturación) -->
+  <g id="LeftColumn">
+    <text x="56" y="136" fill="#7D8594" font-family="Inter, sans-serif" font-size="12" font-weight="400">Estado fisiológico</text>
+    <text x="56" y="172" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="28" font-weight="500" letter-spacing="-0.5">Estable, 1 variación leve</text>
+    <text x="56" y="198" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Comparado contra tu línea base pre-vuelo (L-44)</text>
+
+    <line x1="56" y1="232" x2="380" y2="232" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 1: Pulso -->
+    <text x="56" y="272" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Frecuencia cardíaca</text>
+    <text x="56" y="316" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">72</text>
+    <text x="110" y="316" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">lpm</text>
+    <text x="290" y="312" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Base 68</text>
+
+    <line x1="56" y1="352" x2="380" y2="352" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 2: Saturación -->
+    <text x="56" y="392" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Saturación de oxígeno</text>
+    <text x="56" y="436" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">98</text>
+    <text x="110" y="436" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">%</text>
+    <text x="290" y="432" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Base 99%</text>
+
+    <line x1="56" y1="472" x2="380" y2="472" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Métrica 3: Presión arterial -->
+    <text x="56" y="512" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Presión arterial</text>
+    <text x="56" y="556" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="40" font-weight="300" letter-spacing="-1">118/76</text>
+    <text x="196" y="556" fill="#484F5C" font-family="Inter, sans-serif" font-size="14">mmHg</text>
+    <text x="290" y="552" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">Nominal</text>
+
+    <line x1="56" y1="592" x2="380" y2="592" stroke="#181B22" stroke-width="1"/>
+
+    <!-- Selector minimalista de tripulación -->
+    <text x="56" y="640" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Tripulación (OSD-575)</text>
+    <rect x="56" y="658" width="68" height="36" rx="8" fill="#161922" stroke="#ECEFF4" stroke-width="1"/>
+    <text x="75" y="681" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">C001</text>
+
+    <rect x="134" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="153" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C002</text>
+
+    <rect x="212" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="231" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C003</text>
+
+    <rect x="290" y="658" width="68" height="36" rx="8" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <text x="309" y="681" fill="#7D8594" font-family="Inter, sans-serif" font-size="12">C004</text>
+  </g>
+
+  <!-- Columna Derecha: Foco Único en la Variación Detectada + Tendencia Limpia -->
+  <g id="RightColumn">
+    <rect x="1020" y="128" width="364" height="320" rx="16" fill="#101217" stroke="#1C2029" stroke-width="1"/>
+    <circle cx="1050" cy="162" r="4" fill="#ECEFF4"/>
+    <text x="1064" y="166" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="12" font-weight="500">Observación activa · Metabólico</text>
+
+    <text x="1048" y="218" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="44" font-weight="300" letter-spacing="-1">102</text>
+    <text x="1132" y="218" fill="#7D8594" font-family="Inter, sans-serif" font-size="15">mg/dL</text>
+    <text x="1048" y="244" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Glucosa en ayunas (+14% sobre tu base de 89 mg/dL)</text>
+
+    <!-- Curva longitudinal minimalista (L-92 a R+194) -->
+    <line x1="1048" y1="296" x2="1352" y2="296" stroke="#1C2029" stroke-width="1" stroke-dasharray="3 3"/>
+    <path d="M1048 320 L1098 318 L1148 316 L1198 282 L1248 314 L1298 317 L1352 318" stroke="#ECEFF4" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle cx="1198" cy="282" r="4" fill="#ECEFF4"/>
+    <text x="1048" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">L-92</text>
+    <text x="1186" y="348" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="11" font-weight="500">R+1</text>
+    <text x="1320" y="348" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">R+194</text>
+
+    <rect x="1048" y="376" width="308" height="44" rx="10" fill="#ECEFF4"/>
+    <text x="1126" y="403" fill="#0A0B0E" font-family="Inter, sans-serif" font-size="13" font-weight="600">Iniciar medición guiada</text>
+
+    <!-- Contexto ambiental discreto -->
+    <text x="1020" y="504" fill="#484F5C" font-family="Inter, sans-serif" font-size="12">Ambiente de cabina</text>
+    <line x1="1020" y1="520" x2="1384" y2="520" stroke="#181B22" stroke-width="1"/>
+    <text x="1020" y="552" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Radiación acumulada</text>
+    <text x="1312" y="552" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">0.4 mSv</text>
+    <text x="1020" y="588" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Presión parcial CO₂</text>
+    <text x="1302" y="588" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">2.8 mmHg</text>
+    <text x="1020" y="624" fill="#7D8594" font-family="Inter, sans-serif" font-size="13">Retardo con Tierra</text>
+    <text x="1312" y="624" fill="#ECEFF4" font-family="Inter, sans-serif" font-size="13">14m 20s</text>
+  </g>
+
+  <!-- Pie de página silencioso -->
+  <text x="56" y="860" fill="#484F5C" font-family="Inter, sans-serif" font-size="11">Prototipo informativo basado en NASA OSDR OSD-575. No es un dispositivo médico.</text>
+</svg>

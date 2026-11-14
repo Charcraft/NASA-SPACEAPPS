@@ -68,12 +68,15 @@
 | D22 | **Protocolo documental obligatorio** + verificación automática de documentos huérfanos | 2026-11-13 | Que ningún agente cierre una tarea sin registrar decisiones, fuentes, IA y archivos |
 | D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
 | D24 | El maquetado se entrega como **plugin de Figma** en `design/`, no como SVG suelto | 2026-11-14 | El MCP de Figma es de solo lectura y la API REST no crea nodos; el plugin deja capas nativas y funciona en cualquier archivo |
+| D25 | **Modelo 3D del cuerpo: `open-anatomy-3d`** (GLB CC BY 4.0, sin share-alike) | 2026-11-14 | 147 estructuras con nombre en el nodo glTF, hombre y mujer, 7.6 MB. Es el único que cubre los 6 `meshNodeId` del contrato **sin** contaminar el repo abierto con una licencia NC. Z-Anatomy queda solo como atlas de consulta. Ver `docs/02-investigacion/06-modelos-3d-anatomia.md` |
 | D25 | La escena de demo es **C003 en R+1, glucosa 103 mg/dL** | 2026-11-14 | Es el único valor de glucosa realmente fuera de rango en R+1; los 102/89 anteriores no existen en OSD-575 |
 
 ---
 
 ## Pendientes abiertos
 
+- [ ] **Eduardo: su usuario de GitHub (`eduardovd2007`) no existe (404).** Confirmar el real o crear cuenta; sin eso no se le puede invitar.
+- [ ] Angel, Carlos Alberto y Ernesto: **aceptar la invitación** al repo (enviada 2026-11-14, permiso write).
 - [x] **Sesión de Google activa en NASA-BROWSER** (2026-11-13, la persona inició sesión manualmente).
 - [x] Crear el repositorio público y la licencia (MIT o Apache-2.0). ✅ `Charcraft/NASA-SPACEAPPS`
 - [ ] Invitar a los 5 integrantes al repo con permiso de escritura.
@@ -86,6 +89,9 @@
 - [ ] Validar umbrales clínicos con fuente primaria (`[POR VALIDAR]` en `docs/02-investigacion/02-indicadores-fisiologicos.md`).
 - [ ] Explorar OSDR y documentar 3 datasets concretos utilizables.
 - [ ] Revisar recursos oficiales el 13 de noviembre y ajustar el plan de datos.
+- [x] **Modelo 3D definitivo: `open-anatomy-3d`** (2026-11-14). Descargado en `public/models/`: `anatomy-male.glb` (7,614,076 B), `anatomy-female.glb` (8,134,732 B), `catalog.json` (147 estructuras) y las dos licencias. Cabecera GLB validada (magic `glTF`, longitud declarada = tamaño real). Ver D25.
+- [ ] **Actualizar `TECH-STACK.md`**: la fila "Mapa corporal: SVG inline, cero dependencias" contradice el Three.js que ya fija `BRIEF-BACKEND-AGENTES.md` §2. Manda el contrato, pero la tabla debe decir la verdad.
+- [ ] Añadir al pie de la app y al README la cadena de atribución anatómica (BodyParts3D + HuBMAP + MakeHuman + open-anatomy-3d).
 
 ---
 
@@ -98,6 +104,22 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Modelos 3D: descarga e instalación
+- Pineda confirmó la decisión **D25**: `open-anatomy-3d`. Anteriormente era solo una recomendación.
+- **Descargado y verificado** en `public/models/`: `anatomy-male.glb` (7,614,076 B), `anatomy-female.glb` (8,134,732 B), `catalog.json` (23,585 B, 147 estructuras), `ATTRIBUTION.md`, `LICENSE-MODELS.md`.
+- **Validación real:** se abrió la cabecera GLB de cada archivo — magic `glTF`, `version 2`, longitud declarada **igual** al tamaño en disco. 134 nodos / 128 mallas el macho; 139 / 133 la hembra. Los 6 nodos raíz (`skin`, `skeleton`, `muscles`, `organs`, `vessels`, `nerves`) y los 6 órganos del contrato existen.
+- **Dos hallazgos que afectan al código:** el glTF trae **`materials = 0`** (el color hay que aplicarlo desde `catalog.json`) y usa **`EXT_meshopt_compression`** (sin `MeshoptDecoder` no carga).
+- **Corrección de una cifra publicada:** el tamaño de 5,991,963 B era el del flujo comprimido que devolvió el CDN en una petición `Range`, no el del archivo. El real es 7,614,076 B. Corregido en el documento, la bibliografía y este registro.
+- Se añadió `public/models/README.md` y `.gitattributes` pasó a tratar `*.glb`/`*.gltf` como binarios.
+
+### 2026-11-14 — Investigación de modelos 3D de anatomía
+- Se compararon **7 fuentes** de modelos 3D del cuerpo humano con descarga y licencia verificadas por HTTP, no por README.
+- **Elegido y descargado:** `open-anatomy-3d` — **`anatomy-male.glb` 7,614,076 B** + **`anatomy-female.glb` 8,134,732 B** (cabecera GLB validada: magic `glTF`, longitud declarada = tamaño en disco), 147 estructuras con nombre, hombre y mujer, **CC BY 4.0** (modelos) + MIT (código). Sin cláusula NC ni share-alike. En `public/models/` con su `ATTRIBUTION.md`.
+- **Descartados:** Z-Anatomy como asset publicado (CC BY-SA 4.0 + riñón CC BY-NC 4.0 + oído interno CC BY-NC-SA 4.0, y su dueño interpreta que la app que lo lee debe abrir su código), Sketchfab (NC/ND), tiendas (licencia propietaria), BioDigital (SaaS cerrado).
+- **Verificado que los 6 `meshNodeId` del contrato del backend existen como mallas reales** en el modelo elegido. Ese era el riesgo real, no la falta de modelos.
+- Documento: `docs/02-investigacion/06-modelos-3d-anatomia.md`. Fuentes B60–B76 en la bibliografía.
+- **Contradicción detectada:** `TECH-STACK.md` dice "mapa corporal SVG inline, cero dependencias" y `BRIEF-BACKEND-AGENTES.md` fija Three.js con `meshNodeId`. Se registra como pendiente; manda el contrato por ser más específico y reciente.
 
 ### 2026-11-14 — Pitch presencial
 - La charla del Local Event fijó: **7 diapositivas máximo, en inglés**, con la estructura problema/usuario → solución → datos → demostración → evidencia y limitaciones → cierre.
