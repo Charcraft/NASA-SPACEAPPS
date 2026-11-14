@@ -74,6 +74,8 @@
 | D28 | Contratos compartidos (`types/index.ts`) **congelados a H2**; cambios solo por PR | 2026-11-14 | Un contrato que cambia en vivo rompe el build y la demo |
 | D29 | **Roles backend cerrados:** Ernesto = Back 1, Angel = Back 2 | 2026-11-14 | Elimina la ambigüedad que dejó el brief y evita dos planes para el mismo frente |
 | D30 | **TypeScript fijado en 6.x y `next.config.mjs`** en lugar de `next.config.ts` | 2026-11-14 | Next 15 falla con el compilador nativo de TS 7 (`fileExists` undefined) y rechaza el build: "TypeScript 7.0.2 is not supported". TS 6 es la versión que Next recomienda |
+| D31 | **Local-first con sincronización diferida a Tierra; sin réplica en tiempo real entre astronautas** | 2026-11-14 | El enlace en vuelo es intermitente y no hay backend remoto en 30 h. `colaSync` deja el transporte listo. Ver `docs/03-plan/11-arquitectura-backend.md` §8 |
+| D32 | **Alcance físico únicamente:** 26 parámetros físicos/bioquímicos. Sueño, ánimo y carga cognitiva quedan para fase posterior | 2026-11-14 | Evita inventar escalas clínicas y mantiene la demo enfocada |
 
 ---
 

@@ -178,7 +178,81 @@ export interface ResultadoPersistencia {
 
 ---
 
-## 8. Fuera de alcance (explícito)
+## 8. Sincronización, persistencia y hardware
+
+### 8.1 · Modelo de datos: local primero, Tierra después
+
+| Capa | Dónde vive | Qué guarda | Estado en el MVP |
+|---|---|---|---|
+| **Local** | IndexedDB del dispositivo (Dexie) | Verdad operativa en vuelo: mediciones, episodios, alertas, bitácora | **Sí** |
+| **Nave** | Nodo compartido de la tripulación | Consolidado de los 4 tripulantes | **No** (fuera del MVP) |
+| **Tierra** | Servidor de misión | Archivo histórico y análisis clínico | **No** (contrato y cola sí) |
+
+**Decisión:** no hay sincronización en tiempo real entre astronautas. Cada estación
+trabaja contra su IndexedDB y la sincronización es **diferida hacia Tierra**.
+
+Por qué:
+
+1. En vuelo real el enlace es intermitente y con retardo; el dato no puede depender de la red.
+2. Sin backend remoto no hay forma honesta de simular un nodo de nave en 30 h.
+3. El modelo real de NASA es telemetría hacia el *Mission Control Center*, no
+   réplica entre tripulantes.
+
+Lo que **sí** queda preparado: `colaSync` en Dexie con prioridad, hash e idempotencia.
+Cuando exista el nodo central, solo se implementa el transporte; el contrato ya está.
+
+### 8.2 · Pérdida de conexión
+
+```text
+sensor ──► frame ──► evaluar ──► guardarFrame (Dexie)  ← siempre funciona
+                                        │
+                                        └──► colaSync: A (crítico) > B (alerta)
+                                                       > C (medición) > D (bitácora)
+                                                            │
+                                          sin red ──────────┘  se acumula
+                                                            │
+                                          con red ──────────┘  replay en orden
+```
+
+- **Nada se descarta por falta de red.** La escritura local es la operación crítica.
+- Cada lote lleva hash del anterior: si no coincide, no se reintenta en automático
+  (`E-SYN-001`) para no corromper el histórico.
+- **Conflicto:** las mediciones son *append-only*. Una corrección es una fila nueva
+  con `amendsId`; nunca se sobrescribe un valor clínico.
+- **Reconexión:** se envía primero lo crítico, luego el resto; el ACK libera la cola.
+
+### 8.3 · De dónde salen los datos (hardware)
+
+| Fuente | Interfaz | Uso en el MVP |
+|---|---|---|
+| Simulador determinista | `stream-engine` | **Sí**, es la fuente de la demo |
+| Sensor BLE (pulsioxímetro, manguito, termómetro) | Web Bluetooth + GATT | Interfaz prevista, no conectada |
+| Equipo con puerto serie | Web Serial | Interfaz prevista, no conectada |
+| Bus de la nave (CO₂, radiación) | Gateway → HTTP/WS | Fuera del alcance del navegador |
+| Entrada manual / importación | Formulario + CSV/JSON | Sí, para datos OSDR y correcciones |
+
+**Regla de honestidad:** la demo no afirma leer hardware real. Los 9 parámetros
+simulados se presentan como simulación; los 17 de OSDR se presentan como dataset
+público. Cualquier cifra clínica sin fuente va marcada `[SUPUESTO]`.
+
+**Consecuencia técnica:** la ingesta se define como una interfaz `SensorSource`
+(Back 1) que hoy implementa el simulador. Un adaptador BLE o serie se añade sin
+tocar `stream-engine` ni los contratos.
+
+### 8.4 · Alcance actual: solo físico
+
+En el MVP entran únicamente parámetros **físicos y bioquímicos** (los 26 del
+`registry.ts`: 17 OSDR + 9 simulados). Quedan fuera, para una fase posterior:
+
+- Estado de ánimo y cuestionarios psicológicos.
+- Horas de sueño y calidad percibida.
+- Tiempo de reacción y carga cognitiva.
+
+El contrato `LecturaEvaluable` ya acepta estos datos (valor numérico + unidad +
+calidad); lo que falta es su catálogo de umbrales y su fuente. No se implementan
+ahora para no diluir el alcance ni inventar escalas clínicas.
+
+## 9. Fuera de alcance (explícito)
 
 - Implementar IA: solo el contrato `AIProvider` y el `null-provider`.
 - Modelo 3D y animaciones: los consume, no los define.
@@ -187,7 +261,7 @@ export interface ResultadoPersistencia {
 
 ---
 
-## 9. Riesgos
+## 10. Riesgos
 
 | Riesgo | Impacto | Mitigación |
 |---|---|---|
@@ -199,7 +273,7 @@ export interface ResultadoPersistencia {
 
 ---
 
-## 10. Registro
+## 11. Registro
 
 | Artefacto | Destino |
 |---|---|
