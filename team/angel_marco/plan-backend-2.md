@@ -34,7 +34,7 @@
 | `src/lib/model3d-bridge/contracts.ts` | Back 1 | `meshNodeId` / `toolAnimationId` |
 | `src/app/api/telemetry/route.ts` | Back 1 | SSE / polling |
 | `src/app/api/parameters/route.ts` | Back 1 | Expone el registry |
-| `package.json`, `tsconfig.json`, `next.config.ts` | Back 1 | Scaffold inicial |
+| `package.json`, `tsconfig.json`, `next.config.mjs` | Back 1 | Scaffold inicial |
 | `src/lib/osdr/client.ts` | **Back 2 (yo)** | Índice + baseline pre-vuelo |
 | `src/app/api/osdr/route.ts` | **Back 2** | API híbrida con fallback |
 | `src/lib/db/dexie.ts` | **Back 2** | Tablas IndexedDB |
