@@ -30,7 +30,10 @@ El script:
 - Instala las **24 skills** del maletín en `.opencode/skills`, `.claude/skills` y `.cursor/skills` del proyecto. Así funciona igual para cualquier harness.
 - Prepara la carpeta personal del integrante si aún no existe.
 - Registra el repo en Orca.
+- **Pone el icono del proyecto a la carpeta y crea un acceso directo `NASA-SPACEAPPS` en el escritorio**, para que sepas siempre dónde vive el proyecto.
 - Imprime el estado final.
+
+> El `desktop.ini` que genera el icono está en `.gitignore`: es local de cada máquina. El icono compartido es `assets/brand/proyecto.ico` y se regenera con `python scripts/generar-icono.py`.
 
 Si falla algo, **reporta el error exacto** y no continúes al paso 2 hasta resolverlo.
 

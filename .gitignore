@@ -56,3 +56,6 @@ scripts/.osdr-humano.json
 .opencode/skills/
 .claude/skills/
 .cursor/skills/
+
+# Icono de carpeta local (lo genera scripts/crear-acceso-directo)
+desktop.ini

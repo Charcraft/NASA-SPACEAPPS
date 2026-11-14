@@ -23,7 +23,7 @@ linea
 echo ""
 
 # ---------------------------------------------------------------- 1. Herramientas
-echo "[1/5] Herramientas"
+echo "[1/6] Herramientas"
 echo ""
 
 FALTANTES=()
@@ -45,7 +45,7 @@ check "orca" "orca" "sitio oficial de Orca"
 echo ""
 
 # ---------------------------------------------------------------- 2. Skills
-echo "[2/5] Skills (24)"
+echo "[2/6] Skills (24)"
 echo ""
 
 ORIGEN="$RAIZ/skills"
@@ -71,7 +71,7 @@ fi
 echo ""
 
 # ---------------------------------------------------------------- 3. Orca
-echo "[3/5] Orca"
+echo "[3/6] Orca"
 echo ""
 if command -v orca >/dev/null 2>&1; then
   orca repo add --path "$RAIZ" >/dev/null 2>&1 \
@@ -84,7 +84,7 @@ fi
 echo ""
 
 # ---------------------------------------------------------------- 4. Git
-echo "[4/5] Git"
+echo "[4/6] Git"
 echo ""
 GIT_NOMBRE="$(git config user.name || true)"
 GIT_CORREO="$(git config user.email || true)"
@@ -112,8 +112,19 @@ fi
 
 echo ""
 
-# ---------------------------------------------------------------- 5. Estado
-echo "[5/5] Estado"
+# ---------------------------------------------------------------- 5. Escritorio
+echo "[5/6] Escritorio"
+echo ""
+if [ -f "$RAIZ/scripts/crear-acceso-directo.sh" ]; then
+  bash "$RAIZ/scripts/crear-acceso-directo.sh" || echo "      no se pudo preparar el escritorio"
+else
+  echo "      falta scripts/crear-acceso-directo.sh"
+fi
+
+echo ""
+
+# ---------------------------------------------------------------- 6. Estado
+echo "[6/6] Estado"
 echo ""
 SKILLS_OK=$(find "$RAIZ/.opencode/skills" -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 DOCS=$(find "$RAIZ/docs" -name '*.md' -type f 2>/dev/null | wc -l | tr -d ' ')

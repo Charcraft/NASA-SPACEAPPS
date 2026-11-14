@@ -1,4 +1,4 @@
-# instalar-todo.ps1
+﻿# instalar-todo.ps1
 # Instalacion completa de un integrante del equipo ROCKET.
 # Ejecuta esto cuando alguien diga "lee el repo e instalalo".
 #
@@ -10,7 +10,8 @@
 # funcione igual en OpenCode, Claude Code y Cursor.
 
 param(
-    [string]$Usuario = ""
+    [string]$Usuario = "",
+    [string]$Icono = ""
 )
 
 $ErrorActionPreference = "Continue"
@@ -28,7 +29,7 @@ Linea
 Write-Host ""
 
 # ---------------------------------------------------------------- 1. Herramientas
-Write-Host "[1/5] Herramientas" -ForegroundColor Yellow
+Write-Host "[1/6] Herramientas" -ForegroundColor Yellow
 Write-Host ""
 
 $faltantes = @()
@@ -52,7 +53,7 @@ Test-Minimo "orca"    "orca"    "sitio oficial de Orca"
 Write-Host ""
 
 # ---------------------------------------------------------------- 2. Skills
-Write-Host "[2/5] Skills (24)" -ForegroundColor Yellow
+Write-Host "[2/6] Skills (24)" -ForegroundColor Yellow
 Write-Host ""
 
 $origen = Join-Path $raiz "skills"
@@ -86,7 +87,7 @@ else {
 Write-Host ""
 
 # ---------------------------------------------------------------- 3. Repo en Orca
-Write-Host "[3/5] Orca" -ForegroundColor Yellow
+Write-Host "[3/6] Orca" -ForegroundColor Yellow
 Write-Host ""
 
 if (Get-Command orca -ErrorAction SilentlyContinue) {
@@ -105,7 +106,7 @@ else {
 Write-Host ""
 
 # ---------------------------------------------------------------- 4. Git
-Write-Host "[4/5] Git" -ForegroundColor Yellow
+Write-Host "[4/6] Git" -ForegroundColor Yellow
 Write-Host ""
 
 $nombre = git config user.name
@@ -140,8 +141,27 @@ if ($Usuario -ne "") {
 
 Write-Host ""
 
-# ---------------------------------------------------------------- 5. Estado
-Write-Host "[5/5] Estado" -ForegroundColor Yellow
+# ---------------------------------------------------------------- 5. Escritorio
+Write-Host "[5/6] Escritorio" -ForegroundColor Yellow
+Write-Host ""
+
+$scriptAcceso = Join-Path $raiz "scripts\crear-acceso-directo.ps1"
+if (Test-Path $scriptAcceso) {
+    try {
+        if ($Icono -ne "") { & $scriptAcceso -Icono $Icono } else { & $scriptAcceso }
+    }
+    catch {
+        Write-Host "      no se pudo preparar el escritorio: $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+}
+else {
+    Write-Host "      falta scripts\crear-acceso-directo.ps1" -ForegroundColor Yellow
+}
+
+Write-Host ""
+
+# ---------------------------------------------------------------- 6. Estado
+Write-Host "[6/6] Estado" -ForegroundColor Yellow
 Write-Host ""
 
 $skillsOk = (Get-ChildItem (Join-Path $raiz ".opencode\skills") -Directory -ErrorAction SilentlyContinue).Count

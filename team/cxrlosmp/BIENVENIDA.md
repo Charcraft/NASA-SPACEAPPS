@@ -87,6 +87,7 @@ WhatsApp del equipo: **967 135 4853**
 
 ## Tu entorno
 
+- **Tu carpeta:** el instalador creó un acceso directo **`NASA-SPACEAPPS`** en tu escritorio, con el icono del proyecto. Ábrelo y estarás en el repo.
 - **Skills:** 24 instaladas en `.opencode/skills`, `.claude/skills` y `.cursor/skills`.
   Catálogo: [`skills/README.md`](../../skills/README.md)
 - **Reglas:** [`AGENTS.md`](../../AGENTS.md) — se leen antes de cualquier cosa.
