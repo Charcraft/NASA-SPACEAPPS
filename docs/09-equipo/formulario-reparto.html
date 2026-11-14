@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROCKET · Formulario de reparto de trabajo</title>
+<style>
+  :root {
+    --bg: #0b0e13;
+    --panel: #141922;
+    --panel-2: #1b2230;
+    --line: #26303f;
+    --text: #e6edf6;
+    --muted: #8b9bb0;
+    --accent: #4da3ff;
+    --good: #3ddc97;
+    --warn: #ffb84d;
+    --bad: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55; font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 32px 20px 120px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  .meta { display: flex; gap: 16px; flex-wrap: wrap; color: var(--muted); font-size: .85rem; margin-top: 12px; }
+  section {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px; margin-bottom: 18px;
+  }
+  section > h2 {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--accent); margin: 0 0 4px; font-weight: 600;
+  }
+  section > .hint { color: var(--muted); font-size: .88rem; margin: 0 0 18px; }
+  .q { margin-bottom: 22px; }
+  .q:last-child { margin-bottom: 0; }
+  .q > label.title { display: block; font-weight: 500; margin-bottom: 4px; }
+  .q .why { color: var(--muted); font-size: .82rem; margin: 0 0 10px; }
+  input[type=text], input[type=number], textarea, select {
+    width: 100%; background: var(--panel-2); border: 1px solid var(--line);
+    color: var(--text); border-radius: 8px; padding: 10px 12px; font: inherit;
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .scale { display: flex; align-items: center; gap: 12px; }
+  input[type=range] { flex: 1; accent-color: var(--accent); }
+  .scale .val {
+    min-width: 110px; text-align: right; font-size: .85rem; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+  .checks label {
+    display: flex; gap: 8px; align-items: flex-start; background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; font-size: .92rem;
+    cursor: pointer;
+  }
+  .checks input { margin: 3px 0 0; accent-color: var(--accent); }
+  .radios { display: flex; flex-wrap: wrap; gap: 8px; }
+  .radios label {
+    display: flex; gap: 7px; align-items: center; background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 13px; font-size: .92rem;
+    cursor: pointer;
+  }
+  .radios input { accent-color: var(--accent); }
+  .rank { display: grid; gap: 8px; }
+  .rank .row {
+    display: flex; align-items: center; gap: 10px; background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px;
+  }
+  .rank .row span { flex: 1; font-size: .92rem; }
+  .rank select { width: 90px; }
+  .note {
+    background: rgba(77,163,255,.08); border: 1px solid rgba(77,163,255,.25);
+    border-radius: 8px; padding: 12px 14px; font-size: .88rem; color: #bcd8ff;
+  }
+  button {
+    background: var(--accent); color: #04121f; border: 0; border-radius: 9px;
+    padding: 13px 22px; font: inherit; font-weight: 650; cursor: pointer;
+  }
+  button:hover { filter: brightness(1.08); }
+  button.ghost {
+    background: transparent; color: var(--text); border: 1px solid var(--line);
+    font-weight: 500; padding: 10px 16px;
+  }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  #resumen { display: none; }
+  .scorebar { height: 8px; background: var(--panel-2); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .scorebar > div { height: 100%; background: var(--accent); border-radius: 99px; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+  .tag {
+    display: inline-block; font-size: .74rem; padding: 2px 8px; border-radius: 99px;
+    background: rgba(61,220,151,.14); color: var(--good); border: 1px solid rgba(61,220,151,.3);
+  }
+  .tag.warn { background: rgba(255,184,77,.14); color: var(--warn); border-color: rgba(255,184,77,.3); }
+  .tag.bad { background: rgba(255,107,107,.14); color: var(--bad); border-color: rgba(255,107,107,.3); }
+  pre {
+    background: #05080c; border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px; overflow-x: auto; font-size: .8rem; color: #a9c4e4;
+  }
+  footer { color: var(--muted); font-size: .82rem; text-align: center; margin-top: 32px; }
+  @media (max-width: 560px) {
+    .scale { flex-direction: column; align-items: stretch; }
+    .scale .val { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Reparto de trabajo · Equipo ROCKET</h1>
+  <p class="sub">NASA Space Apps Challenge 2026 · Health Monitoring Software · Tuxtla Gutiérrez</p>
+  <div class="meta">
+    <span>⏱️ 8 minutos</span>
+    <span>🔒 Se guarda en tu navegador, no se envía a ningún servidor</span>
+    <span>📅 Antes del 13 de noviembre, 19:00</span>
+  </div>
+</header>
+
+<div class="note" style="margin-bottom:18px">
+  <strong>Para qué es esto.</strong> El sábado a las 11:15 no hay tiempo para descubrir quién sabe hacer qué.
+  Con tus respuestas se asignan los cinco roles antes del evento, y cada quien llega sabiendo qué hace.
+  <br><br>
+  <strong>Responde con honestidad, no con optimismo.</strong> Decir "no sé React" no te resta: te pone donde sí aportas.
+</div>
+
+<form id="form">
+
+<!-- ============ 1 ============ -->
+<section>
+  <h2>01 · Identificación</h2>
+  <p class="hint">Para cruzar esto con el repositorio y con la página del equipo.</p>
+
+  <div class="q">
+    <label class="title" for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" placeholder="Como aparece en spaceappschallenge.org" required>
+  </div>
+
+  <div class="q">
+    <label class="title" for="usuario">Usuario de GitHub</label>
+    <p class="why">Si no tienes cuenta todavía, escribe "no tengo".</p>
+    <input type="text" id="usuario" placeholder="ej. cxrlosmp" required>
+  </div>
+
+  <div class="q">
+    <label class="title" for="correo">Correo</label>
+    <input type="text" id="correo" placeholder="el que revisas">
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+  <h2>02 · Habilidades técnicas</h2>
+  <p class="hint">Mueve cada barra. <strong>0 = nunca lo he hecho · 4 = lo hago sin buscar en Google.</strong></p>
+
+  <div class="q">
+    <label class="title" for="sk_fe">Frontend: HTML, CSS, React, Tailwind</label>
+    <p class="why">Pantallas, componentes, layout, responsive.</p>
+    <div class="scale">
+      <input type="range" id="sk_fe" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_fe"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_logic">Lógica y código: TypeScript, Python, algoritmos, tests</label>
+    <p class="why">Funciones puras, validaciones, pruebas automatizadas.</p>
+    <div class="scale">
+      <input type="range" id="sk_logic" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_logic"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_data">Datos: limpiar CSV/JSON, APIs, análisis</label>
+    <p class="why">Descargar un dataset de NASA, normalizarlo y graficarlo.</p>
+    <div class="scale">
+      <input type="range" id="sk_data" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_data"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_design">Diseño visual: Figma, color, tipografía, íconos</label>
+    <p class="why">Que la app se vea intencional y no como plantilla.</p>
+    <div class="scale">
+      <input type="range" id="sk_design" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_design"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_story">Narrativa y video: guion, edición, comunicación</label>
+    <p class="why">El demo de 30 segundos y el pitch valen un criterio completo.</p>
+    <div class="scale">
+      <input type="range" id="sk_story" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_story"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_platform">Plataforma: git, deploy, build, PWA/offline</label>
+    <p class="why">Que el proyecto corra en otra máquina y sin internet.</p>
+    <div class="scale">
+      <input type="range" id="sk_platform" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_platform"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_domain">Salud, biología o medicina</label>
+    <p class="why">Aunque sea informal: primeros auxilios, cursos, lectura por interés.</p>
+    <div class="scale">
+      <input type="range" id="sk_domain" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_domain"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_ai">Herramientas de IA: prompting, agentes, MCPs, skills</label>
+    <p class="why">Quién puede sacarle más provecho a los agentes del equipo.</p>
+    <div class="scale">
+      <input type="range" id="sk_ai" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_ai"></span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title" for="sk_collab">Trabajo en equipo con git</label>
+    <p class="why">Ramas, pull requests, resolver un conflicto sin romper nada.</p>
+    <div class="scale">
+      <input type="range" id="sk_collab" min="0" max="4" value="0" data-skill>
+      <span class="val" data-out="sk_collab"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+  <h2>03 · Preferencia de rol</h2>
+  <p class="hint">Ordena del 1 (lo que más quieres hacer) al 5 (lo que menos). No se puede repetir número.</p>
+
+  <div class="rank" id="rank">
+    <div class="row"><span>Frontend — construir las pantallas</span>
+      <select data-rank="fe"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+    <div class="row"><span>Lógica y reglas — el motor que decide</span>
+      <select data-rank="logic"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+    <div class="row"><span>Datos — descargar, limpiar y graficar</span>
+      <select data-rank="data"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+    <div class="row"><span>Diseño y video — que se vea y se cuente bien</span>
+      <select data-rank="design"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+    <div class="row"><span>Plataforma — que todo corra y se despliegue</span>
+      <select data-rank="platform"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+  <h2>04 · Herramientas que ya usas</h2>
+  <p class="hint">Marca solo lo que podrías usar hoy sin aprender desde cero.</p>
+  <div class="checks">
+    <label><input type="checkbox" data-tool="node"> Node.js / pnpm</label>
+    <label><input type="checkbox" data-tool="react"> React / Next.js</label>
+    <label><input type="checkbox" data-tool="python"> Python</label>
+    <label><input type="checkbox" data-tool="figma"> Figma</label>
+    <label><input type="checkbox" data-tool="capcut"> CapCut / edición de video</label>
+    <label><input type="checkbox" data-tool="git"> Git por terminal</label>
+    <label><input type="checkbox" data-tool="gh"> GitHub CLI (gh)</label>
+    <label><input type="checkbox" data-tool="orca"> Orca</label>
+    <label><input type="checkbox" data-tool="vscode"> VS Code</label>
+    <label><input type="checkbox" data-tool="excel"> Excel / hojas de cálculo</label>
+    <label><input type="checkbox" data-tool="obs"> OBS / grabación de pantalla</label>
+    <label><input type="checkbox" data-tool="blender"> Blender / 3D</label>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+  <h2>05 · Tu entorno de trabajo</h2>
+  <p class="hint">Para dejar tu máquina lista antes del sábado.</p>
+
+  <div class="q">
+    <label class="title">¿Qué harness de IA usas normalmente?</label>
+    <div class="radios">
+      <label><input type="radio" name="harness" value="opencode"> OpenCode</label>
+      <label><input type="radio" name="harness" value="claude"> Claude Code</label>
+      <label><input type="radio" name="harness" value="codex"> Codex</label>
+      <label><input type="radio" name="harness" value="cursor"> Cursor</label>
+      <label><input type="radio" name="harness" value="copilot"> Copilot</label>
+      <label><input type="radio" name="harness" value="ninguno"> Ninguno</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Qué modelo usas por defecto?</label>
+    <p class="why">Escribe el nombre tal cual aparece en tu herramienta. Si no sabes, di "no sé".</p>
+    <input type="text" id="modelo" placeholder="ej. Claude Sonnet, GPT-5.1, Gemini 3 Pro, DeepSeek…">
+  </div>
+
+  <div class="q">
+    <label class="title">¿Qué sistema operativo tienes?</label>
+    <div class="radios">
+      <label><input type="radio" name="so" value="windows"> Windows</label>
+      <label><input type="radio" name="so" value="mac"> macOS</label>
+      <label><input type="radio" name="so" value="linux"> Linux</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Nivel de inglés?</label>
+    <p class="why">El submission y los subtítulos del video van en inglés. Alguien tiene que poder revisarlo.</p>
+    <div class="radios">
+      <label><input type="radio" name="ingles" value="0"> Nada</label>
+      <label><input type="radio" name="ingles" value="1"> Leo pero no escribo</label>
+      <label><input type="radio" name="ingles" value="2"> Me defiendo</label>
+      <label><input type="radio" name="ingles" value="3"> Escribo con soltura</label>
+      <label><input type="radio" name="ingles" value="4"> Fluido</label>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+  <h2>06 · Disponibilidad</h2>
+  <p class="hint">El evento empieza el sábado a las 09:00 y el envío cierra el domingo a las 17:00.</p>
+
+  <div class="q">
+    <label class="title" for="horas">¿Cuántas horas seguidas puedes trabajar el sábado?</label>
+    <div class="scale">
+      <input type="range" id="horas" min="0" max="16" value="8">
+      <span class="val" id="horasOut">8 h</span>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Puedes quedarte de madrugada (00:00–06:00)?</label>
+    <div class="radios">
+      <label><input type="radio" name="noche" value="si"> Sí, completo</label>
+      <label><input type="radio" name="noche" value="turno"> Solo un turno</label>
+      <label><input type="radio" name="noche" value="no"> No</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Puedes llegar a las 08:30 del sábado?</label>
+    <div class="radios">
+      <label><input type="radio" name="llegada" value="si"> Sí</label>
+      <label><input type="radio" name="llegada" value="talvez"> Probablemente</label>
+      <label><input type="radio" name="llegada" value="no"> No</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Llevas laptop propia?</label>
+    <div class="radios">
+      <label><input type="radio" name="laptop" value="si"> Sí, con cargador</label>
+      <label><input type="radio" name="laptop" value="bateria"> Sí, pero poca batería</label>
+      <label><input type="radio" name="laptop" value="no"> No</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="title">¿Tienes datos móviles de respaldo?</label>
+    <div class="radios">
+      <label><input type="radio" name="datos" value="si"> Sí</label>
+      <label><input type="radio" name="datos" value="no"> No</label>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+  <h2>07 · Contexto y límites</h2>
+
+  <div class="q">
+    <label class="title" for="experiencia">¿Has participado en un hackathon antes?</label>
+    <textarea id="experiencia" placeholder="Cuántos, de qué tipo, qué tal te fue. Si es tu primero, dilo."></textarea>
+  </div>
+
+  <div class="q">
+    <label class="title" for="nohacer">¿Qué NO quieres hacer?</label>
+    <p class="why">Tan importante como lo que sí. Nadie va a ser feliz haciendo algo que odia durante 30 horas.</p>
+    <textarea id="nohacer" placeholder="ej. no quiero hablar en público, no quiero editar video, no quiero tocar CSS"></textarea>
+  </div>
+
+  <div class="q">
+    <label class="title" for="preocupa">¿Qué te preocupa del fin de semana?</label>
+    <p class="why">Se lee solo quien organiza. Sirve para prevenirlo ahora, no a las 3 de la mañana.</p>
+    <textarea id="preocupa" placeholder="tiempo, traslado, nivel técnico, hablar en inglés, lo que sea"></textarea>
+  </div>
+
+  <div class="q">
+    <label class="title" for="aporte">¿Qué aportas que no esté en la lista?</label>
+    <textarea id="aporte" placeholder="diseño de sonido, contactos, experiencia médica, saber hablar en público, cocinar…"></textarea>
+  </div>
+</section>
+
+<div class="actions">
+  <button type="submit">Calcular mi rol</button>
+  <button type="button" class="ghost" onclick="descargar()">Descargar JSON</button>
+  <button type="button" class="ghost" onclick="copiar()">Copiar resultado</button>
+</div>
+
+<!-- ============ RESULTADO ============ -->
+<section id="resumen" style="margin-top:18px">
+  <h2>Resultado</h2>
+  <div id="resultado"></div>
+</section>
+
+</form>
+
+<footer>
+  Equipo ROCKET · NASA Space Apps Challenge 2026 · Documento interno<br>
+  Este formulario no envía datos a ningún servidor. Todo se calcula en tu navegador.
+</footer>
+
+</div>
+
+<script>
+const DIMENSIONES = {
+  fe: "Frontend",
+  logic: "Lógica y código",
+  data: "Datos",
+  design: "Diseño",
+  story: "Narrativa y video",
+  platform: "Plataforma",
+  domain: "Salud / biología",
+  ai: "Herramientas de IA",
+  collab: "Git y colaboración"
+};
+
+const ETIQUETAS = ["Nunca", "Muy poco", "Algo", "Bastante", "Sólido"];
+
+// Pesos por rol: cómo se compone la nota de cada rol
+const ROLES = {
+  fe:       { nombre: "Frontend",           pesos: { fe: 3, design: 1.5, collab: 0.5, ai: 1, logic: 0.5 } },
+  logic:    { nombre: "Lógica y reglas",    pesos: { logic: 3, data: 1, domain: 1.5, collab: 1, ai: 0.5 } },
+  data:     { nombre: "Datos",              pesos: { data: 3, logic: 1, ai: 1, collab: 0.5, domain: 0.5 } },
+  design:   { nombre: "Diseño y video",     pesos: { design: 3, story: 2.5, fe: 1, ai: 0.5 } },
+  platform: { nombre: "Plataforma",         pesos: { platform: 3, collab: 1.5, logic: 0.5, ai: 1 } }
+};
+
+const CLAVES = Object.keys(ROLES);
+
+function leer() {
+  const datos = {};
+  document.querySelectorAll("[data-skill]").forEach(el => {
+    datos[el.id.replace("sk_", "")] = Number(el.value);
+  });
+  datos.horas = Number(document.getElementById("horas").value);
+
+  const rank = {};
+  document.querySelectorAll("[data-rank]").forEach(sel => {
+    rank[sel.dataset.rank] = Number(sel.value);
+  });
+
+  const herramientas = [];
+  document.querySelectorAll("[data-tool]:checked").forEach(el => herramientas.push(el.dataset.tool));
+
+  const radio = name => {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  };
+
+  return {
+    nombre: document.getElementById("nombre").value.trim(),
+    usuario: document.getElementById("usuario").value.trim(),
+    correo: document.getElementById("correo").value.trim(),
+    skills: datos,
+    rank,
+    herramientas,
+    harness: radio("harness"),
+    modelo: document.getElementById("modelo").value.trim(),
+    so: radio("so"),
+    ingles: radio("ingles"),
+    noche: radio("noche"),
+    llegada: radio("llegada"),
+    laptop: radio("laptop"),
+    datosMoviles: radio("datos"),
+    experiencia: document.getElementById("experiencia").value.trim(),
+    noHacer: document.getElementById("nohacer").value.trim(),
+    preocupa: document.getElementById("preocupa").value.trim(),
+    aporte: document.getElementById("aporte").value.trim(),
+    generado: new Date().toISOString()
+  };
+}
+
+function calcular(d) {
+  const maxPeso = {};
+  CLAVES.forEach(k => {
+    maxPeso[k] = Object.values(ROLES[k].pesos).reduce((a, b) => a + b * 4, 0);
+  });
+
+  const notas = {};
+  CLAVES.forEach(k => {
+    let suma = 0;
+    for (const [dim, peso] of Object.entries(ROLES[k].pesos)) {
+      suma += (d.skills[dim] || 0) * peso;
+    }
+    // bonus por preferencia declarada: 1º +30 %, 2º +18 %, 3º +8 %
+    const pref = d.rank[k] || 5;
+    const bonus = pref === 1 ? 0.30 : pref === 2 ? 0.18 : pref === 3 ? 0.08 : 0;
+    notas[k] = Math.min(100, Math.round((suma / maxPeso[k]) * 100 * (1 + bonus)));
+  });
+
+  const orden = [...CLAVES].sort((a, b) => notas[b] - notas[a]);
+  return { notas, orden };
+}
+
+function banderas(d) {
+  const b = [];
+  if ((d.skills.domain || 0) >= 3) b.push(["Revisor de sanidad", "Valida todos los textos clínicos", ""]);
+  if (Number(d.ingles) >= 3) b.push(["Textos en inglés", "Submission y subtítulos", ""]);
+  if ((d.skills.ai || 0) >= 3) b.push(["Soporte de agentes", "Skills, MCPs y harness del equipo", ""]);
+  if (Number(d.ingles) <= 1) b.push(["Necesita apoyo en inglés", "Sus textos pasan por revisión", "warn"]);
+  if (d.horas <= 5) b.push(["Disponibilidad baja", "Plan de 30 h: asignar alcance corto", "warn"]);
+  if (d.noche === "no") b.push(["Sin madrugada", "No entra al turno nocturno", "warn"]);
+  if (d.laptop === "no") b.push(["Sin laptop", "Trabajo sin build: docs, guion, contenido", "bad"]);
+  if (d.llegada === "no") b.push(["Llegada tarde", "Revisar logística con el Local Lead", "warn"]);
+  return b;
+}
+
+function render(d) {
+  const { notas, orden } = calcular(d);
+  const b = banderas(d);
+  const principal = orden[0];
+  const secundario = orden[1];
+
+  let html = `
+    <p style="margin-top:0"><strong>${d.nombre || "Sin nombre"}</strong> — rol principal sugerido:
+      <span class="tag">${ROLES[principal].nombre}</span>
+      &nbsp; · &nbsp;rol de respaldo: <span class="tag warn">${ROLES[secundario].nombre}</span>
+    </p>
+    <table>
+      <thead><tr><th>Rol</th><th style="width:80px">Afinidad</th><th>Perfil</th></tr></thead>
+      <tbody>`;
+
+  orden.forEach((k, i) => {
+    html += `<tr>
+      <td>${i === 0 ? "<strong>" + ROLES[k].nombre + "</strong>" : ROLES[k].nombre}</td>
+      <td>${notas[k]}</td>
+      <td><div class="scorebar"><div style="width:${notas[k]}%"></div></div></td>
+    </tr>`;
+  });
+  html += "</tbody></table>";
+
+  if (b.length) {
+    html += `<h3 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 10px">Notas del perfil</h3><ul style="margin:0;padding-left:18px">`;
+    b.forEach(([t, desc, cls]) => {
+      html += `<li style="margin-bottom:6px"><span class="tag ${cls}">${t}</span> — ${desc}</li>`;
+    });
+    html += "</ul>";
+  }
+
+  html += `
+    <h3 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 10px">Para guardar</h3>
+    <pre id="json">${JSON.stringify({ ...d, resultado: { notas, orden, principal, secundario } }, null, 1)}</pre>
+    <p style="color:var(--muted);font-size:.85rem">
+      Manda este JSON a Eduardo, o copia el resultado. No se envía solo.
+    </p>`;
+
+  document.getElementById("resultado").innerHTML = html;
+  document.getElementById("resumen").style.display = "block";
+  window.__resultado = { ...d, resultado: { notas, orden, principal, secundario } };
+  document.getElementById("resumen").scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("form").addEventListener("submit", ev => {
+  ev.preventDefault();
+  const d = leer();
+
+  const usados = Object.values(d.rank);
+  if (new Set(usados).size !== 5) {
+    alert("En el orden de preferencia de rol hay números repetidos. Usa 1, 2, 3, 4 y 5 una sola vez.");
+    return;
+  }
+  if (!d.harness) { alert("Falta indicar qué harness usas (o 'Ninguno')."); return; }
+  if (d.ingles === null) { alert("Falta indicar tu nivel de inglés."); return; }
+
+  render(d);
+});
+
+// sliders: etiqueta en vivo
+document.querySelectorAll("[data-skill]").forEach(el => {
+  const out = document.querySelector(`[data-out="${el.id}"]`);
+  const upd = () => { out.textContent = `${el.value} · ${ETIQUETAS[el.value]}`; };
+  el.addEventListener("input", upd); upd();
+});
+
+const horas = document.getElementById("horas");
+const horasOut = document.getElementById("horasOut");
+horas.addEventListener("input", () => { horasOut.textContent = horas.value + " h"; });
+
+function descargar() {
+  if (!window.__resultado) { alert("Primero pulsa 'Calcular mi rol'."); return; }
+  const nombre = (window.__resultado.nombre || "integrante").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const blob = new Blob([JSON.stringify(window.__resultado, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `perfil-${nombre}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function copiar() {
+  if (!window.__resultado) { alert("Primero pulsa 'Calcular mi rol'."); return; }
+  navigator.clipboard.writeText(JSON.stringify(window.__resultado, null, 2))
+    .then(() => alert("Copiado. Pégalo en el grupo o mándalo a Eduardo."))
+    .catch(() => alert("No se pudo copiar. Usa 'Descargar JSON'."));
+}
+</script>
+</body>
+</html>

@@ -106,6 +106,27 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 
 ---
 
+## 09 · Reparto de trabajo
+
+| Documento | Contenido |
+|---|---|
+| [`09-equipo/formulario-reparto.html`](09-equipo/formulario-reparto.html) | **Formulario que calcula el rol de cada integrante** (abrir en el navegador) |
+| [`09-equipo/02-formulario-reparto.md`](09-equipo/02-formulario-reparto.md) | Cómo se calcula el rol y cómo se interpreta |
+
+---
+
+## 10 · Entorno de trabajo
+
+| Documento | Contenido |
+|---|---|
+| [`10-entorno/01-mcp.md`](10-entorno/01-mcp.md) | Conectar MCPs por harness |
+| [`10-entorno/02-github.md`](10-entorno/02-github.md) | Conectar GitHub y trabajar sin romper nada |
+| [`10-entorno/03-browseract.md`](10-entorno/03-browseract.md) | BrowserAct en detalle, para agentes y personas |
+| [`10-entorno/04-harness-por-integrante.md`](10-entorno/04-harness-por-integrante.md) | Cada harness, su modelo y las mismas reglas |
+| [`../skills/README.md`](../skills/README.md) | Maletín de 24 skills y cómo instalarlas |
+
+---
+
 ## Convenciones
 
 - Idioma: español. Términos oficiales en inglés cuando corresponda.

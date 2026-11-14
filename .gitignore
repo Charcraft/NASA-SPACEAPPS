@@ -48,3 +48,6 @@ practicas-locales/
 *.jpg
 !docs/**/*.png
 !docs/**/*.jpg
+
+# Cache de exploracion de datos
+scripts/.osdr-humano.json

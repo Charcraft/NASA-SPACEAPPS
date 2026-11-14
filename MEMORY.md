@@ -58,12 +58,16 @@
 | D12 | **Cero imágenes generadas por IA** en el demo | 2026-11-13 | Evita la marca de agua obligatoria y el riesgo de branding de NASA |
 | D13 | README en **inglés** (`README.md`) y español en `README.es.md` | 2026-11-13 | Todo el material enlazado al submission debe estar en inglés |
 | D14 | **Dos ventanas de envío**: 16:30 para el pitch, 21:00–23:00 opcional | 2026-11-13 | El sitio permite reenviar; el Local Event cierra a las 17:00 |
+| D15 | Dataset elegido: **OSDR OSD-575** (panel metabólico de Inspiration4) | 2026-11-13 | Datos humanos reales de vuelo, con rangos de referencia incluidos y línea base pre-vuelo |
+| D16 | Maletín de **24 skills** versionado en el repo | 2026-11-13 | Que los agentes de todos carguen las mismas capacidades, sin depender de la máquina de cada quien |
+| D17 | Formulario de reparto **autoevaluado en HTML** | 2026-11-13 | Calcula el rol con pesos y preferencia; no depende de Google ni de internet |
 
 ---
 
 ## Pendientes abiertos
 
-- [ ] Crear el repositorio público y la licencia (MIT o Apache-2.0).
+- [ ] **El navegador del proyecto no tiene sesión de Google.** El import de perfil copió la sesión de Space Apps, no la de Google. Para usar Gmail/Drive/Forms hay que iniciar sesión con `remote-assist`.
+- [x] Crear el repositorio público y la licencia (MIT o Apache-2.0). ✅ `Charcraft/NASA-SPACEAPPS`
 - [ ] Invitar a los 5 integrantes al repo con permiso de escritura.
 - [ ] Reemplazar los `<github-user>` en `.github/CODEOWNERS`.
 - [ ] Crear el tablero de GitHub Projects con las 5 columnas y las etiquetas.
