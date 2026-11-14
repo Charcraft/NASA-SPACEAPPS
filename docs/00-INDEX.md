@@ -49,6 +49,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/07-pitch-7-slides.md`](03-plan/07-pitch-7-slides.md) | **Pitch presencial: 7 diapositivas en inglés, guion hablado y tiempos** |
 | [`03-plan/pitch-aegis.pptx`](03-plan/pitch-aegis.pptx) | **Presentación lista para proyectar** (generada con `scripts/generar-pitch.py`) |
 | [`03-plan/08-preguntas-jurado.md`](03-plan/08-preguntas-jurado.md) | **Documento de estudio: 40+ preguntas del jurado con respuestas y preguntas trampa** |
+| [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
 
 ---
 

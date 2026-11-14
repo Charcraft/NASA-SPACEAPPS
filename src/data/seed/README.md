@@ -66,6 +66,26 @@ El script descarga el CSV desde OSDR y regenera el JSON. Es idempotente.
 - Los puntos temporales son **discretos** (7 por tripulante), no una serie continua.
 - Los datos son de **vuelo orbital corto** (3 días), no de una misión a Marte.
 
+### Calidad del dato: 24 de 475 valores fuera de rango
+
+Del total de **475 valores** (17 indicadores × 4 tripulantes × 7 puntos), **24 caen fuera del rango de referencia que trae el propio dataset** (5.1 %).
+
+Ejemplos reales:
+
+| Tripulante | Punto | Analito | Valor | Rango |
+|---|---|---|---|---|
+| C003 | R+45 | Glucosa | 36 mg/dL | 65–99 |
+| C002 | R+45 | Glucosa | 44 mg/dL | 65–99 |
+| C004 | L-92 | Glucosa | 100 mg/dL | 65–99 |
+
+**Cómo tratarlo:**
+
+1. El script **reproduce exactamente** los valores publicados. No hay error de parseo: se verificó contra el CSV original.
+2. **No se interpretan clínicamente.** Una glucosa de 36 mg/dL en un astronauta sano no se explica con este dataset y no es nuestra tarea explicarla.
+3. **Se usan como argumento de producto:** si casi el 5 % de los valores de un dataset real cae fuera de rango, una app que muestre todo en verde está mintiendo. Eso es exactamente lo que justifica el semáforo.
+4. En el pitch: *"24 de 475 valores del propio dataset caen fuera de su rango de referencia. Nosotros no los interpretamos: los marcamos."*
+
+
 ### Citación
 
 ```
