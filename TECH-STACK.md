@@ -14,11 +14,76 @@
 | 5 personas, perfiles mixtos, sin especialista médico | Stack con curva de aprendizaje baja y mucha documentación. |
 | Jurado ve un **video de 1 minuto** y un repo público | El repo tiene que ser legible; el video se graba desde la app corriendo. |
 | Debe ser open source y verificable | Sin servicios de pago obligatorios para que la app funcione. |
-| Necesita gráficas, mapa corporal y datos reales | Librería de charts + SVG interactivo. |
+| Necesita gráficas, mapa corporal y datos reales | Librería de charts + visor 3D por WebGL con respaldo SVG. |
 
 ---
 
-## 2. Stack principal
+## 1.1 · Lenguajes por parte del software
+
+> **Medido sobre el código real del repositorio el 2026-11-14**, no sobre el plan.
+> Conteo sin `node_modules`, `.git`, `.next` ni `skills/`.
+
+### Lo que usa cada parte
+
+| Parte del software | Lenguaje | Dónde vive | Tamaño |
+|---|---|---|---|
+| **Interfaz** — pantallas, componentes | **TSX** (React 19) | `src/app/`, `src/components/` | 18 archivos · 5 416 líneas |
+| **Lógica clínica** — umbrales y triage | **TypeScript** puro | `src/lib/rules/` | dentro de las 3 082 líneas de `.ts` |
+| **Estado global** | **TypeScript** (Zustand) | `src/lib/store/` | — |
+| **Persistencia offline** | **TypeScript** + Dexie (IndexedDB) | `src/lib/db/` | — |
+| **Cliente de datos NASA** | **TypeScript** | `src/lib/osdr/` | — |
+| **Asistente de IA** | **TypeScript** | `src/lib/ai/` | — |
+| **Rutas de servidor** | **TypeScript** (Next route handlers) | `src/app/api/` | 5 rutas |
+| **Modelo 3D del cuerpo** | **TypeScript + three.js** (WebGL) | `src/components/BodyModel3D.tsx` | — |
+| **Estilos** | **CSS** (Tailwind v4) | `src/app/globals.css` | 16 líneas |
+| **Datos y configuración** | **JSON** | `src/data/` | 9 archivos · 5 175 líneas |
+| **Pipeline de datos** | **Python** | `scripts/*.py` | 8 archivos · 783 líneas |
+| **Plugin de Figma** | **JavaScript + HTML** | `design/figma-plugin/` | 2 archivos JS · 995 líneas |
+| **Automatización del equipo** | **PowerShell / Bash** | `scripts/*.ps1`, `*.sh` | 12 scripts · 1 076 líneas |
+| **Mockups y assets** | **SVG** | `design/pantallas/`, `assets/` | 13 archivos · 1 580 líneas |
+| **Build y configuración** | **MJS / JSON** | `postcss.config.mjs`, `next.config` | 3 archivos · 283 líneas |
+| **Documentación** | **Markdown** | `docs/`, `team/`, raíz | 121 archivos |
+
+### Totales por lenguaje
+
+| Lenguaje | Archivos | Líneas |
+|---|---|---|
+| **TSX** | 18 | 5 416 |
+| **TypeScript** | 17 | 3 082 |
+| **JSON** | 9 | 5 175 |
+| **SVG** | 13 | 1 580 |
+| **JavaScript** | 2 | 995 |
+| **HTML** | 4 | 912 |
+| **Python** | 8 | 783 |
+| **PowerShell** | 7 | 692 |
+| **Bash** | 5 | 384 |
+| **MJS** | 3 | 283 |
+| **CSS** | 1 | 16 |
+
+### Lo que NO usamos
+
+| Lenguaje / tecnología | Por qué |
+|---|---|
+| **SQL / base de datos** | No hay backend persistente: todo vive en IndexedDB |
+| **Java, Kotlin, C#, Swift** | No hay app nativa; es una PWA |
+| **GLSL escrito a mano** | three.js genera los shaders; no tocamos shaders propios |
+| **PHP, Ruby, Go** | Fuera del stack y sin necesidad |
+
+### Desviaciones del stack congelado
+
+El `TECH-STACK.md` original decía "sin three.js" y "sin backend". La realidad cambió:
+
+| Se planeó | Se hizo | Motivo |
+|---|---|---|
+| Sin three.js | **three.js instalado** | El modelo 3D del cuerpo resultó más demostrable que el SVG |
+| Sin backend | **5 rutas de API** | Proxy para OSDR, TTS y el asistente; no son una base de datos, son funciones sin estado |
+| Solo TypeScript | **Python para datos y tooling** | El pipeline de OSDR y la generación del pitch son más simples en Python |
+
+> Toda desviación está registrada aquí y en `MEMORY.md`. Si aparece otra, se anota igual.
+
+---
+
+## 2 · Stack principal
 
 ### Frontend
 | Pieza | Elección | Motivo |
@@ -27,7 +92,7 @@
 | UI | **Tailwind CSS v4** | Velocidad; sin archivos CSS que mantener. |
 | Componentes | **shadcn/ui** (copiar/pegar, no dependencia) | Accesibles y personalizables sin pelear con estilos. |
 | Gráficas | **Recharts** | Simple, declarativo, suficiente para tendencias. |
-| Mapa corporal | **SVG inline** dibujado a mano + `onClick` por región | Cero dependencias nuevas; control total del estilo. |
+| Mapa corporal | **Three.js** con `anatomy-male.glb` + `MeshoptDecoder`, piel translúcida tipo rayos X, picking por órgano. El SVG de `BodyMap.tsx` queda como respaldo sin WebGL. | Es el único modelo CC BY 4.0 que cubre los 6 `meshNodeId`. La piel opaca del cuerpo masculino es de baja calidad, así que se dibuja en rayos X. Ver D27. |
 | Estado | **Zustand** | 3 líneas de boilerplate frente a Redux. |
 | Formularios | **react-hook-form + zod** | Validación de rangos fisiológicos en el cliente. |
 
@@ -140,7 +205,7 @@ type Evaluacion = {
 | Backend con base de datos | 30 h no dan; IndexedDB cumple. Se declara como limitación honesta. |
 | Autenticación / multiusuario | No aporta al jurado y se come 6 horas. |
 | LLM local en navegador (WebLLM) | Descarga de cientos de MB, lento en el venue. |
-| Three.js / 3D del cuerpo | El SVG 2D se ve mejor en un video de 1 min y se hace en 2 h. |
+| ~~Three.js / 3D del cuerpo~~ | **Revisado el 2026-11-14:** se descartó por tiempo, pero la decisión D25 lo volvió el centro de `/cuerpo`. Ya está implementado en `BodyModel3D.tsx`. |
 | React Native / móvil nativo | El jurado lo ve en video; web responsive basta. |
 | Kubernetes, Docker Compose, microservicios | Ruido sin valor para este entregable. |
 
