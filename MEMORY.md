@@ -97,6 +97,11 @@
 
 ## Bitácora
 
+### 2026-11-14 — Pitch presencial
+- La charla del Local Event fijó: **7 diapositivas máximo, en inglés**, con la estructura problema/usuario → solución → datos → demostración → evidencia y limitaciones → cierre.
+- Se creó `docs/03-plan/07-pitch-7-slides.md` (guion hablado, tiempos, preguntas del jurado) y la presentación `pitch-aegis.pptx`, generada con `scripts/generar-pitch.py`.
+- Verificado visualmente: 7 diapositivas, sin desbordes.
+
 ### 2026-11-13 — Saneamiento de codificación y auditoría previa al kickoff
 - Se detectó y resolvió el problema de mojibake (Windows-1252 vs UTF-8) en los 10 archivos de perfiles y bitácoras de `team/`.
 - Se corrigió `scripts/setup-integrante.ps1`, `scripts/instalar-todo.ps1` e `instalar-todo.sh` para asegurar lectura y escritura en UTF-8 sin BOM y reemplazo de `{{NOMBRE}}`.
