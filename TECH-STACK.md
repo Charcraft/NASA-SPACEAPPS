@@ -51,6 +51,7 @@
 | Pieza | Elección |
 |---|---|
 | Runtime | Node.js 22 LTS |
+| Lenguaje | **TypeScript 6** (fijado). Next 15 no soporta el compilador nativo de TS 7: el build falla pidiendo TS 6. |
 | Gestor de paquetes | **pnpm** |
 | Lint/format | ESLint + Prettier (config compartida) |
 | Deploy | **Vercel** (gratis, un comando) + export estático como respaldo |

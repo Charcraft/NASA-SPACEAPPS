@@ -19,7 +19,7 @@ El brief marca como `[YA CREADO]` varios archivos que **no existen** en el repos
 | `src/lib/rules/thresholds.ts` | No existe |
 | `src/lib/rules/triage.ts` | No existe |
 | `src/types/index.ts` | No existe |
-| Scaffold (`package.json`, `tsconfig.json`, `next.config.ts`) | No existe |
+| Scaffold (`package.json`, `tsconfig.json`, `next.config.mjs`) | No existe |
 
 `[VERIFICADO]` — Solo existe `src/data/seed/osdr-inspiration4-cmp.json`.
 
@@ -37,7 +37,7 @@ Además, el seed tiene **17 indicadores**, no 19 como dice el brief; sí coincid
 | `src/lib/model3d-bridge/contracts.ts` | Back 1 |
 | `src/app/api/telemetry/route.ts` | Back 1 |
 | `src/app/api/parameters/route.ts` | Back 1 |
-| `package.json`, `tsconfig.json`, `next.config.ts` | Back 1 |
+| `package.json`, `tsconfig.json`, `next.config.mjs` | Back 1 |
 | `src/lib/osdr/client.ts` | Back 2 |
 | `src/app/api/osdr/route.ts` | Back 2 |
 | `src/lib/db/dexie.ts` | Back 2 |

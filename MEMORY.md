@@ -73,6 +73,7 @@
 | D27 | **`repositories.ts` es el único punto de escritura en Dexie**; Back 1 solo emite por `TelemetrySink` | 2026-11-14 | Evita doble escritura y filas duplicadas en la demo |
 | D28 | Contratos compartidos (`types/index.ts`) **congelados a H2**; cambios solo por PR | 2026-11-14 | Un contrato que cambia en vivo rompe el build y la demo |
 | D29 | **Roles backend cerrados:** Ernesto = Back 1, Angel = Back 2 | 2026-11-14 | Elimina la ambigüedad que dejó el brief y evita dos planes para el mismo frente |
+| D30 | **TypeScript fijado en 6.x y `next.config.mjs`** en lugar de `next.config.ts` | 2026-11-14 | Next 15 falla con el compilador nativo de TS 7 (`fileExists` undefined) y rechaza el build: "TypeScript 7.0.2 is not supported". TS 6 es la versión que Next recomienda |
 
 ---
 
@@ -109,6 +110,14 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Scaffold de Back 1
+
+- Next 15.5 + React 19 + Tailwind v4 + Dexie 4 + Zod 4 + Zustand 5 instalados con pnpm.
+- **Error corregido:** `pnpm typecheck` fallaba con `TS2882` por importar `globals.css`; se añadió `src/types/assets.d.ts`.
+- **Error corregido:** `next build` rompía al cargar `next.config.ts` con TypeScript 7 (`Cannot read properties of undefined (reading 'fileExists')`). Se cambió a `next.config.mjs` y se fijó TypeScript 6.
+- Verificado: `pnpm typecheck` limpio y `pnpm build` genera 4 rutas; primer load 102 kB (límite del stack: 3 MB).
+- Los 4 contratos compartidos quedaron en `src/types/index.ts` (congelados a H2).
 
 ### 2026-11-14 — Revisión y corrección del plan de Back 2
 
