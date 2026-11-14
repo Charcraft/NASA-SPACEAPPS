@@ -8,9 +8,9 @@
 
 Frecuencia cardíaca 
 
-Frec respiratoria
+Frecuencia respiratoria
 
-Saturaron de oxígeno 
+Saturación de oxígeno 
 
 Tensión arterial 
 

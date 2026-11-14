@@ -86,7 +86,9 @@ else {
         $origen = Join-Path $plantilla $archivo
         $destino = Join-Path $carpeta $archivo
         if (Test-Path $origen) {
-            (Get-Content $origen -Raw) -replace '\{\{USUARIO\}\}', $Usuario | Set-Content $destino -Encoding UTF8
+            $txt = (Get-Content $origen -Raw -Encoding UTF8) -replace '\{\{USUARIO\}\}', $Usuario
+            $txt = $txt -replace '\{\{NOMBRE\}\}', $Usuario
+            [System.IO.File]::WriteAllText($destino, $txt, [System.Text.UTF8Encoding]::new($false))
         }
     }
     Write-Host ("  CREADA team\{0}" -f $Usuario) -ForegroundColor Green

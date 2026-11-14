@@ -104,17 +104,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-006 · Auditoría y saneamiento de textos rotos (mojibake) e integridad
+- **Fecha/hora:** 2026-11-13 21:40
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA (Gemini 3.8 Flash High)
+- **Categoría:** documentación / código
+- **Prompt usado:** "revisa los textos rotos y arregelalos, de paso tambien lee el proyecto y analizalo"
+- **Propósito:** auditar y solucionar problemas de codificación de caracteres, enlaces rotos e integridad general antes del kickoff.
+- **Resultado obtenido:** reparación de 10 archivos en `team/` con mojibake por Windows-1252, corrección de `scripts/setup-integrante.ps1`, corrección de enlaces y tipografía en `skills/` y `context.md`.
+- **Validación:** comprobación automatizada de caracteres, `git diff` y ejecución de `.\scripts\verificar-docs.ps1` (0 errores).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
-| Documentación | 1 | 1 |
-| Arquitectura / código | 1 | 0 |
+| Documentación | 2 | 2 |
+| Arquitectura / código | 2 | 1 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **5** | **4** |
+| **Total** | **7** | **6** |
 
 ---
 

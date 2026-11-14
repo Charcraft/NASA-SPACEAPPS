@@ -61,12 +61,14 @@
 | D15 | Dataset elegido: **OSDR OSD-575** (panel metabólico de Inspiration4) | 2026-11-13 | Datos humanos reales de vuelo, con rangos de referencia incluidos y línea base pre-vuelo |
 | D16 | Maletín de **24 skills** versionado en el repo | 2026-11-13 | Que los agentes de todos carguen las mismas capacidades, sin depender de la máquina de cada quien |
 | D17 | Formulario de reparto **autoevaluado en HTML** | 2026-11-13 | Calcula el rol con pesos y preferencia; no depende de Google ni de internet |
+| D18 | **Google Form publicado** para recolectar las respuestas | 2026-11-13 | Es lo más fácil de compartir con 4 personas; el cálculo se hace a mano |
+| D19 | El navegador se guarda como **NASA-BROWSER** con sesión de Google activa | 2026-11-13 | Es el navegador por defecto para cualquier búsqueda o trámite del proyecto |
 
 ---
 
 ## Pendientes abiertos
 
-- [ ] **El navegador del proyecto no tiene sesión de Google.** El import de perfil copió la sesión de Space Apps, no la de Google. Para usar Gmail/Drive/Forms hay que iniciar sesión con `remote-assist`.
+- [x] **Sesión de Google activa en NASA-BROWSER** (2026-11-13, la persona inició sesión manualmente).
 - [x] Crear el repositorio público y la licencia (MIT o Apache-2.0). ✅ `Charcraft/NASA-SPACEAPPS`
 - [ ] Invitar a los 5 integrantes al repo con permiso de escritura.
 - [ ] Reemplazar los `<github-user>` en `.github/CODEOWNERS`.
@@ -91,6 +93,12 @@
 
 ## Bitácora
 
+### 2026-11-13 — Saneamiento de codificación y auditoría previa al kickoff
+- Se detectó y resolvió el problema de mojibake (Windows-1252 vs UTF-8) en los 10 archivos de perfiles y bitácoras de `team/`.
+- Se corrigió `scripts/setup-integrante.ps1` para asegurar lectura y escritura en UTF-8 sin BOM y reemplazo de `{{NOMBRE}}`.
+- Se revisaron enlaces y referencias del repositorio; verificación con `verificar-docs.ps1` al 100 %.
+- Se registró la intervención en `docs/05-ia/03-registro-uso-ia.md` (IA-006).
+
 ### 2026-11-13 — Recursos oficiales y adaptación del plan
 - Se revisó la pestaña Resources del reto: **3 enlaces de NASA HRP + 2 de CSA, ningún dataset**.
 - Se leyó el Judging & Awards Guide: 5 criterios de 1 a 5 y **10 premios globales** (antes creíamos 6).
@@ -110,7 +118,8 @@
 - También valida el **local-first**: NASA almacena y analiza datos esenciales a bordo antes de transmitir.
 - Se retiró un PNG del repositorio (`cur.png` se queda en disco, fuera de git).
 
-### 2026-11-06 — Sesión de arranque- Investigación del reto, HRP, 5 hazards, reglas del evento, premios y datasets disponibles.
+### 2026-11-06 — Sesión de arranque
+- Investigación del reto, HRP, 5 hazards, reglas del evento, premios y datasets disponibles.
 - Se identificó el Local Event, el equipo, el límite de 5 y **el horario real de entrega (17:00)**.
 - Se creó el navegador aislado `nasa-spaceapps-2026` con el perfil `charcraftycarlos@gmail.com`.
 - Se generó la estructura documental completa (ver `docs/00-INDEX.md`).

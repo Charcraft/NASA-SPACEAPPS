@@ -85,6 +85,23 @@ El formulario detecta condiciones que cambian la asignación:
 
 ## Versión Google Form
 
-El HTML es la versión canónica porque calcula el puntaje. Si el equipo prefiere un Google Form para responder desde el celular, se puede replicar con las mismas preguntas — pero **el cálculo se pierde** y hay que hacerlo a mano.
+**Formulario publicado:** https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
 
-Recomendación: usar el HTML.
+- Cuenta: `charcraftycarlos@gmail.com`
+- Estado: publicado, cualquiera con el enlace puede responder (verificado sin cookies)
+- Editor: https://docs.google.com/forms/d/1TBsm5nE8IC7l4qWs9HduQ2CpmEWeLWs7suP4l6Q7lCM/edit
+- Respuestas: pestaña **Respuestas** del editor, o vincular a una hoja de cálculo
+
+### Diferencias con la versión HTML
+
+| | HTML | Google Form |
+|---|---|---|
+| Calcula el rol | ✅ Automático | ❌ Manual |
+| Exporta JSON | ✅ | ❌ |
+| Se responde desde el celular | 🟡 Hay que enviar el archivo | ✅ Link directo |
+| Funciona sin internet | ✅ | ❌ |
+
+**Recomendación:** usar el Google Form para recolectar (es lo más fácil de compartir) y calcular el rol a mano con la tabla de pesos de este documento, o pasar las respuestas al HTML.
+
+> Nota conocida: la última pregunta quedó con una errata menor ("que not este" en lugar de "que no este"). No afecta la respuesta.
+

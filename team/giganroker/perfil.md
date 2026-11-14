@@ -1,6 +1,6 @@
-﻿# Perfil de Carlos Alberto Lázaro Aguilar
+# Perfil de Carlos Alberto Lázaro Aguilar
 
-> **Llena esto antes del 9 de noviembre.** Es lo que permite repartir el trabajo con datos y no con intuiciÃ³n.
+> **Llena esto antes del 9 de noviembre.** Es lo que permite repartir el trabajo con datos y no con intuición.
 > Tiempo estimado: 10 minutos. No hay respuestas correctas ni incorrectas.
 
 ---
@@ -12,11 +12,11 @@
 | Nombre | Carlos Alberto Lázaro Aguilar |
 | Usuario de GitHub | giganroker |
 | Usuario de Space Apps | giganroker |
-| Zona horaria | AmÃ©rica/Ciudad de MÃ©xico (UTCâˆ’6) |
+| Zona horaria | América/Ciudad de México (UTC−6) |
 
 ---
 
-## 1 Â· Â¿QuÃ© lenguajes o herramientas manejas con comodidad?
+## 1 · ¿Qué lenguajes o herramientas manejas con comodidad?
 
 _Marca lo que puedas usar sin buscar en Google cada 5 minutos._
 
@@ -28,16 +28,16 @@ _Marca lo que puedas usar sin buscar en Google cada 5 minutos._
 - [ ] C# / .NET
 - [ ] SQL / bases de datos
 - [ ] Figma
-- [ ] EdiciÃ³n de video (CapCut, Premiere, DaVinci)
-- [ ] Excel / hojas de cÃ¡lculo
+- [ ] Edición de video (CapCut, Premiere, DaVinci)
+- [ ] Excel / hojas de cálculo
 - [ ] Git (ramas, PRs, conflictos)
 - [ ] Otro: ___________
 
 ---
 
-## 2 Â· Â¿QuÃ© has construido antes?
+## 2 · ¿Qué has construido antes?
 
-_Un proyecto de clase, un trabajo, algo personal. Con una lÃ­nea basta._
+_Un proyecto de clase, un trabajo, algo personal. Con una línea basta._
 
 ```
 -
@@ -46,31 +46,31 @@ _Un proyecto de clase, un trabajo, algo personal. Con una lÃ­nea basta._
 
 ---
 
-## 3 Â· Â¿En quÃ© rol te sientes mÃ¡s Ãºtil?
+## 3 · ¿En qué rol te sientes más útil?
 
-_Ordena del 1 (mÃ¡s cÃ³modo) al 6 (menos cÃ³modo)._
+_Ordena del 1 (más cómodo) al 6 (menos cómodo)._
 
 | Rol | Orden |
 |---|---|
 | Frontend / interfaz | |
-| Datos / anÃ¡lisis | |
-| LÃ³gica / reglas del sistema | |
-| DiseÃ±o visual | |
+| Datos / análisis | |
+| Lógica / reglas del sistema | |
+| Diseño visual | |
 | Video / narrativa | |
-| DocumentaciÃ³n / investigaciÃ³n | |
+| Documentación / investigación | |
 
 ---
 
-## 4 Â· Â¿Tienes experiencia en salud, biologÃ­a o medicina?
+## 4 · ¿Tienes experiencia en salud, biología o medicina?
 
-_Aunque sea informal: primeros auxilios, cursos, familiares en el Ã¡rea, lectura por interÃ©s._
+_Aunque sea informal: primeros auxilios, cursos, familiares en el área, lectura por interés._
 
 ```
 ```
 
 ---
 
-## 5 Â· Â¿QuÃ© herramienta de IA usas normalmente?
+## 5 · ¿Qué herramienta de IA usas normalmente?
 
 - [ ] OpenCode
 - [ ] Claude Code
@@ -82,22 +82,22 @@ _Aunque sea informal: primeros auxilios, cursos, familiares en el Ã¡rea, lectu
 
 ---
 
-## 6 Â· Disponibilidad
+## 6 · Disponibilidad
 
 | Pregunta | Respuesta |
 |---|---|
-| Â¿Hasta quÃ© hora puedes trabajar el sÃ¡bado? | |
-| Â¿Puedes quedarte de madrugada? | |
-| Â¿Tienes laptop propia? | |
-| Â¿CuÃ¡nta baterÃ­a aguanta sin cargador? | |
-| Â¿Tienes plan de datos mÃ³viles? | |
-| Â¿Puedes llegar a las 08:30 del sÃ¡bado? | |
+| ¿Hasta qué hora puedes trabajar el sábado? | |
+| ¿Puedes quedarte de madrugada? | |
+| ¿Tienes laptop propia? | |
+| ¿Cuánta batería aguanta sin cargador? | |
+| ¿Tienes plan de datos móviles? | |
+| ¿Puedes llegar a las 08:30 del sábado? | |
 
 ---
 
-## 7 Â· Â¿Hay algo que te preocupe del hackathon?
+## 7 · ¿Hay algo que te preocupe del hackathon?
 
-_Es en serio. Si algo te preocupa ahora, es mejor saberlo hoy que el sÃ¡bado a las 2 de la maÃ±ana._
+_Es en serio. Si algo te preocupa ahora, es mejor saberlo hoy que el sábado a las 2 de la mañana._
 
 ```
 ```
@@ -106,6 +106,6 @@ _Es en serio. Si algo te preocupa ahora, es mejor saberlo hoy que el sÃ¡bado a
 
 ## Para el Product Lead
 
-- **Rol asignado:** _(se llena despuÃ©s de la consolidaciÃ³n)_
-- **Respaldo:** _(se llena despuÃ©s de la consolidaciÃ³n)_
+- **Rol asignado:** _(se llena después de la consolidación)_
+- **Respaldo:** _(se llena después de la consolidación)_
 - **Notas:**

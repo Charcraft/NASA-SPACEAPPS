@@ -1,14 +1,14 @@
-﻿# BitÃ¡cora de Angel Marco Martínez Cobos
+# Bitácora de Angel Marco Martínez Cobos
 
-> **Append-only.** Solo tÃº escribes aquÃ­. AÃ±ade un bloque al final cada vez que cierras una sesiÃ³n de trabajo.
-> Sirve para tres cosas: que no pierdas el hilo, que el equipo sepa en quÃ© vas, y que el domingo puedas reconstruir quÃ© pasÃ³.
+> **Append-only.** Solo tú escribes aquí. Añade un bloque al final cada vez que cierras una sesión de trabajo.
+> Sirve para tres cosas: que no pierdas el hilo, que el equipo sepa en qué vas, y que el domingo puedas reconstruir qué pasó.
 
 ---
 
 ## Formato
 
 ```
-## YYYY-MM-DD Â· HH:MM â€” TÃ­tulo corto
+## YYYY-MM-DD · HH:MM — Título corto
 
 **Hice:** ...
 **Siguiente:** ...
@@ -19,13 +19,13 @@
 
 ---
 
-## Ejemplo (bÃ³rralo cuando escribas el tuyo)
+## Ejemplo (bórralo cuando escribas el tuyo)
 
 ```
-## 2026-11-10 Â· 18:30 â€” Primer dataset normalizado
+## 2026-11-10 · 18:30 — Primer dataset normalizado
 
-**Hice:** DescarguÃ© la serie de glucosa de OSDR y la dejÃ© en src/data/seed/glucosa.json
-**Siguiente:** Escribir el script de normalizaciÃ³n para que sea reproducible
+**Hice:** Descargué la serie de glucosa de OSDR y la dejé en src/data/seed/glucosa.json
+**Siguiente:** Escribir el script de normalización para que sea reproducible
 **Bloqueos:** ninguna
 **Issue(s):** #8
 **Rama:** data/cxrlosmp/osdr-glucosa
@@ -35,4 +35,4 @@
 
 ## Registro
 
-_(empieza aquÃ­)_
+_(empieza aquí)_
