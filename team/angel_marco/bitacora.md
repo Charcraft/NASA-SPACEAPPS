@@ -50,3 +50,11 @@
 **Bloqueos:** ninguno
 **Issue(s):** pendiente de crear
 **Rama:** docs/angel_marco/plan-backend
+
+## 2026-11-14 · 15:53 — PR abierto para revisión
+
+**Hice:** Subí la rama `docs/angel_marco/plan-backend` y abrí el **PR #1**: https://github.com/Charcraft/NASA-SPACEAPPS/pull/1. Asigné como revisores a **Pineda (`@Charcraft`)** y **Ernesto (`@ErnestoMG01`)**. Para poder subir, acepté la invitación pendiente del repo con permiso `write`.
+**Siguiente:** Resolver comentarios y, con su aprobación, mergear.
+**Bloqueos:** ninguno (red intermitente al subir).
+**Issue(s):** pendiente de crear
+**Rama:** docs/angel_marco/plan-backend
