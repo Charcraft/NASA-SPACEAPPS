@@ -34,7 +34,7 @@ team/
 
 | Carpeta | Space Apps | GitHub | Rol |
 |---|---|---|---|
-| `danny1510/` | @danny1510 | `@eduardovd2007` | Product Lead · Video · Submission |
+| `danny1510/` | @danny1510 | `@eduardovd2007-sys` | Product Lead · Video · Submission |
 | `angel_marco/` | @angel_marco | `@angelcobos380-art` | Lógica y reglas · Tests |
 | `cxrlosmp/` | @cxrlosmp | `@Charcraft` | Frontend Lead · IA |
 | `giganroker/` | @giganroker | `@carlosaalbertolazaro` | Datos · QA de datos |

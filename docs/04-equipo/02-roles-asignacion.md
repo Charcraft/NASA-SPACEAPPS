@@ -17,7 +17,7 @@ Con 5 personas y ~30 horas no hay especialistas. La regla:
 
 | # | Persona | GitHub | Rol primario | Respaldo |
 |---|---|---|---|---|
-| 1 | **Eduardo** | `@eduardovd2007` | **Product Lead · Video · Submission** | Pineda |
+| 1 | **Eduardo** | `@eduardovd2007-sys` | **Product Lead · Video · Submission** | Pineda |
 | 2 | **Pineda** | `@Charcraft` | **Frontend Lead · IA** | Eduardo |
 | 3 | **Angel Marco** | `@angelcobos380-art` | **Lógica y reglas · Tests** | Pineda |
 | 4 | **Carlos Alberto** | `@carlosaalbertolazaro` | **Datos · QA de datos** | Angel Marco |

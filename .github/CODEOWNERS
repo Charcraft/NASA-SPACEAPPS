@@ -14,12 +14,12 @@
 /docs/05-ia/                            @Charcraft
 
 # --- Plan y alcance ---
-/docs/03-plan/                          @eduardovd2007 @Charcraft
+/docs/03-plan/                          @eduardovd2007-sys @Charcraft
 
 # --- Reglas de trabajo ---
-/AGENTS.md                              @Charcraft @eduardovd2007
+/AGENTS.md                              @Charcraft @eduardovd2007-sys
 /TECH-STACK.md                          @Charcraft
-/MEMORY.md                              @eduardovd2007 @Charcraft
+/MEMORY.md                              @eduardovd2007-sys @Charcraft
 
 # --- Código ---
 # /src/lib/rules/                       @angelcobos380-art @Charcraft
@@ -29,7 +29,7 @@
 # /scripts/                             @ErnestoMG01 @carlosaalbertolazaro
 
 # --- Carpetas personales: cada quien revisa la suya ---
-/team/danny1510/                        @eduardovd2007
+/team/danny1510/                        @eduardovd2007-sys
 /team/angel_marco/                      @angelcobos380-art
 /team/cxrlosmp/                         @Charcraft
 /team/giganroker/                       @carlosaalbertolazaro

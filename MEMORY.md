@@ -70,13 +70,14 @@
 | D24 | El maquetado se entrega como **plugin de Figma** en `design/`, no como SVG suelto | 2026-11-14 | El MCP de Figma es de solo lectura y la API REST no crea nodos; el plugin deja capas nativas y funciona en cualquier archivo |
 | D25 | **Modelo 3D del cuerpo: `open-anatomy-3d`** (GLB CC BY 4.0, sin share-alike) | 2026-11-14 | 147 estructuras con nombre en el nodo glTF, hombre y mujer, 7.6 MB. Es el único que cubre los 6 `meshNodeId` del contrato **sin** contaminar el repo abierto con una licencia NC. Z-Anatomy queda solo como atlas de consulta. Ver `docs/02-investigacion/06-modelos-3d-anatomia.md` |
 | D25 | La escena de demo es **C003 en R+1, glucosa 103 mg/dL** | 2026-11-14 | Es el único valor de glucosa realmente fuera de rango en R+1; los 102/89 anteriores no existen en OSD-575 |
+| D26 | **Agente asistente AURA híbrido con grounding estricto, memoria en IndexedDB, voz Web Speech API y rostro HUD en SVG** | 2026-11-14 | Garantiza 0 alucinación numérica (validador post-generación + fallback determinista `< 2.5 s`), recuerda a cada astronauta (`C001`–`C004`), pide ayuda interna al CMO y cumple D12 (cero imágenes raster generadas por IA). Ver `docs/05-ia/05-arquitectura-agente-aura.md` |
 
 ---
 
 ## Pendientes abiertos
 
-- [ ] **Eduardo: su usuario de GitHub (`eduardovd2007`) no existe (404).** Confirmar el real o crear cuenta; sin eso no se le puede invitar.
-- [ ] Angel, Carlos Alberto y Ernesto: **aceptar la invitación** al repo (enviada 2026-11-14, permiso write).
+- [ ] **Eduardo: aceptar la invitación** al repo (enviada a `@eduardovd2007-sys`, permiso write). Su usuario del formulario (`eduardovd2007`) no existía; el real se encontró por búsqueda.
+- [x] Angel, Carlos Alberto y Ernesto **aceptaron** la invitación (2026-11-14).
 - [x] **Sesión de Google activa en NASA-BROWSER** (2026-11-13, la persona inició sesión manualmente).
 - [x] Crear el repositorio público y la licencia (MIT o Apache-2.0). ✅ `Charcraft/NASA-SPACEAPPS`
 - [ ] Invitar a los 5 integrantes al repo con permiso de escritura.
@@ -104,6 +105,18 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Verificación de los modelos 3D abriéndolos en Blender
+- Pineda pidió explícitamente **abrir los modelos en Blender** antes de programar el visor. Hecho con Blender 5.2.0 LTS vía MCP.
+- **La importación directa funcionó.** `EXT_meshopt_compression` y `KHR_mesh_quantization` no bloquean a Blender 5.2, que los decodifica de forma nativa. La sospecha previa de que habría que descomprimir a mano era **falsa**.
+- **Geometría medida:** 128 mallas / 986,873 vértices / 1,025,739 triángulos el masculino; 133 mallas el femenino. `materials = 0` en ambos, tal como decía el JSON.
+- **Escala real y correcta:** 0.666 × 0.292 × **1.719 m** con los pies en `z = 0`. No hay que reescalar ni recentrar.
+- **Anatomía comprobada sobre la geometría, no a ojo:** corazón en `z = 1.305` y `x = +0.022` (desviado a la izquierda, donde debe estar), 11,611 vértices; pulmones 1.26–1.32; hígado 1.184; riñones ~1.10; cerebro 1.65. Los renders de verificación confirman hígado a la derecha del paciente, estómago a la izquierda, intestinos en la pelvis.
+- **Hallazgo que afecta a la UI:** `skin` es una malla de 20,846 vértices **sin detalle facial**, y los ojos (`eye_l`, `eye_r`) viven dentro de `organs`. Mostrar sólo la piel deja la cara **con cuencas vacías**. La solución es mantener los ojos visibles siempre, y así se verificó con un render de la cabeza.
+- **Hallazgo que afecta al código:** hay **dos nodos llamados `skin`** en el glTF (un grupo con 1 hijo y la malla dentro). `getObjectByName('skin')` devuelve el grupo. Blender los separa como `skin` y `skin.001`, pero three.js **no renombra nada**: el índice del catálogo no puede asumir nombres únicos.
+- **Corrección al inventario:** el femenino no trae `fallopian_tube_l/r` sino una sola malla `fallopian_tubes`, y tampoco `prostate` ni `reproductive`. Corregido en `public/models/README.md`.
+- **Peso en memoria:** el GLB declara un fallback sin comprimir de **18.8 MB** (buffer 1) frente a los 7.3 MiB del archivo. Importa para móvil y para el presupuesto de un PWA.
+- Los renders de verificación (torso, cuerpo completo, piel, comparación macho/hembra, cabeza) se generaron en `%TEMP%\opencode\` y no se versionan: son evidencia de QA, no entregables.
 
 ### 2026-11-14 — Modelos 3D: descarga e instalación
 - Pineda confirmó la decisión **D25**: `open-anatomy-3d`. Anteriormente era solo una recomendación.
@@ -188,3 +201,10 @@
 - Se añadieron dos herramientas: `design/tools/verificar-pantallas.py` (falla si un número no está en el dataset) y `design/tools/smoke-test.mjs` (ejecuta el plugin contra un doble de la API y genera `design/out/preview.html`).
 - **Inconsistencia abierta:** el semáforo de glucemia del catálogo (verde 70–140) contradice la referencia de ayuno que cita (70–99). La pantalla 04 lo dice explícitamente; falta decidir la regla oficial.
 - No se tocó `assets/figma-vistas/`: otra línea de trabajo estaba escribiendo ahí y llegó a sobrescribir un archivo durante la sesión.
+
+### 2026-11-14 — Implementación del Agente Asistente AURA (Voz, Rostro HUD, Memoria por Astronauta y Cero Alucinación)
+- Se implementó el módulo completo del asistente **AURA** cumpliendo el contrato `BRIEF-BACKEND-AGENTES.md` §5.3 y la decisión **D12** (cero imágenes raster generadas por IA).
+- **Memoria real por astronauta (`C001`–`C004`):** se expandió `src/lib/db/dexie.ts` a versión 2 (`memoriaAstronautas`, `mensajesAsistente`, `solicitudesAyuda`) y se creó `src/lib/db/ai-memory.ts`.
+- **Seguridad anti-alucinación:** se creó `src/lib/ai/grounding-engine.ts` y `/api/ai-context` con pre-cálculo determinista sobre `OSD-575` y filtro numérico `validarRespuestaSinAlucinacion()` que descarta cualquier cifra ajena al dataset o prescripción farmacológica.
+- **Voz y Rostro HUD:** se crearon `src/lib/ai/useAssistantVoice.ts` (síntesis y reconocimiento de voz offline vía `Web Speech API` con modulación labial) y `src/components/ai/AssistantFaceHUD.tsx` (rostro SVG expresivo con parpadeo, mirada y cejas según nivel de triage).
+- **Solicitud de ayuda dentro del software:** `src/components/ai/AegisAssistantDock.tsx` permite activar alertas internas automáticas o manuales hacia el Oficial Médico (`C001`), mostrando un banner global en consola y encolando el paquete SBAR para Tierra.

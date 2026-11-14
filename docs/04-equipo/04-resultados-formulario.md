@@ -29,7 +29,7 @@ El puntaje de cada rol es una suma ponderada de dimensiones, con un bonus por pr
 
 ## Respuestas individuales
 
-### Eduardo — `@eduardovd2007`
+### Eduardo — `@eduardovd2007-sys`
 
 | Campo | Respuesta |
 |---|---|

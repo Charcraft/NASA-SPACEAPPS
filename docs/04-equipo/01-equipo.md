@@ -31,7 +31,7 @@
 
 | # | Nombre | Usuario Space Apps | GitHub | Rol | Respaldo |
 |---|---|---|---|---|---|
-| 1 | **Eduardo Daniel Vázquez Díaz** | @danny1510 | `@eduardovd2007` | **Product Lead · Video · Submission** | Pineda |
+| 1 | **Eduardo Daniel Vázquez Díaz** | @danny1510 | `@eduardovd2007-sys` | **Product Lead · Video · Submission** | Pineda |
 | 2 | **Angel Marco Martínez Cobos** | @angel_marco | `@angelcobos380-art` | **Lógica y reglas · Tests** | Pineda |
 | 3 | **Carlos De Jesús Martínez Pineda** | @cxrlosmp | `@Charcraft` | **Frontend Lead · IA** | Eduardo |
 | 4 | **Carlos Alberto Lázaro Aguilar** | @giganroker | `@carlosaalbertolazaro` | **Datos · QA de datos** | Angel Marco |
@@ -55,25 +55,18 @@ Invitaciones enviadas el **2026-11-14** con permiso **write** (pueden crear rama
 | Persona | GitHub | Invitación | Estado |
 |---|---|---|---|
 | Pineda | `@Charcraft` | — | ✅ Owner del repo |
-| Angel Marco | `@angelcobos380-art` | Enviada | ⏳ Pendiente de aceptar |
-| Carlos Alberto | `@carlosaalbertolazaro` | Enviada | ⏳ Pendiente de aceptar |
-| Ernesto | `@ErnestoMG01` | Enviada | ⏳ Pendiente de aceptar |
-| **Eduardo** | `@eduardovd2007` | ❌ **No enviada** | El usuario no existe en GitHub (404) |
+| Angel Marco | `@angelcobos380-art` | Enviada | ✅ **Aceptada** |
+| Carlos Alberto | `@carlosaalbertolazaro` | Enviada | ✅ **Aceptada** |
+| Ernesto | `@ErnestoMG01` | Enviada | ✅ **Aceptada** |
+| Eduardo | `@eduardovd2007-sys` | Enviada | ⏳ Pendiente de aceptar |
 
-### Qué tiene que hacer cada quien
+### Qué tiene que hacer Eduardo
 
-1. Revisar el correo de GitHub (o entrar a `github.com/Charcraft/NASA-SPACEAPPS/invitations`).
-2. Aceptar la invitación.
-3. Verificar: `gh repo view Charcraft/NASA-SPACEAPPS`.
+1. Aceptar la invitación (correo de GitHub o el banner en el repo).
+2. Verificar: `gh repo view Charcraft/NASA-SPACEAPPS`.
 
-### Pendiente de Eduardo
-
-El usuario `eduardovd2007` que puso en el formulario **no existe en GitHub**. Tiene que:
-
-1. Confirmar cuál es su usuario real, o crear una cuenta si no tiene.
-2. Pasarlo para enviar la invitación.
-
-> Hasta que acepten, no pueden hacer push. Conviene confirmarlo **antes** del sábado a las 11:15.
+> El usuario que escribió en el formulario (`eduardovd2007`) no existe; el real es **`eduardovd2007-sys`**.
+> Hasta que acepte, no puede hacer push.
 
 ---
 
