@@ -5,7 +5,7 @@ Blender Assembly is a geometry-building skill for creating reliable 3D models in
 
 The image below shows how the Blender MCP Assembly Skill helps an AI agent move from a disconnected chair assembly to a cleaner, connected Blender model.
 
-<!-- ![Before vs After](Before%20vs%20After.png) -->
+<!-- Note: Before vs After illustration diagram -->
 
 ## What is included in the skill?
 

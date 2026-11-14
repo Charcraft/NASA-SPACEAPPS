@@ -129,7 +129,9 @@ if ($Usuario -ne "") {
         foreach ($archivo in @("BIENVENIDA.md", "perfil.md", "bitacora.md")) {
             $o = Join-Path $plantilla $archivo
             if (Test-Path $o) {
-                (Get-Content $o -Raw) -replace '\{\{USUARIO\}\}', $Usuario | Set-Content (Join-Path $carpeta $archivo) -Encoding UTF8
+                $txt = (Get-Content $o -Raw -Encoding UTF8) -replace '\{\{USUARIO\}\}', $Usuario
+                $txt = $txt -replace '\{\{NOMBRE\}\}', $Usuario
+                [System.IO.File]::WriteAllText((Join-Path $carpeta $archivo), $txt, [System.Text.UTF8Encoding]::new($false))
             }
         }
         Write-Host ("      carpeta team/{0} creada" -f $Usuario) -ForegroundColor DarkGreen

@@ -1,42 +1,36 @@
 # CODEOWNERS
 #
 # Revisión automática por área. GitHub pide review a estas personas al abrir un PR.
-#
-# ⚠️ PENDIENTE (Eduardo, antes del 12 de noviembre):
-#    Reemplazar los marcadores <github-user> por los usuarios reales de GitHub
-#    de cada integrante. Los de Space Apps no siempre coinciden.
-#
-#    Mientras estén los marcadores, las líneas comentadas no hacen nada.
-#    Solo la regla "*" está activa y usa @Charcraft como respaldo.
+# Usuarios de GitHub verificados el 2026-11-13 con las respuestas del formulario.
 #
 # Formato:  <patrón>  <usuario(s)>
 # Más info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# Respaldo: si nadie más aplica, revisa el owner del equipo.
-*                                   @Charcraft
+# Respaldo general: el owner del equipo
+*                                       @Charcraft
 
 # --- Documentación científica (nadie la cambia sin revisión) ---
-/docs/02-investigacion/             @Charcraft
-/docs/05-ia/                        @Charcraft
+/docs/02-investigacion/                 @Charcraft @carlosaalbertolazaro
+/docs/05-ia/                            @Charcraft
 
 # --- Plan y alcance ---
-/docs/03-plan/                      @Charcraft
+/docs/03-plan/                          @eduardovd2007 @Charcraft
 
 # --- Reglas de trabajo ---
-/AGENTS.md                          @Charcraft
-/TECH-STACK.md                      @Charcraft
-/MEMORY.md                          @Charcraft
+/AGENTS.md                              @Charcraft @eduardovd2007
+/TECH-STACK.md                          @Charcraft
+/MEMORY.md                              @eduardovd2007 @Charcraft
 
-# --- Cuando exista código (descomentar y asignar) ---
-# /src/lib/rules/                   @<github-user-de-carlos-de-jesus>
-# /src/data/                        @<github-user-de-carlos-de-jesus>
-# /src/components/                  @<github-user-de-angel-marco>
-# /src/lib/db/                      @<github-user-de-carlos-alberto>
-# /scripts/                         @<github-user-de-carlos-alberto>
+# --- Código ---
+# /src/lib/rules/                       @angelcobos380-art @Charcraft
+# /src/data/                            @carlosaalbertolazaro @Charcraft
+# /src/components/                      @Charcraft
+# /src/lib/db/                          @ErnestoMG01
+# /scripts/                             @ErnestoMG01 @carlosaalbertolazaro
 
 # --- Carpetas personales: cada quien revisa la suya ---
-/team/danny1510/                    @Charcraft
-# /team/angel_marco/                @<github-user>
-# /team/cxrlosmp/                   @<github-user>
-# /team/giganroker/                 @<github-user>
-# /team/ernesto-montes/             @<github-user>
+/team/danny1510/                        @eduardovd2007
+/team/angel_marco/                      @angelcobos380-art
+/team/cxrlosmp/                         @Charcraft
+/team/giganroker/                       @carlosaalbertolazaro
+/team/ernesto-montes/                   @ErnestoMG01

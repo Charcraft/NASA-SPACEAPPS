@@ -21,13 +21,12 @@
 
 ## Tu rol
 
-**Diseño · Video · Narrativa**
+**Plataforma · Offline · Build**
 
-Respaldo si faltas: **Eduardo**
+GitHub: **@ErnestoMG01** · Respaldo si faltas: **Carlos Alberto**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 
@@ -58,17 +57,17 @@ Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs
 
 ## Tus primeras tres tareas
 
-1. **Define el sistema visual**: paleta (verde/amarillo/rojo accesibles), tipografía, iconografía. Sin logos ni elementos de marca de NASA.
-2. **Haz los wireframes de las 6 pantallas** clave: dashboard, mapa corporal, medición guiada, resultado, selector de emergencia y protocolo activo.
-3. **Escribe el guion de 30 segundos en inglés** con subtítulos, siguiendo `docs/03-plan/06-demo-30s.md`.
+1. **Deploy en Vercel desde el primer día**: una página vacía el sábado a las 13:00 es suficiente. Tener URL viva desde temprano evita el pánico del domingo.
+2. **Haz que funcione sin conexión**: PWA, service worker y prueba real con el WiFi apagado. Es uno de nuestros argumentos centrales.
+3. **Verifica el build en una máquina limpia**: clonar, instalar, correr. Si falla ahí, falla en el jurado.
 
 ---
 
 ## Lo que NO te toca
 
-- No uses el logo, la bandera ni identificadores de misión de NASA.
-- No uses imágenes generadas por IA sin marca de agua visible.
-- No edites código de reglas ni de datos.
+- No te preocupes por el despliegue: Carlos Alberto te acompaña, él ya lo ha hecho.
+- No diseñes pantallas nuevas: el sistema visual lo define Pineda con el base.
+- No toques `src/lib/rules/` ni los datos.
 
 ---
 

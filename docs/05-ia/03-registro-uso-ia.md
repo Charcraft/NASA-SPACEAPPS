@@ -117,17 +117,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-007 · Segunda auditoría de estado y corrección de scripts de aprovisionamiento
+- **Fecha/hora:** 2026-11-13 22:55
+- **Quién:** Carlos De Jesús Martínez Pineda (@cxrlosmp)
+- **Herramienta / modelo:** agente de IA (Gemini 3.8 Flash High)
+- **Categoría:** código / documentación
+- **Prompt usado:** "vuelve a revisar todo el estado y corrige lo dañado"
+- **Propósito:** auditoría integral de scripts de instalación, exclusiones de Git, validación JSON y asignación de CODEOWNERS.
+- **Resultado obtenido:** corrección de lectura/escritura UTF-8 en `instalar-todo.ps1` e `instalar-todo.sh`, exclusión de caché de Python en `.gitignore`, asignación directa de carpetas de equipo en `.github/CODEOWNERS`, y eliminación de falsos enlaces rotos.
+- **Validación:** ejecución exitosa de `instalar-todo.ps1`, `explorar-osdr.py`, `normalizar-osdr.py`, y `verificar-docs.ps1` (0 errores).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 2 | 2 |
-| Arquitectura / código | 2 | 1 |
+| Arquitectura / código | 3 | 2 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **7** | **6** |
+| **Total** | **8** | **7** |
 
 ---
 

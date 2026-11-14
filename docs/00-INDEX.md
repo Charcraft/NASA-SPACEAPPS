@@ -54,8 +54,9 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | Documento | Contenido |
 |---|---|
 | [`04-equipo/01-equipo.md`](04-equipo/01-equipo.md) | Integrantes, datos oficiales, contacto |
-| [`04-equipo/02-roles-asignacion.md`](04-equipo/02-roles-asignacion.md) | Roles propuestos, matriz RACI, reglas de trabajo |
+| [`04-equipo/02-roles-asignacion.md`](04-equipo/02-roles-asignacion.md) | **Roles definitivos**, matriz RACI, restricciones y turnos |
 | [`04-equipo/03-logistica-evento.md`](04-equipo/03-logistica-evento.md) | Sede, horarios, qué llevar, checklist |
+| [`04-equipo/04-resultados-formulario.md`](04-equipo/04-resultados-formulario.md) | Respuestas del formulario, puntajes y por qué se asignó cada rol |
 
 ---
 

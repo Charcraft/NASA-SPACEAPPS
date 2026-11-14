@@ -29,19 +29,22 @@
 
 ## Integrantes
 
-| # | Nombre | Usuario | Rol en el equipo | Desde |
-|---|---|---|---|---|
-| 1 | **Eduardo Daniel Vázquez Díaz** | @danny1510 | **Team Owner** | 2026 |
-| 2 | **Angel Marco Martínez Cobos** | @angel_marco | Integrante | 2026 |
-| 3 | **Carlos De Jesús Martínez Pineda** | @cxrlosmp | Integrante | 2026 |
-| 4 | **Carlos Alberto Lázaro Aguilar** | @giganroker | Integrante | 2026 |
-| 5 | **Ernesto Montes García** | @ernesto-montes | Integrante | 2026 |
+| # | Nombre | Usuario Space Apps | GitHub | Rol | Respaldo |
+|---|---|---|---|---|---|
+| 1 | **Eduardo Daniel Vázquez Díaz** | @danny1510 | `@eduardovd2007` | **Product Lead · Video · Submission** | Pineda |
+| 2 | **Angel Marco Martínez Cobos** | @angel_marco | `@angelcobos380-art` | **Lógica y reglas · Tests** | Pineda |
+| 3 | **Carlos De Jesús Martínez Pineda** | @cxrlosmp | `@Charcraft` | **Frontend Lead · IA** | Eduardo |
+| 4 | **Carlos Alberto Lázaro Aguilar** | @giganroker | `@carlosaalbertolazaro` | **Datos · QA de datos** | Angel Marco |
+| 5 | **Ernesto Montes García** | @ernesto-montes | `@ErnestoMG01` | **Plataforma · Offline · Build** | Carlos Alberto |
+
+> Roles cerrados el **2026-11-13** con las respuestas del formulario.
+> Justificación y puntajes: [`02-roles-asignacion.md`](02-roles-asignacion.md) y [`04-resultados-formulario.md`](04-resultados-formulario.md).
 
 ### Notas
 
-- **Eduardo** es el owner: es quien puede editar la página del equipo, gestionar el proyecto y representar al equipo ante el Local Lead.
-- **Carlos De Jesús (@cxrlosmp)** es la cuenta con la que se administra este repositorio y el navegador del proyecto.
-- Los perfiles técnicos de cada integrante **no están documentados todavía**. La asignación de roles en `02-roles-asignacion.md` es una **propuesta**, no un hecho.
+- **Eduardo** es el owner: es quien puede editar la página del proyecto y enviar el submission.
+- **Pineda (@cxrlosmp / @Charcraft)** administra este repositorio y el navegador del proyecto, y da soporte de IA al equipo.
+- Las carpetas de `team/` usan el **usuario de Space Apps**; las ramas y CODEOWNERS usan el **usuario de GitHub**.
 
 ---
 

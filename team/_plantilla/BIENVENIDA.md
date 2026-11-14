@@ -23,11 +23,10 @@
 
 **{{ROL}}**
 
-Respaldo si faltas: **{{RESPALDO}}**
+GitHub: **@{{GITHUB}}** · Respaldo si faltas: **{{RESPALDO}}**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 

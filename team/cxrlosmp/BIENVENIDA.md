@@ -21,13 +21,12 @@
 
 ## Tu rol
 
-**Datos · Reglas · IA**
+**Frontend Lead · IA**
 
-Respaldo si faltas: **Carlos Alberto**
+GitHub: **@Charcraft** · Respaldo si faltas: **Eduardo**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 
@@ -58,17 +57,17 @@ Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs
 
 ## Tus primeras tres tareas
 
-1. **Valida el dataset `src/data/seed/osdr-inspiration4-cmp.json`** y documenta dos datasets de respaldo en `docs/02-investigacion/03-fuentes-datos.md`.
-2. **Escribe el borrador de `thresholds.ts`** con la fuente al lado de cada umbral. Lo que no tenga fuente va marcado `[POR VALIDAR]`.
-3. **Mantén el registro de IA** (`docs/05-ia/03-registro-uso-ia.md`) al día y da soporte al equipo con skills y MCPs.
+1. **Levanta el esqueleto de la app**: layout, navegación y sistema visual base con shadcn y Tailwind. Que funcione con datos mock antes de las 18:00 del sábado.
+2. **Construye la tarjeta de semáforo y el dashboard**: son las dos pantallas que el jurado va a ver en el video.
+3. **Sé el soporte de IA del equipo**: skills, navegadores personales, MCPs y el registro de uso. Es lo que nadie más puede hacer.
 
 ---
 
 ## Lo que NO te toca
 
-- No inventes umbrales clínicos. Sin fuente, es un supuesto y se marca como tal.
-- No cambies la política de IA sin discutirlo.
-- No mergees nada de `src/lib/rules/` sin que otra persona lo lea.
+- No hagas "todo": tienes 16 horas y el frontend ya es mucho. Delega datos y reglas.
+- No implementes tu propio diseño desde cero: usa el sistema base y que Ernesto lo revise.
+- No mergees `src/lib/rules/` sin que Angel o Eduardo lo lean.
 
 ---
 

@@ -21,13 +21,12 @@
 
 ## Tu rol
 
-**Product Lead · Pitch · Submission**
+**Product Lead · Video · Submission**
 
-Respaldo si faltas: **Carlos De Jesús (Pineda)**
+GitHub: **@eduardovd2007** · Respaldo si faltas: **Pineda**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 
@@ -58,18 +57,18 @@ Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs
 
 ## Tus primeras tres tareas
 
-1. **Responde el formulario de reparto** (5 minutos) y confirma que los 5 tengan acceso al repo.
-2. **Congela el alcance del sábado** a las 12:00: 8 indicadores, 3 protocolos y una lista escrita de lo que **no** se hará.
-3. **Prepara el pitch de 3 minutos** y revisa el guion del demo de 30 s en `docs/03-plan/06-demo-30s.md`. Tú eres la cara del equipo el domingo.
+1. **Instala tu harness hoy** (OpenCode o Claude Code) y corre `scripts/instalar-todo.ps1`. Sin harness no puedes aprovechar las 24 skills del equipo.
+2. **Eres el dueño del submission y del demo.** Todo el texto en inglés pasa por ti: eres el único con inglés fluido. Guion de 30 s en `docs/03-plan/06-demo-30s.md` y campos en `docs/08-submission/01-project-page-en.md`.
+3. **Congela el alcance el sábado a las 12:00**: 8 indicadores, 3 protocolos y una lista escrita de lo que **no** se hará. Decides tú, en 5 minutos, sin votación.
 
 ---
 
 ## Lo que NO te toca
 
 - No escribas código de producto antes del sábado a las 09:00.
-- No tomes decisiones clínicas sin pasar por Datos.
-- No edites la carpeta de otra persona.
-- No dejes el submission para las 16:50 del domingo: el objetivo es enviarlo a las 16:30.
+- No tomes decisiones clínicas sin pasar por Pineda o Angel.
+- No dejes el submission para las 16:50: el objetivo es enviarlo a las 16:30.
+- No traduzcas tú solo los textos técnicos del equipo sin que su autor los revise.
 
 ---
 

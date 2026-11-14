@@ -102,7 +102,7 @@ if [ -n "$USUARIO" ]; then
   if [ ! -d "$CARPETA" ]; then
     mkdir -p "$CARPETA"
     for archivo in BIENVENIDA.md perfil.md bitacora.md; do
-      [ -f "$PLANTILLA/$archivo" ] && sed "s/{{USUARIO}}/$USUARIO/g" "$PLANTILLA/$archivo" > "$CARPETA/$archivo"
+      [ -f "$PLANTILLA/$archivo" ] && sed "s/{{USUARIO}}/$USUARIO/g; s/{{NOMBRE}}/$USUARIO/g" "$PLANTILLA/$archivo" > "$CARPETA/$archivo"
     done
     echo "      carpeta team/$USUARIO creada"
   else

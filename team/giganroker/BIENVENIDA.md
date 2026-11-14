@@ -21,13 +21,12 @@
 
 ## Tu rol
 
-**Plataforma · Offline · QA**
+**Datos · QA de datos**
 
-Respaldo si faltas: **Angel Marco**
+GitHub: **@carlosaalbertolazaro** · Respaldo si faltas: **Angel Marco**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 
@@ -58,17 +57,17 @@ Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs
 
 ## Tus primeras tres tareas
 
-1. **Verifica que el repo clone en limpio** en otra carpeta y que `scripts/instalar-todo.ps1` funcione sin errores.
-2. **Prepara el deploy en Vercel** (una página vacía es suficiente) y el plan para verificar el modo offline.
-3. **Configura la protección de `main`** y el tablero de GitHub Projects con las 5 columnas y las etiquetas.
+1. **Valida el dataset `src/data/seed/osdr-inspiration4-cmp.json`**: que los 17 indicadores tengan sentido, que los rangos sean coherentes y que el script `normalizar-osdr.py` lo regenere igual.
+2. **Documenta las limitaciones** en `src/data/seed/README.md`: qué no cubre, de dónde viene, cómo se cita. Eso se usa en el submission.
+3. **Apoya a Ernesto con el despliegue.** Dijiste que aportas comandos, terminal y Linux: eso vale oro el domingo cuando algo no compile.
 
 ---
 
 ## Lo que NO te toca
 
-- No toques la lógica clínica ni los datos.
-- No hagas `push --force` a `main`.
-- No agregues servicios que cuesten dinero sin avisar.
+- No toques la lógica clínica ni el frontend.
+- No edites el JSON de datos a mano: se regenera con el script.
+- No te ofrezcas para el video ni para hablar en inglés: ya dijiste que no y se respetó.
 
 ---
 

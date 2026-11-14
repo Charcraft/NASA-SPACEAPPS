@@ -32,6 +32,9 @@ pnpm-debug.log*
 .cache/
 .turbo/
 *.tsbuildinfo
+__pycache__/
+*.py[cod]
+*$py.class
 
 # Datos temporales del hackathon
 temp/

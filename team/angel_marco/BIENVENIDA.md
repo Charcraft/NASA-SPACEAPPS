@@ -21,13 +21,12 @@
 
 ## Tu rol
 
-**Frontend**
+**Lógica y reglas · Tests**
 
-Respaldo si faltas: **Ernesto (diseño y video)**
+GitHub: **@angelcobos380-art** · Respaldo si faltas: **Pineda**
 
-> Este rol es **provisional**. Se confirma cuando respondas el formulario de reparto:
-> https://docs.google.com/forms/d/e/1FAIpQLSc9ru484FG9c5DJdTjkiPXC28nuYSz11ugFvlCfJ96gPDGHCA/viewform
-> Si tus respuestas dicen otra cosa, se cambia. La motivación pesa más que la nota.
+> **Rol confirmado** con tus respuestas del formulario del 13 de noviembre.
+> Por qué te tocó este rol, con los puntajes: [`docs/04-equipo/04-resultados-formulario.md`](../../docs/04-equipo/04-resultados-formulario.md)
 
 ---
 
@@ -58,17 +57,18 @@ Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs
 
 ## Tus primeras tres tareas
 
-1. **Lee `TECH-STACK.md` §3** (arquitectura) y `docs/03-plan/03-alcance-producto.md` (qué se construye).
-2. **Practica el componente de tarjeta con semáforo** en una rama local, con datos inventados. No es el producto: es para llegar con la herramienta caliente.
-3. **Define con Ernesto el sistema visual base**: color, tipografía, tamaños táctiles (48 px mínimo) y cómo se comunica el estado sin depender solo del color.
+1. **Escribe `thresholds.ts`**: los umbrales de los 8 indicadores del MVP, cada uno con su fuente al lado. Lo que no tenga fuente va marcado `[POR VALIDAR]`.
+2. **Escribe la función pura `evaluar(valor, baseline, entorno)`** y sus tests. Entra un dato, sale `{nivel, razon, accion, fuente}`. Sin UI, sin red.
+3. **Cierra tu entrega el sábado antes de las 19:00.** Tienes 8 horas: necesitas terminar temprano, no quedarte hasta el final.
 
 ---
 
 ## Lo que NO te toca
 
-- No instales dependencias nuevas sin un PR que lo justifique.
-- No toques `src/lib/rules/` ni `src/data/`: eso es de Datos.
-- No diseñes pantallas nuevas sin hablarlo con Ernesto.
+- No toques diseño ni UI: lo dijiste claro y se respetó.
+- No hagas despliegue ni configures Vercel.
+- No amplíes el alcance de reglas sin hablarlo: cada indicador extra cuesta tiempo que no tienes.
+- No mergees nada de `src/lib/rules/` sin que Pineda lo lea.
 
 ---
 

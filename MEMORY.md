@@ -66,6 +66,7 @@
 | D20 | **Onboarding autoinstalable**: `ONBOARDING.md` + `instalar-todo` + `BIENVENIDA.md` por integrante | 2026-11-13 | Cualquier agente que clone el repo instala, pregunta quién eres y arranca el trabajo sin explicaciones |
 | D21 | **Un navegador BrowserAct por persona**, nunca compartido | 2026-11-13 | Sesiones de Google y GitHub son privadas; compartir uno rompe trazabilidad y desconecta sesiones |
 | D22 | **Protocolo documental obligatorio** + verificación automática de documentos huérfanos | 2026-11-13 | Que ningún agente cierre una tarea sin registrar decisiones, fuentes, IA y archivos |
+| D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
 
 ---
 
@@ -98,9 +99,11 @@
 
 ### 2026-11-13 — Saneamiento de codificación y auditoría previa al kickoff
 - Se detectó y resolvió el problema de mojibake (Windows-1252 vs UTF-8) en los 10 archivos de perfiles y bitácoras de `team/`.
-- Se corrigió `scripts/setup-integrante.ps1` para asegurar lectura y escritura en UTF-8 sin BOM y reemplazo de `{{NOMBRE}}`.
-- Se revisaron enlaces y referencias del repositorio; verificación con `verificar-docs.ps1` al 100 %.
-- Se registró la intervención en `docs/05-ia/03-registro-uso-ia.md` (IA-006).
+- Se corrigió `scripts/setup-integrante.ps1`, `scripts/instalar-todo.ps1` e `instalar-todo.sh` para asegurar lectura y escritura en UTF-8 sin BOM y reemplazo de `{{NOMBRE}}`.
+- Se añadieron exclusiones de Python cache (`__pycache__/`, `*.pyc`) en `.gitignore`.
+- Se configuraron los usuarios de equipo en `.github/CODEOWNERS`.
+- Se probaron y validaron los scripts de OSDR y verificación con `verificar-docs.ps1` al 100 % (0 errores).
+- Se registraron las intervenciones en `docs/05-ia/03-registro-uso-ia.md` (IA-006 e IA-007).
 
 ### 2026-11-13 — Recursos oficiales y adaptación del plan
 - Se revisó la pestaña Resources del reto: **3 enlaces de NASA HRP + 2 de CSA, ningún dataset**.
@@ -111,6 +114,13 @@
 - Se tradujo el README a inglés y se conservó el español en `README.es.md`.
 - Se añadió `LICENSE` MIT con aviso de no afiliación a NASA.
 - Se corrigió un error propio de codificación que corrompió `02-plan-30h-hackathon.md` (reparado y verificado).
+
+### 2026-11-13 — Cierre de roles con el formulario
+- Respondieron los 5. Respuestas exportadas desde Google Forms a hoja de cálculo y procesadas.
+- Puntajes calculados con los mismos pesos del formulario HTML.
+- **Roles definitivos:** Eduardo (Producto/Video/Submission), Pineda (Frontend/IA), Angel (Reglas/Tests), Carlos Alberto (Datos), Ernesto (Plataforma).
+- Hallazgos que cambian el plan: solo Eduardo tiene inglés fluido; Angel tiene 8 h; dos personas sin datos móviles; Eduardo y Angel sin harness todavía.
+- CODEOWNERS actualizado con los usuarios reales de GitHub.
 
 ### 2026-11-13 — Integración de la investigación del equipo
 - El equipo aportó en `context.md` una investigación sobre la arquitectura real de monitorización de NASA
