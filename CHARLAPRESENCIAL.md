@@ -33,3 +33,16 @@ ESTRUCTURA PARA PRACTICAR
 5. evidencia y limitaciones
 6. cierre
 
+EL APORTE ESPACIAL
+
+dato espacial &gt; procesamiento &gt; resultado &gt; decision del usuario
+
+Ejemplo: Estimaciones de precipitacion GPM de NASA y JAXA para visualizar
+
+DEMOSTRACION DE PROTOTIPO
+
+medidas claras, datos y fuentes visibles
+
+
+
+&nbsp;

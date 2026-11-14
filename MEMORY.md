@@ -101,6 +101,7 @@
 - La charla del Local Event fijó: **7 diapositivas máximo, en inglés**, con la estructura problema/usuario → solución → datos → demostración → evidencia y limitaciones → cierre.
 - Se creó `docs/03-plan/07-pitch-7-slides.md` (guion hablado, tiempos, preguntas del jurado) y la presentación `pitch-aegis.pptx`, generada con `scripts/generar-pitch.py`.
 - Verificado visualmente: 7 diapositivas, sin desbordes.
+- Se añadió `docs/03-plan/08-preguntas-jurado.md`: documento de estudio con datos para memorizar, 10 preguntas obligatorias (ES/EN), 30 preguntas por categoría y 6 trampas.
 
 ### 2026-11-13 — Saneamiento de codificación y auditoría previa al kickoff
 - Se detectó y resolvió el problema de mojibake (Windows-1252 vs UTF-8) en los 10 archivos de perfiles y bitácoras de `team/`.
