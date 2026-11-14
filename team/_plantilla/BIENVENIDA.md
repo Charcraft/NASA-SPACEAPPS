@@ -50,6 +50,7 @@ Funciona **sin conexión**. Y no diagnostica: da criterio.
 3. **Commit cada hora.** Un portátil que se apaga no se lleva el trabajo.
 4. **Append-only** en `MEMORY.md` y en el registro de IA: se añade al final, no se reordena lo ajeno.
 5. **El alcance no se cambia solo.** Si crees que algo debe cambiar, se propone y se decide en equipo.
+6. **Si no está escrito, no pasó.** Todo lo que hagas queda documentado: decisiones en `MEMORY.md`, fuentes en la bibliografía, uso de IA en su registro, archivos nuevos en el índice y tu día en tu bitácora. Protocolo: [`docs/11-documentacion/01-protocolo-documental.md`](../../docs/11-documentacion/01-protocolo-documental.md)
 
 Guía completa: [`docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md`](../../docs/07-trabajo-colaborativo/02-flujo-git-y-pr.md)
 

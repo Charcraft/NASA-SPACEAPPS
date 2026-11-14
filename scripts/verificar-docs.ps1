@@ -65,7 +65,29 @@ if ($huerfanosSinH1.Count -gt 0) {
     Write-Host ""
 }
 
-if ($rotos.Count -eq 0 -and $huerfanosSinH1.Count -eq 0) {
+# --- Documentos de docs/ que no estan registrados en el indice ---------------
+$indice = Join-Path $raiz "docs\00-INDEX.md"
+$sinRegistrar = @()
+
+if (Test-Path $indice) {
+    $textoIndice = Get-Content $indice -Raw
+    Get-ChildItem (Join-Path $raiz "docs") -Recurse -Filter *.md -File |
+        Where-Object { $_.Name -ne "00-INDEX.md" } |
+        ForEach-Object {
+            if ($textoIndice -notmatch [regex]::Escape($_.Name)) {
+                $sinRegistrar += $_.FullName.Replace($raiz + '\', '')
+            }
+        }
+}
+
+if ($sinRegistrar.Count -gt 0) {
+    Write-Host "DOCUMENTOS SIN REGISTRAR EN docs/00-INDEX.md:" -ForegroundColor Yellow
+    $sinRegistrar | ForEach-Object { Write-Host ("  {0}" -f $_) -ForegroundColor Yellow }
+    Write-Host "  (todo documento nuevo se registra en el indice: docs/11-documentacion/)" -ForegroundColor DarkGray
+    Write-Host ""
+}
+
+if ($rotos.Count -eq 0 -and $huerfanosSinH1.Count -eq 0 -and $sinRegistrar.Count -eq 0) {
     Write-Host "Todo correcto." -ForegroundColor Green
     exit 0
 }

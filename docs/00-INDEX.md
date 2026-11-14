@@ -129,6 +129,15 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 
 ---
 
+## 11 · Documentación
+
+| Documento | Contenido |
+|---|---|
+| [`11-documentacion/01-protocolo-documental.md`](11-documentacion/01-protocolo-documental.md) | **Qué documenta cada agente, dónde y cuándo.** Lectura obligatoria |
+| [`11-documentacion/02-plantillas.md`](11-documentacion/02-plantillas.md) | Plantillas para copiar y pegar |
+
+---
+
 ## Convenciones
 
 - Idioma: español. Términos oficiales en inglés cuando corresponda.

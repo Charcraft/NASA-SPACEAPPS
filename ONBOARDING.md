@@ -128,6 +128,24 @@ No termines con "¿en qué te ayudo?". Termina con **trabajo concreto**:
    - ¿Ves algo del plan que cambiarías? (el proyecto está abierto a mejoras, pero **se consulta en equipo** antes de cambiar el alcance)
 4. Propón **la primera tarea concreta** de su `BIENVENIDA.md`.
 
+### PASO 7 · Dejar claro el deber de documentar
+
+Antes de terminar, dile explícitamente **qué vas a documentar y dónde**. No lo dejes como una promesa vaga:
+
+> "De aquí en adelante, todo lo que hagamos queda escrito:
+> decisiones en `MEMORY.md`, hallazgos y fuentes en `docs/02-investigacion/`, uso de IA en `docs/05-ia/03-registro-uso-ia.md`, archivos nuevos en `docs/00-INDEX.md`, y tu trabajo del día en `team/{usuario}/bitacora.md`.
+> Si algo no está escrito, no pasó. Es la regla del proyecto."
+
+Y aplica el **cierre de sesión** al final de cada bloque de trabajo (5 preguntas):
+
+1. ¿Tomé alguna decisión? → `MEMORY.md`
+2. ¿Usé una fuente nueva? → bibliografía
+3. ¿Usé IA para algo relevante? → registro
+4. ¿Creé o moví archivos? → índice
+5. ¿Quedó algo pendiente? → pendientes
+
+Protocolo completo: `docs/11-documentacion/01-protocolo-documental.md`.
+
 ---
 
 ## Reglas que ningún agente puede romper

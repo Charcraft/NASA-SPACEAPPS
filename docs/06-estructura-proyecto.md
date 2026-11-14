@@ -112,8 +112,7 @@ Alguien que entra por primera vez lee `00 → 01 → 03` y ya entiende el proyec
 
 | Si tienes… | Va en… |
 |---|---|
-| Un dato clínico nuevo con fuente | `docs/02-investigacion/02-indicadores-fisiologicos.md` |
-| Una fuente nueva | `docs/02-investigacion/04-bibliografia.md` |
+| Un dato clínico nuevo con fuente | `docs/02-investigacion/02-indicadores-fisiologicos.md` || Una fuente nueva | `docs/02-investigacion/04-bibliografia.md` |
 | Un dataset descargado y normalizado | `src/data/seed/` (y se documenta en `03-fuentes-datos.md`) |
 | Una decisión tomada | `MEMORY.md` § Decisiones |
 | Una tarea pendiente | `MEMORY.md` § Pendientes |
@@ -123,6 +122,8 @@ Alguien que entra por primera vez lee `00 → 01 → 03` y ya entiende el proyec
 | Una duda sin resolver | `MEMORY.md` § Pendientes (no en un chat) |
 | Un riesgo nuevo | `docs/03-plan/04-riesgos.md` |
 | El guion del video | `docs/03-plan/03-alcance-producto.md` §7 o sección propia el 11 de noviembre |
+
+> **¿Dudas sobre dónde va algo?** El protocolo completo está en [`11-documentacion/01-protocolo-documental.md`](11-documentacion/01-protocolo-documental.md), con la tabla de destinos y las plantillas.
 
 ---
 

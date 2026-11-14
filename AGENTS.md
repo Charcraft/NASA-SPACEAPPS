@@ -123,3 +123,46 @@ Una tarea está terminada solo si:
 - [ ] Está enlazado desde `docs/00-INDEX.md` o el `README.md`.
 - [ ] Tiene fuente o justificación.
 - [ ] Otra persona del equipo lo puede entender sin preguntarte.
+- [ ] **Pasó el cierre de sesión documental del §9.**
+
+---
+
+## 9. Deber de documentar
+
+> **Si no está escrito, no pasó.** Documentar es parte del trabajo, no un extra al final.
+
+Cada agente documenta lo que produce **en el momento**, no al cerrar el proyecto.
+
+### Destinos obligatorios
+
+| Si hiciste esto… | Escríbelo en… |
+|---|---|
+| Una decisión | `MEMORY.md` § Decisiones |
+| Un hallazgo o dato | `docs/02-investigacion/` + bibliografía |
+| Un uso de IA relevante | `docs/05-ia/03-registro-uso-ia.md` |
+| Un archivo o carpeta nueva | `docs/00-INDEX.md` |
+| Trabajo del día | `team/<usuario>/bitacora.md` |
+| Un cambio de alcance | `docs/03-plan/03-alcance-producto.md` + `MEMORY.md` |
+| Un riesgo nuevo | `docs/03-plan/04-riesgos.md` |
+| Algo que intentaste y falló | `team/<usuario>/bitacora.md` |
+
+### La prueba de los tres días
+
+Antes de documentar, pregúntate: **¿alguien lo necesitaría en tres días y no podría deducirlo del código?**
+Si la respuesta es no, no lo documentes. El ruido también es un problema.
+
+### Etiquetas de honestidad (obligatorias)
+
+`[VERIFICADO]` · `[POR VALIDAR]` · `[SUPUESTO]` · `[INFERENCIA]` · `[DESCARTADO]`
+
+Ver el protocolo completo en [`docs/11-documentacion/01-protocolo-documental.md`](docs/11-documentacion/01-protocolo-documental.md) y las plantillas en [`02-plantillas.md`](docs/11-documentacion/02-plantillas.md).
+
+### Cierre de sesión (cinco preguntas)
+
+1. ¿Tomé alguna decisión? → `MEMORY.md`
+2. ¿Usé una fuente nueva? → bibliografía
+3. ¿Usé IA para algo relevante? → registro
+4. ¿Creé o moví archivos? → índice
+5. ¿Quedó algo pendiente? → pendientes
+
+Si alguna es "sí" y no está escrito, **la tarea no está terminada**.
