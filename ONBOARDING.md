@@ -100,6 +100,22 @@ Enumera brevemente lo que ahora puedes hacer (adáptalo a lo que el script confi
 | **Modelado en Blender** | `blender-mcp-assembly-skill` — construir un objeto pieza a pieza sin que se vea "explotado" |
 | **Verificación** | `proveit` — comprobar un límite real antes de afirmar que no puedes hacer algo |
 
+#### Ofrece su navegador personal
+
+Después de la tabla, **pregunta** (no lo hagas sin permiso):
+
+> ¿Quieres que te cree tu propio navegador para el proyecto? Es un Chrome aislado con tu cuenta, y sirve para que yo busque en internet sin tocar tu navegador de siempre. Toma unos 10 minutos y lo haces tú en la parte de la contraseña.
+
+Si dice que sí:
+
+```powershell
+.\scripts\crear-navegador.ps1 -Usuario <usuario>
+```
+
+Luego explicas el paso de importar el perfil, sin elegirlo tú. Guía completa: `docs/10-entorno/05-tu-navegador.md`.
+
+> **Cada quien tiene el suyo.** El navegador de Pineda es personal y no se comparte.
+
 ### PASO 6 · Arrancar la discusión
 
 No termines con "¿en qué te ayudo?". Termina con **trabajo concreto**:

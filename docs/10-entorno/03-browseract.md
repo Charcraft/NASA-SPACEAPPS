@@ -2,6 +2,8 @@
 
 > **Para qué sirve en este proyecto:** leer páginas que necesitan JavaScript, entrar a sesiones ya iniciadas, sacar capturas para el README y la documentación, y automatizar trámites (formularios, GitHub, OSDR).
 >
+> **Cada integrante usa SU navegador.** El de Pineda (`NASA-BROWSER`) es personal y no se comparte. Para crear el tuyo: [`05-tu-navegador.md`](05-tu-navegador.md).
+>
 > **Regla de oro:** si `curl` o un fetch normal funcionan, no uses un navegador. El navegador es para lo que no se puede hacer sin él.
 
 ---

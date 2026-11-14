@@ -88,6 +88,7 @@ WhatsApp del equipo: **967 135 4853**
 ## Tu entorno
 
 - **Tu carpeta:** el instalador creó un acceso directo **`NASA-SPACEAPPS`** en tu escritorio, con el icono del proyecto. Ábrelo y estarás en el repo.
+- **Tu navegador:** pídele a tu agente que te cree uno propio (`NASA-giganroker`). El de Pineda es personal y no se comparte. Guía: [`docs/10-entorno/05-tu-navegador.md`](../../docs/10-entorno/05-tu-navegador.md)
 - **Skills:** 24 instaladas en `.opencode/skills`, `.claude/skills` y `.cursor/skills`.
   Catálogo: [`skills/README.md`](../../skills/README.md)
 - **Reglas:** [`AGENTS.md`](../../AGENTS.md) — se leen antes de cualquier cosa.

@@ -64,6 +64,7 @@
 | D18 | **Google Form publicado** para recolectar las respuestas | 2026-11-13 | Es lo más fácil de compartir con 4 personas; el cálculo se hace a mano |
 | D19 | El navegador se guarda como **NASA-BROWSER** con sesión de Google activa | 2026-11-13 | Es el navegador por defecto para cualquier búsqueda o trámite del proyecto |
 | D20 | **Onboarding autoinstalable**: `ONBOARDING.md` + `instalar-todo` + `BIENVENIDA.md` por integrante | 2026-11-13 | Cualquier agente que clone el repo instala, pregunta quién eres y arranca el trabajo sin explicaciones |
+| D21 | **Un navegador BrowserAct por persona**, nunca compartido | 2026-11-13 | Sesiones de Google y GitHub son privadas; compartir uno rompe trazabilidad y desconecta sesiones |
 
 ---
 

@@ -124,6 +124,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`10-entorno/02-github.md`](10-entorno/02-github.md) | Conectar GitHub y trabajar sin romper nada |
 | [`10-entorno/03-browseract.md`](10-entorno/03-browseract.md) | BrowserAct en detalle, para agentes y personas |
 | [`10-entorno/04-harness-por-integrante.md`](10-entorno/04-harness-por-integrante.md) | Cada harness, su modelo y las mismas reglas |
+| [`10-entorno/05-tu-navegador.md`](10-entorno/05-tu-navegador.md) | Crear el navegador personal de cada integrante |
 | [`../skills/README.md`](../skills/README.md) | Maletín de 24 skills y cómo instalarlas |
 
 ---
