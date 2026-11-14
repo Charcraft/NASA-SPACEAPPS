@@ -86,7 +86,7 @@ src/components/
 
 **Invariantes:**
 1. `repositories.ts` es el único que escribe en Dexie.
-2. `rules/` no importa `db/`, `realtime/` ni `ai/`.
+2. `rules/` no importa `db/`, `stream-engine` ni `ai/`; **sí importa `registry.ts` (catálogo puro) y `osdr/client.ts` (baseline)** para no duplicar umbrales ni lógica.
 3. `realtime/` no importa `dexie`.
 4. La IA es opcional: con `AI_ENABLED=false` todo funciona.
 5. La sala (`crew-hub`) no persiste: si cae, el dato local sigue intacto.
