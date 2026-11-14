@@ -8,6 +8,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 
 | Archivo | Qué contiene | Para quién |
 |---|---|---|
+| [`ONBOARDING.md`](../ONBOARDING.md) | **Protocolo de instalación y bienvenida que sigue un agente al clonar el repo** | Agentes y nuevos integrantes |
 | [`README.md`](../README.md) | Puerta de entrada al repo | Todos |
 | [`AGENTS.md`](../AGENTS.md) | Reglas de trabajo y veracidad | Todos |
 | [`MEMORY.md`](../MEMORY.md) | Estado vivo, decisiones, pendientes | Todos |

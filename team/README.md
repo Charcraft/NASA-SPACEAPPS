@@ -10,6 +10,7 @@ Una carpeta por integrante. **Cada quien es dueño de la suya y de nadie más.**
 team/
 ├── README.md            ← este archivo
 ├── _plantilla/          ← no editar; es la base
+│   ├── BIENVENIDA.md
 │   ├── perfil.md
 │   └── bitacora.md
 ├── danny1510/           Eduardo Daniel Vázquez Díaz — Team Owner
@@ -25,7 +26,8 @@ team/
 
 | Archivo | Para qué | Quién lo edita |
 |---|---|---|
-| `perfil.md` | Tus habilidades, disponibilidad y preferencias. **Se llena una vez, antes del 9 de noviembre.** | Solo tú |
+| `BIENVENIDA.md` | Tu rol, tus primeras tareas y cómo se trabaja aquí. **Se lee al entrar.** | Solo lectura (lo mantiene Pineda) |
+| `perfil.md` | Tus habilidades, disponibilidad y preferencias. **Se llena antes del evento.** | Solo tú |
 | `bitacora.md` | Qué hiciste y qué te bloqueó, bloque por bloque. Append-only. | Solo tú |
 
 ---

@@ -9,6 +9,25 @@
 
 ---
 
+## Instalar en un comando
+
+Si eres del equipo ROCKET y acabas de clonar esto:
+
+```powershell
+git clone https://github.com/Charcraft/NASA-SPACEAPPS
+cd NASA-SPACEAPPS
+powershell -ExecutionPolicy Bypass -File .\scripts\instalar-todo.ps1
+```
+
+O dile a tu agente:
+
+> *"Lee el repo https://github.com/Charcraft/NASA-SPACEAPPS e instálalo"*
+
+Tu agente seguirá [`ONBOARDING.md`](ONBOARDING.md): instala las 24 skills, te pregunta quién eres, te lleva a tu carpeta en `team/` y arranca la conversación de trabajo.
+
+---
+---
+
 ## El problema
 
 A mitad de camino a Marte, un compañero de tripulación colapsa con dolor en el pecho. No hay médico a bordo, y el mensaje a la Tierra tarda hasta 22 minutos en llegar.

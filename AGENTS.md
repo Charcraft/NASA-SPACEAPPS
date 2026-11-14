@@ -5,6 +5,23 @@
 
 ---
 
+## 0 · Si te pidieron "lee el repo e instálalo"
+
+**Detente y sigue [`ONBOARDING.md`](ONBOARDING.md) en orden.** No improvises.
+
+El protocolo es:
+
+1. Ejecutar `scripts/instalar-todo.ps1` (Windows) o `scripts/instalar-todo.sh` (macOS/Linux).
+2. **Preguntar quién es la persona**, con la lista de los 5 integrantes.
+3. Abrir `team/<usuario>/BIENVENIDA.md` y seguirlo.
+4. Dar la bienvenida (la firma **Pineda / `Cxrlosmp`**).
+5. Mostrar las capacidades nuevas del agente (skills instaladas).
+6. Arrancar la discusión sobre el trabajo, con las tres preguntas del protocolo.
+
+**Nunca asumas la identidad** por el nombre de usuario del sistema, la carpeta o el correo. Se pregunta.
+
+---
+
 ## 1. Contexto del proyecto
 
 - **Evento:** NASA International Space Apps Challenge 2026 — 14 y 15 de noviembre de 2026.

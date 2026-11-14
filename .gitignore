@@ -51,3 +51,8 @@ practicas-locales/
 
 # Cache de exploracion de datos
 scripts/.osdr-humano.json
+
+# Skills instaladas localmente (se generan con scripts/instalar-todo)
+.opencode/skills/
+.claude/skills/
+.cursor/skills/

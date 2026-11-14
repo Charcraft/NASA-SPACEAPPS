@@ -11,7 +11,13 @@ Write-Host "== Verificacion de documentacion ==" -ForegroundColor Cyan
 Write-Host ""
 
 $archivos = Get-ChildItem $raiz -Recurse -Filter *.md -File |
-    Where-Object { $_.FullName -notmatch '\\node_modules\\' -and $_.FullName -notmatch '\\\.git\\' }
+    Where-Object {
+        $_.FullName -notmatch '\\node_modules\\' -and
+        $_.FullName -notmatch '\\\.git\\' -and
+        $_.FullName -notmatch '\\\.opencode\\skills\\' -and
+        $_.FullName -notmatch '\\\.claude\\skills\\' -and
+        $_.FullName -notmatch '\\\.cursor\\skills\\'
+    }
 
 $rotos = @()
 $totalEnlaces = 0

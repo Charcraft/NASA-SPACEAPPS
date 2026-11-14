@@ -8,6 +8,25 @@
 
 ---
 
+## Install in one command
+
+Team ROCKET members, right after cloning:
+
+```bash
+git clone https://github.com/Charcraft/NASA-SPACEAPPS
+cd NASA-SPACEAPPS
+powershell -ExecutionPolicy Bypass -File ./scripts/instalar-todo.ps1   # Windows
+# bash scripts/instalar-todo.sh                                        # macOS / Linux
+```
+
+Or just tell your agent:
+
+> *"Read the repo https://github.com/Charcraft/NASA-SPACEAPPS and install it"*
+
+Your agent follows [`ONBOARDING.md`](ONBOARDING.md): installs the 24 skills, asks who you are, takes you to your folder in `team/`, and starts the working conversation.
+
+---
+
 ## The problem
 
 Halfway to Mars, a crewmate collapses with chest pain. There is no doctor on board, and the message to Earth takes up to 22 minutes to arrive.
