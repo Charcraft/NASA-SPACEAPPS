@@ -130,6 +130,20 @@ export interface LecturaFrame {
   meshNodeId: MeshNodeId | null;
   toolAnimationId: ToolAnimationId;
   calidad: number;
+  /**
+   * Explicación ya redactada por el evaluador. Viaja con la lectura para que la
+   * sala de tripulación pueda mostrar una alerta sin recalcular reglas.
+   */
+  razon: string;
+  accion: string;
+  reglaDisparada: string;
+  fuente: string;
+}
+
+export interface EstadoNodo3D {
+  nivelMaximo: Nivel;
+  parametroPrincipalId: string;
+  animacionActiva: ToolAnimationId | null;
 }
 
 export interface RealtimeTelemetryFrame {
@@ -138,16 +152,7 @@ export interface RealtimeTelemetryFrame {
   /** Tiempo de misión en segundos. Sustituye al enum cerrado de timepoints. */
   metSegundos: number;
   lecturas: Record<string, LecturaFrame>;
-  estadoNodos3D: Partial<
-    Record<
-      MeshNodeId,
-      {
-        nivelMaximo: Nivel;
-        parametroPrincipalId: string;
-        animacionActiva: ToolAnimationId | null;
-      }
-    >
-  >;
+  estadoNodos3D: Partial<Record<MeshNodeId, EstadoNodo3D>>;
 }
 
 // ---------------------------------------------------------------------------
@@ -165,6 +170,52 @@ export interface TelemetrySink {
   onLectura(lectura: LecturaEvaluable, crewId: CrewId): void;
   onFrame(frame: RealtimeTelemetryFrame): void;
 }
+
+// ---------------------------------------------------------------------------
+// Sala de tripulación (sincronización entre astronautas)
+// ---------------------------------------------------------------------------
+
+export type EstadoEnlace = 'conectado' | 'degradado' | 'sin-enlace';
+
+/** Una lectura fuera de rango, ya evaluada y lista para mostrarse a otro tripulante. */
+export interface AlertaTripulacion {
+  /** Estable por tripulante + parámetro + timestamp; idempotente al reintentar. */
+  id: string;
+  crewId: CrewId;
+  parametroId: string;
+  nombreParametro: string;
+  nivel: Exclude<Nivel, 'NOMINAL'>;
+  valor: number;
+  unidad: string;
+  baseline: number | null;
+  razon: string;
+  accion: string;
+  reglaDisparada: string;
+  fuente: string;
+  timestamp: number;
+}
+
+/** Estado agregado de un tripulante tal como lo ve la sala. */
+export interface EstadoTripulante {
+  crewId: CrewId;
+  nivel: Nivel;
+  alertasActivas: AlertaTripulacion[];
+  ultimaActualizacion: number;
+  /** Segundos sin recibir un frame. `null` si nunca se recibió. */
+  silencioSegundos: number | null;
+  estadoEnlace: EstadoEnlace;
+}
+
+/** Eventos que viajan por `GET /api/telemetry` (SSE). */
+export type EventoSala =
+  | { tipo: 'snapshot'; timestamp: number; tripulantes: EstadoTripulante[] }
+  | { tipo: 'alerta'; timestamp: number; alerta: AlertaTripulacion }
+  | { tipo: 'resuelta'; timestamp: number; crewId: CrewId; parametroId: string }
+  | {
+      tipo: 'latido';
+      timestamp: number;
+      tripulantes: Array<{ crewId: CrewId; nivel: Nivel; estadoEnlace: EstadoEnlace }>;
+    };
 
 // ---------------------------------------------------------------------------
 // Módulo de IA (contrato únicamente; la implementación es de otro integrante)
