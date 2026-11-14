@@ -119,7 +119,12 @@ export function evaluar(
 
 ```ts
 // src/lib/osdr/client.ts
-export function baselinePreVuelo(crewId: CrewId, paramId: string): number | null;
+export function baselinePreVuelo(
+  crewId: CrewId,
+  paramId: string,
+): EstadisticaBaselinePersonal | null;
+// Objeto completo (media, desviacionEstandar, min, max, n), no solo la media:
+// `triage` necesita la desviación estándar para el z-score.
 ```
 
 ```ts
