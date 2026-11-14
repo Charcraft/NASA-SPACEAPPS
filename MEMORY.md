@@ -1,7 +1,7 @@
 # MEMORY.md — Memoria operativa del proyecto
 
 > Registro vivo del estado del proyecto. Se actualiza al final de cada sesión de trabajo.
-> **Última actualización:** 2026-11-13
+> **Última actualización:** 2026-11-14
 
 ---
 
@@ -67,6 +67,8 @@
 | D21 | **Un navegador BrowserAct por persona**, nunca compartido | 2026-11-13 | Sesiones de Google y GitHub son privadas; compartir uno rompe trazabilidad y desconecta sesiones |
 | D22 | **Protocolo documental obligatorio** + verificación automática de documentos huérfanos | 2026-11-13 | Que ningún agente cierre una tarea sin registrar decisiones, fuentes, IA y archivos |
 | D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
+| D24 | Reparto Backend: **Back 1** = motor realtime, registry, bridge 3D, `types` y scaffold; **Back 2 (Angel)** = OSDR client, Dexie/repositorios, reglas/triage, APIs `osdr` y `ai-context`, tests | 2026-11-14 | El brief asumía archivos ya creados que no existen; se reparte por dominio para evitar conflictos |
+| D25 | Corregir el brief: **17 indicadores OSDR**, no 19; `meshNodeId` nullable para parámetros ambientales | 2026-11-14 | Verificado contra `src/data/seed/osdr-inspiration4-cmp.json` |
 
 ---
 
@@ -84,6 +86,9 @@
 - [ ] Validar umbrales clínicos con fuente primaria (`[POR VALIDAR]` en `docs/02-investigacion/02-indicadores-fisiologicos.md`).
 - [ ] Explorar OSDR y documentar 3 datasets concretos utilizables.
 - [ ] Revisar recursos oficiales el 13 de noviembre y ajustar el plan de datos.
+- [x] Confirmar **Back 1**: Ernesto (`@ernesto-montes`); falta su aceptación del reparto.
+- [ ] Integrar `BRIEF-BACKEND-AGENTES.md` al repo (hoy está en `~/Downloads`).
+- [ ] Crear los issues de Backend 1 y Backend 2 y el scaffold (`package.json`, `tsconfig`, `next.config`).
 
 ---
 

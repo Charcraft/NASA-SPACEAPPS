@@ -50,6 +50,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/pitch-aegis.pptx`](03-plan/pitch-aegis.pptx) | **Presentación lista para proyectar** (generada con `scripts/generar-pitch.py`) |
 | [`03-plan/08-preguntas-jurado.md`](03-plan/08-preguntas-jurado.md) | **Documento de estudio: 40+ preguntas del jurado con respuestas y preguntas trampa** |
 | [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
+| [`03-plan/10-reparto-backend.md`](03-plan/10-reparto-backend.md) | **Reparto Back 1 / Back 2**: dueño por archivo, contratos de dependencia y acuerdos previos |
 
 ---
 

@@ -130,17 +130,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-008 · Reparto de tareas Backend 1 / Backend 2
+- **Fecha/hora:** 2026-11-14 15:47
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (deepseek-flash)
+- **Categoría:** documentación
+- **Prompt usado:** ad hoc
+- **Propósito:** convertir `BRIEF-BACKEND-AGENTES.md` en un reparto de archivos y contratos sin duplicar dueños.
+- **Resultado obtenido:** `docs/03-plan/10-reparto-backend.md` y `team/angel_marco/plan-backend-2.md`; detección de 10 archivos inexistentes y del desajuste 17 vs 19 indicadores.
+- **Validación:** contraste con `git ls-tree`, `git status` y el JSON del seed; pendiente de revisión de Back 1 y Pineda.
+- **Estado:** [POR VALIDAR]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
-| Documentación | 2 | 2 |
+| Documentación | 3 | 2 |
 | Arquitectura / código | 3 | 2 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **8** | **7** |
+| **Total** | **9** | **7** |
 
 ---
 
