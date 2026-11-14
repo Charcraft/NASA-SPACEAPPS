@@ -104,6 +104,7 @@
 - Se añadió `docs/03-plan/08-preguntas-jurado.md`: documento de estudio con datos para memorizar, 10 preguntas obligatorias (ES/EN), 30 preguntas por categoría y 6 trampas.
 - Se añadió `docs/03-plan/09-guia-demo-actual.md` y `scripts/demo-dataset.py` para mostrar el dataset sin depender de la app.
 - **Hallazgo de calidad de datos:** 24 de 475 valores (5.1 %) caen fuera del rango de referencia del propio dataset. Verificado contra el CSV original; no es error de parseo. Se documenta en `src/data/seed/README.md` y se usa como argumento de producto.
+- Se añadió `docs/12-briefing-equipo.md`: todo el proyecto en un documento, para presentarlo al equipo en 40 minutos.
 
 ### 2026-11-13 — Saneamiento de codificación y auditoría previa al kickoff
 - Se detectó y resolvió el problema de mojibake (Windows-1252 vs UTF-8) en los 10 archivos de perfiles y bitácoras de `team/`.

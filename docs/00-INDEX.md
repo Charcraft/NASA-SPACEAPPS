@@ -143,6 +143,14 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 
 ---
 
+## 12 · Briefing del equipo
+
+| Documento | Contenido |
+|---|---|
+| [`12-briefing-equipo.md`](12-briefing-equipo.md) | **Todo el proyecto en un documento**, para presentarlo al equipo en 40 minutos |
+
+---
+
 ## Convenciones
 
 - Idioma: español. Términos oficiales en inglés cuando corresponda.
