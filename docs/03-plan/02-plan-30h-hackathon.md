@@ -114,15 +114,16 @@ Un *gate* es un punto donde se decide sí o no. Se respeta aunque duela.
 | 09:00–10:00 | Kick Off y conferencia (aprovechar para descansar la vista) | — | — |
 | 10:00–12:00 | Integración: unir todo, arreglar lo roto, estados vacíos y de error | Todos | App coherente |
 | **12:00** | **G4 — congelamiento de features** | Todos | Solo bugs de aquí en adelante |
-| 12:00–13:30 | **Grabar el video de 60 s** (guion ya escrito el miércoles) | Diseño + Owner | Video exportado |
+| 12:00–13:30 | **Grabar el video de 30 s** (guion ya escrito el viernes) | Diseño + Owner | Video exportado |
 | 13:30–14:30 | Ensayo del pitch de 3 min, dos veces | Todos | Guion memorizado |
 | 14:30–15:00 | Comida | — | — |
-| 15:00–16:00 | README final: arquitectura, datasets, declaración SI, créditos | Dev + Datos | Repo presentable |
+| 15:00–16:00 | README en inglés + campos del formulario + declaración SI | Dev + Datos | Repo presentable |
 | 16:00–16:30 | **Subir el submission** con 1 hora de margen | Owner | Confirmación en pantalla |
 | **16:30** | **G5** — enviado | Todos | ✅ |
-| 17:00 | Envío oficial cierra | — | — |
+| 17:00 | Envío oficial local cierra | — | — |
 | 17:30–19:00 | Semifinalistas locales | Owner + 1 | Pitch |
 | 19:00–20:00 | Finalistas y premiación | Todos | — |
+| 21:00–23:00 | **Ventana de reenvío opcional.** Solo mejoras sin riesgo. Nunca empeorar lo enviado | Owner + 1 | Envío 2 |
 
 ---
 
@@ -147,7 +148,7 @@ Si el sábado a las 18:00 (G2) el equipo va retrasado, se aplica este orden de r
 | 4. Gráficas de tendencia | 2. Semáforo clínico |
 | 5. Perfiles de entorno | 3. Un protocolo de emergencia completo |
 | 6. Copiloto SI | 4. Funcionamiento offline |
-| 7. Indicadores 6–8 | 5. Video de 60 s y submission |
+| 7. Indicadores 6–8 | 5. Video de 30 s y submission |
 
 **La regla:** mejor una app pequeña que se ve impresionante que una app enorme que no abre.
 

@@ -125,7 +125,7 @@ Alguien tiene dolor en el pecho. La app deja de ser un dashboard y se convierte 
 
 ## 7. Guion de la demo en vivo (90 segundos)
 
-Para el pitch de las 17:30.
+> ⚠️ **No confundir con el demo del submission.** El jurado global exige un **video de 30 segundos** (`06-demo-30s.md`). Este guion de 90 s es para el **pitch presencial** del domingo a las 17:30, donde sí hay tiempo para una demo en vivo.
 
 | t | Acción | Qué se dice |
 |---|---|---|

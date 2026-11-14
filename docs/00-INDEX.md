@@ -38,10 +38,12 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 
 | Documento | Contenido |
 |---|---|
-| [`03-plan/01-plan-7-dias.md`](03-plan/01-plan-7-dias.md) | Plan día por día del 6 al 13 de noviembre |
+| [`03-plan/01-plan-7-dias.md`](03-plan/01-plan-7-dias.md) | Plan día por día del 6 al 13 (histórico) |
 | [`03-plan/02-plan-30h-hackathon.md`](03-plan/02-plan-30h-hackathon.md) | Cronograma hora por hora del evento, calibrado al envío de las 17:00 |
 | [`03-plan/03-alcance-producto.md`](03-plan/03-alcance-producto.md) | Qué construimos, qué no, y cómo se ve |
 | [`03-plan/04-riesgos.md`](03-plan/04-riesgos.md) | Riesgos, probabilidad, impacto y mitigación |
+| [`03-plan/05-plan-13nov.md`](03-plan/05-plan-13nov.md) | **Plan del día 13 con los recursos oficiales ya publicados** |
+| [`03-plan/06-demo-30s.md`](03-plan/06-demo-30s.md) | Guion del demo oficial: 30 segundos, estructura NASA, subtítulos |
 
 ---
 
@@ -92,6 +94,14 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`../team/`](../team/README.md) | Una carpeta por integrante: perfil y bitácora |
 | [`../.github/`](../.github/CODEOWNERS) | Plantillas de issue y PR, CODEOWNERS |
 | [`../scripts/`](../scripts/setup-integrante.ps1) | Setup por integrante, worktrees y verificación de docs |
+
+---
+
+## 08 · Submission
+
+| Documento | Contenido |
+|---|---|
+| [`08-submission/01-project-page-en.md`](08-submission/01-project-page-en.md) | Todos los campos del formulario en inglés, listos para copiar y pegar |
 
 ---
 

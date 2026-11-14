@@ -42,3 +42,9 @@ Uso de IA-Personal/
 
 # Pruebas locales de cada integrante (ver docs/03-plan/01-plan-7-dias.md)
 practicas-locales/
+
+# Capturas y archivos sueltos
+*.png
+*.jpg
+!docs/**/*.png
+!docs/**/*.jpg

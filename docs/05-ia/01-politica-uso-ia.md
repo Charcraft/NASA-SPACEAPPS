@@ -56,6 +56,57 @@ Una IA **puede** decir algo falso con total seguridad. Por eso:
 - Presentar código generado sin entenderlo.
 - Usar IA para **decidir** el alcance del producto (eso lo decide el equipo).
 - Subir al repo credenciales, tokens o API keys vistas en un prompt.
+- **Usar IA para concebir la idea de solución.** Regla textual del evento: *"SI should not be used to (come up with your idea of how to solve the challenge)."*
+
+---
+
+## 3.1 · Reglas de divulgación de contenido generado (publicadas 2026-11-13)
+
+El Project Submission Guide impone obligaciones concretas sobre el contenido generado por SI:
+
+| Tipo de contenido | Obligación |
+|---|---|
+| **Imágenes y videos** | **Marca de agua visible** que indique generación por SI |
+| **Audio** | Acreditación en el texto descriptivo y en los metadatos |
+| **Código y datos** | Acreditación en el texto descriptivo y en los metadatos |
+
+Además:
+
+> "Generated content may not use, contain, or modify any NASA branding or design elements (such as the NASA logos, flags, or mission identifiers)."
+
+### La estrategia que elegimos
+
+**No usar imágenes ni video generados por IA en el demo del submission.**
+
+Motivos:
+1. Evita la obligación de la marca de agua, que ensucia el video.
+2. Evita cualquier riesgo de incorporar branding de NASA.
+3. Una grabación real de la app es más creíble ante el jurado que un render.
+
+| Elemento del video | Origen permitido |
+|---|---|
+| Capturas de la app | Grabación de pantalla real |
+| Iconos | Lucide (ISC) o SVG propios |
+| Imágenes de contexto | Dominio público, **sin logos ni identificadores de misión** |
+| Música | Solo con licencia libre verificable |
+
+### Si aun así se usa una imagen generada
+
+1. Debe llevar marca de agua **visible** (esquina inferior, texto "SI-generated").
+2. Se declara en el campo *Use of SI*.
+3. Se registra en `03-registro-uso-ia.md` con el prompt usado.
+
+No hay excepción para "es solo un fondo".
+
+---
+
+## 3.2 · Lo que los jueces ven
+
+El formulario dice que la respuesta de SI es para recolección de datos y **no la leen los jueces**. Pero:
+
+> "Judges will be able to see any SI-generated indicators within your project — such as watermarks, descriptive text, or metadata."
+
+Es decir: **el jurado juzga el contenido, no la declaración**. Si hay marca de agua, la ven. Si hay código generado sin acreditar en el README, no la ven — pero la declaración del formulario debe ser cierta de todas formas, porque el equipo firma que el trabajo es original.
 
 ---
 

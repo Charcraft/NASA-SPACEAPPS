@@ -72,11 +72,41 @@ Basado en el patrón de años anteriores y en lo que el video del reto menciona:
 
 ---
 
-## 5. Registro de recursos oficiales (se llena el 2026-11-13)
+## 5. Registro de recursos oficiales (publicados 2026-11-13)
+
+> **Revisado el 2026-11-13 a las 09:00 desde la pestaña Resources del reto.**
 
 | Recurso | Tipo | Enlace | Utilidad | Decisión |
 |---|---|---|---|---|
-| _pendiente_ | | | | |
+| 5 Hazards of Human Spaceflight | Documentación HRP | https://www.nasa.gov/hrp/hazards/ | Marco central del proyecto | ✅ **Usar** — ya integrado |
+| Risks of Human Spaceflight | Documentación HRP | https://www.nasa.gov/hrp/risks/ | Trazabilidad peligro→riesgo | ✅ **Usar** |
+| Ongoing HRP Research in Space | Documentación HRP | https://www.nasa.gov/hrp/ongoing-hrp-research/ | Contramedidas y evidencia activa | ✅ **Usar** |
+| CSA — Monitoring Radiation for Astronaut Health | Artículo (agencia socia) | https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp | Justifica el indicador de dosis acumulada | ✅ **Usar** |
+| CSA — Why Do We Conduct Science Experiments in Space? | Artículo (agencia socia) | https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp | Contexto general | 🟢 Citarlo si sobra espacio |
+
+### ⚠️ Hallazgo crítico: no hay datasets
+
+El paquete oficial **no incluye ni un solo conjunto de datos**. Son cinco enlaces de documentación.
+
+Consecuencias:
+
+1. **OSDR deja de ser plan B y pasa a ser plan A obligatorio.** Sin un dataset real, el criterio *Relevance* ("NASA data is integral to the project's success") queda débil.
+2. Citar solo documentación es legítimo, pero no es "integración de datos".
+3. Es una **ventaja competitiva**: la mayoría de equipos va a presentar un dashboard sin datos reales.
+
+**Decisión:** se implementa el pipeline de OSDR (§2) antes de las 18:00 del sábado. Si falla, plan C documentado en `../03-plan/05-plan-13nov.md` §4.
+
+### Qué NO trajo el paquete oficial
+
+| Esperado | ¿Llegó? |
+|---|---|
+| Datasets clínicos de ejemplo | ❌ |
+| Notebooks o scripts | ❌ |
+| Enlaces a OSDR/LSDA | ❌ |
+| APIs | ❌ |
+| Recursos de la agencia autora (AEB) | ❌ |
+
+Todo lo que falte se cubre con lo ya documentado en este archivo.
 
 ---
 

@@ -1,7 +1,7 @@
 # MEMORY.md — Memoria operativa del proyecto
 
 > Registro vivo del estado del proyecto. Se actualiza al final de cada sesión de trabajo.
-> **Última actualización:** 2026-11-06
+> **Última actualización:** 2026-11-13
 
 ---
 
@@ -9,16 +9,24 @@
 
 | Campo | Valor |
 |---|---|
-| Días para el hackathon | **8** (evento: 2026-11-14) |
-| Fase | Investigación y planificación (pre-evento permitida) |
+| Fecha | **Viernes 13 de noviembre de 2026** |
+| Días para el hackathon | **1** (evento: 2026-11-14, 09:00) |
+| Fase | Recursos oficiales recibidos · adaptación final |
 | Proyecto enviado | No (0 de 1) |
-| Repositorio público | Pendiente de crear |
+| Repositorio público | ✅ https://github.com/Charcraft/NASA-SPACEAPPS |
 | Equipo cerrado | Sí — 5 integrantes, cupo local lleno |
 | Challenge confirmado | Sí — Health Monitoring Software |
 
 ---
 
 ## Hechos verificados
+
+- **Los recursos oficiales del reto se publicaron el 2026-11-13.** Contienen **solo documentación**: 3 enlaces de NASA HRP y 2 de la CSA. **Ningún dataset.**
+- El demo del submission debe ser de **30 segundos máximo** (o 7 diapositivas). Excederlo descalifica de la fase global.
+- El submission completo debe estar **en inglés**. El video puede ir en español **solo con subtítulos en inglés**.
+- Son **10 premios globales**. El puntaje real son **5 criterios de 1 a 5**: Impact, Creativity, Validity, Relevance, Presentation.
+- El contenido generado por SI (imágenes/video) requiere **marca de agua visible** y no puede incluir branding de NASA.
+- Se puede **editar y reenviar** el proyecto hasta el fin del hackathon; solo cuenta la última versión guardada.
 
 - La cuenta del equipo está registrada desde el **2026-09-08**.
 - Equipo **ROCKET** (`team-rocket13`), Local Event **Tuxtla Gutiérrez**.
@@ -45,6 +53,11 @@
 | D7 | Cada integrante trabaja en **su máquina** con **su harness** | 2026-11-06 | Menos acoplamiento, menos puntos de fallo |
 | D8 | Un archivo, un dueño. Append-only en compartidos | 2026-11-06 | Evita el 90 % de los conflictos de merge |
 | D9 | Tablero en **GitHub Projects**, no en Trello/Notion | 2026-11-06 | Ya está donde vive el código; cero logins extra |
+| D10 | **OSDR pasa a ser plan A**, no plan B | 2026-11-13 | El paquete oficial no trae datasets; sin datos reales, *Relevance* queda débil |
+| D11 | Demo de **30 s** en español con subtítulos en inglés | 2026-11-13 | Límite oficial; superar el video descalifica |
+| D12 | **Cero imágenes generadas por IA** en el demo | 2026-11-13 | Evita la marca de agua obligatoria y el riesgo de branding de NASA |
+| D13 | README en **inglés** (`README.md`) y español en `README.es.md` | 2026-11-13 | Todo el material enlazado al submission debe estar en inglés |
+| D14 | **Dos ventanas de envío**: 16:30 para el pitch, 21:00–23:00 opcional | 2026-11-13 | El sitio permite reenviar; el Local Event cierra a las 17:00 |
 
 ---
 
@@ -73,6 +86,16 @@
 ---
 
 ## Bitácora
+
+### 2026-11-13 — Recursos oficiales y adaptación del plan
+- Se revisó la pestaña Resources del reto: **3 enlaces de NASA HRP + 2 de CSA, ningún dataset**.
+- Se leyó el Judging & Awards Guide: 5 criterios de 1 a 5 y **10 premios globales** (antes creíamos 6).
+- Se leyó el Project Submission Guide: demo de **30 s máximo**, **todo en inglés**, reglas nuevas de divulgación de SI.
+- Se creó el repositorio público: https://github.com/Charcraft/NASA-SPACEAPPS
+- Se crearon `05-plan-13nov.md` (plan del día), `06-demo-30s.md` (guion oficial) y `08-submission/01-project-page-en.md`.
+- Se tradujo el README a inglés y se conservó el español en `README.es.md`.
+- Se añadió `LICENSE` MIT con aviso de no afiliación a NASA.
+- Se corrigió un error propio de codificación que corrompió `02-plan-30h-hackathon.md` (reparado y verificado).
 
 ### 2026-11-06 — Sesión de arranque- Investigación del reto, HRP, 5 hazards, reglas del evento, premios y datasets disponibles.
 - Se identificó el Local Event, el equipo, el límite de 5 y **el horario real de entrega (17:00)**.

@@ -1,5 +1,9 @@
 # 03.1 · Plan de los 7 días previos (6 → 13 de noviembre)
 
+> ⚠️ **DOCUMENTO HISTÓRICO.** La semana ya transcurrió y el día 13 está cubierto por
+> [`05-plan-13nov.md`](05-plan-13nov.md), que incorpora los recursos oficiales publicados ese día.
+> Se conserva como registro de lo que se planeó y de las reglas que siguen vigentes.
+
 > **Regla que manda:** no se construye el proyecto antes del hackathon.
 > Esta semana es de **investigación, decisiones y preparación**. Cero código de producto.
 
@@ -120,15 +124,15 @@ Cada persona practica su stack con un ejemplo **que no sea del proyecto**:
 **Objetivo:** quitar del domingo las tareas que siempre se olvidan.
 
 - [ ] Crear el repositorio público con licencia MIT y README.
-- [ ] Escribir el **guion del video de 60 s**, con tiempos:
+- [ ] Escribir el **guion del video** según el formato oficial (`06-demo-30s.md`, 30 segundos máximo, publicado el 13).
 
 | Tiempo | Plano | Texto / voz en off |
 |---|---|---|
-| 0:00–0:08 | Astronauta, oscuridad, alarma | "A mitad de camino a Marte, no hay médico." |
-| 0:08–0:18 | Síntoma → app → semáforo rojo | "La tripulación tiene que decidir sola." |
-| 0:18–0:38 | Mapa corporal, medición guiada, tendencia | "Cada indicador explicado, medido y comparado con tu propia línea base." |
-| 0:38–0:50 | Protocolo de emergencia paso a paso | "Y cuando es urgente, la app te lleva de la mano." |
-| 0:50–0:60 | Logo + repo + cierre | "Funciona sin conexión. Porque allá arriba, no hay señal." |
+| 0:00–0:02 | Logo del equipo | "Soy Carlos, equipo ROCKET." |
+| 0:02–0:06 | Silueta y alarma | "A mitad de camino a Marte, un compañero colapsa. No hay médico." |
+| 0:06–0:09 | Nombre del producto | "AEGIS. Autonomía de salud, sin conexión." |
+| 0:09–0:20 | Demo real de la app | "Guía cada medición, la compara con tu línea base de datos de NASA, y te da una señal simple." |
+| 0:20–0:29 | WiFi apagado + cierre | "Funciona sin conexión. Porque veintidós minutos de retraso son veintidós minutos de más." |
 
 - [ ] Redactar el borrador de la declaración de SI: `docs/05-ia/04-declaracion-si-submission.md`.
 - [ ] Preparar la plantilla del formulario de submission (qué campos pide).

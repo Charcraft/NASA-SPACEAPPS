@@ -2,6 +2,15 @@
 
 > **Estado: BORRADOR.** Se completa el 15 de noviembre a las 15:00 con el registro real de `03-registro-uso-ia.md`.
 > Se pega en el campo correspondiente del formulario de submission de Space Apps.
+>
+> ⚠️ **Actualización 2026-11-13:** el submission va en inglés. La versión que realmente se pega en el formulario
+> está en [`../08-submission/01-project-page-en.md`](../08-submission/01-project-page-en.md) § "Use of Super Intelligence (SI)".
+> Este documento queda como la versión razonada y en español del mismo contenido.
+>
+> **Reglas nuevas que aplican** (ver `01-politica-uso-ia.md` § 3.1):
+> - Imágenes y videos generados por SI: **marca de agua visible obligatoria**.
+> - Nada de logos, banderas ni identificadores de misión de NASA en contenido generado.
+> - SI **no puede** usarse para concebir la idea de solución.
 
 ---
 

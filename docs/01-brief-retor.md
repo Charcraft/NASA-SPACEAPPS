@@ -85,24 +85,46 @@ Y menciona como indicadores útiles: **presión arterial, frecuencia cardíaca, 
 
 ## 6. Cómo se gana esto
 
-### Premios globales 2026 (6 categorías)
+### Los 5 criterios reales de evaluación (1–5 cada uno)
+
+> Fuente: Judging & Awards Guide, publicado 2026-11-13.
+
+| Criterio | Qué premia | Nuestra respuesta |
+|---|---|---|
+| **Impact** | Resolver un problema significativo, con alcance amplio | Colapso a mitad de camino a Marte + aplicación en Tierra |
+| **Creativity** | Originalidad real, no una mejora cosmética | Modo emergencia + línea base personal + offline-first |
+| **Validity** | Solidez científica, viabilidad, usabilidad | Umbrales con fuente, motor de reglas auditable, sin red |
+| **Relevance** | Alineación con el reto + **integración profunda de datos NASA** | OSDR como fuente real |
+| **Presentation** | Claridad, historia, ejecución del demo | Guion de 30 s con la estructura oficial + subtítulos |
+
+### Los 10 premios globales 2026
+
 | Premio | Qué busca |
 |---|---|
-| Best Use of Hardware | Uso creativo de hardware físico |
-| **Best Use of Data** | Uso real, profundo y trazable de datos abiertos de NASA/agencias asociadas |
-| Most Inspiring | Historia, impacto humano, capacidad de inspirar |
-| **Galactic Impact** | Impacto real y escalable en la exploración espacial |
-| Best Mission Concept | Solidez del concepto de misión |
-| People's Choice | Voto público |
+| Best Use of Science | Mejor y más válido uso del método científico |
+| **Best Use of Data** | Hacer accesible el dato espacial o usarlo en una aplicación única |
+| Best Use of Technology | Uso más innovador de tecnología |
+| **Galactic Impact** | Mayor potencial de mejorar la vida en la Tierra o el universo |
+| Best Mission Concept | Concepto y diseño más plausibles |
+| Most Inspirational | El que captura el corazón |
+| **Best Storytelling** | El que mejor comunica el potencial del dato abierto |
+| Global Connection | El que mejor conecta personas a través de la tecnología |
+| Art & Technology | Mejor combinación de habilidad técnica y creativa |
+| Local Impact | Mayor potencial de impacto en la comunidad local |
+
+> Los premios se asignan **después** de la ronda de finalistas globales, entre los 10 mejores. No se compite "por categoría" desde el inicio: se compite por puntaje en los 5 criterios.
 
 ### Entregables que evalúa el jurado
 1. Descripción corta del proyecto.
-2. **Video de 1 minuto**.
-3. Página del proyecto.
-4. **Repositorio público con el código.**
+2. **Demo: video de 30 segundos MÁXIMO, o 7 diapositivas.** Excederlo descalifica de la fase global.
+3. Página del proyecto (todos los campos).
+4. Enlaces públicos sin login.
+
+### Requisito de idioma
+**Todo el submission y el material enlazado debe estar en inglés.** El video puede hablarse en español **solo si lleva subtítulos en inglés**. Las diapositivas deben estar en inglés.
 
 ### Selección
-El Local Event nomina los mejores proyectos a la fase global. En Tuxtla Gutiérrez hay semifinalistas locales a las **17:30** y pitch de finalistas a las **19:00** del domingo.
+El Local Event nomina proyectos a la fase global. Global Nominees: 3 de diciembre. Global Finalists: 17 de diciembre. Ganadores: 26 de enero de 2027.
 
 ---
 
