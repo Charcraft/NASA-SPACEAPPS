@@ -118,6 +118,7 @@
 - **Error corregido:** `next build` rompía al cargar `next.config.ts` con TypeScript 7 (`Cannot read properties of undefined (reading 'fileExists')`). Se cambió a `next.config.mjs` y se fijó TypeScript 6.
 - Verificado: `pnpm typecheck` limpio y `pnpm build` genera 4 rutas; primer load 102 kB (límite del stack: 3 MB).
 - Los 4 contratos compartidos quedaron en `src/types/index.ts` (congelados a H2).
+- `src/lib/realtime/registry.ts`: 26 parámetros (17 OSDR reales + 9 simulados), `meshNodeId` nullable solo para `cabin_co2`, validación de invariantes y error `E-VAL-002` textual.
 
 ### 2026-11-14 — Revisión y corrección del plan de Back 2
 
