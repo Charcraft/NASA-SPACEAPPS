@@ -2,45 +2,37 @@ import Dexie from 'dexie';
 
 import { db } from '@/lib/db/dexie';
 import { Back2Error, type CodigoError } from '@/lib/db/errors';
+import { GENESIS, contenidoEntrada, hashEncadenado } from '@/lib/sync/hash';
 
 import type { Nivel, ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
 
 import type {
   EntradaColaSync,
+  EstadoSync,
   EventoEmergencia,
   RegistroBitacora,
   RegistroMedicionLocal,
+  SerieAgregada,
 } from './types';
 
 /**
  * ÚNICO punto de escritura en IndexedDB (invariante de arquitectura).
  *
  * Nadie más importa `db` para escribir: Back 1 emite por `TelemetrySink` y
- * aquí se persiste. Todas las funciones de escritura son no-bloqueantes para
- * el hilo de renderizado y nunca lanzan hacia el caller: devuelven
- * `ResultadoPersistencia` o un `Back2Error` capturado en el resultado.
+ * aquí se persiste. Las escrituras son no-bloqueantes para el renderizado y
+ * `guardarFrame` nunca lanza: devuelve `ResultadoPersistencia`.
  */
 
 const SEGUNDOS = 1000;
 const MINUTO = 60 * SEGUNDOS;
 const DIA = 24 * 60 * MINUTO;
 
-/** Hash de integridad (djb2) para la cola de sync. Demo, no criptográfico. */
-function hashFrame(frame: RealtimeTelemetryFrame): string {
-  const serializado = JSON.stringify({
-    t: frame.timestamp,
-    c: frame.crewId,
-    l: Object.fromEntries(
-      Object.entries(frame.lecturas).map(([k, v]) => [k, [v.valor, v.nivel]]),
-    ),
-  });
-
-  let h = 5381;
-  for (let i = 0; i < serializado.length; i++) {
-    h = ((h << 5) + h + serializado.charCodeAt(i)) >>> 0;
-  }
-  return `h${h.toString(16)}`;
-}
+const ORDEN_PRIORIDAD: Record<EntradaColaSync['prioridad'], number> = {
+  A: 0,
+  B: 1,
+  C: 2,
+  D: 3,
+};
 
 function mapearError(error: unknown): { codigo: CodigoError; message: string } {
   if (error instanceof Dexie.QuotaExceededError) {
@@ -64,7 +56,7 @@ function prioridadParaNiveles(niveles: Nivel[]): EntradaColaSync['prioridad'] {
 
 /**
  * Persiste un frame de telemetría: una fila de `mediciones` por lectura + una
- * entrada en `colaSync` (prioridad según el nivel máximo). Nunca lanza.
+ * entrada en `colaSync` con hash encadenado al anterior. Nunca lanza.
  */
 export async function guardarFrame(
   frame: RealtimeTelemetryFrame,
@@ -76,9 +68,8 @@ export async function guardarFrame(
   }
 
   try {
-    const nivelMaximo = lecturas
-      .map(([, lectura]) => lectura.nivel)
-      .reduce<Nivel>((acc, n) => (n === 'CRITICO' ? 'CRITICO' : n === 'ATENCION' && acc !== 'CRITICO' ? 'ATENCION' : acc), 'NOMINAL');
+    const prioridad = prioridadParaNiveles(lecturas.map(([, l]) => l.nivel));
+    const creadoEn = Date.now();
 
     await db.transaction('rw', db.mediciones, db.colaSync, async () => {
       for (const [parametroId, lectura] of lecturas) {
@@ -93,13 +84,19 @@ export async function guardarFrame(
         });
       }
 
+      const previa = await db.colaSync.toCollection().last();
+      const hash = hashEncadenado(
+        previa?.hash ?? GENESIS,
+        contenidoEntrada(prioridad, 'frame', frame.timestamp, creadoEn),
+      );
+
       await db.colaSync.add({
-        prioridad: prioridadParaNiveles(lecturas.map(([, l]) => l.nivel)),
+        prioridad,
         tipo: 'frame',
         payloadId: frame.timestamp,
-        hash: hashFrame(frame),
+        hash,
         estado: 'pendiente',
-        creadoEn: Date.now(),
+        creadoEn,
         intentos: 0,
       });
     });
@@ -157,6 +154,47 @@ export async function registrarBitacora(
   registro: Omit<RegistroBitacora, 'id'>,
 ): Promise<number> {
   return db.bitacora.add(registro);
+}
+
+// ---------------------------------------------------------------------------
+// Cola de sincronización (escrituras/lecturas para `sync/queue.ts`)
+// ---------------------------------------------------------------------------
+
+export async function encolarSync(entrada: Omit<EntradaColaSync, 'id'>): Promise<number> {
+  return db.colaSync.add(entrada);
+}
+
+export async function ultimaEntradaSync(): Promise<EntradaColaSync | undefined> {
+  return db.colaSync.toCollection().last();
+}
+
+export async function todasEntradasSync(): Promise<EntradaColaSync[]> {
+  return db.colaSync.toCollection().toArray();
+}
+
+export async function pendientesSync(): Promise<EntradaColaSync[]> {
+  const pendientes = await db.colaSync.where('estado').equals('pendiente').toArray();
+  return pendientes.sort(
+    (a, b) =>
+      ORDEN_PRIORIDAD[a.prioridad] - ORDEN_PRIORIDAD[b.prioridad] || a.creadoEn - b.creadoEn,
+  );
+}
+
+export async function marcarColaSync(ids: number[], estado: EstadoSync): Promise<number> {
+  await db.transaction('rw', db.colaSync, async () => {
+    for (const id of ids) {
+      await db.colaSync.update(id, { estado });
+    }
+  });
+  return ids.length;
+}
+
+// ---------------------------------------------------------------------------
+// Series agregadas
+// ---------------------------------------------------------------------------
+
+export async function guardarSerie(serie: Omit<SerieAgregada, 'id'>): Promise<number> {
+  return db.series.add(serie);
 }
 
 export { Back2Error };
