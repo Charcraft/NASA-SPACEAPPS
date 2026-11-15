@@ -54,13 +54,13 @@ afterAll(async () => {
 });
 
 describe('db/repositories · guardarFrame', () => {
-  it('persiste una fila por lectura y encola sync', async () => {
+  it('persiste una fila por lectura (sin encolar sync)', async () => {
     const resultado = await guardarFrame(frameCon(Date.now()));
 
     expect(resultado.ok).toBe(true);
     expect(resultado.guardadas).toBe(1);
     expect(await db.mediciones.count()).toBe(1);
-    expect(await db.colaSync.count()).toBe(1);
+    expect(await db.colaSync.count()).toBe(0);
   });
 
   it('devuelve guardadas=0 para un frame sin lecturas', async () => {
@@ -75,12 +75,6 @@ describe('db/repositories · guardarFrame', () => {
     expect(resultado.ok).toBe(true);
     expect(resultado.guardadas).toBe(0);
     expect(await db.mediciones.count()).toBe(0);
-  });
-
-  it('asigna prioridad A cuando hay una lectura CRITICO', async () => {
-    await guardarFrame(frameCon(Date.now(), ['CRITICO']));
-    const cola = await db.colaSync.toArray();
-    expect(cola[0]?.prioridad).toBe('A');
   });
 
   it('deja las mediciones sin sincronizar', async () => {

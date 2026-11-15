@@ -183,3 +183,56 @@ export function obtenerValorEnTimepoint(
   const punto = indicador.serie[crewId]?.find((p) => p.timepoint === timepoint);
   return punto?.valor ?? null;
 }
+
+// ---------------------------------------------------------------------------
+// Hallazgos fuera de rango
+// ---------------------------------------------------------------------------
+
+export interface HallazgoFueraDeRango {
+  crewId: CrewId;
+  indicadorId: string;
+  nombre: string;
+  unidad: string;
+  timepoint: TimepointId;
+  valor: number;
+  rangoMin: number | null;
+  rangoMax: number | null;
+  mediaBaseline: number;
+}
+
+/**
+ * Identifica todas las lecturas fuera del rango de referencia oficial de
+ * OSD-575 (en todo el dataset o para un tripulante concreto).
+ */
+export function listarValoresFueraDeRango(crewId?: CrewId): HallazgoFueraDeRango[] {
+  const hallazgos: HallazgoFueraDeRango[] = [];
+  const crews: CrewId[] = crewId ? [crewId] : dataset.meta.tripulantes;
+
+  for (const indicador of dataset.indicadores) {
+    const { min, max } = indicador.rangoReferencia;
+
+    for (const c of crews) {
+      const base = baselinePreVuelo(c, indicador.id);
+      for (const p of indicador.serie[c] ?? []) {
+        if (p.valor === null) continue;
+        const bajo = min !== null && p.valor < min;
+        const alto = max !== null && p.valor > max;
+        if (bajo || alto) {
+          hallazgos.push({
+            crewId: c,
+            indicadorId: indicador.id,
+            nombre: indicador.nombre,
+            unidad: indicador.unidad,
+            timepoint: p.timepoint,
+            valor: p.valor,
+            rangoMin: min,
+            rangoMax: max,
+            mediaBaseline: base?.media ?? 0,
+          });
+        }
+      }
+    }
+  }
+
+  return hallazgos;
+}

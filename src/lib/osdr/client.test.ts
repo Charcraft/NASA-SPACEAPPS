@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   baselinePreVuelo,
   listarIndicadoresOSDR,
+  listarValoresFueraDeRango,
   obtenerIndicadorOSDR,
   obtenerValorEnTimepoint,
 } from '@/lib/osdr/client';
@@ -68,5 +69,25 @@ describe('osdr/client · obtenerValorEnTimepoint', () => {
 
   it('devuelve null si la celda no existe', () => {
     expect(obtenerValorEnTimepoint('C001', 'no-existe')).toBeNull();
+  });
+});
+
+describe('osdr/client · valores fuera de rango', () => {
+  it('encuentra exactamente 24 lecturas fuera del rango de referencia', () => {
+    expect(listarValoresFueraDeRango()).toHaveLength(24);
+  });
+
+  it('cada hallazgo está realmente fuera de su rango', () => {
+    for (const h of listarValoresFueraDeRango()) {
+      const fueraAbajo = h.rangoMin !== null && h.valor < h.rangoMin;
+      const fueraArriba = h.rangoMax !== null && h.valor > h.rangoMax;
+      expect(fueraAbajo || fueraArriba).toBe(true);
+    }
+  });
+
+  it('filtra por tripulante', () => {
+    const deC001 = listarValoresFueraDeRango('C001');
+    expect(deC001.length).toBeGreaterThan(0);
+    expect(deC001.every((h) => h.crewId === 'C001')).toBe(true);
   });
 });

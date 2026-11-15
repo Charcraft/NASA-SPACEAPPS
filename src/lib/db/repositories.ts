@@ -3,10 +3,9 @@ import Dexie from 'dexie';
 import { db } from '@/lib/db/dexie';
 import { Back2Error, type CodigoError } from '@/lib/db/errors';
 
-import type { Nivel, ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
+import type { ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
 
 import type {
-  EntradaColaSync,
   EventoEmergencia,
   RegistroBitacora,
   RegistroMedicionLocal,
@@ -25,23 +24,6 @@ const SEGUNDOS = 1000;
 const MINUTO = 60 * SEGUNDOS;
 const DIA = 24 * 60 * MINUTO;
 
-/** Hash de integridad (djb2) para la cola de sync. Demo, no criptográfico. */
-function hashFrame(frame: RealtimeTelemetryFrame): string {
-  const serializado = JSON.stringify({
-    t: frame.timestamp,
-    c: frame.crewId,
-    l: Object.fromEntries(
-      Object.entries(frame.lecturas).map(([k, v]) => [k, [v.valor, v.nivel]]),
-    ),
-  });
-
-  let h = 5381;
-  for (let i = 0; i < serializado.length; i++) {
-    h = ((h << 5) + h + serializado.charCodeAt(i)) >>> 0;
-  }
-  return `h${h.toString(16)}`;
-}
-
 function mapearError(error: unknown): { codigo: CodigoError; message: string } {
   if (error instanceof Dexie.QuotaExceededError) {
     return { codigo: 'E-DB-001', message: 'Cuota de IndexedDB agotada.' };
@@ -56,15 +38,10 @@ function mapearError(error: unknown): { codigo: CodigoError; message: string } {
   return { codigo: 'E-DB-001', message };
 }
 
-function prioridadParaNiveles(niveles: Nivel[]): EntradaColaSync['prioridad'] {
-  if (niveles.includes('CRITICO')) return 'A';
-  if (niveles.includes('ATENCION')) return 'B';
-  return 'C';
-}
-
 /**
- * Persiste un frame de telemetría: una fila de `mediciones` por lectura + una
- * entrada en `colaSync` (prioridad según el nivel máximo). Nunca lanza.
+ * Persiste un frame de telemetría: una fila de `mediciones` por lectura.
+ * No encola en `colaSync`: de eso se encarga `sync/queue.encolarFrame` (Back 1),
+ * evitando escrituras duplicadas. Nunca lanza.
  */
 export async function guardarFrame(
   frame: RealtimeTelemetryFrame,
@@ -76,11 +53,7 @@ export async function guardarFrame(
   }
 
   try {
-    const nivelMaximo = lecturas
-      .map(([, lectura]) => lectura.nivel)
-      .reduce<Nivel>((acc, n) => (n === 'CRITICO' ? 'CRITICO' : n === 'ATENCION' && acc !== 'CRITICO' ? 'ATENCION' : acc), 'NOMINAL');
-
-    await db.transaction('rw', db.mediciones, db.colaSync, async () => {
+    await db.transaction('rw', db.mediciones, async () => {
       for (const [parametroId, lectura] of lecturas) {
         await db.mediciones.add({
           crewId: frame.crewId,
@@ -92,16 +65,6 @@ export async function guardarFrame(
           timestamp: frame.timestamp,
         });
       }
-
-      await db.colaSync.add({
-        prioridad: prioridadParaNiveles(lecturas.map(([, l]) => l.nivel)),
-        tipo: 'frame',
-        payloadId: frame.timestamp,
-        hash: hashFrame(frame),
-        estado: 'pendiente',
-        creadoEn: Date.now(),
-        intentos: 0,
-      });
     });
 
     return { ok: true, guardadas: lecturas.length };
