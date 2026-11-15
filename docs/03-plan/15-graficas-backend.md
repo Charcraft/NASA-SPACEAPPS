@@ -2,7 +2,7 @@
 
 > Traspaso Back 1 (Ernesto) → Back 2 (Angel Marco).
 > Para graficar el historial sin tocar la estructura: un endpoint de **solo lectura** sobre la tabla `series` que ya existe.
-> Dueño: **Back 2** (`api/series/route.ts` + `repositories.ts`). Estado: **lista para implementar**.
+> Dueño: **Back 2** (`api/series/route.ts` + `repositories.ts`). Estado: **✅ implementada** (`listarSeries` + `/api/series`, con filtro en memoria porque la tabla no tiene índice simple `crewId`).
 
 ---
 
@@ -64,6 +64,9 @@ import type { SerieAgregada } from '@/lib/db/types';
 /**
  * Lista las series agregadas de un tripulante (opcionalmente de un parámetro,
  * resolución y rango). Solo lectura; no lanza (devuelve [] ante error).
+ *
+ * Nota: la tabla `series` NO tiene índice simple `crewId` (solo el compuesto
+ * `[crewId+parametroId+resolucion+inicio]`), así que se filtra en memoria.
  */
 export async function listarSeries(opciones: {
   crewId: CrewId;
@@ -73,24 +76,25 @@ export async function listarSeries(opciones: {
   hasta?: number;
 }): Promise<SerieAgregada[]> {
   try {
-    let col = db.series.where('crewId').equals(opciones.crewId);
+    const todas = await db.series.toCollection().toArray();
 
-    const todas = await col.toArray();
-
-    return todas.filter((s) => {
-      if (opciones.parametroId && s.parametroId !== opciones.parametroId) return false;
-      if (opciones.resolucion && s.resolucion !== opciones.resolucion) return false;
-      if (opciones.desde !== undefined && s.inicio < opciones.desde) return false;
-      if (opciones.hasta !== undefined && s.fin > opciones.hasta) return false;
-      return true;
-    }).sort((a, b) => a.inicio - b.inicio);
+    return todas
+      .filter((s) => {
+        if (s.crewId !== opciones.crewId) return false;
+        if (opciones.parametroId && s.parametroId !== opciones.parametroId) return false;
+        if (opciones.resolucion && s.resolucion !== opciones.resolucion) return false;
+        if (opciones.desde !== undefined && s.inicio < opciones.desde) return false;
+        if (opciones.hasta !== undefined && s.fin > opciones.hasta) return false;
+        return true;
+      })
+      .sort((a, b) => a.inicio - b.inicio);
   } catch {
     return [];
   }
 }
 ```
 
-> El índice `crewId` ya existe en `db/dexie.ts` (la tabla `series` tiene `++id, [crewId+parametroId+resolucion+inicio], parametroId`). No requiere migración de esquema.
+> ⚠️ La tabla `series` **no** tiene índice simple `crewId` (solo el compuesto `[crewId+parametroId+resolucion+inicio]`). Por eso se lee con `toCollection()` y se filtra en memoria — sin tocar el esquema.
 
 ### 3.2 · Endpoint `src/app/api/series/route.ts`
 

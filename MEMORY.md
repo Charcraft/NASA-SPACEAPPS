@@ -140,6 +140,12 @@
 
 ## Bitácora
 
+### 2026-11-14 — Endpoint /api/series implementado (corrección de índice)
+
+- Angel implementó `listarSeries` + `/api/series`. Señaló que `series` no tiene índice simple `crewId` (solo el compuesto); lo resolvió con filtro en memoria sin tocar el esquema.
+- Corregí `15-graficas-backend.md`: la propuesta usaba `db.series.where('crewId')` (inexistente); ahora documenta `toCollection()` + filtro en memoria, y marco el estado como implementada.
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 78/78.
+
 ### 2026-11-14 — Gráficas: agrupación por sección + traspaso a Back 2
 
 - `types/index.ts`: tipo `SistemaParametro` + campo `sistema` en `ParameterDefinition` (append-only).
