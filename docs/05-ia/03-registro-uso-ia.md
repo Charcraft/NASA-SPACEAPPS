@@ -143,17 +143,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-009 · Merge Back 1 + Back 2, cableado y capa de sync
+- **Fecha/hora:** 2026-11-14 18:20
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** arquitectura / código
+- **Prompt usado:** "continúa con el flujo de trabajo", "resuelve los conflictos", "continuar con la implementación del cableado y la capa"
+- **Propósito:** fusionar `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture`, corregir la invariante `rules/`, y construir la capa de sincronización + composition root de Back 1.
+- **Resultado obtenido:** merge sin conflictos de archivos; corrección de la invariante en `docs/03-plan/11-arquitectura-backend.md` §3; nuevos archivos `src/lib/sync/{queue,aggregate,transport}.ts`, `src/lib/runtime.ts` y `src/lib/realtime/osdr-replay-source.ts`; `sala-control.tsx` migrado a `runtime`; `repositories.test.ts` corregido para `LecturaFrame` extendida.
+- **Validación:** `pnpm typecheck` limpio, `pnpm test` 41/41, `pnpm build` 4 rutas.
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 3 | 2 |
+| Arquitectura / código | 4 | 3 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **9** | **7** |
+| **Total** | **10** | **8** |
 
 ---
 

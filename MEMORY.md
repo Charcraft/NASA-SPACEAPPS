@@ -78,6 +78,9 @@
 | D32 | **Alcance físico únicamente:** 26 parámetros físicos/bioquímicos. Sueño, ánimo y carga cognitiva quedan para fase posterior | 2026-11-14 | Evita inventar escalas clínicas y mantiene la demo enfocada |
 | D33 | **El hub de sala no persiste:** estado en memoria del proceso. Lo durable vive en Dexie y `colaSync` | 2026-11-14 | Un backend durable en 30 h no es viable; el hub demuestra el contrato y se reinicia sin pérdida clínica |
 | D34 | **Proveedores `[DEMO]` inyectables** (`demo/baseline.ts`, `demo/evaluador.ts`, `demo/sensor-source.ts`) hasta que Back 2 entregue `osdr/` y `rules/` | 2026-11-14 | Permite una demo funcional hoy sin duplicar archivos de Back 2; el reemplazo es una línea en `sala-control.tsx` |
+| D35 | **`sync/` pasa a Back 1** (Ernesto): `queue.ts`, `aggregate.ts`, `transport.ts` | 2026-11-14 | La cola y el transporte dependen del frame de Back 1; Back 2 ya cubre `db/`, `rules/` y APIs. Evita solapar frentes |
+| D36 | **Invariante corregida:** `rules/` **sí importa `registry.ts` y `osdr/client.ts`**; sigue sin importar `db/`, `stream-engine` ni `ai/` | 2026-11-14 | `thresholds.ts` resuelve umbrales desde el catálogo en vez de duplicar los 26; pedido de Angel y aceptado |
+| D37 | **`runtime.ts` es el composition root de Back 1**: arranca motor, suscribe sink (DB + sync + agregación) y expone `start()/stop()` | 2026-11-14 | Sin un único punto de arranque, el pipeline no se ejecuta y la UI no puede alternar simulado/replay |
 
 ---
 
@@ -99,9 +102,14 @@
 - [x] Confirmar **Back 2**: Angel Marco (`@angel_marco`).
 - [ ] Integrar `BRIEF-BACKEND-AGENTES.md` al repo (hoy está en `~/Downloads`).
 - [ ] Crear el issue del reparto y los dos issues de trabajo.
-- [ ] Scaffold de Next 15 (Back 1) — deadline H0:45.
-- [ ] Congelar `types/index.ts` (Back 1 + Back 2) — deadline H2.
+- [x] Scaffold de Next 15 (Back 1) — deadline H0:45.
+- [x] Congelar `types/index.ts` (Back 1 + Back 2) — deadline H2.
 - [ ] Revisión de Pineda sobre `rules/` antes de mergear.
+- [x] Merge de `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (2026-11-14).
+- [x] Capa de sync de Back 1: `sync/queue.ts` + `aggregate.ts` + `transport.ts`.
+- [x] `runtime.ts` (composition root) + `osdr-replay-source.ts` (replay real R+1→R+194).
+- [ ] `api/osdr/route.ts` y `api/ai-context/route.ts` (Back 2 · Angel).
+- [ ] Demo de 3 min con WiFi apagado (stream + semáforo + persistencia + cola sync).
 
 ---
 
@@ -114,6 +122,17 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Merge Back 1 + Back 2 y capa de sync
+
+- Merge de `origin/feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (sin conflictos de archivos; `types/index.ts` se fusionó adoptando la versión extendida de Angel).
+- **Invariante corregida** en `docs/03-plan/11-arquitectura-backend.md` §3: `rules/` sí importa `registry.ts` y `osdr/client.ts` (pedido de Angel).
+- Rama renombrada a `feat/back1-realtime-architecture` (antes `feat/back1-arquitectura`); la antigua se eliminó en remoto.
+- **Nuevos de Back 1:** `sync/queue.ts` (cola A/B/C/D, hash djb2 encadenado, ACK/rechazo, reintentos), `sync/aggregate.ts` (1 Hz → 1 min → 1 h), `sync/transport.ts` (`SyncTransport` + stub local con simulación de red), `runtime.ts` (composition root) y `osdr-replay-source.ts` (replay real R+1→R+194 en 60 s).
+- `sala-control.tsx` ahora usa `runtime` (motor + evaluar + baseline reales de Back 2) y alterna simulado/replay; añadido panel de estado de sync.
+- `repositories.test.ts` corregido: `LecturaFrame` extendida exige `razon/accion/reglaDisparada/fuente`.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 41/41, `pnpm build` 4 rutas.
+- **Pendiente:** `api/osdr` y `api/ai-context` (Back 2 · Angel) y la demo de 3 min sin red.
 
 ### 2026-11-14 — Sala de tripulación y motor de tiempo real
 

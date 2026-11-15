@@ -35,4 +35,21 @@
 
 ## Registro
 
-_(empieza aquí)_
+## 2026-11-14 · 18:20 — Merge Back 1 + Back 2, sync layer y runtime
+
+**Hice:**
+- Merge de `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (sin conflictos de archivos; `types/index.ts` fusionado con la versión extendida de Angel).
+- Corregí la invariante en `docs/03-plan/11-arquitectura-backend.md` §3: `rules/` sí importa `registry.ts` y `osdr/client.ts`.
+- Renombré la rama a `feat/back1-realtime-architecture`.
+- Implementé la capa de sync: `src/lib/sync/queue.ts` (cola A/B/C/D, hash encadenado, ACK/rechazo, reintentos), `aggregate.ts` (1 Hz → 1 min → 1 h) y `transport.ts` (`SyncTransport` + stub local).
+- Implementé `src/lib/runtime.ts` (composition root: motor + evaluar + baseline + sink) y `src/lib/realtime/osdr-replay-source.ts` (replay real R+1→R+194 en 60 s).
+- Migré `sala-control.tsx` al runtime y añadí panel de estado de sync.
+- Corregí `repositories.test.ts` para la `LecturaFrame` extendida.
+
+**Siguiente:** cablear `api/osdr` y `api/ai-context` (Back 2); demo de 3 min con WiFi apagado.
+
+**Bloqueos:** ninguno (push a GitHub falló temporalmente por red; resuelto al reintentar).
+
+**Issue(s):** #2 (Back 1), #3 (Back 2)
+
+**Rama:** feat/back1-realtime-architecture
