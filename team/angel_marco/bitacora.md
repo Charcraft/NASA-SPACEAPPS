@@ -82,3 +82,11 @@
 **Bloqueos:** ninguno.
 **Issue(s):** pendiente de crear
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 23:17 — Back 2 completo: episodios, poda y entrada manual
+
+**Hice:** B2-1 (test de purgarVentana: solo mediciones), B2-2 (abrirEpisodio/cerrarEpisodio/episodioAbierto + fix índice booleano `abierto`), B2-3 (guardarMedicion + POST /api/mediciones con Zod + triage). 8 tests nuevos.
+**Siguiente:** Back 1 (Ernesto) consume los episodios en B1-4 (emergencia). Cerrar PR hacia main.
+**Bloqueos:** ninguno.
+**Issue(s):** pendiente de crear
+**Rama:** feat/integracion-back
