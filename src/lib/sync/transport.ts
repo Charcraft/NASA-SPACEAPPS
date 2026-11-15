@@ -1,9 +1,10 @@
 /**
  * Transporte de sincronización hacia Tierra — Back 1.
  *
- * Interfaz `SyncTransport` + implementación stub local (`LocalSyncTransport`).
- * Cuando exista el nodo central, se implementa `HttpSyncTransport` sin tocar
- * la cola ni la agregación.
+ * Interfaz `SyncTransport` + implementación real (`HttpSyncTransport`) que
+ * envía los lotes al endpoint local `/api/tierra` (que actúa de Mission
+ * Control Center en la demo). Se puede registrar otra implementación con
+ * `registrarSyncTransport` sin tocar la cola ni la agregación.
  */
 
 import type { LoteSync, PrioridadSync } from './queue';
@@ -31,20 +32,19 @@ export interface SyncTransport {
 }
 
 // ---------------------------------------------------------------------------
-// Stub local (demo): simula latencia, fallos intermitentes y ACK
+// Transporte HTTP real (POST a /api/tierra)
 // ---------------------------------------------------------------------------
 
-class LocalSyncTransport implements SyncTransport {
+class HttpSyncTransport implements SyncTransport {
   private estado: EstadoRed = 'online';
-  private readonly latenciaBaseMs = 150;
-  private readonly probabilidadFallo = 0.05; // 5%
+  private readonly endpoint: string;
   private readonly listeners = new Set<(estado: EstadoRed) => void>();
 
-  constructor() {
+  constructor(endpoint = '/api/tierra') {
+    this.endpoint = endpoint;
     if (typeof window !== 'undefined') {
       // El estado real lo marcan los eventos del navegador: al apagar WiFi se
-      // dispara `offline`; al reconectar, `online`. Sin simulación aleatoria
-      // para que la demo offline sea fiel a lo que el usuario hace de verdad.
+      // dispara `offline`; al reconectar, `online`.
       window.addEventListener('online', () => this._setEstado('online'));
       window.addEventListener('offline', () => this._setEstado('offline'));
     }
@@ -73,38 +73,20 @@ class LocalSyncTransport implements SyncTransport {
   async enviar(lote: LoteSync): Promise<boolean> {
     if (this.estado === 'offline') return false;
 
-    // Simular latencia
-    const latencia = this.latenciaBaseMs + Math.random() * 300;
-    await new Promise((r) => setTimeout(r, latencia));
-
-    // Simular fallo aleatorio
-    if (Math.random() < this.probabilidadFallo) {
+    try {
+      const response = await fetch(this.endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lote),
+      });
+      return response.ok;
+    } catch {
       return false;
     }
-
-    // En stub local: validar hash encadenado
-    const valido = this._validarHash(lote);
-    if (!valido) {
-      console.warn('[sync] Hash inválido en lote', lote.id);
-      return false;
-    }
-
-    // ACK simulado
-    return true;
-  }
-
-  private _validarHash(lote: LoteSync): boolean {
-    // En implementación real, el servidor recalcula y compara
-    return lote.hash.length > 0;
   }
 
   async cerrar(): Promise<void> {
-    // No-op en stub
-  }
-
-  // Para pruebas: forzar estado
-  __forzarEstado(estado: EstadoRed): void {
-    this._setEstado(estado);
+    // No hay conexión persistente que cerrar.
   }
 }
 
@@ -116,7 +98,7 @@ let _instancia: SyncTransport | null = null;
 
 export function obtenerSyncTransport(): SyncTransport {
   if (!_instancia) {
-    _instancia = new LocalSyncTransport();
+    _instancia = new HttpSyncTransport();
   }
   return _instancia;
 }
@@ -175,7 +157,7 @@ export async function flushCola(transport?: SyncTransport): Promise<ResultadoFlu
   return { procesados, exitosos, fallidos, duracionMs: Date.now() - inicio };
 }
 
-/** Inicia flush periódico (cada 10s si online). */
+/** Inicia flush periódico (cada 10s si online) + flush inmediato al reconectar. */
 export function iniciarFlushPeriodico(intervaloMs = 10_000): () => void {
   let timer: ReturnType<typeof setInterval> | null = null;
   const transport = obtenerSyncTransport();
@@ -188,10 +170,19 @@ export function iniciarFlushPeriodico(intervaloMs = 10_000): () => void {
   };
 
   timer = setInterval(tick, intervaloMs);
-  tick(); // ejecución inmediata
+  tick(); // ejecución inmediata al arrancar
+
+  // Al reconectar, drena la cola sin esperar al siguiente tick: así los datos
+  // registrados offline se re-envían en cuanto vuelve la red.
+  const desuscribir = transport.onCambioRed((estado) => {
+    if (estado === 'online') {
+      void tick();
+    }
+  });
 
   return () => {
     if (timer) clearInterval(timer);
+    desuscribir();
   };
 }
 

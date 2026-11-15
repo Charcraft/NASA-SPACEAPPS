@@ -85,3 +85,21 @@
 **Issue(s):** #2 (Back 1)
 
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 21:05 — Entornos de misión, central persistente y transporte real
+
+**Hice:**
+- Tres entornos (`nave`, `estacion`, `base-lunar`): `EntornoMision` + campo `entornos` + `listarPorEntorno()`.
+- `docs/02-investigacion/06-entornos-mision.md` (trazabilidad HRP/OSDR).
+- Central persistente: snapshot en `data/central/` con restauración al arrancar.
+- Transporte real: `HttpSyncTransport` → `POST /api/tierra` (MCC local).
+- Replay al reconectar: flush inmediato al evento `online`.
+- Eliminé la incoherencia §8.1/§8.2/§9 vs D31.
+
+**Siguiente:** que Angel implemente protocolos; reconciliación de `sincronizadoTierra` (Back 2); front real (Pineda).
+
+**Bloqueos:** ninguno.
+
+**Issue(s):** #2 (Back 1)
+
+**Rama:** feat/integracion-back

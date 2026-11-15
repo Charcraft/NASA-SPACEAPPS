@@ -195,17 +195,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-013 · Entornos de misión, central persistente y transporte real
+- **Fecha/hora:** 2026-11-14 21:05
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "adaptar a entornos con HRP/OSDR, incorporar las 3 piezas, eliminar la incoherencia".
+- **Propósito:** adaptar AEGIS a tres entornos (nave/estación/base-lunar) con trazabilidad HRP, implementar persistencia del central, transporte real a Tierra y replay al reconectar, y eliminar la incoherencia documental.
+- **Resultado obtenido:** `EntornoMision` + campo `entornos` en el catálogo; `docs/02-investigacion/06-entornos-mision.md`; snapshot durable en `crew-hub`; `HttpSyncTransport` → `POST /api/tierra`; flush inmediato al reconectar; §8.1/§8.2/§9 de la arquitectura alineados con D31.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49), `pnpm build` (7 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 7 | 5 |
+| Arquitectura / código | 8 | 6 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **13** | **10** |
+| **Total** | **14** | **11** |
 
 ---
 

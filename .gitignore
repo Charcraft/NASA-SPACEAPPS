@@ -60,6 +60,12 @@ practicas-locales/
 # Cache de exploracion de datos
 scripts/.osdr-humano.json
 
+# Snapshot durable del central (runtime, no se versiona)
+data/central/
+
+# Lotes recibidos por el endpoint "Tierra" (runtime, no se versiona)
+data/tierra/
+
 # Skills instaladas localmente (se generan con scripts/instalar-todo)
 .opencode/skills/
 .claude/skills/

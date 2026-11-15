@@ -15,6 +15,14 @@ export type CrewId = 'C001' | 'C002' | 'C003' | 'C004';
 
 export type Nivel = 'NOMINAL' | 'ATENCION' | 'CRITICO';
 
+/**
+ * Entorno de misión. Cada uno tiene una exposición distinta a los cinco
+ * peligros del HRP de NASA (radiación, microgravedad, ambiente cerrado,
+ * distancia y aislamiento), lo que determina qué indicadores importan y
+ * cómo se leen. Ver `docs/02-investigacion/06-entornos-mision.md`.
+ */
+export type EntornoMision = 'nave' | 'estacion' | 'base-lunar';
+
 export type TipoDato = 'escalar' | 'onda' | 'evento';
 
 export type TipoDesviacion = 'z-score' | 'delta-absoluto';
@@ -82,6 +90,13 @@ export interface ParameterDefinition {
   // `null` para parámetros ambientales: CO2 no tiene malla corporal.
   meshNodeId: MeshNodeId | null;
   toolAnimationId: ToolAnimationId;
+
+  /**
+   * Entornos de misión donde este parámetro es relevante. La mayoría aplica a
+   * los tres; las excepciones están justificadas en HRP (ej. la presión
+   * intracraneal/SANS solo importa en microgravedad).
+   */
+  entornos: EntornoMision[];
 
   fuenteTrazable: string;
   esDatoRealOSDR: boolean;

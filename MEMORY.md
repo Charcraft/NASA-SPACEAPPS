@@ -83,6 +83,9 @@
 | D37 | **`runtime.ts` es el composition root de Back 1**: arranca motor, suscribe sink (DB + sync + agregación) y expone `start()/stop()` | 2026-11-14 | Sin un único punto de arranque, el pipeline no se ejecuta y la UI no puede alternar simulado/replay |
 | D38 | **PWA oficial (no demo)**: `manifest.webmanifest`, `sw.js`, iconos 192/512 y registro solo en producción | 2026-11-14 | Versión oficial offline-first; el SW cachea app-shell y `/api/*` con network-first. Se descarta Vercel: app local + BD central |
 | D39 | **Protocolos médicos → Back 2 (Angel)**: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` y mapeo en triage. Contrato en `docs/03-plan/12-protocolos-medicos.md` | 2026-11-14 | Son datos + reglas + API (dominio Back 2); Back 1 ya cachea `/api/protocolos` en el SW |
+| D40 | **Tres entornos de misión**: `nave`, `estacion`, `base-lunar`. Campo `entornos` en `ParameterDefinition` + `listarPorEntorno()` | 2026-11-14 | Cada entorno tiene exposición distinta a los 5 peligros del HRP; trazabilidad en `docs/02-investigacion/06-entornos-mision.md` |
+| D41 | **El central persiste**: `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar | 2026-11-14 | Un reinicio del servidor ya no borra la sala; el histórico completo sigue en Dexie |
+| D42 | **Transporte real a Tierra**: `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub | 2026-11-14 | El envío ya no se simula: la cola drena a un endpoint real que persiste y devuelve ACK |
 
 ---
 
@@ -114,7 +117,9 @@
 - [ ] Demo de 3 min con WiFi apagado (stream + semáforo + persistencia + cola sync).
 - [x] PWA oficial: `manifest.webmanifest` + `sw.js` + iconos + registro (Back 1).
 - [ ] Protocolos médicos: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` + mapeo en triage (Back 2 · Angel). Contrato: `docs/03-plan/12-protocolos-medicos.md`.
-- [ ] BD central + sync tripulación/Tierra (decisión de arquitectura pendiente).
+- [x] Entornos de misión: `nave`, `estacion`, `base-lunar` con `entornos` en el catálogo (Back 1).
+- [x] Central persistente (snapshot en `data/central/`) + transporte real a Tierra (`/api/tierra`).
+- [ ] Reconciliación completa: marcar mediciones `sincronizadoTierra` tras el ACK (Back 2 · `repositories`).
 - [ ] Frontend real (Pineda): semáforo literal, modelo 3D, módulo IA, pantalla de emergencia.
 
 ---
@@ -128,6 +133,16 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Entornos de misión, central persistente y transporte real
+
+- **Tres entornos** (`nave`, `estacion`, `base-lunar`): tipo `EntornoMision` + campo `entornos` en `ParameterDefinition` + `listarPorEntorno()`. Los 17 OSDR aplican a los tres; `intracranial_pressure_est` (SANS) solo a microgravedad.
+- `docs/02-investigacion/06-entornos-mision.md`: trazabilidad entorno → peligro HRP → indicador.
+- **Central persistente:** `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar (ya no se borra la sala al reiniciar).
+- **Transporte real:** `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub; `/api/tierra` valida con Zod y persiste append-only.
+- **Replay al reconectar:** `iniciarFlushPeriodico` flushea inmediatamente al evento `online` (antes solo cada 10 s).
+- **Incoherencia eliminada:** `docs/03-plan/11-arquitectura-backend.md` §8.1 y §8.2 alineados con D31 (central persistente, Tierra real, 3 entornos); §9 actualizado (protocolos ahora en alcance).
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 49/49, `pnpm build` 7 rutas (incluye `/api/tierra`).
 
 ### 2026-11-14 — PWA oficial y traspaso de protocolos a Back 2
 

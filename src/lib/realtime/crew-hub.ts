@@ -2,11 +2,15 @@
  * Hub de la sala de tripulación — Back 1.
  *
  * Mantiene el último frame de cada tripulante y difunde las alertas al resto
- * por SSE. Es un hub **en memoria del proceso**: sirve para la demo y para el
- * contrato; la persistencia durable y la cola hacia Tierra son de Back 2.
+ * por SSE. Persiste un snapshot del estado consolidado a disco (`data/central/`)
+ * para que el central sobreviva a un reinicio; el histórico completo de cada
+ * estación vive en su IndexedDB y la cola hacia Tierra es de Back 2.
  *
  * No importar desde componentes cliente: usa estado de módulo del servidor.
  */
+
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import type {
   AlertaTripulacion,
@@ -24,6 +28,10 @@ import { get } from './registry';
 const VENTANA_DEGRADADO_MS = 5_000;
 const VENTANA_SIN_ENLACE_MS = 15_000;
 
+/** Directorio y archivo del snapshot durable del central. */
+const DATA_DIR = join(process.cwd(), 'data', 'central');
+const SNAPSHOT_FILE = join(DATA_DIR, 'snapshot.json');
+
 const ORDEN_NIVEL = { NOMINAL: 0, ATENCION: 1, CRITICO: 2 } as const satisfies Record<Nivel, number>;
 
 interface RegistroTripulante {
@@ -34,6 +42,48 @@ interface RegistroTripulante {
 
 const registro = new Map<CrewId, RegistroTripulante>();
 const suscriptores = new Set<(evento: EventoSala) => void>();
+
+// ---------------------------------------------------------------------------
+// Persistencia del central (snapshot durable en disco)
+// ---------------------------------------------------------------------------
+
+type SnapshotEnDisco = Array<{
+  crewId: CrewId;
+  frame: RealtimeTelemetryFrame;
+  recibidoEn: number;
+}>;
+
+function persistirSnapshot(): void {
+  try {
+    mkdirSync(DATA_DIR, { recursive: true });
+    const data: SnapshotEnDisco = [...registro.entries()].map(([crewId, item]) => ({
+      crewId,
+      frame: item.frame,
+      recibidoEn: item.recibidoEn,
+    }));
+    writeFileSync(SNAPSHOT_FILE, JSON.stringify(data));
+  } catch (error) {
+    // Un fallo de disco no puede tumbar la sala en vivo.
+    console.warn('[crew-hub] no se pudo persistir el snapshot:', error);
+  }
+}
+
+function restaurarSnapshot(): void {
+  try {
+    if (!existsSync(SNAPSHOT_FILE)) return;
+
+    const data = JSON.parse(readFileSync(SNAPSHOT_FILE, 'utf8')) as SnapshotEnDisco;
+    for (const item of data) {
+      publicarFrame(item.frame, item.recibidoEn);
+    }
+    console.log(`[crew-hub] snapshot restaurado: ${data.length} tripulante(s).`);
+  } catch (error) {
+    console.warn('[crew-hub] no se pudo restaurar el snapshot:', error);
+  }
+}
+
+// Se restaura una sola vez al cargar el módulo (arranque del servidor).
+restaurarSnapshot();
 
 function emitir(evento: EventoSala): void {
   for (const suscriptor of suscriptores) {
@@ -125,6 +175,8 @@ export function publicarFrame(
   }
 
   registro.set(frame.crewId, { frame, recibidoEn: ahora, alertas });
+
+  persistirSnapshot();
 
   return [...alertas.values()];
 }

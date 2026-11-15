@@ -195,21 +195,34 @@ export interface ResultadoPersistencia {
 
 ### 8.1 · Modelo de capas: local, sala y Tierra
 
-| Capa | Dónde vive | Qué guarda | Estado en el MVP |
+| Capa | Dónde vive | Qué guarda | Estado |
 |---|---|---|---|
 | **Local** | IndexedDB (Dexie), Back 2 | Verdad operativa: mediciones, episodios, bitácora | **Sí** |
-| **Sala** | Hub en memoria del servidor, Back 1 | Último frame y alertas activas de los 4 tripulantes | **Sí** |
-| **Tierra** | Servidor de misión | Archivo histórico y análisis clínico | **No** (contrato y cola sí) |
+| **Sala (nave)** | Hub del servidor + snapshot en `data/central/`, Back 1 | Último frame y alertas activas de los 4 tripulantes | **Sí** (persiste a disco) |
+| **Tierra** | `data/tierra/` vía `/api/tierra`, Back 1 | Lotes de la cola recibidos y ACK | **Sí** (transporte real) |
 
-**Decisión (sustituye a D31):** hay dos canales con propósitos distintos.
+**Decisión (alineada con D31):** hay dos canales con propósitos distintos.
 
 1. **Sala en vivo (SSE):** que cualquier tripulante vea la alerta de otro en
-   menos de 2 s. No es durable: si el servidor reinicia, la sala se vacía.
+   menos de 2 s. Persiste un *snapshot* del estado consolidado a disco para
+   sobrevivir a un reinicio del servidor (el histórico completo vive en Dexie).
 2. **Cola durable (Back 2):** que nada se pierda y que el histórico llegue a
-   Tierra cuando haya enlace.
+   Tierra cuando haya enlace. El transporte es `HttpSyncTransport` → `/api/tierra`.
 
-No hay réplica de bases de datos entre astronautas ni base central durable en
-30 h. El hub es deliberadamente simple: estado en memoria + reintento del cliente.
+### 8.1.1 · Entornos de misión
+
+El producto se adapta a tres entornos, cada uno con exposición distinta a los
+cinco peligros del HRP (ver `docs/02-investigacion/06-entornos-mision.md`):
+
+| Entorno | Gravedad | Radiación | Distancia |
+|---|---|---|---|
+| **nave** | microgravedad | máxima (GCR + SPE) | hasta ~22 min |
+| **estacion** | microgravedad | moderada (magnetosfera) | ~1.3 s |
+| **base-lunar** | parcial (1/6 g) | alta (sin atmósfera) | ~1.3 s |
+
+Cada parámetro del `registry` declara `entornos: []`; `listarPorEntorno()` filtra
+el catálogo para la UI. Excepción documentada: `intracranial_pressure_est` (SANS)
+solo aplica a microgravedad (`nave`, `estacion`).
 
 ### 8.2 · Cómo funciona la sala compartida
 
@@ -235,8 +248,10 @@ Estación C004 ─┘                     │
   y `EventSource` reintenta solo (3 s).
 - El hub marca `degradado` a los 5 s sin frame y `sin-enlace` a los 15 s.
 
-**Límite honesto:** el hub no es una base de datos. Reiniciar el servidor borra
-la sala; lo que debe sobrevivir vive en Dexie y en `colaSync`.
+**Límite honesto:** el hub conserva el **estado consolidado** (último frame por
+tripulante) en `data/central/snapshot.json`; un reinicio recupera la sala pero no
+reconstruye el histórico minuto a minuto. El histórico completo vive en Dexie de
+cada estación y en la cola `colaSync` hacia Tierra.
 
 ### 8.3 · Pérdida de conexión
 
@@ -297,7 +312,9 @@ ahora para no diluir el alcance ni inventar escalas clínicas.
 - Implementar IA: solo el contrato `AIProvider` y el `null-provider`.
 - Modelo 3D y animaciones: los consume, no los define.
 - Autenticación, multiusuario y backend remoto.
-- Protocolos ALSP paso a paso (si entran, van como datos en `src/data/knowledge/`).
+- Los protocolos médicos paso a paso **sí** entran como datos en
+  `src/data/knowledge/` (ver `docs/03-plan/12-protocolos-medicos.md`), a cargo de
+  Back 2. Aquí solo se deja fuera la implementación de la UI de emergencia.
 
 ---
 

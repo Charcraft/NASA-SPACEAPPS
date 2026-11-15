@@ -16,6 +16,7 @@
 
 import type {
   CategoriaParametro,
+  EntornoMision,
   MeshNodeId,
   ParameterDefinition,
   TipoDesviacion,
@@ -76,6 +77,9 @@ function laboratorio(overrides: Pick<ParameterDefinition, 'id' | 'nombre' | 'uni
     fuenteUmbral: FUENTE_OSDR,
     fuenteTrazable: `${FUENTE_OSDR} · src/data/seed/osdr-inspiration4-cmp.json`,
     esDatoRealOSDR: true,
+    // El panel metabólico (CMP) se monitorea en cualquier misión tripulada,
+    // sin distinción de entorno: es el biomarcador de rutina pre/en/post vuelo.
+    entornos: ['nave', 'estacion', 'base-lunar'],
   };
 }
 
@@ -235,6 +239,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'thorax_heart',
     toolAnimationId: 'anim_none',
     fuenteTrazable: `${FUENTE_FISIO} §1`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -255,6 +260,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'thorax_lungs',
     toolAnimationId: 'anim_pulse_oximeter',
     fuenteTrazable: `${FUENTE_FISIO} §3`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -275,6 +281,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'thorax_heart',
     toolAnimationId: 'anim_bp_cuff',
     fuenteTrazable: `${FUENTE_FISIO} §2`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -295,6 +302,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'thorax_heart',
     toolAnimationId: 'anim_bp_cuff',
     fuenteTrazable: `${FUENTE_FISIO} §2`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -315,6 +323,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'thorax_lungs',
     toolAnimationId: 'anim_none',
     fuenteTrazable: `${FUENTE_FISIO} §4`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -335,6 +344,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'systemic_immune_radiation',
     toolAnimationId: 'anim_none',
     fuenteTrazable: `${FUENTE_FISIO} §5`,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -356,6 +366,10 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'head_neuro_ocular',
     toolAnimationId: 'anim_ocular_fundoscope',
     fuenteTrazable: FUENTE_SUPUESTO,
+    // SANS / desplazamiento de fluidos: solo documentado en microgravedad
+    // (nave y estación). En base lunar (1/6 g) el efecto es menor pero falta
+    // dato primario → queda fuera del catálogo de ese entorno por ahora.
+    entornos: ['nave', 'estacion'],
     esDatoRealOSDR: false,
   },
   {
@@ -376,6 +390,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: null,
     toolAnimationId: 'anim_none',
     fuenteTrazable: FUENTE_SUPUESTO,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
   {
@@ -396,6 +411,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
     meshNodeId: 'systemic_immune_radiation',
     toolAnimationId: 'anim_none',
     fuenteTrazable: FUENTE_SUPUESTO,
+    entornos: ['nave', 'estacion', 'base-lunar'],
     esDatoRealOSDR: false,
   },
 ];
@@ -445,6 +461,11 @@ export function idsPorCategoria(categoria: CategoriaParametro): readonly string[
   );
 }
 
+/** Parámetros relevantes para un entorno de misión concreto. */
+export function listarPorEntorno(entorno: EntornoMision): readonly ParameterDefinition[] {
+  return TODOS.filter((parametro) => parametro.entornos.includes(entorno));
+}
+
 /**
  * Verifica las invariantes del catálogo. Se ejecuta en tests y en el arranque
  * del stream-engine, no en cada lectura.
@@ -473,6 +494,10 @@ export function validateRegistry(): void {
       throw new Error(
         `Parámetro ambiental «${parametro.id}» no debe requerir contexto del tripulante.`,
       );
+    }
+
+    if (parametro.entornos.length === 0) {
+      throw new Error(`Parámetro «${parametro.id}» sin entornos de misión.`);
     }
 
     const { min, max, criticoMin, criticoMax } = parametro.rangoReferencia;

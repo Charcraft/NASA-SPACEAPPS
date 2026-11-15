@@ -34,6 +34,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`02-investigacion/03-fuentes-datos.md`](02-investigacion/03-fuentes-datos.md) | OSDR, LSDA, LSAH, data.nasa.gov: qué hay realmente y cómo acceder |
 | [`02-investigacion/04-bibliografia.md`](02-investigacion/04-bibliografia.md) | Todas las fuentes citadas, con fecha de consulta |
 | [`02-investigacion/05-arquitectura-actual-nasa.md`](02-investigacion/05-arquitectura-actual-nasa.md) | Cómo monitoriza NASA la salud hoy, y qué hueco llenamos |
+| [`02-investigacion/06-entornos-mision.md`](02-investigacion/06-entornos-mision.md) | **Adaptación a entornos** (nave, estación, base lunar): trazabilidad HRP/OSDR por indicador |
 
 ---
 
