@@ -54,6 +54,8 @@ practicas-locales/
 *.jpg
 !docs/**/*.png
 !docs/**/*.jpg
+# Iconos de la PWA (se sirven estáticamente y deben versionarse)
+!public/icons/*.png
 
 # Cache de exploracion de datos
 scripts/.osdr-humano.json

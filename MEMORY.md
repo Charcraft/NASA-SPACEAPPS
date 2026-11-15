@@ -81,6 +81,8 @@
 | D35 | **`sync/` pasa a Back 1** (Ernesto): `queue.ts`, `aggregate.ts`, `transport.ts` | 2026-11-14 | La cola y el transporte dependen del frame de Back 1; Back 2 ya cubre `db/`, `rules/` y APIs. Evita solapar frentes |
 | D36 | **Invariante corregida:** `rules/` **sí importa `registry.ts` y `osdr/client.ts`**; sigue sin importar `db/`, `stream-engine` ni `ai/` | 2026-11-14 | `thresholds.ts` resuelve umbrales desde el catálogo en vez de duplicar los 26; pedido de Angel y aceptado |
 | D37 | **`runtime.ts` es el composition root de Back 1**: arranca motor, suscribe sink (DB + sync + agregación) y expone `start()/stop()` | 2026-11-14 | Sin un único punto de arranque, el pipeline no se ejecuta y la UI no puede alternar simulado/replay |
+| D38 | **PWA oficial (no demo)**: `manifest.webmanifest`, `sw.js`, iconos 192/512 y registro solo en producción | 2026-11-14 | Versión oficial offline-first; el SW cachea app-shell y `/api/*` con network-first. Se descarta Vercel: app local + BD central |
+| D39 | **Protocolos médicos → Back 2 (Angel)**: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` y mapeo en triage. Contrato en `docs/03-plan/12-protocolos-medicos.md` | 2026-11-14 | Son datos + reglas + API (dominio Back 2); Back 1 ya cachea `/api/protocolos` en el SW |
 
 ---
 
@@ -108,8 +110,12 @@
 - [x] Merge de `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (2026-11-14).
 - [x] Capa de sync de Back 1: `sync/queue.ts` + `aggregate.ts` + `transport.ts`.
 - [x] `runtime.ts` (composition root) + `osdr-replay-source.ts` (replay real R+1→R+194).
-- [ ] `api/osdr/route.ts` y `api/ai-context/route.ts` (Back 2 · Angel).
+- [x] `api/osdr/route.ts` y `api/ai-context/route.ts` (Back 2 · Angel).
 - [ ] Demo de 3 min con WiFi apagado (stream + semáforo + persistencia + cola sync).
+- [x] PWA oficial: `manifest.webmanifest` + `sw.js` + iconos + registro (Back 1).
+- [ ] Protocolos médicos: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` + mapeo en triage (Back 2 · Angel). Contrato: `docs/03-plan/12-protocolos-medicos.md`.
+- [ ] BD central + sync tripulación/Tierra (decisión de arquitectura pendiente).
+- [ ] Frontend real (Pineda): semáforo literal, modelo 3D, módulo IA, pantalla de emergencia.
 
 ---
 
@@ -122,6 +128,15 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — PWA oficial y traspaso de protocolos a Back 2
+
+- **PWA implementada:** `public/manifest.webmanifest`, `public/sw.js` (app-shell cache-first, `/api/*` network-first, `/api/telemetry` sin cache), iconos `public/icons/icon-192.png` + `icon-512.png`.
+- `scripts/generar-iconos-pwa.py` genera los PNG desde el mismo diseño de `proyecto.ico` (sin marcas de NASA).
+- `src/app/layout.tsx`: metadatos PWA (manifest, viewport, icons) + registro del SW **solo en producción**; se corrigió el mojibake de título/descripción.
+- `next.config.mjs`: headers `no-cache` para `sw.js` y `Content-Type` del manifest.
+- **Traspaso a Angel:** `docs/03-plan/12-protocolos-medicos.md` con el contrato congelado de `/api/protocolos`, esquema JSON, firma del cliente y criterios de aceptación.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 49/49, `pnpm build` 7 rutas.
 
 ### 2026-11-14 — Merge Back 1 + Back 2 y capa de sync
 

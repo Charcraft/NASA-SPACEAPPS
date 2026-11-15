@@ -53,6 +53,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
 | [`03-plan/10-reparto-backend.md`](03-plan/10-reparto-backend.md) | **Reparto Back 1 / Back 2**: dueño por archivo, contratos de dependencia y acuerdos previos |
 | [`03-plan/11-arquitectura-backend.md`](03-plan/11-arquitectura-backend.md) | **Arquitectura de backend**: roles, flujo de datos, contratos congelados, puertas y plan paralelo |
+| [`03-plan/12-protocolos-medicos.md`](03-plan/12-protocolos-medicos.md) | **Protocolos médicos (traspaso Back 1 → Back 2)**: contrato de `/api/protocolos`, esquema JSON, integración con triage |
 
 ---
 

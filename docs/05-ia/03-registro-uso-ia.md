@@ -182,17 +182,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-012 · PWA oficial (offline-first) y traspaso de protocolos a Back 2
+- **Fecha/hora:** 2026-11-14 19:56
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "modifica lo necesario para la versión oficial offline y enlace con el front; indica a Angel lo que debe realizar; cambia carpetas/arquitectura para el PWA".
+- **Propósito:** implementar la PWA oficial (manifest, service worker, iconos, registro) y dejar el contrato de protocolos médicos para Back 2.
+- **Resultado obtenido:** `public/manifest.webmanifest`, `public/sw.js` (app-shell cache-first, `/api/*` network-first, SSE sin cache), iconos 192/512 generados por `scripts/generar-iconos-pwa.py`, `layout.tsx` con metadatos PWA y registro del SW en producción, `next.config.mjs` con headers. Documento de traspaso `docs/03-plan/12-protocolos-medicos.md` con el contrato de `/api/protocolos`.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49) y `pnpm build` (7 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 6 | 4 |
+| Arquitectura / código | 7 | 5 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **12** | **9** |
+| **Total** | **13** | **10** |
 
 ---
 

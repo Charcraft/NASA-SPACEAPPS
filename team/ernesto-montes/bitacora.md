@@ -68,3 +68,20 @@
 **Issue(s):** #2 (Back 1)
 
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 19:58 — PWA oficial y traspaso de protocolos a Back 2
+
+**Hice:**
+- PWA completa: `public/manifest.webmanifest`, `public/sw.js` (app-shell cache-first, `/api/*` network-first, SSE sin cache), iconos `public/icons/icon-192.png` + `icon-512.png`.
+- `scripts/generar-iconos-pwa.py` genera los PNG desde el diseño de `proyecto.ico`.
+- `src/app/layout.tsx`: metadatos PWA + registro del SW solo en producción + corregí el mojibake.
+- `next.config.mjs`: headers para `sw.js` y `manifest.webmanifest`.
+- Traspaso a Angel: `docs/03-plan/12-protocolos-medicos.md` (contrato de `/api/protocolos`).
+
+**Siguiente:** BD central + sync tripulación/Tierra (decisión de arquitectura pendiente); que Angel implemente los protocolos.
+
+**Bloqueos:** ninguno.
+
+**Issue(s):** #2 (Back 1)
+
+**Rama:** feat/integracion-back
