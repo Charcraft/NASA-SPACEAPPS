@@ -88,6 +88,7 @@
 | D42 | **Transporte real a Tierra**: `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub | 2026-11-14 | El envío ya no se simula: la cola drena a un endpoint real que persiste y devuelve ACK |
 | D43 | **Reconciliación de sync + rangos por sexo** (Angel): `marcarSincronizadoPorFrame` conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` | 2026-11-14 | Cierra el ciclo de sincronización (ACK → `sincronizadoTierra`) y añade precisión clínica por sexo con fuente UCSF `[POR VALIDAR]` |
 | D44 | **Resiliencia de Back 1**: `respetarIntervalos: true` por defecto, poda automática (crudo + series, nunca eventos/bitácora), exportación de respaldo y detección de emergencia (transición a CRITICO → `registrarEvento`) | 2026-11-14 | Evita que IndexedDB se llene, permite respaldo manual y cierra el hueco del modo emergencia |
+| D45 | **Gráficas por sección**: campo `sistema` (tipo `SistemaParametro`) en el catálogo + `listarPorSistema()`, para agrupar el historial por sistema clínico | 2026-11-14 | La gráfica de historial lee las `series` agregadas (no el crudo), agrupadas por `sistema` o `meshNodeId`; endpoint `/api/series` en Back 2 |
 
 ---
 
@@ -138,6 +139,13 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Gráficas: agrupación por sección + traspaso a Back 2
+
+- `types/index.ts`: tipo `SistemaParametro` + campo `sistema` en `ParameterDefinition` (append-only).
+- `registry.ts`: mapeo `SISTEMA_OSDR` (17 OSDR por sistema del seed) + `sistema` en los 9 simulados + `listarPorSistema()` + validación.
+- `docs/03-plan/15-graficas-backend.md`: contrato de `/api/series` para Back 2 (lee `series` agregadas, no el crudo).
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 74/74.
 
 ### 2026-11-14 — Merge Back 2 (episodios/entrada manual) + contrato front
 

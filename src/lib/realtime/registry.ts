@@ -19,6 +19,7 @@ import type {
   EntornoMision,
   MeshNodeId,
   ParameterDefinition,
+  SistemaParametro,
   TipoDesviacion,
   TipoFrecuenciaParametro,
   ToolAnimationId,
@@ -47,6 +48,27 @@ interface DefinicionBase {
   toolAnimationId: ToolAnimationId;
 }
 
+/** Sistema clínico de cada analito OSDR (del campo `sistema` del seed OSD-575). */
+const SISTEMA_OSDR: Record<string, SistemaParametro> = {
+  albumin: 'proteina',
+  alkaline_phosphatase: 'hepatico',
+  alt: 'hepatico',
+  ast: 'hepatico',
+  total_bilirubin: 'hepatico',
+  calcium: 'electrolitos',
+  carbon_dioxide: 'electrolitos',
+  chloride: 'electrolitos',
+  creatinine: 'renal',
+  egfr_african_american: 'renal',
+  egfr_non_african_american: 'renal',
+  globulin: 'proteina',
+  glucose: 'metabolico',
+  potassium: 'electrolitos',
+  total_protein: 'proteina',
+  sodium: 'electrolitos',
+  urea_nitrogen_bun: 'renal',
+};
+
 function laboratorio(overrides: Pick<ParameterDefinition, 'id' | 'nombre' | 'unidad' | 'rangoReferencia' | 'esDerivado'> & {
   metodo?: string;
   rangoReferenciaPorSexo?: ParameterDefinition['rangoReferenciaPorSexo'];
@@ -66,6 +88,7 @@ function laboratorio(overrides: Pick<ParameterDefinition, 'id' | 'nombre' | 'uni
     nombre: overrides.nombre,
     unidad: overrides.unidad,
     unidadCanonica: overrides.unidad,
+    sistema: SISTEMA_OSDR[overrides.id]!,
     tipoDato: 'escalar',
     esDerivado: overrides.esDerivado,
     metodo: overrides.metodo,
@@ -231,6 +254,7 @@ const PARAMETROS_OSDR: readonly ParameterDefinition[] = [
 const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   {
     id: 'heart_rate',
+    sistema: 'cardiovascular',
     nombre: 'Frecuencia cardíaca',
     unidad: 'bpm',
     unidadCanonica: 'bpm',
@@ -252,6 +276,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'spo2',
+    sistema: 'respiratorio',
     nombre: 'Saturación de oxígeno (SpO₂)',
     unidad: '%',
     unidadCanonica: '%',
@@ -273,6 +298,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'systolic_bp',
+    sistema: 'cardiovascular',
     nombre: 'Presión arterial sistólica',
     unidad: 'mmHg',
     unidadCanonica: 'mmHg',
@@ -294,6 +320,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'diastolic_bp',
+    sistema: 'cardiovascular',
     nombre: 'Presión arterial diastólica',
     unidad: 'mmHg',
     unidadCanonica: 'mmHg',
@@ -315,6 +342,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'respiratory_rate',
+    sistema: 'respiratorio',
     nombre: 'Frecuencia respiratoria',
     unidad: 'rpm',
     unidadCanonica: 'rpm',
@@ -336,6 +364,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'core_temperature',
+    sistema: 'termorregulacion',
     nombre: 'Temperatura corporal',
     unidad: '°C',
     unidadCanonica: '°C',
@@ -357,6 +386,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'intracranial_pressure_est',
+    sistema: 'neuro-ocular',
     nombre: 'Presión intracraneal estimada',
     unidad: 'mmHg',
     unidadCanonica: 'mmHg',
@@ -382,6 +412,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'cabin_co2',
+    sistema: 'ambiental',
     nombre: 'CO₂ parcial en cabina',
     unidad: 'mmHg',
     unidadCanonica: 'mmHg',
@@ -403,6 +434,7 @@ const PARAMETROS_SIMULADOS: readonly ParameterDefinition[] = [
   },
   {
     id: 'radiation_dose',
+    sistema: 'ambiental',
     nombre: 'Dosis de radiación acumulada',
     unidad: 'mSv',
     unidadCanonica: 'mSv',
@@ -474,6 +506,11 @@ export function listarPorEntorno(entorno: EntornoMision): readonly ParameterDefi
   return TODOS.filter((parametro) => parametro.entornos.includes(entorno));
 }
 
+/** Parámetros de un sistema fisiológico/clínico concreto (para gráficas por sección). */
+export function listarPorSistema(sistema: SistemaParametro): readonly ParameterDefinition[] {
+  return TODOS.filter((parametro) => parametro.sistema === sistema);
+}
+
 /**
  * Verifica las invariantes del catálogo. Se ejecuta en tests y en el arranque
  * del stream-engine, no en cada lectura.
@@ -506,6 +543,10 @@ export function validateRegistry(): void {
 
     if (parametro.entornos.length === 0) {
       throw new Error(`Parámetro «${parametro.id}» sin entornos de misión.`);
+    }
+
+    if (parametro.sistema.trim().length === 0) {
+      throw new Error(`Parámetro «${parametro.id}» sin sistema fisiológico.`);
     }
 
     const { min, max, criticoMin, criticoMax } = parametro.rangoReferencia;

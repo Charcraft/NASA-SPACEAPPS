@@ -40,6 +40,24 @@ export type CategoriaParametro =
   | 'bioquimico-osdr'
   | 'ambiental';
 
+/**
+ * Sistema fisiológico/clínico al que pertenece un parámetro. Sirve para
+ * agrupar las gráficas "por sección" (hígado, riñón, cardiovascular…).
+ * Los 17 OSDR usan el `sistema` del dataset; los 9 simulados se asignan
+ * por fisiología (ver `docs/03-plan/15-graficas-backend.md` §Anexo).
+ */
+export type SistemaParametro =
+  | 'cardiovascular'
+  | 'respiratorio'
+  | 'termorregulacion'
+  | 'neuro-ocular'
+  | 'hepatico'
+  | 'renal'
+  | 'electrolitos'
+  | 'proteina'
+  | 'metabolico'
+  | 'ambiental';
+
 export type MeshNodeId =
   | 'head_neuro_ocular'
   | 'thorax_heart'
@@ -74,6 +92,8 @@ export interface ParameterDefinition {
   unidad: string;
   unidadCanonica: string;
   categoria: CategoriaParametro;
+  /** Sistema fisiológico/clínico, para agrupar gráficas "por sección". */
+  sistema: SistemaParametro;
   frecuencia: TipoFrecuenciaParametro;
   intervaloMs?: number;
 
