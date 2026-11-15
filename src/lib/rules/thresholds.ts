@@ -1,5 +1,7 @@
 import { get, list } from '@/lib/realtime/registry';
 
+import type { Sexo } from '@/types';
+
 /**
  * Umbrales de evaluación con trazabilidad (Back 2).
  *
@@ -31,14 +33,21 @@ export function esFuenteValidada(fuente: string): boolean {
 }
 
 /**
- * Resuelve los umbrales efectivos de un parámetro. Devuelve `null` si el ID no
- * existe en el catálogo.
+ * Resuelve los umbrales efectivos de un parámetro. Si se pasa `sexo` y existe
+ * un rango sexo-específico, lo usa (y lo marca `[POR VALIDAR]`); si no, cae al
+ * rango general. Devuelve `null` si el ID no existe en el catálogo.
  */
-export function obtenerUmbrales(paramId: string): UmbralesEfectivos | null {
+export function obtenerUmbrales(paramId: string, sexo?: Sexo): UmbralesEfectivos | null {
   const def = get(paramId);
   if (!def) return null;
 
-  const { min, max, criticoMin, criticoMax } = def.rangoReferencia;
+  const rangoPorSexo = sexo ? def.rangoReferenciaPorSexo?.[sexo] : undefined;
+  const usaSexo = rangoPorSexo !== undefined;
+  const { min, max, criticoMin, criticoMax } = rangoPorSexo ?? def.rangoReferencia;
+
+  const fuente = usaSexo
+    ? `${def.fuenteUmbral} · rango sexo-específico [POR VALIDAR]`
+    : def.fuenteUmbral;
 
   return {
     paramId: def.id,
@@ -46,9 +55,9 @@ export function obtenerUmbrales(paramId: string): UmbralesEfectivos | null {
     max,
     criticoMin,
     criticoMax,
-    referenciaPoblacional: def.referenciaPoblacional,
-    fuente: def.fuenteUmbral,
-    fuenteValidada: esFuenteValidada(def.fuenteUmbral),
+    referenciaPoblacional: usaSexo ? { min, max } : def.referenciaPoblacional,
+    fuente,
+    fuenteValidada: esFuenteValidada(fuente),
   };
 }
 
@@ -56,8 +65,8 @@ export function obtenerUmbrales(paramId: string): UmbralesEfectivos | null {
  * Versión estricta: falla si el parámetro no está registrado. Usa el mismo
  * espíritu que `registry.getOrThrow` (E-VAL-002).
  */
-export function obtenerUmbralesOrThrow(paramId: string): UmbralesEfectivos {
-  const umbrales = obtenerUmbrales(paramId);
+export function obtenerUmbralesOrThrow(paramId: string, sexo?: Sexo): UmbralesEfectivos {
+  const umbrales = obtenerUmbrales(paramId, sexo);
   if (!umbrales) {
     throw new Error(
       `Parámetro «${paramId}» no existe en el catálogo. Añádelo en registry.ts antes de registrar.`,

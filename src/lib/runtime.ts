@@ -8,6 +8,7 @@
 import { StreamEngine, type SensorSource, type OpcionesStreamEngine } from '@/lib/realtime/stream-engine';
 import { evaluar } from '@/lib/rules/triage';
 import { baselinePreVuelo } from '@/lib/osdr/client';
+import { sexoDe } from '@/lib/knowledge/tripulacion';
 import { guardarFrame } from '@/lib/db/repositories';
 import { encolarFrame } from '@/lib/sync/queue';
 import { agregarFrame, persistirSeries } from '@/lib/sync/aggregate';
@@ -119,7 +120,7 @@ export async function start(opciones: OpcionesRuntime = {}): Promise<void> {
     crewId,
     fuente,
     evaluador: (lectura, def, baseline) =>
-      evaluar(lectura.parametroId, lectura.valor, baseline, undefined, lectura.calidad),
+      evaluar(lectura.parametroId, lectura.valor, baseline, undefined, lectura.calidad, sexoDe(crewId)),
     baseline: (cid, paramId) => baselinePreVuelo(cid, paramId)?.media ?? null,
     intervaloMs,
     respetarIntervalos: opciones.respetarIntervalos ?? false,

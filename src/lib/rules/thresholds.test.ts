@@ -68,3 +68,31 @@ describe('rules/thresholds · etiquetas de honestidad', () => {
     expect(esFuenteValidada('OSDR OSD-575 (rango de referencia incluido en el dataset)')).toBe(true);
   });
 });
+
+describe('rules/thresholds · rango por sexo', () => {
+  it('creatinina usa el rango masculino con sexo M', () => {
+    const u = obtenerUmbrales('creatinine', 'M');
+    expect(u?.min).toBe(0.7);
+    expect(u?.max).toBe(1.3);
+    expect(u?.fuenteValidada).toBe(false); // rango por sexo [POR VALIDAR]
+  });
+
+  it('creatinina usa el rango femenino con sexo F', () => {
+    const u = obtenerUmbrales('creatinine', 'F');
+    expect(u?.min).toBe(0.5);
+    expect(u?.max).toBe(0.95);
+  });
+
+  it('sin sexo cae al rango general', () => {
+    const u = obtenerUmbrales('creatinine');
+    expect(u?.min).toBe(0.6);
+    expect(u?.max).toBe(1.35);
+  });
+
+  it('un parámetro sin rango por sexo ignora el sexo', () => {
+    const u = obtenerUmbrales('glucose', 'F');
+    expect(u?.min).toBe(65);
+    expect(u?.max).toBe(99);
+    expect(u?.fuenteValidada).toBe(true);
+  });
+});

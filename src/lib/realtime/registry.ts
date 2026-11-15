@@ -49,6 +49,7 @@ interface DefinicionBase {
 
 function laboratorio(overrides: Pick<ParameterDefinition, 'id' | 'nombre' | 'unidad' | 'rangoReferencia' | 'esDerivado'> & {
   metodo?: string;
+  rangoReferenciaPorSexo?: ParameterDefinition['rangoReferenciaPorSexo'];
 }): ParameterDefinition {
   const base: DefinicionBase = {
     categoria: 'bioquimico-osdr',
@@ -70,6 +71,7 @@ function laboratorio(overrides: Pick<ParameterDefinition, 'id' | 'nombre' | 'uni
     metodo: overrides.metodo,
     requiereContexto: false,
     rangoReferencia: overrides.rangoReferencia,
+    rangoReferenciaPorSexo: overrides.rangoReferenciaPorSexo,
     referenciaPoblacional: {
       min: overrides.rangoReferencia.min,
       max: overrides.rangoReferencia.max,
@@ -150,6 +152,12 @@ const PARAMETROS_OSDR: readonly ParameterDefinition[] = [
     unidad: 'mg/dL',
     esDerivado: false,
     rangoReferencia: { min: 0.6, max: 1.35, criticoMin: null, criticoMax: null },
+    // Rango sexo-específico: la creatinina sérica difiere por masa muscular.
+    // [Fuente: Creatinine blood test (Normal Results) — UCSF Health / A.D.A.M. — https://www.ucsfhealth.org/medical-tests/creatinine-blood-test — consultado 2026-11-14] [POR VALIDAR]
+    rangoReferenciaPorSexo: {
+      M: { min: 0.7, max: 1.3, criticoMin: null, criticoMax: null },
+      F: { min: 0.5, max: 0.95, criticoMin: null, criticoMax: null },
+    },
   }),
   laboratorio({
     id: 'egfr_african_american',

@@ -13,6 +13,9 @@
 
 export type CrewId = 'C001' | 'C002' | 'C003' | 'C004';
 
+/** Sexo biológico del tripulante, usado para rangos de referencia sexo-específicos. */
+export type Sexo = 'M' | 'F';
+
 export type Nivel = 'NOMINAL' | 'ATENCION' | 'CRITICO';
 
 /**
@@ -81,6 +84,13 @@ export interface ParameterDefinition {
   tipoDesviacion: TipoDesviacion;
 
   rangoReferencia: RangoReferencia;
+  /**
+   * Rangos de referencia por sexo biológico. Solo se rellena para analitos con
+   * diferencia clínicamente relevante (ej. creatinina, por masa muscular).
+   * Si no existe para un sexo, `thresholds` cae al rango general.
+   * Fuente citada en `docs/02-investigacion/04-bibliografia.md`.
+   */
+  rangoReferenciaPorSexo?: Partial<Record<Sexo, RangoReferencia>>;
   referenciaPoblacional: { min: number | null; max: number | null };
 
   /** Obligatorio: "OSD-575", "[SUPUESTO]" o "[POR VALIDAR]". */

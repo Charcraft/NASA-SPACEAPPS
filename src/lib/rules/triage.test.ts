@@ -88,3 +88,26 @@ describe('rules/triage · errores', () => {
     expect(() => evaluar('no-existe', 1, 1)).toThrow(/no existe en el catálogo/);
   });
 });
+
+describe('rules/triage · sexo específico (creatinina)', () => {
+  it('1.0 mg/dL es NOMINAL para hombre (rango M 0.7–1.3)', () => {
+    const r = evaluar('creatinine', 1.0, 0.9, undefined, undefined, 'M');
+    expect(r.nivel).toBe('NOMINAL');
+  });
+
+  it('1.0 mg/dL es ATENCION para mujer (rango F 0.5–0.95)', () => {
+    const r = evaluar('creatinine', 1.0, 0.9, undefined, undefined, 'F');
+    expect(r.nivel).toBe('ATENCION');
+    expect(r.reglaDisparada).toBe('ATENCION_ALTO');
+  });
+
+  it('sin sexo usa el rango general (0.6–1.35)', () => {
+    const r = evaluar('creatinine', 1.0, 0.9);
+    expect(r.nivel).toBe('NOMINAL');
+  });
+
+  it('el rango por sexo se marca degradado ([POR VALIDAR])', () => {
+    const r = evaluar('creatinine', 1.0, 0.9, undefined, undefined, 'F');
+    expect(r.degradado).toBe(true);
+  });
+});

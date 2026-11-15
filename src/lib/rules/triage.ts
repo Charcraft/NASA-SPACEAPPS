@@ -1,7 +1,7 @@
 import { getOrThrow } from '@/lib/realtime/registry';
 import { obtenerUmbralesOrThrow } from '@/lib/rules/thresholds';
 
-import type { EntornoCabina, Evaluacion, Nivel, TipoDesviacion } from '@/types';
+import type { EntornoCabina, Evaluacion, Nivel, Sexo, TipoDesviacion } from '@/types';
 
 /**
  * Motor determinista puro de triage (Back 2).
@@ -56,9 +56,10 @@ export function evaluar(
   baseline: number | null,
   entorno?: EntornoCabina,
   calidad?: number,
+  sexo?: Sexo,
 ): Evaluacion {
   const def = getOrThrow(paramId);
-  const umbrales = obtenerUmbralesOrThrow(paramId);
+  const umbrales = obtenerUmbralesOrThrow(paramId, sexo);
 
   const { min, max, criticoMin, criticoMax, fuente, fuenteValidada } = umbrales;
   const unidad = def.unidad;
