@@ -32,6 +32,10 @@ import { getOrThrow, validateRegistry } from './registry';
 /** Cualquier fuente de lecturas: simulador, BLE, serie o bus de la nave. */
 export interface SensorSource {
   leer(ahora: number): LecturaEvaluable[];
+  /** Opcional: inicio controlado (para replay, etc.). */
+  start?(): void;
+  /** Opcional: parada controlada. */
+  stop?(): void;
 }
 
 /** Lo que Back 2 entrega como `evaluar()` de `rules/triage.ts`. */

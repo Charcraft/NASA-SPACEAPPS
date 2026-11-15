@@ -65,7 +65,7 @@ function amplitud(definicion: ParameterDefinition, base: number): number {
   return Math.max(porRango, Math.abs(base) * 0.008, 0.01);
 }
 
-export function crearFuenteDemo(opciones: OpcionesFuenteDemo): SensorSource {
+function crearFuenteDemoInterna(opciones: OpcionesFuenteDemo): SensorSource {
   const { crewId, baseline } = opciones;
   const aleatorio = mulberry32(opciones.semilla ?? 20_261_114);
 
@@ -118,6 +118,32 @@ export function crearFuenteDemo(opciones: OpcionesFuenteDemo): SensorSource {
       return lecturas;
     },
   };
+}
+
+/** Clase wrapper para uso en runtime (implementa SensorSource). */
+export class SimulatedSource implements SensorSource {
+  private readonly inner: SensorSource;
+
+  constructor(opciones: OpcionesFuenteDemo) {
+    this.inner = crearFuenteDemoInterna(opciones);
+  }
+
+  leer(ahora: number): LecturaEvaluable[] {
+    return this.inner.leer(ahora);
+  }
+
+  start(): void {
+    // Sin-op para fuente simulada
+  }
+
+  stop(): void {
+    // Sin-op para fuente simulada
+  }
+}
+
+/** Función factory retrocompatible. */
+export function crearFuenteDemo(opciones: OpcionesFuenteDemo): SensorSource {
+  return new SimulatedSource(opciones);
 }
 
 /** Comprueba que un ID exista antes de forzar una anomalía. */

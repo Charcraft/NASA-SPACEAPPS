@@ -4,8 +4,8 @@
  * Sala de tripulación — shell de demostración de Back 1.
  *
  * Una pestaña = una estación = un tripulante (`?crew=C002`). Cada estación
- * publica su frame en `/api/telemetry` y escucha las alertas de las demás por
- * SSE. Si el hub no responde, la estación sigue mostrando sus propios datos.
+ * usa el runtime que cablea: fuente → motor → evaluador/baseline reales (Back 2)
+ * → sink (DB + sync + agregación + 3D + UI).
  *
  * La UI definitiva es de Frontend; esto demuestra que el contrato funciona.
  */
@@ -28,11 +28,8 @@ import {
   NODOS_3D,
   estadoDeNodo,
 } from '@/lib/model3d-bridge/contracts';
-import { crearBaselineDemo } from '@/lib/realtime/demo/baseline';
-import { crearEvaluadorDemo } from '@/lib/realtime/demo/evaluador';
-import { crearFuenteDemo } from '@/lib/realtime/demo/sensor-source';
 import { list } from '@/lib/realtime/registry';
-import { StreamEngine } from '@/lib/realtime/stream-engine';
+import { start, stop, subscribe, getMotor, forzarAnomalia, limpiarAnomalias, getEstado } from '@/lib/runtime';
 
 const TRIPULANTES: readonly CrewId[] = ['C001', 'C002', 'C003', 'C004'];
 const VITALES = [
@@ -65,11 +62,9 @@ function nivelDeAlertas(alertas: readonly AlertaTripulacion[]): Nivel {
   if (alertas.some((alerta) => alerta.nivel === 'CRITICO')) {
     return 'CRITICO';
   }
-
   if (alertas.length > 0) {
     return 'ATENCION';
   }
-
   return 'NOMINAL';
 }
 
@@ -80,10 +75,7 @@ function formatear(valor: number, unidad: string): string {
 }
 
 function selloDeTiempo(timestamp: number, ahora: number): string {
-  if (ahora === 0) {
-    return '—';
-  }
-
+  if (ahora === 0) return '—';
   const segundos = Math.max(0, Math.round((ahora - timestamp) / 1_000));
   return segundos <= 1 ? 'ahora' : `hace ${segundos} s`;
 }
@@ -94,24 +86,19 @@ export default function SalaControl() {
   const [frame, setFrame] = useState<RealtimeTelemetryFrame | null>(null);
   const [sala, setSala] = useState<EstadoTripulante[]>([]);
   const [alertas, setAlertas] = useState<AlertaTripulacion[]>([]);
-  const [enlaceSala, setEnlaceSala] = useState<'conectado' | 'degradado' | 'sin-enlace'>(
-    'sin-enlace',
-  );
-  const [enlacePublicacion, setEnlacePublicacion] = useState<'conectado' | 'degradado'>(
-    'degradado',
-  );
+  const [enlaceSala, setEnlaceSala] = useState<'conectado' | 'degradado' | 'sin-enlace'>('sin-enlace');
+  const [enlacePublicacion, setEnlacePublicacion] = useState<'conectado' | 'degradado'>('degradado');
   const [ahora, setAhora] = useState(0);
   const [parametroSimulado, setParametroSimulado] = useState('heart_rate');
   const [nivelSimulado, setNivelSimulado] = useState<'ATENCION' | 'CRITICO'>('CRITICO');
+  const [modoFuente, setModoFuente] = useState<'simulado' | 'replay-osdr'>('simulado');
 
-  const engineRef = useRef<StreamEngine | null>(null);
   const ultimoFrameRef = useRef<RealtimeTelemetryFrame | null>(null);
 
   // Reloj de la UI, solo en cliente para evitar desajustes de hidratación.
   useEffect(() => {
     setMontado(true);
     setAhora(Date.now());
-
     const intervalo = setInterval(() => setAhora(Date.now()), 1_000);
     return () => clearInterval(intervalo);
   }, []);
@@ -128,48 +115,47 @@ export default function SalaControl() {
     }
   }, []);
 
-  // Motor local de la estación.
+  // Arrancar/parar runtime al cambiar tripulante o modo.
   useEffect(() => {
-    const baseline = crearBaselineDemo();
-    const engine = new StreamEngine({
-      crewId,
-      fuente: crearFuenteDemo({
+    let cancelado = false;
+
+    (async () => {
+      await start({
         crewId,
-        baseline,
-        semilla: 7_919 * Number(crewId.slice(1)),
-      }),
-      evaluador: crearEvaluadorDemo(),
-      baseline,
-      respetarIntervalos: false,
-    });
+        modo: modoFuente,
+        intervaloMs: 1_000,
+        respetarIntervalos: false,
+      });
 
-    engineRef.current = engine;
-    ultimoFrameRef.current = null;
+      if (cancelado) {
+        await stop();
+        return;
+      }
 
-    const baja = engine.subscribe((nuevoFrame) => {
-      ultimoFrameRef.current = nuevoFrame;
-      setFrame(nuevoFrame);
-    });
+      // Suscribir UI al motor
+      const baja = subscribe((nuevoFrame) => {
+        ultimoFrameRef.current = nuevoFrame;
+        setFrame(nuevoFrame);
+      });
 
-    engine.start();
+      return () => {
+        baja();
+      };
+    })();
 
     return () => {
-      baja();
-      engine.stop();
-      engineRef.current = null;
+      cancelado = true;
+      stop().catch(console.error);
     };
-  }, [crewId]);
+  }, [crewId, modoFuente]);
 
-  // Publicación del frame propio cada 2 s.
+  // Publicación del frame propio cada 2 s al hub (SSE).
   useEffect(() => {
     let cancelado = false;
 
     const publicar = async (): Promise<void> => {
       const actual = ultimoFrameRef.current;
-
-      if (!actual) {
-        return;
-      }
+      if (!actual) return;
 
       try {
         const respuesta = await fetch('/api/telemetry', {
@@ -177,20 +163,16 @@ export default function SalaControl() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(actual),
         });
-
         if (!cancelado) {
           setEnlacePublicacion(respuesta.ok ? 'conectado' : 'degradado');
         }
       } catch {
-        if (!cancelado) {
-          setEnlacePublicacion('degradado');
-        }
+        if (!cancelado) setEnlacePublicacion('degradado');
       }
     };
 
     void publicar();
     const intervalo = setInterval(() => void publicar(), 2_000);
-
     return () => {
       cancelado = true;
       clearInterval(intervalo);
@@ -206,7 +188,6 @@ export default function SalaControl() {
 
     fuente.onmessage = (mensaje) => {
       let evento: EventoSala;
-
       try {
         evento = JSON.parse(mensaje.data) as EventoSala;
       } catch {
@@ -241,10 +222,8 @@ export default function SalaControl() {
 
       setSala((previos) => {
         const porCrew = new Map(previos.map((tripulante) => [tripulante.crewId, tripulante]));
-
         for (const resumen of evento.tripulantes) {
           const existente = porCrew.get(resumen.crewId);
-
           porCrew.set(resumen.crewId, {
             crewId: resumen.crewId,
             nivel: existente?.nivel ?? resumen.nivel,
@@ -254,7 +233,6 @@ export default function SalaControl() {
             estadoEnlace: resumen.estadoEnlace,
           });
         }
-
         return [...porCrew.values()].sort((a, b) => a.crewId.localeCompare(b.crewId));
       });
     };
@@ -264,14 +242,9 @@ export default function SalaControl() {
 
   const alertasPorCrew = useMemo(() => {
     const mapa = new Map<CrewId, AlertaTripulacion[]>();
-
     for (const tripulante of TRIPULANTES) {
-      mapa.set(
-        tripulante,
-        alertas.filter((alerta) => alerta.crewId === tripulante),
-      );
+      mapa.set(tripulante, alertas.filter((alerta) => alerta.crewId === tripulante));
     }
-
     return mapa;
   }, [alertas]);
 
@@ -297,11 +270,15 @@ export default function SalaControl() {
   };
 
   const simular = (nivel: 'ATENCION' | 'CRITICO'): void => {
-    engineRef.current?.forzarAnomalia(parametroSimulado, nivel, 30_000);
+    forzarAnomalia(parametroSimulado, nivel, 30_000);
   };
 
   const limpiar = (): void => {
-    engineRef.current?.limpiarAnomalias();
+    limpiarAnomalias();
+  };
+
+  const cambiarModo = (modo: 'simulado' | 'replay-osdr'): void => {
+    setModoFuente(modo);
   };
 
   return (
@@ -317,7 +294,7 @@ export default function SalaControl() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
             <span
               className="rounded-full border px-3 py-1"
               style={{
@@ -332,18 +309,29 @@ export default function SalaControl() {
               style={{
                 borderColor:
                   COLOR_NIVEL[enlacePublicacion === 'conectado' ? 'NOMINAL' : 'ATENCION'],
-                color: COLOR_NIVEL[enlacePublicacion === 'conectado' ? 'NOMINAL' : 'ATENCION'],
+                color:
+                  COLOR_NIVEL[enlacePublicacion === 'conectado' ? 'NOMINAL' : 'ATENCION'],
               }}
             >
               Envío: {enlacePublicacion}
             </span>
+            <span className="rounded-full border px-3 py-1 text-neutral-400">
+              Fuente: {modoFuente === 'replay-osdr' ? 'OSDR Replay' : 'Simulado'}
+            </span>
+            <button
+              type="button"
+              onClick={() => cambiarModo(modoFuente === 'simulado' ? 'replay-osdr' : 'simulado')}
+              className="rounded border border-neutral-700 px-2 py-1 text-[11px] text-neutral-300 hover:bg-neutral-800"
+            >
+              Cambiar a {modoFuente === 'simulado' ? 'OSDR Replay' : 'Simulado'}
+            </button>
           </div>
         </div>
 
         <p className="max-w-3xl text-sm text-neutral-400">
           Esta pestaña es la estación de <strong className="text-neutral-200">{crewId}</strong>.
           Abre otra pestaña con <code className="text-neutral-300">?crew=C002</code> para ver la
-          sincronización. Los datos son simulados; las 17 analíticas vienen de OSDR OSD-575.
+          sincronización. Los datos {modoFuente === 'replay-osdr' ? 'reales de OSDR OSD-575' : 'simulados'}.
         </p>
       </header>
 
@@ -598,6 +586,11 @@ export default function SalaControl() {
               )}
             </div>
           </section>
+
+          <section aria-label="Estado del sync" className="rounded-lg border border-neutral-800 bg-neutral-950 p-4">
+            <h2 className="text-sm font-semibold text-neutral-200">Sincronización a Tierra</h2>
+            <SyncStatus />
+          </section>
         </div>
       </div>
 
@@ -607,10 +600,52 @@ export default function SalaControl() {
           alertas propias: {propias.length}
         </p>
         <p className="mt-1">
-          Prototipo de hackathon. Datos simulados y dataset público OSD-575. No es un
+          Prototipo de hackathon. Datos {modoFuente === 'replay-osdr' ? 'reales de OSD-575' : 'simulados'}. No es un
           dispositivo médico.
         </p>
       </footer>
     </main>
+  );
+}
+
+// Componente auxiliar: estado de la cola de sync
+function SyncStatus() {
+  const [stats, setStats] = useState<{
+    cola: { pendientes: number; porPrioridad: Record<string, number>; masAntigua: number | null };
+    red: string;
+  } | null>(null);
+
+  useEffect(() => {
+    let transport: any;
+
+    import('@/lib/sync/transport').then((mod) => {
+      transport = mod.obtenerSyncTransport();
+    });
+
+    const actualizar = async () => {
+      const { statsCola } = await import('@/lib/sync/queue');
+      const cola = await statsCola();
+      setStats({
+        cola,
+        red: transport?.['estado'] ?? 'online',
+      });
+    };
+
+    actualizar();
+    const intervalo = setInterval(actualizar, 2_000);
+    return () => clearInterval(intervalo);
+  }, []);
+
+  if (!stats) return <p className="text-xs text-neutral-500">Cargando…</p>;
+
+  return (
+    <div className="text-xs text-neutral-300 space-y-1">
+      <p>Red: <span style={{ color: stats.red === 'online' ? '#22c55e' : stats.red === 'degradado' ? '#f59e0b' : '#ef4444' }}>{stats.red}</span></p>
+      <p>Cola pendientes: {stats.cola.pendientes}</p>
+      <p>Más antigua: {stats.cola.masAntigua ? `${Math.round((Date.now() - stats.cola.masAntigua) / 1000)} s` : '—'}</p>
+      <p>
+        A:{stats.cola.porPrioridad.A ?? 0} B:{stats.cola.porPrioridad.B ?? 0} C:{stats.cola.porPrioridad.C ?? 0} D:{stats.cola.porPrioridad.D ?? 0}
+      </p>
+    </div>
   );
 }
