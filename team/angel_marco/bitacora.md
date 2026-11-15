@@ -74,3 +74,11 @@
 **Bloqueos:** ninguna (creatinina verificada; BUN sin cifras exactas de fuente confiable).
 **Issue(s):** pendiente de crear
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 21:42 — Reconciliación de marcas de sync (Back 2)
+
+**Hice:** Implementé `marcarSincronizadoPorFrame(crewId, timestamp)` en `repositories.ts` (idempotente, no-lanza, transacción rw) y lo conecté en `flushCola` (`transport.ts`) al enviar un lote de tipo frame. Conecta `colaSync.estado` con `mediciones.sincronizadoTierra`. 4 tests nuevos.
+**Siguiente:** nada pendiente de este frente; validar que el flush limpio drene y marque en la demo offline.
+**Bloqueos:** ninguno.
+**Issue(s):** pendiente de crear
+**Rama:** feat/integracion-back
