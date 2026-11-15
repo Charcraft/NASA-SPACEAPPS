@@ -139,6 +139,13 @@
 
 ## Bitácora
 
+### 2026-11-14 — Merge Back 2 (episodios/entrada manual) + contrato front
+
+- Merge de Angel: `guardarMedicion` + `/api/mediciones` (entrada manual), `abrirEpisodio`/`cerrarEpisodio`/`episodioAbierto` (episodios), poda acotada (quita índice `abierto`).
+- **Conecté episodios en `runtime.ts`:** `detectarEmergencia` ahora abre/cierra episodios (no solo registra el evento puntual).
+- **Contrato front actualizado:** `docs/03-plan/14-contrato-integracion-front.md` (endpoints, SSE, 3D, entornos, entrada manual, episodios). Moví `13-reconciliacion-sync.md` al repo como registro.
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 74/74, `pnpm build` 9 rutas.
+
 ### 2026-11-14 — Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
 
 - `runtime.ts`: `respetarIntervalos: true` por defecto (antes emitía 26 lecturas/s), poda automática cada hora (`purgarVentana` + `podarSeries`, nunca eventos/bitácora), y detección de emergencia (transición a CRITICO → `registrarEvento`).

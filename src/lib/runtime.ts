@@ -9,7 +9,13 @@ import { StreamEngine, type SensorSource, type OpcionesStreamEngine } from '@/li
 import { evaluar } from '@/lib/rules/triage';
 import { baselinePreVuelo } from '@/lib/osdr/client';
 import { sexoDe } from '@/lib/knowledge/tripulacion';
-import { guardarFrame, purgarVentana, registrarEvento } from '@/lib/db/repositories';
+import {
+  guardarFrame,
+  purgarVentana,
+  registrarEvento,
+  abrirEpisodio,
+  cerrarEpisodio,
+} from '@/lib/db/repositories';
 import { encolarFrame } from '@/lib/sync/queue';
 import { agregarFrame, persistirSeries, podarSeries } from '@/lib/sync/aggregate';
 import { obtenerSyncTransport, flushCola, iniciarFlushPeriodico } from '@/lib/sync/transport';
@@ -52,15 +58,19 @@ const _estado: EstadoRuntime = {
 const _ultimoNivel = new Map<string, Nivel>();
 
 /**
- * Registra un `EventoEmergencia` (Back 2) cuando un parámetro pasa a CRITICO.
- * Solo en la transición (no en cada frame) para no duplicar eventos.
+ * Detecta emergencias y mantiene los episodios (Back 2):
+ * - Transición a CRITICO → `registrarEvento` (evento puntual).
+ * - Salida de NOMINAL → `abrirEpisodio` (período continuo fuera de rango).
+ * - Vuelta a NOMINAL → `cerrarEpisodio`.
+ * Usa el último nivel visto para detectar transiciones, sin duplicar.
  */
 async function detectarEmergencia(frame: RealtimeTelemetryFrame): Promise<void> {
   for (const [parametroId, lectura] of Object.entries(frame.lecturas)) {
     const clave = `${frame.crewId}:${parametroId}`;
     const anterior = _ultimoNivel.get(clave);
+    const nivel = lectura.nivel;
 
-    if (lectura.nivel === 'CRITICO' && anterior !== 'CRITICO') {
+    if (nivel === 'CRITICO' && anterior !== 'CRITICO') {
       await registrarEvento({
         crewId: frame.crewId,
         timestamp: frame.timestamp,
@@ -69,7 +79,13 @@ async function detectarEmergencia(frame: RealtimeTelemetryFrame): Promise<void> 
       });
     }
 
-    _ultimoNivel.set(clave, lectura.nivel);
+    if (nivel !== 'NOMINAL') {
+      await abrirEpisodio(frame.crewId, parametroId, nivel, frame.timestamp);
+    } else if (anterior !== undefined && anterior !== 'NOMINAL') {
+      await cerrarEpisodio(frame.crewId, parametroId, frame.timestamp);
+    }
+
+    _ultimoNivel.set(clave, nivel);
   }
 }
 

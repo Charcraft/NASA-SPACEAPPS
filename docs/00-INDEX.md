@@ -56,6 +56,8 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/10-reparto-backend.md`](03-plan/10-reparto-backend.md) | **Reparto Back 1 / Back 2**: dueño por archivo, contratos de dependencia y acuerdos previos |
 | [`03-plan/11-arquitectura-backend.md`](03-plan/11-arquitectura-backend.md) | **Arquitectura de backend**: roles, flujo de datos, contratos congelados, puertas y plan paralelo |
 | [`03-plan/12-protocolos-medicos.md`](03-plan/12-protocolos-medicos.md) | **Protocolos médicos (traspaso Back 1 → Back 2)**: contrato de `/api/protocolos`, esquema JSON, integración con triage |
+| [`03-plan/13-reconciliacion-sync.md`](03-plan/13-reconciliacion-sync.md) | **Reconciliación de sync (tarea Back 2)**: conectar ACK → `sincronizadoTierra` | 
+| [`03-plan/14-contrato-integracion-front.md`](03-plan/14-contrato-integracion-front.md) | **Contrato de integración Frontend ↔ Backend**: endpoints, SSE, modelo 3D, entornos, entrada manual |
 
 ---
 
