@@ -9,6 +9,7 @@ import {
   cerrarEpisodio,
   episodioAbierto,
   guardarFrame,
+  listarSeries,
   marcarSincronizado,
   marcarSincronizadoPorFrame,
   pendientesSincronizar,
@@ -260,5 +261,52 @@ describe('db/repositories · episodios', () => {
 
   it('cerrar sin episodio abierto devuelve null', async () => {
     expect(await cerrarEpisodio('C001', 'heart_rate')).toBeNull();
+  });
+});
+
+describe('db/repositories · listarSeries', () => {
+  const BASE = 1_760_000_000_000;
+
+  async function sembrar(): Promise<void> {
+    await db.series.bulkAdd([
+      { crewId: 'C001', parametroId: 'heart_rate', resolucion: '1h', inicio: BASE, fin: BASE + 3_600_000, min: 58, max: 84, media: 71, n: 3600 },
+      { crewId: 'C001', parametroId: 'heart_rate', resolucion: '1h', inicio: BASE + 7_200_000, fin: BASE + 10_800_000, min: 60, max: 88, media: 72, n: 3600 },
+      { crewId: 'C001', parametroId: 'spo2', resolucion: '1h', inicio: BASE, fin: BASE + 3_600_000, min: 96, max: 99, media: 98, n: 3600 },
+      { crewId: 'C002', parametroId: 'heart_rate', resolucion: '1h', inicio: BASE, fin: BASE + 3_600_000, min: 60, max: 80, media: 70, n: 3600 },
+    ]);
+  }
+
+  it('devuelve solo el tripulante y ordenado por inicio', async () => {
+    await sembrar();
+    const series = await listarSeries({ crewId: 'C001' });
+    expect(series).toHaveLength(3);
+    expect(series.every((s) => s.crewId === 'C001')).toBe(true);
+    expect(series[0]!.inicio).toBeLessThanOrEqual(series[1]!.inicio);
+  });
+
+  it('filtra por parámetro', async () => {
+    await sembrar();
+    const series = await listarSeries({ crewId: 'C001', parametroId: 'spo2' });
+    expect(series).toHaveLength(1);
+    expect(series[0]!.parametroId).toBe('spo2');
+  });
+
+  it('filtra por resolución y rango desde/hasta', async () => {
+    await sembrar();
+    const series = await listarSeries({
+      crewId: 'C001',
+      parametroId: 'heart_rate',
+      resolucion: '1h',
+      desde: BASE + 3_600_000,
+      hasta: BASE + 10_800_000,
+    });
+    expect(series).toHaveLength(1);
+    expect(series[0]!.inicio).toBe(BASE + 7_200_000);
+  });
+
+  it('devuelve [] si no hay datos en el rango', async () => {
+    await sembrar();
+    const series = await listarSeries({ crewId: 'C001', parametroId: 'no-existe' });
+    expect(series).toEqual([]);
   });
 });

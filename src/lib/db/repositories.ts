@@ -10,6 +10,7 @@ import type {
   EventoEmergencia,
   RegistroBitacora,
   RegistroMedicionLocal,
+  SerieAgregada,
 } from './types';
 
 /**
@@ -155,6 +156,38 @@ export async function registrarBitacora(
   registro: Omit<RegistroBitacora, 'id'>,
 ): Promise<number> {
   return db.bitacora.add(registro);
+}
+
+/**
+ * Lista las series agregadas de un tripulante (opcionalmente de un parámetro,
+ * resolución y rango). Solo lectura; no lanza (devuelve [] ante error).
+ *
+ * Nota: la tabla `series` no tiene índice simple `crewId` (solo el compuesto
+ * `[crewId+parametroId+resolucion+inicio]`), así que se filtra en memoria.
+ */
+export async function listarSeries(opciones: {
+  crewId: CrewId;
+  parametroId?: string;
+  resolucion?: '1min' | '1h';
+  desde?: number;
+  hasta?: number;
+}): Promise<SerieAgregada[]> {
+  try {
+    const todas = await db.series.toCollection().toArray();
+
+    return todas
+      .filter((s) => {
+        if (s.crewId !== opciones.crewId) return false;
+        if (opciones.parametroId && s.parametroId !== opciones.parametroId) return false;
+        if (opciones.resolucion && s.resolucion !== opciones.resolucion) return false;
+        if (opciones.desde !== undefined && s.inicio < opciones.desde) return false;
+        if (opciones.hasta !== undefined && s.fin > opciones.hasta) return false;
+        return true;
+      })
+      .sort((a, b) => a.inicio - b.inicio);
+  } catch {
+    return [];
+  }
 }
 
 // ---------------------------------------------------------------------------
