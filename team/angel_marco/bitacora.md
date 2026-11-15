@@ -90,3 +90,11 @@
 **Bloqueos:** ninguno.
 **Issue(s):** pendiente de crear
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 23:51 — Endpoint /api/series para gráficas (Back 2)
+
+**Hice:** Implementé `listarSeries()` en `repositories.ts` y `GET /api/series` (lectura de la tabla `series`, filtros crewId/parametroId/resolucion/desde/hasta). 4 tests nuevos.
+**Nota:** la doc de Ernesto decía `db.series.where('crewId')`, pero la tabla `series` no tiene índice simple `crewId` (solo el compuesto); usé filtro en memoria.
+**Siguiente:** Pineda grafica con Recharts. Cerrar PR hacia main.
+**Bloqueos:** ninguno.
+**Rama:** feat/integracion-back
