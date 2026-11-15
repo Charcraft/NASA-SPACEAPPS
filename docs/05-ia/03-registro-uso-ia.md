@@ -247,17 +247,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-017 · Documento de los 17 analitos OSDR (CMP)
+- **Fecha/hora:** 2026-11-14 21:59
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** investigación
+- **Prompt usado:** ad hoc — "dame un archivo de los 17 OSDR y cómo se obtendrían, con ejemplos de uso en viajes ya realizados".
+- **Propósito:** documentar los 17 analitos del panel metabólico (función, método de obtención y relevancia en vuelo) para la trazabilidad del catálogo.
+- **Resultado obtenido:** `docs/02-investigacion/07-analitos-osdr.md` con la tabla de los 17 analitos (unidad, rango, método, relevancia), la distinción medido vs calculado (eGFR, globulina), y ejemplos en misiones reales (Inspiration4, ISS, Twins Study, Gemini/Apollo).
+- **Validación:** datos y rangos extraídos del seed OSD-575 `[VERIFICADO]`; técnicas de laboratorio `[INFERENCIA]`; misiones no-Inspiration4 `[POR VERIFICAR]`.
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
-| Investigación | 3 | 3 |
+| Investigación | 4 | 4 |
 | Documentación | 3 | 2 |
 | Arquitectura / código | 11 | 7 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **17** | **12** |
+| **Total** | **18** | **13** |
 
 ---
 

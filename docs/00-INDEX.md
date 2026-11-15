@@ -35,6 +35,7 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`02-investigacion/04-bibliografia.md`](02-investigacion/04-bibliografia.md) | Todas las fuentes citadas, con fecha de consulta |
 | [`02-investigacion/05-arquitectura-actual-nasa.md`](02-investigacion/05-arquitectura-actual-nasa.md) | Cómo monitoriza NASA la salud hoy, y qué hueco llenamos |
 | [`02-investigacion/06-entornos-mision.md`](02-investigacion/06-entornos-mision.md) | **Adaptación a entornos** (nave, estación, base lunar): trazabilidad HRP/OSDR por indicador |
+| [`02-investigacion/07-analitos-osdr.md`](02-investigacion/07-analitos-osdr.md) | **Los 17 analitos OSDR (CMP)**: función, método de laboratorio, y ejemplos en misiones reales |
 
 ---
 
