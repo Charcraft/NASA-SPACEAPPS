@@ -260,17 +260,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-018 · Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
+- **Fecha/hora:** 2026-11-14 23:15
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "realiza la implementación que me corresponde (Back 1)".
+- **Propósito:** implementar las 4 tareas de resiliencia de Back 1: respetar intervalos, poda automática, exportación de respaldo y detección de emergencia.
+- **Resultado obtenido:** `runtime.ts` con `respetarIntervalos: true`, poda cada hora, y `detectarEmergencia()` (transición a CRITICO → `registrarEvento`); `src/lib/export/backup.ts` con `exportarRespaldo`/`respaldoAJson`/`descargarRespaldo`.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (70/70), `pnpm build` (8 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 4 | 4 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 11 | 7 |
+| Arquitectura / código | 12 | 8 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **18** | **13** |
+| **Total** | **19** | **14** |
 
 ---
 

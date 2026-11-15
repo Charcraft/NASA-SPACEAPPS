@@ -119,3 +119,17 @@
 **Issue(s):** #2 (Back 1)
 
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 23:16 — Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
+
+**Hice:**
+- `runtime.ts`: `respetarIntervalos: true` por defecto (evita 26 lecturas/s), poda automática cada hora, y `detectarEmergencia()` (transición a CRITICO → `registrarEvento`).
+- `src/lib/export/backup.ts`: exportación de respaldo (lee Dexie → JSON → descarga).
+
+**Siguiente:** que Angel entregue entrada manual + episodios; front real (Pineda).
+
+**Bloqueos:** ninguno.
+
+**Issue(s):** #2 (Back 1)
+
+**Rama:** feat/integracion-back

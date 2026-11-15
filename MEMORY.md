@@ -87,6 +87,7 @@
 | D41 | **El central persiste**: `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar | 2026-11-14 | Un reinicio del servidor ya no borra la sala; el histórico completo sigue en Dexie |
 | D42 | **Transporte real a Tierra**: `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub | 2026-11-14 | El envío ya no se simula: la cola drena a un endpoint real que persiste y devuelve ACK |
 | D43 | **Reconciliación de sync + rangos por sexo** (Angel): `marcarSincronizadoPorFrame` conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` | 2026-11-14 | Cierra el ciclo de sincronización (ACK → `sincronizadoTierra`) y añade precisión clínica por sexo con fuente UCSF `[POR VALIDAR]` |
+| D44 | **Resiliencia de Back 1**: `respetarIntervalos: true` por defecto, poda automática (crudo + series, nunca eventos/bitácora), exportación de respaldo y detección de emergencia (transición a CRITICO → `registrarEvento`) | 2026-11-14 | Evita que IndexedDB se llene, permite respaldo manual y cierra el hueco del modo emergencia |
 
 ---
 
@@ -122,6 +123,8 @@
 - [x] Central persistente (snapshot en `data/central/`) + transporte real a Tierra (`/api/tierra`).
 - [x] Reconciliación completa: marcar mediciones `sincronizadoTierra` tras el ACK (Back 2 · `repositories`).
 - [x] Rangos de referencia por sexo (creatinina) + `tripulacion.json` (Back 2 · Angel).
+- [x] Resiliencia Back 1: intervalos + poda automática + exportación de respaldo + detección de emergencia.
+- [ ] Entrada manual de mediciones (`api/mediciones`) + episodios completos (Back 2 · Angel).
 - [ ] Frontend real (Pineda): semáforo literal, modelo 3D, módulo IA, pantalla de emergencia.
 
 ---
@@ -135,6 +138,12 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
+
+- `runtime.ts`: `respetarIntervalos: true` por defecto (antes emitía 26 lecturas/s), poda automática cada hora (`purgarVentana` + `podarSeries`, nunca eventos/bitácora), y detección de emergencia (transición a CRITICO → `registrarEvento`).
+- `src/lib/export/backup.ts`: exportación de respaldo (lee Dexie, descarga JSON, sin red).
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 70/70, `pnpm build` 8 rutas.
 
 ### 2026-11-14 — Revisión e incorporación de Back 2 (reconciliación + sexo)
 

@@ -9,9 +9,9 @@ import { StreamEngine, type SensorSource, type OpcionesStreamEngine } from '@/li
 import { evaluar } from '@/lib/rules/triage';
 import { baselinePreVuelo } from '@/lib/osdr/client';
 import { sexoDe } from '@/lib/knowledge/tripulacion';
-import { guardarFrame } from '@/lib/db/repositories';
+import { guardarFrame, purgarVentana, registrarEvento } from '@/lib/db/repositories';
 import { encolarFrame } from '@/lib/sync/queue';
-import { agregarFrame, persistirSeries } from '@/lib/sync/aggregate';
+import { agregarFrame, persistirSeries, podarSeries } from '@/lib/sync/aggregate';
 import { obtenerSyncTransport, flushCola, iniciarFlushPeriodico } from '@/lib/sync/transport';
 import { OsdrReplaySource } from '@/lib/realtime/osdr-replay-source';
 import { SimulatedSource } from '@/lib/realtime/demo/sensor-source';
@@ -27,6 +27,7 @@ interface EstadoRuntime {
   fuente: SensorSource | null;
   desuscribirSink: (() => void) | null;
   detenerFlush: (() => void) | null;
+  detenerPoda: ReturnType<typeof setInterval> | null;
   crewId: CrewId;
   modo: 'simulado' | 'replay-osdr';
   iniciado: boolean;
@@ -37,10 +38,40 @@ const _estado: EstadoRuntime = {
   fuente: null,
   desuscribirSink: null,
   detenerFlush: null,
+  detenerPoda: null,
   crewId: 'C001',
   modo: 'simulado',
   iniciado: false,
 };
+
+// ---------------------------------------------------------------------------
+// Detección de emergencias (transición a CRITICO → registrarEvento)
+// ---------------------------------------------------------------------------
+
+/** Último nivel visto por `crewId:parametroId`, para detectar transiciones. */
+const _ultimoNivel = new Map<string, Nivel>();
+
+/**
+ * Registra un `EventoEmergencia` (Back 2) cuando un parámetro pasa a CRITICO.
+ * Solo en la transición (no en cada frame) para no duplicar eventos.
+ */
+async function detectarEmergencia(frame: RealtimeTelemetryFrame): Promise<void> {
+  for (const [parametroId, lectura] of Object.entries(frame.lecturas)) {
+    const clave = `${frame.crewId}:${parametroId}`;
+    const anterior = _ultimoNivel.get(clave);
+
+    if (lectura.nivel === 'CRITICO' && anterior !== 'CRITICO') {
+      await registrarEvento({
+        crewId: frame.crewId,
+        timestamp: frame.timestamp,
+        severidad: 'CRITICO',
+        detalle: `${parametroId}: ${lectura.razon}`,
+      });
+    }
+
+    _ultimoNivel.set(clave, lectura.nivel);
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Sink principal: persistencia + sync + agregación
@@ -63,8 +94,11 @@ async function sinkPrincipal(frame: RealtimeTelemetryFrame): Promise<void> {
     await persistirSeries(series);
   }
 
-  // 4. El crew-hub (SSE) se suscribe aparte vía `motor.subscribe()`
-  // 5. El modelo 3D consume `frame.estadoNodos3D` vía suscripción UI
+  // 4. Registrar emergencia si hay transición a CRITICO (Back 2)
+  await detectarEmergencia(frame);
+
+  // 5. El crew-hub (SSE) se suscribe aparte vía `motor.subscribe()`
+  // 6. El modelo 3D consume `frame.estadoNodos3D` vía suscripción UI
 }
 
 // ---------------------------------------------------------------------------
@@ -123,7 +157,7 @@ export async function start(opciones: OpcionesRuntime = {}): Promise<void> {
       evaluar(lectura.parametroId, lectura.valor, baseline, undefined, lectura.calidad, sexoDe(crewId)),
     baseline: (cid, paramId) => baselinePreVuelo(cid, paramId)?.media ?? null,
     intervaloMs,
-    respetarIntervalos: opciones.respetarIntervalos ?? false,
+    respetarIntervalos: opciones.respetarIntervalos ?? true,
   });
   _estado.motor = motor;
 
@@ -133,11 +167,29 @@ export async function start(opciones: OpcionesRuntime = {}): Promise<void> {
   // 4. Iniciar flush periódico de sync
   _estado.detenerFlush = iniciarFlushPeriodico(10_000);
 
-  // 5. Arrancar motor
+  // 5. Poda automática (cada hora): el crudo de `mediciones` y las `series`
+  //    viejas se purgan para no llenar IndexedDB. Nunca toca eventos ni bitácora.
+  void podarAhora();
+  _estado.detenerPoda = setInterval(() => void podarAhora(), 60 * 60 * 1000);
+
+  // 6. Arrancar motor
   motor.start();
   _estado.iniciado = true;
 
   console.log('[runtime] Iniciado:', { crewId, modo, intervaloMs });
+}
+
+/** Purga el crudo y las series viejas (delegado en Back 1 y Back 2). */
+async function podarAhora(): Promise<void> {
+  try {
+    const borradas = await purgarVentana(30);
+    const podadas = await podarSeries(30);
+    if (borradas > 0 || podadas > 0) {
+      console.log(`[runtime] Poda: ${borradas} mediciones, ${podadas} series.`);
+    }
+  } catch (error) {
+    console.warn('[runtime] Poda falló:', error);
+  }
 }
 
 /**
@@ -151,11 +203,15 @@ export async function stop(): Promise<void> {
   _estado.fuente?.stop?.();
   _estado.desuscribirSink?.();
   _estado.detenerFlush?.();
+  if (_estado.detenerPoda !== null) {
+    clearInterval(_estado.detenerPoda);
+  }
 
   _estado.motor = null;
   _estado.fuente = null;
   _estado.desuscribirSink = null;
   _estado.detenerFlush = null;
+  _estado.detenerPoda = null;
   _estado.iniciado = false;
 
   console.log('[runtime] Detenido');
