@@ -58,6 +58,17 @@
 
 ---
 
+## Fuentes clínicas (rangos de referencia por sexo)
+
+> Usadas para los rangos sexo-específicos del catálogo (`rangoReferenciaPorSexo`).
+
+| # | Fuente | Tipo | Consultado |
+|---|---|---|---|
+| B40 | Creatinine blood test (Normal Results) — UCSF Health / A.D.A.M. — https://www.ucsfhealth.org/medical-tests/creatinine-blood-test | Rango de laboratorio (creatinina por sexo) | 2026-11-14 |
+| B41 | BUN (Blood Urea Nitrogen) Test — MedlinePlus / National Library of Medicine — https://medlineplus.gov/lab-tests/bun-blood-urea-nitrogen/ | Confirma que el BUN varía por sexo (sin cifras exactas) | 2026-11-14 |
+
+---
+
 ## Fuentes pendientes de obtener
 
 | # | Qué falta | Dónde buscarlo | Bloquea a |

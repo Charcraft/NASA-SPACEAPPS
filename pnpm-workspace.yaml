@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: true
+# Configuración de pnpm (v12).
+# Permite que los paquetes nativos ejecuten su script de instalación (postinstall).

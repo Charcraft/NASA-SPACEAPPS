@@ -38,6 +38,12 @@
 | PWA | **next-pwa** o manifest + service worker manual | Instalable, funciona sin red. |
 | Semilla de datos | **JSON estático** en `src/data/seed/` | Datos reales de OSDR exportados antes del evento. |
 
+### Tiempo real
+| Pieza | Elección | Motivo |
+|---|---|---|
+| Sala de tripulación | **SSE nativo** (`EventSource`) + hub en memoria | Sin dependencias nuevas; reconexión automática y suficiente para alertas unidireccionales. |
+| Validación de frames | **Zod** en el route handler | Un frame mal formado no contamina la sala. |
+
 ### IA
 | Pieza | Elección | Motivo |
 |---|---|---|
@@ -51,6 +57,7 @@
 | Pieza | Elección |
 |---|---|
 | Runtime | Node.js 22 LTS |
+| Lenguaje | **TypeScript 6** (fijado). Next 15 no soporta el compilador nativo de TS 7: el build falla pidiendo TS 6. |
 | Gestor de paquetes | **pnpm** |
 | Lint/format | ESLint + Prettier (config compartida) |
 | Deploy | **Vercel** (gratis, un comando) + export estático como respaldo |
@@ -178,3 +185,15 @@ El stack está aprobado si y solo si, el **viernes 13 de noviembre**, en el venu
 - [ ] La app carga con el WiFi apagado.
 - [ ] Se agregó un indicador nuevo sin tocar más de 2 archivos.
 - [ ] El build de producción pesa menos de 3 MB de JS.
+
+---
+
+## 9. Excepciones aprobadas
+
+El congelamiento del §0 sigue vigente. Esta es la única excepción registrada y su justificación.
+
+| Fecha | Dependencia | Tipo | Motivo | Aprobó |
+|---|---|---|---|---|
+| 2026-11-14 | `vitest` | `devDependency` | El backend necesita pruebas unitarias de `rules/` y `db/`; con Node 22 no hay runner de TypeScript sin añadir un cargador. No entra al bundle de producción. | Equipo backend (Back 1 y Back 2) |
+
+**Regla:** una excepción sin fila en esta tabla no existe. Si aparece otra dependencia fuera del §2, se rechaza el PR.

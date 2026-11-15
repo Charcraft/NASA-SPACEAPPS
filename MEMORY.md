@@ -1,7 +1,7 @@
 # MEMORY.md — Memoria operativa del proyecto
 
 > Registro vivo del estado del proyecto. Se actualiza al final de cada sesión de trabajo.
-> **Última actualización:** 2026-11-13
+> **Última actualización:** 2026-11-14
 
 ---
 
@@ -67,6 +67,28 @@
 | D21 | **Un navegador BrowserAct por persona**, nunca compartido | 2026-11-13 | Sesiones de Google y GitHub son privadas; compartir uno rompe trazabilidad y desconecta sesiones |
 | D22 | **Protocolo documental obligatorio** + verificación automática de documentos huérfanos | 2026-11-13 | Que ningún agente cierre una tarea sin registrar decisiones, fuentes, IA y archivos |
 | D23 | **Roles definitivos** asignados con las 5 respuestas del formulario | 2026-11-13 | Eduardo=Producto/Video/Submission · Pineda=Frontend/IA · Angel=Reglas/Tests · Carlos A.=Datos · Ernesto=Plataforma |
+| D24 | Reparto Backend: **Back 1** = motor realtime, registry, bridge 3D, `types` y scaffold; **Back 2 (Angel)** = OSDR client, Dexie/repositorios, reglas/triage, APIs `osdr` y `ai-context`, tests | 2026-11-14 | El brief asumía archivos ya creados que no existen; se reparte por dominio para evitar conflictos |
+| D25 | Corregir el brief: **17 indicadores OSDR**, no 19; `meshNodeId` nullable para parámetros ambientales | 2026-11-14 | Verificado contra `src/data/seed/osdr-inspiration4-cmp.json` |
+| D26 | **Vitest como `devDependency`**, excepción registrada al congelamiento del stack | 2026-11-14 | Sin runner de TS no hay pruebas de `rules/`; no entra al bundle de producción. Ver `TECH-STACK.md` §9 |
+| D27 | **`repositories.ts` es el único punto de escritura en Dexie**; Back 1 solo emite por `TelemetrySink` | 2026-11-14 | Evita doble escritura y filas duplicadas en la demo |
+| D28 | Contratos compartidos (`types/index.ts`) **congelados a H2**; cambios solo por PR | 2026-11-14 | Un contrato que cambia en vivo rompe el build y la demo |
+| D29 | **Roles backend cerrados:** Ernesto = Back 1, Angel = Back 2 | 2026-11-14 | Elimina la ambigüedad que dejó el brief y evita dos planes para el mismo frente |
+| D30 | **TypeScript fijado en 6.x y `next.config.mjs`** en lugar de `next.config.ts` | 2026-11-14 | Next 15 falla con el compilador nativo de TS 7 (`fileExists` undefined) y rechaza el build: "TypeScript 7.0.2 is not supported". TS 6 es la versión que Next recomienda |
+| D31 | **Local-first + sala compartida en vivo (SSE) + sincronización diferida a Tierra.** Sustituye el "sin réplica entre astronautas" del 2026-11-14 | 2026-11-14 | El hub en memoria permite ver la alerta de otro tripulante en < 2 s sin exigir una base central durable. Ver §8 de `11-arquitectura-backend.md` |
+| D32 | **Alcance físico únicamente:** 26 parámetros físicos/bioquímicos. Sueño, ánimo y carga cognitiva quedan para fase posterior | 2026-11-14 | Evita inventar escalas clínicas y mantiene la demo enfocada |
+| D33 | **El hub de sala no persiste:** estado en memoria del proceso. Lo durable vive en Dexie y `colaSync` | 2026-11-14 | Un backend durable en 30 h no es viable; el hub demuestra el contrato y se reinicia sin pérdida clínica |
+| D34 | **Proveedores `[DEMO]` inyectables** (`demo/baseline.ts`, `demo/evaluador.ts`, `demo/sensor-source.ts`) hasta que Back 2 entregue `osdr/` y `rules/` | 2026-11-14 | Permite una demo funcional hoy sin duplicar archivos de Back 2; el reemplazo es una línea en `sala-control.tsx` |
+| D35 | **`sync/` pasa a Back 1** (Ernesto): `queue.ts`, `aggregate.ts`, `transport.ts` | 2026-11-14 | La cola y el transporte dependen del frame de Back 1; Back 2 ya cubre `db/`, `rules/` y APIs. Evita solapar frentes |
+| D36 | **Invariante corregida:** `rules/` **sí importa `registry.ts` y `osdr/client.ts`**; sigue sin importar `db/`, `stream-engine` ni `ai/` | 2026-11-14 | `thresholds.ts` resuelve umbrales desde el catálogo en vez de duplicar los 26; pedido de Angel y aceptado |
+| D37 | **`runtime.ts` es el composition root de Back 1**: arranca motor, suscribe sink (DB + sync + agregación) y expone `start()/stop()` | 2026-11-14 | Sin un único punto de arranque, el pipeline no se ejecuta y la UI no puede alternar simulado/replay |
+| D38 | **PWA oficial (no demo)**: `manifest.webmanifest`, `sw.js`, iconos 192/512 y registro solo en producción | 2026-11-14 | Versión oficial offline-first; el SW cachea app-shell y `/api/*` con network-first. Se descarta Vercel: app local + BD central |
+| D39 | **Protocolos médicos → Back 2 (Angel)**: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` y mapeo en triage. Contrato en `docs/03-plan/12-protocolos-medicos.md` | 2026-11-14 | Son datos + reglas + API (dominio Back 2); Back 1 ya cachea `/api/protocolos` en el SW |
+| D40 | **Tres entornos de misión**: `nave`, `estacion`, `base-lunar`. Campo `entornos` en `ParameterDefinition` + `listarPorEntorno()` | 2026-11-14 | Cada entorno tiene exposición distinta a los 5 peligros del HRP; trazabilidad en `docs/02-investigacion/06-entornos-mision.md` |
+| D41 | **El central persiste**: `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar | 2026-11-14 | Un reinicio del servidor ya no borra la sala; el histórico completo sigue en Dexie |
+| D42 | **Transporte real a Tierra**: `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub | 2026-11-14 | El envío ya no se simula: la cola drena a un endpoint real que persiste y devuelve ACK |
+| D43 | **Reconciliación de sync + rangos por sexo** (Angel): `marcarSincronizadoPorFrame` conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` | 2026-11-14 | Cierra el ciclo de sincronización (ACK → `sincronizadoTierra`) y añade precisión clínica por sexo con fuente UCSF `[POR VALIDAR]` |
+| D44 | **Resiliencia de Back 1**: `respetarIntervalos: true` por defecto, poda automática (crudo + series, nunca eventos/bitácora), exportación de respaldo y detección de emergencia (transición a CRITICO → `registrarEvento`) | 2026-11-14 | Evita que IndexedDB se llene, permite respaldo manual y cierra el hueco del modo emergencia |
+| D45 | **Gráficas por sección**: campo `sistema` (tipo `SistemaParametro`) en el catálogo + `listarPorSistema()`, para agrupar el historial por sistema clínico | 2026-11-14 | La gráfica de historial lee las `series` agregadas (no el crudo), agrupadas por `sistema` o `meshNodeId`; endpoint `/api/series` en Back 2 |
 
 ---
 
@@ -84,6 +106,27 @@
 - [ ] Validar umbrales clínicos con fuente primaria (`[POR VALIDAR]` en `docs/02-investigacion/02-indicadores-fisiologicos.md`).
 - [ ] Explorar OSDR y documentar 3 datasets concretos utilizables.
 - [ ] Revisar recursos oficiales el 13 de noviembre y ajustar el plan de datos.
+- [x] Confirmar **Back 1**: Ernesto (`@ernesto-montes`).
+- [x] Confirmar **Back 2**: Angel Marco (`@angel_marco`).
+- [ ] Integrar `BRIEF-BACKEND-AGENTES.md` al repo (hoy está en `~/Downloads`).
+- [ ] Crear el issue del reparto y los dos issues de trabajo.
+- [x] Scaffold de Next 15 (Back 1) — deadline H0:45.
+- [x] Congelar `types/index.ts` (Back 1 + Back 2) — deadline H2.
+- [ ] Revisión de Pineda sobre `rules/` antes de mergear.
+- [x] Merge de `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (2026-11-14).
+- [x] Capa de sync de Back 1: `sync/queue.ts` + `aggregate.ts` + `transport.ts`.
+- [x] `runtime.ts` (composition root) + `osdr-replay-source.ts` (replay real R+1→R+194).
+- [x] `api/osdr/route.ts` y `api/ai-context/route.ts` (Back 2 · Angel).
+- [ ] Demo de 3 min con WiFi apagado (stream + semáforo + persistencia + cola sync).
+- [x] PWA oficial: `manifest.webmanifest` + `sw.js` + iconos + registro (Back 1).
+- [x] Protocolos médicos: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` + mapeo en triage (Back 2 · Angel). Contrato: `docs/03-plan/12-protocolos-medicos.md`.
+- [x] Entornos de misión: `nave`, `estacion`, `base-lunar` con `entornos` en el catálogo (Back 1).
+- [x] Central persistente (snapshot en `data/central/`) + transporte real a Tierra (`/api/tierra`).
+- [x] Reconciliación completa: marcar mediciones `sincronizadoTierra` tras el ACK (Back 2 · `repositories`).
+- [x] Rangos de referencia por sexo (creatinina) + `tripulacion.json` (Back 2 · Angel).
+- [x] Resiliencia Back 1: intervalos + poda automática + exportación de respaldo + detección de emergencia.
+- [ ] Entrada manual de mediciones (`api/mediciones`) + episodios completos (Back 2 · Angel).
+- [ ] Frontend real (Pineda): semáforo literal, modelo 3D, módulo IA, pantalla de emergencia.
 
 ---
 
@@ -96,6 +139,99 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Endpoint /api/series implementado (corrección de índice)
+
+- Angel implementó `listarSeries` + `/api/series`. Señaló que `series` no tiene índice simple `crewId` (solo el compuesto); lo resolvió con filtro en memoria sin tocar el esquema.
+- Corregí `15-graficas-backend.md`: la propuesta usaba `db.series.where('crewId')` (inexistente); ahora documenta `toCollection()` + filtro en memoria, y marco el estado como implementada.
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 78/78.
+
+### 2026-11-14 — Gráficas: agrupación por sección + traspaso a Back 2
+
+- `types/index.ts`: tipo `SistemaParametro` + campo `sistema` en `ParameterDefinition` (append-only).
+- `registry.ts`: mapeo `SISTEMA_OSDR` (17 OSDR por sistema del seed) + `sistema` en los 9 simulados + `listarPorSistema()` + validación.
+- `docs/03-plan/15-graficas-backend.md`: contrato de `/api/series` para Back 2 (lee `series` agregadas, no el crudo).
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 74/74.
+
+### 2026-11-14 — Merge Back 2 (episodios/entrada manual) + contrato front
+
+- Merge de Angel: `guardarMedicion` + `/api/mediciones` (entrada manual), `abrirEpisodio`/`cerrarEpisodio`/`episodioAbierto` (episodios), poda acotada (quita índice `abierto`).
+- **Conecté episodios en `runtime.ts`:** `detectarEmergencia` ahora abre/cierra episodios (no solo registra el evento puntual).
+- **Contrato front actualizado:** `docs/03-plan/14-contrato-integracion-front.md` (endpoints, SSE, 3D, entornos, entrada manual, episodios). Moví `13-reconciliacion-sync.md` al repo como registro.
+- **Verificado:** `pnpm typecheck` 0, `pnpm test` 74/74, `pnpm build` 9 rutas.
+
+### 2026-11-14 — Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
+
+- `runtime.ts`: `respetarIntervalos: true` por defecto (antes emitía 26 lecturas/s), poda automática cada hora (`purgarVentana` + `podarSeries`, nunca eventos/bitácora), y detección de emergencia (transición a CRITICO → `registrarEvento`).
+- `src/lib/export/backup.ts`: exportación de respaldo (lee Dexie, descarga JSON, sin red).
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 70/70, `pnpm build` 8 rutas.
+
+### 2026-11-14 — Revisión e incorporación de Back 2 (reconciliación + sexo)
+
+- Revisé y aprobé los 4 commits de Angel (`8f147ac`…`e1b40d0`) e hice merge en `feat/integracion-back`.
+- **Reconciliación:** `marcarSincronizadoPorFrame(crewId, timestamp)` en `repositories.ts` (transacción `rw`, idempotente, no-lanza) + llamada en `flushCola`. 4 tests. Cumple la tarea `13-reconciliacion-sync.md`.
+- **Rangos por sexo:** `Sexo` + `rangoReferenciaPorSexo` en `types`; creatinina M/F con fuente UCSF `[POR VALIDAR]`; `tripulacion.json` `[SUPUESTO]` (dataset desidentificado) + `sexoDe()`. Fuentes B40/B41 en bibliografía.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 70/70 (7 suites), `pnpm build` 8 rutas.
+
+### 2026-11-14 — Entornos de misión, central persistente y transporte real
+
+- **Tres entornos** (`nave`, `estacion`, `base-lunar`): tipo `EntornoMision` + campo `entornos` en `ParameterDefinition` + `listarPorEntorno()`. Los 17 OSDR aplican a los tres; `intracranial_pressure_est` (SANS) solo a microgravedad.
+- `docs/02-investigacion/06-entornos-mision.md`: trazabilidad entorno → peligro HRP → indicador.
+- **Central persistente:** `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar (ya no se borra la sala al reiniciar).
+- **Transporte real:** `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub; `/api/tierra` valida con Zod y persiste append-only.
+- **Replay al reconectar:** `iniciarFlushPeriodico` flushea inmediatamente al evento `online` (antes solo cada 10 s).
+- **Incoherencia eliminada:** `docs/03-plan/11-arquitectura-backend.md` §8.1 y §8.2 alineados con D31 (central persistente, Tierra real, 3 entornos); §9 actualizado (protocolos ahora en alcance).
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 49/49, `pnpm build` 7 rutas (incluye `/api/tierra`).
+
+### 2026-11-14 — PWA oficial y traspaso de protocolos a Back 2
+
+- **PWA implementada:** `public/manifest.webmanifest`, `public/sw.js` (app-shell cache-first, `/api/*` network-first, `/api/telemetry` sin cache), iconos `public/icons/icon-192.png` + `icon-512.png`.
+- `scripts/generar-iconos-pwa.py` genera los PNG desde el mismo diseño de `proyecto.ico` (sin marcas de NASA).
+- `src/app/layout.tsx`: metadatos PWA (manifest, viewport, icons) + registro del SW **solo en producción**; se corrigió el mojibake de título/descripción.
+- `next.config.mjs`: headers `no-cache` para `sw.js` y `Content-Type` del manifest.
+- **Traspaso a Angel:** `docs/03-plan/12-protocolos-medicos.md` con el contrato congelado de `/api/protocolos`, esquema JSON, firma del cliente y criterios de aceptación.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 49/49, `pnpm build` 7 rutas.
+
+### 2026-11-14 — Merge Back 1 + Back 2 y capa de sync
+
+- Merge de `origin/feat/back2-osdr-baseline` en `feat/back1-realtime-architecture` (sin conflictos de archivos; `types/index.ts` se fusionó adoptando la versión extendida de Angel).
+- **Invariante corregida** en `docs/03-plan/11-arquitectura-backend.md` §3: `rules/` sí importa `registry.ts` y `osdr/client.ts` (pedido de Angel).
+- Rama renombrada a `feat/back1-realtime-architecture` (antes `feat/back1-arquitectura`); la antigua se eliminó en remoto.
+- **Nuevos de Back 1:** `sync/queue.ts` (cola A/B/C/D, hash djb2 encadenado, ACK/rechazo, reintentos), `sync/aggregate.ts` (1 Hz → 1 min → 1 h), `sync/transport.ts` (`SyncTransport` + stub local con simulación de red), `runtime.ts` (composition root) y `osdr-replay-source.ts` (replay real R+1→R+194 en 60 s).
+- `sala-control.tsx` ahora usa `runtime` (motor + evaluar + baseline reales de Back 2) y alterna simulado/replay; añadido panel de estado de sync.
+- `repositories.test.ts` corregido: `LecturaFrame` extendida exige `razon/accion/reglaDisparada/fuente`.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 41/41, `pnpm build` 4 rutas.
+- **Pendiente:** `api/osdr` y `api/ai-context` (Back 2 · Angel) y la demo de 3 min sin red.
+
+### 2026-11-14 — Sala de tripulación y motor de tiempo real
+
+- `stream-engine.ts`: 1 Hz, anomalías forzadas, estado de nodos 3D y suscriptores tolerantes a fallos.
+- `crew-hub.ts`: último frame por tripulante, deduplicación por parámetro, `snapshot`, `alerta`, `resuelta` y `latido` cada 5 s.
+- `api/telemetry`: POST valida con Zod y publica; GET abre SSE con `retry: 3000`.
+- `api/parameters`: catálogo completo (26) con validación al arranque.
+- `model3d-bridge/contracts.ts`: etiquetas, colores, animación y resumen accesible.
+- Shell `sala-control.tsx`: una pestaña = una estación (`?crew=C002`), alerta compartida y simulador.
+- **Prueba end-to-end** (`scripts/probar-sala.ps1`): catálogo, alerta visible por SSE, alerta resuelta, 400 con detalle. Todo en verde.
+- **Errores corregidos:** `forced anomaly` no aplicaba a parámetros sin umbral (ahora lanza mensaje específico); el script de issues creaba la etiqueta `prio:crítica` con mojibake por UTF-8 en PowerShell 5.1 (ahora usa archivos de cuerpo y etiqueta sin acentos en el código).
+- Issues abiertos: [#2 Back 1](https://github.com/Charcraft/NASA-SPACEAPPS/issues/2) y [#3 Back 2](https://github.com/Charcraft/NASA-SPACEAPPS/issues/3).
+
+### 2026-11-14 — Scaffold de Back 1
+
+- Next 15.5 + React 19 + Tailwind v4 + Dexie 4 + Zod 4 + Zustand 5 instalados con pnpm.
+- **Error corregido:** `pnpm typecheck` fallaba con `TS2882` por importar `globals.css`; se añadió `src/types/assets.d.ts`.
+- **Error corregido:** `next build` rompía al cargar `next.config.ts` con TypeScript 7 (`Cannot read properties of undefined (reading 'fileExists')`). Se cambió a `next.config.mjs` y se fijó TypeScript 6.
+- Verificado: `pnpm typecheck` limpio y `pnpm build` genera 4 rutas; primer load 102 kB (límite del stack: 3 MB).
+- Los 4 contratos compartidos quedaron en `src/types/index.ts` (congelados a H2).
+- `src/lib/realtime/registry.ts`: 26 parámetros (17 OSDR reales + 9 simulados), `meshNodeId` nullable solo para `cabin_co2`, validación de invariantes y error `E-VAL-002` textual.
+
+### 2026-11-14 — Revisión y corrección del plan de Back 2
+
+- Se revisó `docs/angel_marco/plan-backend` contra `main` y contra la rama `feat/back2-persistencia-triage`.
+- **Corregidos 4 defectos de contrato:** `baseline` nullable, `Evaluacion` con `valor`/`desviacion`/`degradado`, `guardarFrame` devuelve `ResultadoPersistencia`, y `evaluar` acepta `calidad`.
+- **Higiene:** eliminado `docs/03-plan/~$pitch-aegis.pptx` (archivo temporal de PowerPoint), añadido `~$*` a `.gitignore`, y `CHARLAPRESENCIAL.md` → `charla-presencial.md` con H1 y registro en el índice.
+- **Stack:** Vitest registrado como excepción explícita en `TECH-STACK.md` §9.
+- **Nuevo:** `docs/03-plan/11-arquitectura-backend.md` con roles, flujo de datos, puertas y plan paralelo.
+- **Roles cerrados:** Back 1 = Ernesto, Back 2 = Angel.
 
 ### 2026-11-14 — Pitch presencial
 - La charla del Local Event fijó: **7 diapositivas máximo, en inglés**, con la estructura problema/usuario → solución → datos → demostración → evidencia y limitaciones → cierre.
