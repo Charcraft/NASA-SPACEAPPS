@@ -169,17 +169,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-011 · Fix de SyncStatus (estado de red reactivo) y limpieza de demo muerto
+- **Fecha/hora:** 2026-11-14 19:38
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "corrige esto en mi rama" (observaciones de Angel Marco para la demo).
+- **Propósito:** corregir el badge "Red" del panel SyncStatus (no se actualizaba al apagar WiFi) y eliminar `demo/baseline.ts` y `demo/evaluador.ts` (código muerto).
+- **Resultado obtenido:** `transport.ts` expone `EstadoRed`, `estadoRed()` y `onCambioRed()` en la interfaz `SyncTransport`; se quitó el simulador aleatorio de red (interfería con la demo offline real). `sala-control.tsx` se suscribe a `onCambioRed` y lee `estadoRed()` en vez de acceder al campo privado. Se eliminaron los 2 archivos demo muertos.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49) y `pnpm build` (6 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 5 | 3 |
+| Arquitectura / código | 6 | 4 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **11** | **8** |
+| **Total** | **12** | **9** |
 
 ---
 

@@ -53,3 +53,18 @@
 **Issue(s):** #2 (Back 1), #3 (Back 2)
 
 **Rama:** feat/back1-realtime-architecture
+
+## 2026-11-14 · 19:40 — Fix SyncStatus y limpieza de demo muerto (pedido de Angel)
+
+**Hice:**
+- `transport.ts`: expuse `EstadoRed`, `estadoRed()` y `onCambioRed()` en la interfaz `SyncTransport`; quité el simulador aleatorio de red (interfería con la demo offline real).
+- `sala-control.tsx`: `SyncStatus` ahora se suscribe a `onCambioRed` y lee `estadoRed()` en vez de acceder al campo privado `transport['estado']`.
+- Eliminé `demo/baseline.ts` y `demo/evaluador.ts` (código muerto; el runtime ya usa `evaluar` y `baselinePreVuelo` reales de Back 2).
+
+**Siguiente:** PWA (manifest + service worker + iconos) y decidir arquitectura de la BD central.
+
+**Bloqueos:** ninguno.
+
+**Issue(s):** #2 (Back 1)
+
+**Rama:** feat/integracion-back
