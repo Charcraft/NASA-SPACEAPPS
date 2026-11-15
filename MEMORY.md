@@ -86,6 +86,7 @@
 | D40 | **Tres entornos de misión**: `nave`, `estacion`, `base-lunar`. Campo `entornos` en `ParameterDefinition` + `listarPorEntorno()` | 2026-11-14 | Cada entorno tiene exposición distinta a los 5 peligros del HRP; trazabilidad en `docs/02-investigacion/06-entornos-mision.md` |
 | D41 | **El central persiste**: `crew-hub` guarda snapshot a `data/central/snapshot.json` y lo restaura al arrancar | 2026-11-14 | Un reinicio del servidor ya no borra la sala; el histórico completo sigue en Dexie |
 | D42 | **Transporte real a Tierra**: `HttpSyncTransport` → `POST /api/tierra` (MCC local) sustituye al stub | 2026-11-14 | El envío ya no se simula: la cola drena a un endpoint real que persiste y devuelve ACK |
+| D43 | **Reconciliación de sync + rangos por sexo** (Angel): `marcarSincronizadoPorFrame` conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` | 2026-11-14 | Cierra el ciclo de sincronización (ACK → `sincronizadoTierra`) y añade precisión clínica por sexo con fuente UCSF `[POR VALIDAR]` |
 
 ---
 
@@ -116,10 +117,11 @@
 - [x] `api/osdr/route.ts` y `api/ai-context/route.ts` (Back 2 · Angel).
 - [ ] Demo de 3 min con WiFi apagado (stream + semáforo + persistencia + cola sync).
 - [x] PWA oficial: `manifest.webmanifest` + `sw.js` + iconos + registro (Back 1).
-- [ ] Protocolos médicos: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` + mapeo en triage (Back 2 · Angel). Contrato: `docs/03-plan/12-protocolos-medicos.md`.
+- [x] Protocolos médicos: `data/knowledge/`, `lib/knowledge/`, `api/protocolos` + mapeo en triage (Back 2 · Angel). Contrato: `docs/03-plan/12-protocolos-medicos.md`.
 - [x] Entornos de misión: `nave`, `estacion`, `base-lunar` con `entornos` en el catálogo (Back 1).
 - [x] Central persistente (snapshot en `data/central/`) + transporte real a Tierra (`/api/tierra`).
-- [ ] Reconciliación completa: marcar mediciones `sincronizadoTierra` tras el ACK (Back 2 · `repositories`).
+- [x] Reconciliación completa: marcar mediciones `sincronizadoTierra` tras el ACK (Back 2 · `repositories`).
+- [x] Rangos de referencia por sexo (creatinina) + `tripulacion.json` (Back 2 · Angel).
 - [ ] Frontend real (Pineda): semáforo literal, modelo 3D, módulo IA, pantalla de emergencia.
 
 ---
@@ -133,6 +135,13 @@
 ---
 
 ## Bitácora
+
+### 2026-11-14 — Revisión e incorporación de Back 2 (reconciliación + sexo)
+
+- Revisé y aprobé los 4 commits de Angel (`8f147ac`…`e1b40d0`) e hice merge en `feat/integracion-back`.
+- **Reconciliación:** `marcarSincronizadoPorFrame(crewId, timestamp)` en `repositories.ts` (transacción `rw`, idempotente, no-lanza) + llamada en `flushCola`. 4 tests. Cumple la tarea `13-reconciliacion-sync.md`.
+- **Rangos por sexo:** `Sexo` + `rangoReferenciaPorSexo` en `types`; creatinina M/F con fuente UCSF `[POR VALIDAR]`; `tripulacion.json` `[SUPUESTO]` (dataset desidentificado) + `sexoDe()`. Fuentes B40/B41 en bibliografía.
+- **Verificado:** `pnpm typecheck` limpio, `pnpm test` 70/70 (7 suites), `pnpm build` 8 rutas.
 
 ### 2026-11-14 — Entornos de misión, central persistente y transporte real
 

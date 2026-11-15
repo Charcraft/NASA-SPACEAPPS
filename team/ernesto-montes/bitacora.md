@@ -103,3 +103,19 @@
 **Issue(s):** #2 (Back 1)
 
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 21:48 — Revisión e incorporación de Back 2 (reconciliación + sexo)
+
+**Hice:**
+- Revisé los 4 commits de Angel y aprobé: `marcarSincronizadoPorFrame` (reconciliación) + rangos por sexo (creatinina).
+- Merge limpio en `feat/integracion-back` sin conflictos.
+
+**Verifiqué:** `pnpm typecheck` (0), `pnpm test` (70/70), `pnpm build` (8 rutas).
+
+**Siguiente:** front real (Pineda): semáforo, 3D, IA, emergencia. Contrato en `.opencode/plan/14-contrato-integracion-front.md`.
+
+**Bloqueos:** ninguno.
+
+**Issue(s):** #2 (Back 1)
+
+**Rama:** feat/integracion-back

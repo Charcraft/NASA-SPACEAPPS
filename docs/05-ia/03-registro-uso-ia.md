@@ -234,17 +234,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-016 · Revisión e incorporación de Back 2 (reconciliación + sexo)
+- **Fecha/hora:** 2026-11-14 21:47
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "revisa sus cambios e incorpora si se aprueba".
+- **Propósito:** revisar los 4 commits de Angel (reconciliación de sync + rangos por sexo) e incorporarlos a `feat/integracion-back`.
+- **Resultado obtenido:** aprobado e integrado. `marcarSincronizadoPorFrame` (transacción, idempotente, no-lanza) conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` y fuentes B40/B41. Merge limpio sin conflictos.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (70/70, 7 suites), `pnpm build` (8 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 10 | 6 |
+| Arquitectura / código | 11 | 7 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **16** | **11** |
+| **Total** | **17** | **12** |
 
 ---
 
