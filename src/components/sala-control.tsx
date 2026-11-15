@@ -30,6 +30,8 @@ import {
 } from '@/lib/model3d-bridge/contracts';
 import { list } from '@/lib/realtime/registry';
 import { start, stop, subscribe, getMotor, forzarAnomalia, limpiarAnomalias, getEstado } from '@/lib/runtime';
+import { obtenerSyncTransport, type EstadoRed } from '@/lib/sync/transport';
+import { statsCola } from '@/lib/sync/queue';
 
 const TRIPULANTES: readonly CrewId[] = ['C001', 'C002', 'C003', 'C004'];
 const VITALES = [
@@ -612,35 +614,35 @@ export default function SalaControl() {
 function SyncStatus() {
   const [stats, setStats] = useState<{
     cola: { pendientes: number; porPrioridad: Record<string, number>; masAntigua: number | null };
-    red: string;
   } | null>(null);
+  const [red, setRed] = useState<EstadoRed>('online');
 
   useEffect(() => {
-    let transport: any;
+    const transport = obtenerSyncTransport();
 
-    import('@/lib/sync/transport').then((mod) => {
-      transport = mod.obtenerSyncTransport();
-    });
+    // Estado inicial + suscripción a cambios (refleja el WiFi real).
+    setRed(transport.estadoRed());
+    const desuscribir = transport.onCambioRed((nuevo) => setRed(nuevo));
 
     const actualizar = async () => {
-      const { statsCola } = await import('@/lib/sync/queue');
       const cola = await statsCola();
-      setStats({
-        cola,
-        red: transport?.['estado'] ?? 'online',
-      });
+      setStats({ cola });
     };
 
     actualizar();
     const intervalo = setInterval(actualizar, 2_000);
-    return () => clearInterval(intervalo);
+
+    return () => {
+      desuscribir();
+      clearInterval(intervalo);
+    };
   }, []);
 
   if (!stats) return <p className="text-xs text-neutral-500">Cargando…</p>;
 
   return (
     <div className="text-xs text-neutral-300 space-y-1">
-      <p>Red: <span style={{ color: stats.red === 'online' ? '#22c55e' : stats.red === 'degradado' ? '#f59e0b' : '#ef4444' }}>{stats.red}</span></p>
+      <p>Red: <span style={{ color: red === 'online' ? '#22c55e' : red === 'degradado' ? '#f59e0b' : '#ef4444' }}>{red}</span></p>
       <p>Cola pendientes: {stats.cola.pendientes}</p>
       <p>Más antigua: {stats.cola.masAntigua ? `${Math.round((Date.now() - stats.cola.masAntigua) / 1000)} s` : '—'}</p>
       <p>

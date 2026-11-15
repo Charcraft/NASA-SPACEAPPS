@@ -14,6 +14,9 @@ import type { RealtimeTelemetryFrame } from '@/types';
 // Contrato
 // ---------------------------------------------------------------------------
 
+/** Estado de red visible para la UI y el orquestador de flush. */
+export type EstadoRed = 'online' | 'offline' | 'degradado';
+
 export interface SyncTransport {
   /** Envía un lote y devuelve true si el ACK fue exitoso. */
   enviar(lote: LoteSync): Promise<boolean>;
@@ -21,13 +24,15 @@ export interface SyncTransport {
   estaConectado(): Promise<boolean>;
   /** Cierra conexiones pendientes. */
   cerrar(): Promise<void>;
+  /** Estado actual de la red (síncrono, para la UI). */
+  estadoRed(): EstadoRed;
+  /** Suscribe a cambios de red. Devuelve función para desuscribir. */
+  onCambioRed(listener: (estado: EstadoRed) => void): () => void;
 }
 
 // ---------------------------------------------------------------------------
 // Stub local (demo): simula latencia, fallos intermitentes y ACK
 // ---------------------------------------------------------------------------
-
-type EstadoRed = 'online' | 'offline' | 'degradado';
 
 class LocalSyncTransport implements SyncTransport {
   private estado: EstadoRed = 'online';
@@ -37,8 +42,9 @@ class LocalSyncTransport implements SyncTransport {
 
   constructor() {
     if (typeof window !== 'undefined') {
-      // Simular cambios de red cada 30-120s en demo
-      setInterval(() => this._simularCambioRed(), 30_000 + Math.random() * 90_000);
+      // El estado real lo marcan los eventos del navegador: al apagar WiFi se
+      // dispara `offline`; al reconectar, `online`. Sin simulación aleatoria
+      // para que la demo offline sea fiel a lo que el usuario hace de verdad.
       window.addEventListener('online', () => this._setEstado('online'));
       window.addEventListener('offline', () => this._setEstado('offline'));
     }
@@ -51,11 +57,8 @@ class LocalSyncTransport implements SyncTransport {
     }
   }
 
-  private _simularCambioRed(): void {
-    const r = Math.random();
-    if (r < 0.1) this._setEstado('offline');
-    else if (r < 0.2) this._setEstado('degradado');
-    else this._setEstado('online');
+  estadoRed(): EstadoRed {
+    return this.estado;
   }
 
   onCambioRed(listener: (estado: EstadoRed) => void): () => void {
@@ -197,9 +200,9 @@ export async function statsSync(): Promise<{
   cola: Awaited<ReturnType<typeof statsCola>>;
   red: EstadoRed;
 }> {
-  const transport = obtenerSyncTransport() as LocalSyncTransport;
+  const transport = obtenerSyncTransport();
   return {
     cola: await statsCola(),
-    red: transport['estado'] ?? 'online',
+    red: transport.estadoRed(),
   };
 }
