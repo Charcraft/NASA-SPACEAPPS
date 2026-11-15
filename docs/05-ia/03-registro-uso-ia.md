@@ -221,17 +221,30 @@ Uso de IA-Personal/
 
 ---
 
+### IA-015 · Rangos de referencia sexo-específicos (creatinina)
+- **Fecha/hora:** 2026-11-14 21:27
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "implementa los datos por sexo solo donde de verdad afecta, con fuentes confiables, sin inventar".
+- **Propósito:** que el semáforo use el rango de referencia correcto según el sexo biológico del tripulante.
+- **Resultado obtenido:** tipo `Sexo` + campo `rangoReferenciaPorSexo?`; creatinina con rango M/F (fuente UCSF Health, verificado por fetch, marcado `[POR VALIDAR]`); perfil `tripulacion.json` [SUPUESTO] + `sexoDe()`; `thresholds`/`triage`/`runtime` resuelven por sexo. 9 tests.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (66/66), `pnpm build`. Fuente de creatinina verificada contra UCSF Health; BUN solo confirmado como sexo-dependiente (MedlinePlus, sin cifras) y no implementado.
+- **Estado:** [POR VALIDAR] (rango sexo-específico adaptado a contexto espacial)
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 9 | 6 |
+| Arquitectura / código | 10 | 6 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **15** | **11** |
+| **Total** | **16** | **11** |
 
 ---
 

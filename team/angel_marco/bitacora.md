@@ -66,3 +66,11 @@
 **Bloqueos:** NASA-STD-3001 no accesible (404); usé HRP + OSDR ya citadas.
 **Issue(s):** pendiente de crear
 **Rama:** feat/integracion-back
+
+## 2026-11-14 · 21:27 — Rangos por sexo (creatinina)
+
+**Hice:** Implementé los rangos de referencia sexo-específicos: tipo `Sexo` + `rangoReferenciaPorSexo?`, creatinina con rango M/F (fuente UCSF Health, `[POR VALIDAR]`), perfil `tripulacion.json` [SUPUESTO] + `sexoDe()`, y resolución por sexo en `thresholds`/`triage`/`runtime`. 9 tests nuevos.
+**Siguiente:** BUN queda documentado (MedlinePlus confirma que varía por sexo, sin cifras) pero sin implementar. Validar rangos sexo-específicos con fuente clínica antes de presentar.
+**Bloqueos:** ninguna (creatinina verificada; BUN sin cifras exactas de fuente confiable).
+**Issue(s):** pendiente de crear
+**Rama:** feat/integracion-back
