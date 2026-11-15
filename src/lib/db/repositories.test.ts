@@ -5,12 +5,16 @@ import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { db } from '@/lib/db/dexie';
 import { Back2Error } from '@/lib/db/errors';
 import {
+  abrirEpisodio,
+  cerrarEpisodio,
+  episodioAbierto,
   guardarFrame,
   marcarSincronizado,
   marcarSincronizadoPorFrame,
   pendientesSincronizar,
   purgarVentana,
   registrarBitacora,
+  registrarEvento,
   ventanaReciente,
 } from '@/lib/db/repositories';
 
@@ -47,6 +51,9 @@ beforeEach(async () => {
     db.colaSync.clear(),
     db.eventos.clear(),
     db.bitacora.clear(),
+    db.episodios.clear(),
+    db.series.clear(),
+    db.baselines.clear(),
   ]);
 });
 
@@ -184,5 +191,74 @@ describe('db/repositories · bitácora y errores', () => {
     const error = new Back2Error('E-DB-001', { usadoMb: 128 });
     expect(error.codigo).toBe('E-DB-001');
     expect(error.message).toContain('128');
+  });
+});
+
+describe('db/repositories · purgarVentana (solo mediciones)', () => {
+  it('no borra series, eventos ni bitácora', async () => {
+    await db.series.add({
+      crewId: 'C001',
+      parametroId: 'heart_rate',
+      resolucion: '1min',
+      inicio: 1,
+      fin: 2,
+      min: 70,
+      max: 80,
+      media: 75,
+      n: 2,
+    });
+    await registrarEvento({
+      crewId: 'C001',
+      timestamp: Date.now(),
+      severidad: 'CRITICO',
+      detalle: 'Test',
+    });
+    await registrarBitacora({
+      timestamp: Date.now(),
+      actor: 'C001',
+      tipo: 'sistema',
+      detalle: 'Test',
+    });
+    await guardarFrame(frameCon(Date.now() - 40 * 24 * 60 * 60_000));
+
+    const borradas = await purgarVentana(30);
+
+    expect(borradas).toBe(1);
+    expect(await db.mediciones.count()).toBe(0);
+    expect(await db.series.count()).toBe(1);
+    expect(await db.eventos.count()).toBe(1);
+    expect(await db.bitacora.count()).toBe(1);
+  });
+});
+
+describe('db/repositories · episodios', () => {
+  it('abre, sube nivelMaximo y cierra un episodio', async () => {
+    const id = await abrirEpisodio('C001', 'heart_rate', 'ATENCION');
+    expect(id).toBeGreaterThan(0);
+
+    const id2 = await abrirEpisodio('C001', 'heart_rate', 'CRITICO');
+    expect(id2).toBe(id);
+
+    const abierto = await episodioAbierto('C001', 'heart_rate');
+    expect(abierto?.nivelMaximo).toBe('CRITICO');
+    expect(abierto?.abierto).toBe(true);
+
+    const cerrado = await cerrarEpisodio('C001', 'heart_rate');
+    expect(cerrado).toBe(id);
+    expect(await episodioAbierto('C001', 'heart_rate')).toBeNull();
+  });
+
+  it('no mezcla episodios de distintos parámetros ni tripulantes', async () => {
+    await abrirEpisodio('C001', 'heart_rate', 'ATENCION');
+    await abrirEpisodio('C001', 'spo2', 'CRITICO');
+    await abrirEpisodio('C002', 'heart_rate', 'ATENCION');
+
+    expect(await episodioAbierto('C001', 'heart_rate')).not.toBeNull();
+    expect(await episodioAbierto('C001', 'spo2')).not.toBeNull();
+    expect(await episodioAbierto('C002', 'heart_rate')).not.toBeNull();
+  });
+
+  it('cerrar sin episodio abierto devuelve null', async () => {
+    expect(await cerrarEpisodio('C001', 'heart_rate')).toBeNull();
   });
 });

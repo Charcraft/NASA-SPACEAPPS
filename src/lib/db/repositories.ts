@@ -3,9 +3,10 @@ import Dexie from 'dexie';
 import { db } from '@/lib/db/dexie';
 import { Back2Error, type CodigoError } from '@/lib/db/errors';
 
-import type { CrewId, ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
+import type { CrewId, Nivel, ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
 
 import type {
+  Episodio,
   EventoEmergencia,
   RegistroBitacora,
   RegistroMedicionLocal,
@@ -154,6 +155,107 @@ export async function registrarBitacora(
   registro: Omit<RegistroBitacora, 'id'>,
 ): Promise<number> {
   return db.bitacora.add(registro);
+}
+
+// ---------------------------------------------------------------------------
+// Entrada manual
+// ---------------------------------------------------------------------------
+
+/**
+ * Persiste una medición manual (una sola lectura, sin frame). La usa
+ * `POST /api/mediciones`. Nunca lanza: devuelve `ResultadoPersistencia`.
+ */
+export async function guardarMedicion(medicion: {
+  crewId: CrewId;
+  parametroId: string;
+  valor: number;
+  unidad: string;
+  nivel: Nivel;
+  timestamp?: number;
+}): Promise<ResultadoPersistencia> {
+  try {
+    await db.mediciones.add({
+      crewId: medicion.crewId,
+      parametroId: medicion.parametroId,
+      valor: medicion.valor,
+      unidad: medicion.unidad,
+      nivel: medicion.nivel,
+      sincronizadoTierra: false,
+      timestamp: medicion.timestamp ?? Date.now(),
+    });
+    return { ok: true, guardadas: 1 };
+  } catch (error) {
+    const { codigo, message } = mapearError(error);
+    return { ok: false, guardadas: 0, codigo, motivo: message };
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Episodios (período continuo fuera de rango: abrir → subir nivel → cerrar)
+// ---------------------------------------------------------------------------
+
+const RANGO_NIVEL: Record<Nivel, number> = { NOMINAL: 0, ATENCION: 1, CRITICO: 2 };
+
+async function _episodioAbierto(crewId: CrewId, parametroId: string): Promise<Episodio | null> {
+  const abierto = await db.episodios
+    .toCollection()
+    .filter((e) => e.crewId === crewId && e.parametroId === parametroId && e.abierto)
+    .first();
+  return abierto ?? null;
+}
+
+/** Devuelve el episodio abierto de un parámetro, o `null` si no hay. */
+export async function episodioAbierto(crewId: CrewId, parametroId: string): Promise<Episodio | null> {
+  return _episodioAbierto(crewId, parametroId);
+}
+
+/**
+ * Abre un episodio (o sube su `nivelMaximo` si ya está abierto y el nivel
+ * empeora). Devuelve el `id` del episodio.
+ */
+export async function abrirEpisodio(
+  crewId: CrewId,
+  parametroId: string,
+  nivel: Nivel,
+  inicio: number = Date.now(),
+): Promise<number> {
+  return db.transaction('rw', db.episodios, async () => {
+    const actual = await _episodioAbierto(crewId, parametroId);
+
+    if (actual?.id != null) {
+      if (RANGO_NIVEL[nivel] > RANGO_NIVEL[actual.nivelMaximo]) {
+        await db.episodios.update(actual.id, { nivelMaximo: nivel });
+      }
+      return actual.id;
+    }
+
+    return db.episodios.add({
+      crewId,
+      parametroId,
+      inicio,
+      fin: null,
+      abierto: true,
+      nivelMaximo: nivel,
+    });
+  });
+}
+
+/**
+ * Cierra el episodio abierto de un parámetro. Devuelve su `id`, o `null` si no
+ * había ninguno abierto (no-op).
+ */
+export async function cerrarEpisodio(
+  crewId: CrewId,
+  parametroId: string,
+  fin: number = Date.now(),
+): Promise<number | null> {
+  return db.transaction('rw', db.episodios, async () => {
+    const actual = await _episodioAbierto(crewId, parametroId);
+    if (actual?.id == null) return null;
+
+    await db.episodios.update(actual.id, { fin, abierto: false });
+    return actual.id;
+  });
 }
 
 export { Back2Error };

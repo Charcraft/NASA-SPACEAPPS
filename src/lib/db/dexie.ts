@@ -44,7 +44,7 @@ class AegisOfflineDB extends Dexie {
       mediciones:
         '++id, crewId, timestamp, [crewId+parametroId+timestamp], nivel',
       series: '++id, [crewId+parametroId+resolucion+inicio], parametroId',
-      episodios: '++id, [crewId+parametroId+inicio], abierto',
+      episodios: '++id, [crewId+parametroId+inicio]',
       baselines: '++id, [crewId+parametroId+epoca]',
       eventos: '++id, crewId, timestamp, severidad',
       colaSync: '++id, prioridad, creadoEn, estado',
