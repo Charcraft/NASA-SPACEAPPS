@@ -7,6 +7,7 @@ import { Back2Error } from '@/lib/db/errors';
 import {
   guardarFrame,
   marcarSincronizado,
+  marcarSincronizadoPorFrame,
   pendientesSincronizar,
   purgarVentana,
   registrarBitacora,
@@ -116,6 +117,54 @@ describe('db/repositories · sincronización', () => {
     const actualizadas = await marcarSincronizado(ids);
     expect(actualizadas).toBe(1);
     expect(await pendientesSincronizar()).toHaveLength(0);
+  });
+});
+
+describe('db/repositories · marcarSincronizadoPorFrame', () => {
+  it('marca solo las mediciones del frame correcto (crewId + timestamp)', async () => {
+    const t1 = Date.now();
+    const t2 = t1 + 1000;
+
+    await guardarFrame(frameCon(t1));
+    await guardarFrame(frameCon(t2));
+    await guardarFrame({ ...frameCon(t1), crewId: 'C002' });
+
+    const marcadas = await marcarSincronizadoPorFrame('C001', t1);
+    expect(marcadas).toBe(1);
+
+    const pendientes = await pendientesSincronizar();
+    expect(pendientes).toHaveLength(2);
+    expect(pendientes.every((m) => m.sincronizadoTierra === false)).toBe(true);
+  });
+
+  it('devuelve el número de mediciones marcadas (no de frames)', async () => {
+    const t = Date.now();
+    const lectura = frameCon(t).lecturas.heart_rate!;
+    const frame: RealtimeTelemetryFrame = {
+      timestamp: t,
+      crewId: 'C001',
+      metSegundos: 100,
+      lecturas: {
+        heart_rate: lectura,
+        spo2: { ...lectura, valor: 98 },
+      },
+      estadoNodos3D: {},
+    };
+    await guardarFrame(frame);
+
+    expect(await marcarSincronizadoPorFrame('C001', t)).toBe(2);
+  });
+
+  it('es idempotente: la 2ª llamada devuelve 0', async () => {
+    const t = Date.now();
+    await guardarFrame(frameCon(t));
+
+    expect(await marcarSincronizadoPorFrame('C001', t)).toBe(1);
+    expect(await marcarSincronizadoPorFrame('C001', t)).toBe(0);
+  });
+
+  it('devuelve 0 sin lanzar para un frame inexistente', async () => {
+    await expect(marcarSincronizadoPorFrame('C001', 123456789)).resolves.toBe(0);
   });
 });
 

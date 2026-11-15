@@ -9,6 +9,8 @@
 
 import type { LoteSync, PrioridadSync } from './queue';
 
+import { marcarSincronizadoPorFrame } from '@/lib/db/repositories';
+
 import type { RealtimeTelemetryFrame } from '@/types';
 
 // ---------------------------------------------------------------------------
@@ -146,6 +148,11 @@ export async function flushCola(transport?: SyncTransport): Promise<ResultadoFlu
     if (ok) {
       await marcarEnviado(lote.id);
       exitosos++;
+      // Reconcilia la marca de la cola con la de las mediciones: si el lote es
+      // un frame, sus mediciones quedan `sincronizadoTierra = true`.
+      if (lote.tipo === 'frame' && 'crewId' in lote.payload) {
+        await marcarSincronizadoPorFrame(lote.payload.crewId, lote.payload.timestamp);
+      }
     } else {
       await marcarRechazado(lote.id, 'Transporte falló o hash inválido');
       fallidos++;

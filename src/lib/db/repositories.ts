@@ -3,7 +3,7 @@ import Dexie from 'dexie';
 import { db } from '@/lib/db/dexie';
 import { Back2Error, type CodigoError } from '@/lib/db/errors';
 
-import type { ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
+import type { CrewId, ResultadoPersistencia, RealtimeTelemetryFrame } from '@/types';
 
 import type {
   EventoEmergencia,
@@ -108,6 +108,40 @@ export async function marcarSincronizado(ids: number[]): Promise<number> {
     }
   });
   return ids.length;
+}
+
+/**
+ * Marca como sincronizadas todas las mediciones de un frame (crewId + timestamp).
+ * Conecta la marca de la cola (`colaSync.estado`) con la de las mediciones
+ * (`sincronizadoTierra`): la llama `flushCola` cuando un lote se envía a Tierra.
+ *
+ * Idempotente y no-lanza:
+ * - La 2ª llamada encuentra 0 pendientes y devuelve 0.
+ * - Un error de IndexedDB devuelve 0 sin romper el flush.
+ * - La lectura y la escritura van en una misma transacción `rw`, de modo que
+ *   llamadas concurrentes (flush periódico + flush al reconectar) se serializan.
+ */
+export async function marcarSincronizadoPorFrame(
+  crewId: CrewId,
+  timestamp: number,
+): Promise<number> {
+  try {
+    return await db.transaction('rw', db.mediciones, async () => {
+      const pendientes = await db.mediciones
+        .where('crewId')
+        .equals(crewId)
+        .filter((m) => m.timestamp === timestamp && !m.sincronizadoTierra)
+        .toArray();
+
+      for (const medicion of pendientes) {
+        await db.mediciones.update(medicion.id as number, { sincronizadoTierra: true });
+      }
+
+      return pendientes.length;
+    });
+  } catch {
+    return 0;
+  }
 }
 
 export async function registrarEvento(
