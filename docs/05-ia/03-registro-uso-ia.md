@@ -195,7 +195,20 @@ Uso de IA-Personal/
 
 ---
 
-### IA-013 · Entornos de misión, central persistente y transporte real
+### IA-013 · Implementación de protocolos médicos (Back 2)
+- **Fecha/hora:** 2026-11-14 20:15
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "investiga fuentes oficiales y escribe los protocolos en lenguaje simple para tripulación no médica".
+- **Propósito:** construir la capa de protocolos médicos (datos + cliente + API) según el contrato congelado de `docs/03-plan/12-protocolos-medicos.md`.
+- **Resultado obtenido:** `src/data/knowledge/protocolos.json` (4 protocolos: cardiorrespiratorio, hipercapnia, radiación, metabólico), `src/lib/knowledge/client.ts` (`protocoloPara`/`listarProtocolos`), `src/app/api/protocolos/route.ts`. 8 tests.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (57/57), `pnpm build` (8 rutas). Fuentes: NASA HRP (página de hazards verificada) y OSDR OSD-575; pasos redactados en lenguaje simple y adaptados, marcados `[POR VALIDAR]` con `validado: false`.
+- **Estado:** [POR VALIDAR] (contenido médico adaptado, pendiente de validación clínica)
+
+---
+
+### IA-014 · Entornos de misión, central persistente y transporte real
 - **Fecha/hora:** 2026-11-14 21:05
 - **Quién:** Ernesto Montes García (@ernesto-montes)
 - **Herramienta / modelo:** agente de IA (deepseek)
@@ -214,11 +227,11 @@ Uso de IA-Personal/
 |---|---|---|
 | Investigación | 3 | 3 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 8 | 6 |
+| Arquitectura / código | 9 | 6 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **14** | **11** |
+| **Total** | **15** | **11** |
 
 ---
 

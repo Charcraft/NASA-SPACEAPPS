@@ -58,3 +58,11 @@
 **Bloqueos:** ninguno (red intermitente al subir).
 **Issue(s):** pendiente de crear
 **Rama:** docs/angel_marco/plan-backend
+
+## 2026-11-14 · 20:15 — Protocolos médicos (Back 2)
+
+**Hice:** Revisé los cambios de Ernesto (PWA offline, fix de SyncStatus, traspaso de protocolos). Implementé la capa de protocolos: `src/data/knowledge/protocolos.json` (4 protocolos en lenguaje simple), `src/lib/knowledge/client.ts` (`protocoloPara`), `src/app/api/protocolos/route.ts` y 8 tests. Fuentes: NASA HRP + OSDR OSD-575; pasos adaptados marcados `[POR VALIDAR]`.
+**Siguiente:** Coordinar con Ernesto el cableado de `protocoloPara` en el runtime/UI y validar el contenido médico con fuente primaria.
+**Bloqueos:** NASA-STD-3001 no accesible (404); usé HRP + OSDR ya citadas.
+**Issue(s):** pendiente de crear
+**Rama:** feat/integracion-back
