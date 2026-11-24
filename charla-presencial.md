@@ -1,4 +1,9 @@
-Presentacion max. 7 slides en ingles 
+# Notas de preparación del pitch presencial
+
+> Notas de trabajo del equipo sobre la charla del Local Event. No es un documento final.
+> La guía oficial está en [`docs/03-plan/07-pitch-7-slides.md`](docs/03-plan/07-pitch-7-slides.md).
+
+Presentacion max. 7 slides en ingles
 
 Resumen del proyecto
 
@@ -10,7 +15,7 @@ evaluaciones:
 
 impacto
 
-creatividad 
+creatividad
 
 validez
 
@@ -35,14 +40,10 @@ ESTRUCTURA PARA PRACTICAR
 
 EL APORTE ESPACIAL
 
-dato espacial &gt; procesamiento &gt; resultado &gt; decision del usuario
+dato espacial > procesamiento > resultado > decision del usuario
 
 Ejemplo: Estimaciones de precipitacion GPM de NASA y JAXA para visualizar
 
 DEMOSTRACION DE PROTOTIPO
 
 medidas claras, datos y fuentes visibles
-
-
-
-&nbsp;

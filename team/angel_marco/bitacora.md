@@ -35,4 +35,26 @@
 
 ## Registro
 
-_(empieza aquí)_
+## 2026-11-14 · 15:47 — Reparto Backend 2
+
+**Hice:** Convertí `BRIEF-BACKEND-AGENTES.md` en un reparto de archivos sin duplicados. Verifiqué que 10 archivos marcados `[YA CREADO]` no existen y que el seed tiene 17 indicadores (no 19). Escribí `team/angel_marco/plan-backend-2.md` y `docs/03-plan/10-reparto-backend.md`.
+**Siguiente:** Acordar contratos e IDs con Back 1; esperar el scaffold para arrancar `osdr/client.ts` y `thresholds.ts`.
+**Bloqueos:** Falta confirmar quién es Back 1; no hay `package.json` ni runner de tests.
+**Issue(s):** pendiente de crear
+**Rama:** docs/angel_marco/plan-backend
+
+## 2026-11-14 · 15:49 — Back 1 confirmado y rama de revisión
+
+**Hice:** Se confirmó que **Back 1 es Ernesto (`@ernesto-montes`)**. Actualicé ambos planes y `MEMORY.md`. Preparo la rama `docs/angel_marco/plan-backend` con los documentos para revisión de Pineda y Ernesto.
+**Siguiente:** Abrir el PR y etiquetar a los dos revisores.
+**Bloqueos:** ninguno
+**Issue(s):** pendiente de crear
+**Rama:** docs/angel_marco/plan-backend
+
+## 2026-11-14 · 15:53 — PR abierto para revisión
+
+**Hice:** Subí la rama `docs/angel_marco/plan-backend` y abrí el **PR #1**: https://github.com/Charcraft/NASA-SPACEAPPS/pull/1. Asigné como revisores a **Pineda (`@Charcraft`)** y **Ernesto (`@ErnestoMG01`)**. Para poder subir, acepté la invitación pendiente del repo con permiso `write`.
+**Siguiente:** Resolver comentarios y, con su aprobación, mergear.
+**Bloqueos:** ninguno (red intermitente al subir).
+**Issue(s):** pendiente de crear
+**Rama:** docs/angel_marco/plan-backend

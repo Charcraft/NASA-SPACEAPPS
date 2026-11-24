@@ -28,6 +28,9 @@ desktop.ini
 npm-debug.log*
 pnpm-debug.log*
 
+# Archivos temporales de Office (bloqueos de PowerPoint/Word/Excel)
+~$*
+
 # Caché
 .cache/
 .turbo/
