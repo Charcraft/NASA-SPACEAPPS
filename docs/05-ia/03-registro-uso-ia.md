@@ -143,17 +143,147 @@ Uso de IA-Personal/
 
 ---
 
+### IA-009 · Merge Back 1 + Back 2, cableado y capa de sync
+- **Fecha/hora:** 2026-11-14 18:20
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** arquitectura / código
+- **Prompt usado:** "continúa con el flujo de trabajo", "resuelve los conflictos", "continuar con la implementación del cableado y la capa"
+- **Propósito:** fusionar `feat/back2-osdr-baseline` en `feat/back1-realtime-architecture`, corregir la invariante `rules/`, y construir la capa de sincronización + composition root de Back 1.
+- **Resultado obtenido:** merge sin conflictos de archivos; corrección de la invariante en `docs/03-plan/11-arquitectura-backend.md` §3; nuevos archivos `src/lib/sync/{queue,aggregate,transport}.ts`, `src/lib/runtime.ts` y `src/lib/realtime/osdr-replay-source.ts`; `sala-control.tsx` migrado a `runtime`; `repositories.test.ts` corregido para `LecturaFrame` extendida.
+- **Validación:** `pnpm typecheck` limpio, `pnpm test` 41/41, `pnpm build` 4 rutas.
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-010 · Implementación del backend Back 2 (cliente OSDR, reglas, persistencia y APIs)
+- **Fecha/hora:** 2026-11-14 17:56
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — implementar las tareas de Back 2 según `team/angel_marco/plan-backend-2.md`.
+- **Propósito:** construir la capa de datos y reglas deterministas de AEGIS (Back 2), sin red, sin DB remota y sin IA crítica.
+- **Resultado obtenido:** `osdr/client.ts` (baseline pre-vuelo + fuera de rango), `rules/thresholds.ts`, `rules/triage.ts` (`evaluar`), `db/{errors,types,dexie,repositories}.ts`, `ai/snapshot.ts`, `api/osdr` y `api/ai-context`. 61 tests propios (la capa `sync/*` de Back 2 quedó absorbida por la de Back 1 en el merge).
+- **Validación:** `pnpm test` (61/61) y `pnpm typecheck` (0 errores). Umbrales OSDR contrastados 1:1 contra `src/data/seed/osdr-inspiration4-cmp.json`; 24 lecturas fuera de rango verificadas con script. Pendiente revisión de Pineda (regla `rules/`) y merge.
+- **Estado:** [POR VALIDAR]
+
+---
+
+### IA-011 · Fix de SyncStatus (estado de red reactivo) y limpieza de demo muerto
+- **Fecha/hora:** 2026-11-14 19:38
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "corrige esto en mi rama" (observaciones de Angel Marco para la demo).
+- **Propósito:** corregir el badge "Red" del panel SyncStatus (no se actualizaba al apagar WiFi) y eliminar `demo/baseline.ts` y `demo/evaluador.ts` (código muerto).
+- **Resultado obtenido:** `transport.ts` expone `EstadoRed`, `estadoRed()` y `onCambioRed()` en la interfaz `SyncTransport`; se quitó el simulador aleatorio de red (interfería con la demo offline real). `sala-control.tsx` se suscribe a `onCambioRed` y lee `estadoRed()` en vez de acceder al campo privado. Se eliminaron los 2 archivos demo muertos.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49) y `pnpm build` (6 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-012 · PWA oficial (offline-first) y traspaso de protocolos a Back 2
+- **Fecha/hora:** 2026-11-14 19:56
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "modifica lo necesario para la versión oficial offline y enlace con el front; indica a Angel lo que debe realizar; cambia carpetas/arquitectura para el PWA".
+- **Propósito:** implementar la PWA oficial (manifest, service worker, iconos, registro) y dejar el contrato de protocolos médicos para Back 2.
+- **Resultado obtenido:** `public/manifest.webmanifest`, `public/sw.js` (app-shell cache-first, `/api/*` network-first, SSE sin cache), iconos 192/512 generados por `scripts/generar-iconos-pwa.py`, `layout.tsx` con metadatos PWA y registro del SW en producción, `next.config.mjs` con headers. Documento de traspaso `docs/03-plan/12-protocolos-medicos.md` con el contrato de `/api/protocolos`.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49) y `pnpm build` (7 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-013 · Implementación de protocolos médicos (Back 2)
+- **Fecha/hora:** 2026-11-14 20:15
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "investiga fuentes oficiales y escribe los protocolos en lenguaje simple para tripulación no médica".
+- **Propósito:** construir la capa de protocolos médicos (datos + cliente + API) según el contrato congelado de `docs/03-plan/12-protocolos-medicos.md`.
+- **Resultado obtenido:** `src/data/knowledge/protocolos.json` (4 protocolos: cardiorrespiratorio, hipercapnia, radiación, metabólico), `src/lib/knowledge/client.ts` (`protocoloPara`/`listarProtocolos`), `src/app/api/protocolos/route.ts`. 8 tests.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (57/57), `pnpm build` (8 rutas). Fuentes: NASA HRP (página de hazards verificada) y OSDR OSD-575; pasos redactados en lenguaje simple y adaptados, marcados `[POR VALIDAR]` con `validado: false`.
+- **Estado:** [POR VALIDAR] (contenido médico adaptado, pendiente de validación clínica)
+
+---
+
+### IA-014 · Entornos de misión, central persistente y transporte real
+- **Fecha/hora:** 2026-11-14 21:05
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "adaptar a entornos con HRP/OSDR, incorporar las 3 piezas, eliminar la incoherencia".
+- **Propósito:** adaptar AEGIS a tres entornos (nave/estación/base-lunar) con trazabilidad HRP, implementar persistencia del central, transporte real a Tierra y replay al reconectar, y eliminar la incoherencia documental.
+- **Resultado obtenido:** `EntornoMision` + campo `entornos` en el catálogo; `docs/02-investigacion/06-entornos-mision.md`; snapshot durable en `crew-hub`; `HttpSyncTransport` → `POST /api/tierra`; flush inmediato al reconectar; §8.1/§8.2/§9 de la arquitectura alineados con D31.
+- **Validación:** `pnpm typecheck` (0 errores), `pnpm test` (49/49), `pnpm build` (7 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-015 · Rangos de referencia sexo-específicos (creatinina)
+- **Fecha/hora:** 2026-11-14 21:27
+- **Quién:** Angel Marco Martínez Cobos (@angel_marco)
+- **Herramienta / modelo:** agente de IA (OpenCode · deepseek-v4-pro)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "implementa los datos por sexo solo donde de verdad afecta, con fuentes confiables, sin inventar".
+- **Propósito:** que el semáforo use el rango de referencia correcto según el sexo biológico del tripulante.
+- **Resultado obtenido:** tipo `Sexo` + campo `rangoReferenciaPorSexo?`; creatinina con rango M/F (fuente UCSF Health, verificado por fetch, marcado `[POR VALIDAR]`); perfil `tripulacion.json` [SUPUESTO] + `sexoDe()`; `thresholds`/`triage`/`runtime` resuelven por sexo. 9 tests.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (66/66), `pnpm build`. Fuente de creatinina verificada contra UCSF Health; BUN solo confirmado como sexo-dependiente (MedlinePlus, sin cifras) y no implementado.
+- **Estado:** [POR VALIDAR] (rango sexo-específico adaptado a contexto espacial)
+
+---
+
+### IA-016 · Revisión e incorporación de Back 2 (reconciliación + sexo)
+- **Fecha/hora:** 2026-11-14 21:47
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "revisa sus cambios e incorpora si se aprueba".
+- **Propósito:** revisar los 4 commits de Angel (reconciliación de sync + rangos por sexo) e incorporarlos a `feat/integracion-back`.
+- **Resultado obtenido:** aprobado e integrado. `marcarSincronizadoPorFrame` (transacción, idempotente, no-lanza) conecta cola↔mediciones; `rangoReferenciaPorSexo` para creatinina con `tripulacion.json` `[SUPUESTO]` y fuentes B40/B41. Merge limpio sin conflictos.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (70/70, 7 suites), `pnpm build` (8 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-017 · Documento de los 17 analitos OSDR (CMP)
+- **Fecha/hora:** 2026-11-14 21:59
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** investigación
+- **Prompt usado:** ad hoc — "dame un archivo de los 17 OSDR y cómo se obtendrían, con ejemplos de uso en viajes ya realizados".
+- **Propósito:** documentar los 17 analitos del panel metabólico (función, método de obtención y relevancia en vuelo) para la trazabilidad del catálogo.
+- **Resultado obtenido:** `docs/02-investigacion/07-analitos-osdr.md` con la tabla de los 17 analitos (unidad, rango, método, relevancia), la distinción medido vs calculado (eGFR, globulina), y ejemplos en misiones reales (Inspiration4, ISS, Twins Study, Gemini/Apollo).
+- **Validación:** datos y rangos extraídos del seed OSD-575 `[VERIFICADO]`; técnicas de laboratorio `[INFERENCIA]`; misiones no-Inspiration4 `[POR VERIFICAR]`.
+- **Estado:** [VERIFICADO]
+
+---
+
+### IA-018 · Resiliencia de Back 1 (intervalos, poda, respaldo, emergencia)
+- **Fecha/hora:** 2026-11-14 23:15
+- **Quién:** Ernesto Montes García (@ernesto-montes)
+- **Herramienta / modelo:** agente de IA (deepseek)
+- **Categoría:** código
+- **Prompt usado:** ad hoc — "realiza la implementación que me corresponde (Back 1)".
+- **Propósito:** implementar las 4 tareas de resiliencia de Back 1: respetar intervalos, poda automática, exportación de respaldo y detección de emergencia.
+- **Resultado obtenido:** `runtime.ts` con `respetarIntervalos: true`, poda cada hora, y `detectarEmergencia()` (transición a CRITICO → `registrarEvento`); `src/lib/export/backup.ts` con `exportarRespaldo`/`respaldoAJson`/`descargarRespaldo`.
+- **Validación:** `pnpm typecheck` (0), `pnpm test` (70/70), `pnpm build` (8 rutas).
+- **Estado:** [VERIFICADO]
+
+---
+
 ## Resumen por categoría
 
 | Categoría | Usos registrados | Verificados |
 |---|---|---|
-| Investigación | 3 | 3 |
+| Investigación | 4 | 4 |
 | Documentación | 3 | 2 |
-| Arquitectura / código | 3 | 2 |
+| Arquitectura / código | 12 | 8 |
 | Diseño | 0 | 0 |
 | Datos | 0 | 0 |
 | Video | 0 | 0 |
-| **Total** | **9** | **7** |
+| **Total** | **19** | **14** |
 
 ---
 

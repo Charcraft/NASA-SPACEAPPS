@@ -38,6 +38,12 @@
 | PWA | **next-pwa** o manifest + service worker manual | Instalable, funciona sin red. |
 | Semilla de datos | **JSON estático** en `src/data/seed/` | Datos reales de OSDR exportados antes del evento. |
 
+### Tiempo real
+| Pieza | Elección | Motivo |
+|---|---|---|
+| Sala de tripulación | **SSE nativo** (`EventSource`) + hub en memoria | Sin dependencias nuevas; reconexión automática y suficiente para alertas unidireccionales. |
+| Validación de frames | **Zod** en el route handler | Un frame mal formado no contamina la sala. |
+
 ### IA
 | Pieza | Elección | Motivo |
 |---|---|---|
@@ -51,6 +57,7 @@
 | Pieza | Elección |
 |---|---|
 | Runtime | Node.js 22 LTS |
+| Lenguaje | **TypeScript 6** (fijado). Next 15 no soporta el compilador nativo de TS 7: el build falla pidiendo TS 6. |
 | Gestor de paquetes | **pnpm** |
 | Lint/format | ESLint + Prettier (config compartida) |
 | Deploy | **Vercel** (gratis, un comando) + export estático como respaldo |

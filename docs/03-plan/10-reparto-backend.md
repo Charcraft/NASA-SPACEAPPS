@@ -34,6 +34,8 @@ Además, el seed tiene **17 indicadores**, no 19 como dice el brief; sí coincid
 | `src/types/index.ts` | Back 1 |
 | `src/lib/realtime/registry.ts` | Back 1 |
 | `src/lib/realtime/stream-engine.ts` | Back 1 |
+| `src/lib/realtime/crew-hub.ts` | Back 1 |
+| `src/lib/realtime/demo/*` | Back 1 (temporal, se sustituye por Back 2) |
 | `src/lib/model3d-bridge/contracts.ts` | Back 1 |
 | `src/app/api/telemetry/route.ts` | Back 1 |
 | `src/app/api/parameters/route.ts` | Back 1 |
@@ -101,7 +103,12 @@ export function evaluar(
   calidad?: number,             // 0..1; si falta, se asume 1
 ): Evaluacion;
 
-export function baselinePreVuelo(crewId: CrewId, paramId: string): number | null;
+export function baselinePreVuelo(
+  crewId: CrewId,
+  paramId: string,
+): EstadisticaBaselinePersonal | null;
+// Devuelve el objeto completo (media, desviacionEstandar, min, max, n), no solo la media:
+// `triage` necesita la desviación estándar para el cálculo z-score.
 
 export interface ResultadoPersistencia {
   ok: boolean;

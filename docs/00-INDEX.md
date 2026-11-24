@@ -34,6 +34,8 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`02-investigacion/03-fuentes-datos.md`](02-investigacion/03-fuentes-datos.md) | OSDR, LSDA, LSAH, data.nasa.gov: qué hay realmente y cómo acceder |
 | [`02-investigacion/04-bibliografia.md`](02-investigacion/04-bibliografia.md) | Todas las fuentes citadas, con fecha de consulta |
 | [`02-investigacion/05-arquitectura-actual-nasa.md`](02-investigacion/05-arquitectura-actual-nasa.md) | Cómo monitoriza NASA la salud hoy, y qué hueco llenamos |
+| [`02-investigacion/06-entornos-mision.md`](02-investigacion/06-entornos-mision.md) | **Adaptación a entornos** (nave, estación, base lunar): trazabilidad HRP/OSDR por indicador |
+| [`02-investigacion/07-analitos-osdr.md`](02-investigacion/07-analitos-osdr.md) | **Los 17 analitos OSDR (CMP)**: función, método de laboratorio, y ejemplos en misiones reales |
 
 ---
 
@@ -53,6 +55,10 @@ Mapa completo del proyecto. Si un documento no está aquí, no existe.
 | [`03-plan/09-guia-demo-actual.md`](03-plan/09-guia-demo-actual.md) | **Cómo mostrar lo que existe hoy**, en 2, 5 o 10 minutos |
 | [`03-plan/10-reparto-backend.md`](03-plan/10-reparto-backend.md) | **Reparto Back 1 / Back 2**: dueño por archivo, contratos de dependencia y acuerdos previos |
 | [`03-plan/11-arquitectura-backend.md`](03-plan/11-arquitectura-backend.md) | **Arquitectura de backend**: roles, flujo de datos, contratos congelados, puertas y plan paralelo |
+| [`03-plan/12-protocolos-medicos.md`](03-plan/12-protocolos-medicos.md) | **Protocolos médicos (traspaso Back 1 → Back 2)**: contrato de `/api/protocolos`, esquema JSON, integración con triage |
+| [`03-plan/13-reconciliacion-sync.md`](03-plan/13-reconciliacion-sync.md) | **Reconciliación de sync (tarea Back 2)**: conectar ACK → `sincronizadoTierra` | 
+| [`03-plan/14-contrato-integracion-front.md`](03-plan/14-contrato-integracion-front.md) | **Contrato de integración Frontend ↔ Backend**: endpoints, SSE, modelo 3D, entornos, entrada manual |
+| [`03-plan/15-graficas-backend.md`](03-plan/15-graficas-backend.md) | **Endpoint de series para gráficas (tarea Back 2)**: contrato de `/api/series` y agrupación por sección |
 
 ---
 
